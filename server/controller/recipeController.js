@@ -1,6 +1,14 @@
 import db from '../model/db';
+/**
+ * @class recipeController
+*/
 
 class handleRecipeMethod {
+  /**
+   * @param {*} req
+   * @param {*} res
+   * @returns  {JSON} Returns a JSON object
+   */
   static addRecipe(req, res) {
     const {
       name, userId, description, mealType,
@@ -18,12 +26,20 @@ class handleRecipeMethod {
     });
     return res.status(201).send(db.recipes[id - 1]);
   }
-
+  /**
+   * @param {*} req
+   * @param {*} res
+   * @returns  {JSON} Returns a JSON object
+   */
   static getAllRecipe(req, res) {
     return res.status(201).send(db.recipes);
   }
-
-  static modifyRcipe(req, res) {
+  /**
+   * @param {*} req
+   * @param {*} res
+   * @returns  {JSON} Returns a JSON object
+   */
+  static modifyRecipe(req, res) {
     const recipeUpdateId = req.params.id;
     const {
       name, description, mealType,

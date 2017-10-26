@@ -7,5 +7,5 @@ export default (app) => {
 
   app.post('/api/v1/recipes', handleRecipeMethod.addRecipe);
   app.get('/api/v1/recipes', handleRecipeMethod.getAllRecipe);
-  app.put('/api/v1/recipes/:id', handleRecipeMethod.modifyRcipe);
+  app.put('/api/v1/recipes/:id', handleRecipeMethod.modifyRecipe);
 };
