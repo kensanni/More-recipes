@@ -5,8 +5,8 @@ class handleRecipeMethod {
     const {
       name, userId, description, mealType,
     } = req.body;
-    const { length } = db.recipes;
-    const id = length + 1;
+    const len = db.recipes.length;
+    const id = len + 1;
     db.recipes.push({
       id,
       userId,
