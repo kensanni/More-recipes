@@ -1,6 +1,16 @@
 import db from '../model/db';
 
+/**
+ * @class votesController
+*/
+
 class handleRecipeMethod {
+  /**
+   *
+   * @param {object} req
+   * @param {object} res
+   * @returns  {JSON} Returns a JSON object
+   */
   static addRecipe(req, res) {
     const {
       name, userId, description, mealType,
