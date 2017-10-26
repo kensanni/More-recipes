@@ -18,6 +18,10 @@ class handleRecipeMethod {
     });
     return res.status(201).send(db.recipes[id - 1]);
   }
+
+  static getAllRecipe(req, res) {
+    return res.status(201).send(db.recipes);
+  }
 }
 
 export default handleRecipeMethod;
