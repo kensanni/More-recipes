@@ -5,5 +5,6 @@ export default (app) => {
     message: 'welcome',
   }));
 
-  app.post('/api/recipes', handleRecipeMethod.addRecipe);
+  app.post('/api/v1/recipes', handleRecipeMethod.addRecipe);
+  app.get('/api/v1/recipes', handleRecipeMethod.getAllRecipe);
 };
