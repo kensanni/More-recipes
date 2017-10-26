@@ -22,6 +22,25 @@ class handleRecipeMethod {
   static getAllRecipe(req, res) {
     return res.status(201).send(db.recipes);
   }
-}
 
+  static modifyRcipe(req, res) {
+    const recipeUpdateId = req.params.id;
+    const {
+      name, description, mealType,
+    } = req.body;
+
+    db.recipes.forEach((recipe) => {
+      if (recipe.id === parseInt(recipeUpdateId, 10)) {
+        recipe.recipeName = name || recipe.recipeName;
+        recipe.mealType = mealType || recipe.mealType;
+        recipe.description = description || recipe.description;
+
+        return res.status(200).send(recipe);
+      }
+    });
+    res.status(404).send({
+      message: 'Recipe Not found!',
+    });
+  }
+}
 export default handleRecipeMethod;
