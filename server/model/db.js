@@ -16,7 +16,6 @@ db.recipes = [
     name: 'Jollof rice',
     mealType: 'Lunch',
     description: 'simple dish',
-    ingredients: ['rice', 'pepper', 'water'],
     upvotes: 1,
     downvotes: 40,
   },
