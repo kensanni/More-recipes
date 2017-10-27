@@ -31,7 +31,7 @@ class handleRecipeMethod {
    * @returns  {JSON} Returns a JSON object
    */
   static getAllRecipe(req, res) {
-    return res.status(201).send(db.recipes);
+    return res.status(200).send(db.recipes);
   }
   /**
    * @param {*} req
