@@ -12,6 +12,21 @@ class handleRecipeMethod {
     const {
       name, userId, description, mealType,
     } = req.body;
+    if (!name) {
+      return res.status(400).send({
+        message: 'Please Enter a Recipe Name'
+      });
+    }
+    if (!mealType) {
+      return res.status(400).send({
+        message: 'Please Enter a mealType'
+      });
+    }
+    if (!description) {
+      return res.status(400).send({
+        message: 'Please Enter the recipe description'
+      });
+    }
     const len = db.recipes.length;
     const id = len + 1;
     db.recipes.push({
