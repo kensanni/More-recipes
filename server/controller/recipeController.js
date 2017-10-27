@@ -60,7 +60,7 @@ class handleRecipeMethod {
     } = req.body;
     db.recipes.forEach((recipe) => {
       if (recipe.id === parseInt(id, 10)) {
-        recipe.name = name || recipe.recipeName;
+        recipe.name = name || recipe.Name;
         recipe.mealType = mealType || recipe.mealType;
         recipe.description = description || recipe.description;
 
