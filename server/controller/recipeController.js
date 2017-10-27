@@ -54,14 +54,13 @@ class handleRecipeMethod {
    * @returns  {JSON} Returns a JSON object
    */
   static modifyRecipe(req, res) {
-    const recipeUpdateId = req.params.id;
+    const id = req.params.recipeUpdateId;
     const {
       name, description, mealType,
     } = req.body;
-
     db.recipes.forEach((recipe) => {
-      if (recipe.id === parseInt(recipeUpdateId, 10)) {
-        recipe.recipeName = name || recipe.recipeName;
+      if (recipe.id === parseInt(id, 10)) {
+        recipe.name = name || recipe.recipeName;
         recipe.mealType = mealType || recipe.mealType;
         recipe.description = description || recipe.description;
 
