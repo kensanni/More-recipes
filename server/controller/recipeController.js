@@ -1,14 +1,11 @@
 import db from '../model/db';
-
 /**
- * @class votesController
+ * @class recipeController
 */
-
 class handleRecipeMethod {
   /**
-   *
-   * @param {object} req
-   * @param {object} res
+   * @param {*} req
+   * @param {*} res
    * @returns  {JSON} Returns a JSON object
    */
   static addRecipe(req, res) {
@@ -28,10 +25,57 @@ class handleRecipeMethod {
     });
     return res.status(201).send(db.recipes[id - 1]);
   }
-
+  /**
+   * @param {*} req
+   * @param {*} res
+   * @returns  {JSON} Returns a JSON object
+   */
   static getAllRecipe(req, res) {
     return res.status(201).send(db.recipes);
   }
-}
+  /**
+   * @param {*} req
+   * @param {*} res
+   * @returns  {JSON} Returns a JSON object
+   */
+  static modifyRecipe(req, res) {
+    const recipeUpdateId = req.params.id;
+    const {
+      name, description, mealType,
+    } = req.body;
 
+    db.recipes.forEach((recipe) => {
+      if (recipe.id === parseInt(recipeUpdateId, 10)) {
+        recipe.recipeName = name || recipe.recipeName;
+        recipe.mealType = mealType || recipe.mealType;
+        recipe.description = description || recipe.description;
+
+        return res.status(200).send(recipe);
+      }
+    });
+    res.status(404).send({
+      message: 'Recipe Not found!',
+    });
+  }
+  /**
+   * @param {*} req
+   * @param {*} res
+   * @returns  {JSON} Returns a JSON object
+   */
+  static deleteRecipe(req, res) {
+    const id = req.params.recipeDeleteId;
+
+    db.recipes.forEach((recipe) => {
+      if (recipe.id === parseInt(id, 10)) {
+        db.recipes.splice(id, 1);
+        return res.status(200).send({
+          message: 'Recipe successfully deleted'
+        });
+      }
+    });
+    res.status(404).send({
+      message: 'Recipe Not found!',
+    });
+  }
+}
 export default handleRecipeMethod;
