@@ -19,7 +19,7 @@ export default class reviewHandler {
       const id = 1 + len;
       db.review.push({
         id,
-        recipeId: req.params.Id,
+        recipeId: req.params.recipeId,
         userId: req.body.userId,
         review: req.body.review
       });

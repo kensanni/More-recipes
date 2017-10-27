@@ -10,7 +10,7 @@ class handleRecipeMethod {
    */
   static addRecipe(req, res) {
     const {
-      name, userId, description, mealType,
+      name, userId, description, mealType, reviews,
     } = req.body;
     if (!name) {
       return res.status(400).send({
@@ -37,6 +37,7 @@ class handleRecipeMethod {
       mealType,
       upvotes: 10,
       downvotes: 3,
+      reviews: []
     });
     return res.status(201).send(db.recipes[id - 1]);
   }
@@ -46,7 +47,17 @@ class handleRecipeMethod {
    * @returns  {JSON} Returns a JSON object
    */
   static getAllRecipe(req, res) {
-    return res.status(200).send(db.recipes);
+    const { recipes } = db;
+
+    recipes.forEach((recipe) => {
+      db.review.forEach((rev) => {
+        if (recipe.id === rev.recipeId) {
+          recipe.reviews.push(rev);
+        }
+      });
+    });
+
+    return res.status(200).send(recipes);
   }
   /**
    * @param {*} req
@@ -78,17 +89,20 @@ class handleRecipeMethod {
    */
   static deleteRecipe(req, res) {
     const id = req.params.recipeDeleteId;
+    console.log(db.recipes)
+    const indexOfrecipe = db.recipes.findIndex(r => r.id === parseInt(id, 10));
+    console.log(indexOfrecipe)
+    console.log(id)
+    if (indexOfrecipe === -1) {
+      res.status(404).send({
+        message: 'Recipe Not found!',
+      });
+    }
 
-    db.recipes.forEach((recipe) => {
-      if (recipe.id === parseInt(id, 10)) {
-        db.recipes.splice(id, 1);
-        return res.status(200).send({
-          message: 'Recipe successfully deleted'
-        });
-      }
-    });
-    res.status(404).send({
-      message: 'Recipe Not found!',
+    db.recipes.splice(indexOfrecipe, 1);
+
+    return res.status(200).send({
+      message: 'Recipe successfully deleted'
     });
   }
 }
