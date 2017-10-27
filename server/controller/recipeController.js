@@ -78,4 +78,5 @@ class handleRecipeMethod {
     });
   }
 }
+
 export default handleRecipeMethod;
