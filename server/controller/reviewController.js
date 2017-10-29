@@ -23,6 +23,12 @@ export default class reviewHandler {
         userId: req.body.userId,
         review: req.body.review
       });
+      db.recipes.forEach((rev) => {       
+        if (rev.id === parseInt(req.params.recipeId, 10)) {
+          rev.reviews.push(db.review[id - 1]);
+          console.log(rev.reviews);
+        }
+      });
       res.status(201).send({
         success: true,
         review: db.review[id - 1],

@@ -48,15 +48,6 @@ class handleRecipeMethod {
    */
   static getAllRecipe(req, res) {
     const { recipes } = db;
-
-    recipes.forEach((recipe) => {
-      db.review.forEach((rev) => {
-        if (recipe.id === rev.recipeId) {
-          recipe.reviews.push(rev);
-        }
-      });
-    });
-
     return res.status(200).send(recipes);
   }
   /**
