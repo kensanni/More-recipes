@@ -138,3 +138,19 @@ a {
 	text-decoration-color: #FFF;
 }
 
+.font, h1, h3 {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.rating-cl {
+	color: #feaa26;
+}
+
+.header-text {
+	font-size: 30px;
+}
+
+.copyright {
+	color: #fff;
+	text-align: center;
+}
