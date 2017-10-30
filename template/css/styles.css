@@ -138,7 +138,7 @@ a {
 	text-decoration-color: #FFF;
 }
 
-.font, h1 {
+.font, h1, h3 {
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -149,8 +149,8 @@ a {
 .header-text {
 	font-size: 30px;
 }
-.copyright {
-    color: #fff;
-    text-align: center;
-}
 
+.copyright {
+	color: #fff;
+	text-align: center;
+}
