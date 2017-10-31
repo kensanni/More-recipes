@@ -1,45 +1,37 @@
-import db from '../model/db';
+import model from '../models';
+
+const { User } = model;
 /**
  * @class recipeController
 */
-class handleRecipeMethod {
+class handleUserMethod {
   /**
    * @param {*} req
    * @param {*} res
    * @returns  {JSON} Returns a JSON object
    */
-  static addRecipe(req, res) {
+  static userSignUp(req, res) {
+    // Initialize the req.body attributes to a const
     const {
-      name, userId, description, mealType, reviews,
+      firstname, lastname, username, email, image, password
     } = req.body;
-    if (!name) {
-      return res.status(400).send({
-        message: 'Please Enter a Recipe Name'
-      });
-    }
-    if (!mealType) {
-      return res.status(400).send({
-        message: 'Please Enter a mealType'
-      });
-    }
-    if (!description) {
-      return res.status(400).send({
-        message: 'Please Enter the recipe description'
-      });
-    }
-    const len = db.recipes.length;
-    const id = len + 1;
-    db.recipes.push({
-      id,
-      userId,
-      name,
-      description,
-      mealType,
-      upvotes: 10,
-      downvotes: 3,
-      reviews: []
-    });
-    return res.status(201).send(db.recipes[id - 1]);
+    return User
+      // Create the  user details
+      .create({
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+        image,
+      })
+      .then(user => res.status(201).send({
+        success: true,
+        messge: 'Account successfully created',
+        username: user.username,
+        id: user.id,
+      }))
+      .catch(error => res.status(400).send(error));
   }
   /**
    * @param {*} req
@@ -98,4 +90,4 @@ class handleRecipeMethod {
   }
 }
 
-export default handleRecipeMethod;
+export default handleUserMethod;

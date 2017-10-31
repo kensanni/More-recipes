@@ -51,7 +51,7 @@ export default (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [8, 20],
-          msg: 'Username should be between 4 to 10 characters',
+          msg: 'Password should be between 4 to 10 characters',
         },
       },
     },
