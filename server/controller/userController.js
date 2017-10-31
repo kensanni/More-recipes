@@ -2,7 +2,7 @@ import { User } from '../models/user';
 /**
  * @class recipeController
 */
-class handleRecipeMethod {
+class handleUserMethod {
   /**
    * @param {*} req
    * @param {*} res
