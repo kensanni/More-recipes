@@ -7,6 +7,7 @@ export default (app) => {
   }));
 
   app.post('/api/v1/users/signup', handleUserMethod.userSignUp);
+  app.post('/api/v1/users/signin', handleUserMethod.userSignIn);
   // app.post('/api/v1/recipes', handleRecipeMethod.addRecipe);
   // app.get('/api/v1/recipes', handleRecipeMethod.getAllRecipe);
   // app.put('/api/v1/recipes/:recipeUpdateId', handleRecipeMethod.modifyRecipe);
