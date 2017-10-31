@@ -49,9 +49,10 @@ export default (sequelize, DataTypes) => {
         msg: 'Please enter a password'
       },
       validate: {
-        len: {
-          args: [8, 20],
-          msg: 'Password should be between 4 to 10 characters',
+        isNotShort: (value) => {
+          if (value.length < 8) {
+            throw new Error('Password should be at least 8 characters');
+          }
         },
       },
     },
