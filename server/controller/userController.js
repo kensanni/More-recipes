@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import model from '../models';
 
 const { User } = model;
@@ -13,8 +14,10 @@ class handleUserMethod {
   static userSignUp(req, res) {
     // Initialize the req.body attributes to a const
     const {
-      firstname, lastname, username, email, image, password
+      firstname, lastname, username, email, image
     } = req.body;
+    let { password } = req.body.password;
+    password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     return User
       // Create the  user details
       .create({
