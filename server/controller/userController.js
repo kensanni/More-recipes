@@ -3,7 +3,7 @@ import model from '../models';
 
 const { User } = model;
 /**
- * @class recipeController
+ * @class userController
 */
 class handleUserMethod {
   /**
@@ -16,7 +16,7 @@ class handleUserMethod {
     const {
       firstname, lastname, username, email, image
     } = req.body;
-    let { password } = req.body.password;
+    let { password } = req.body;
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     return User
       // Create the  user details
