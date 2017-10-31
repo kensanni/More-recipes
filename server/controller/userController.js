@@ -1,6 +1,6 @@
 import model from '../models';
 
-const User = model.User;
+const { User } = model;
 /**
  * @class recipeController
 */
