@@ -88,4 +88,4 @@ class handleUserMethod {
   }
 }
 
-export default handleRecipeMethod;
+export default handleUserMethod;
