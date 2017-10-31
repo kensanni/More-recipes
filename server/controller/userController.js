@@ -1,4 +1,6 @@
-import { User } from '../models/user';
+import model from '../models';
+
+const User = model.User;
 /**
  * @class recipeController
 */
