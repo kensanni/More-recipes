@@ -30,6 +30,10 @@ export default (sequelize, DataTypes) => {
     }
   });
   Recipes.associate = (models) => {
+    Recipes.belongTo(models.User, {
+      foreignKey: 'userId',
+      onDelete: 'CASCADE',
+    });
   };
   return Recipes;
 };

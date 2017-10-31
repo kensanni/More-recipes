@@ -59,6 +59,10 @@ export default (sequelize, DataTypes) => {
     image: DataTypes.STRING,
   });
   User.associate = (models) => {
+    User.hasMany(models.Recipes, {
+      foreignKey: 'userId',
+      as: 'recipes',
+    });
   };
   return User;
 };
