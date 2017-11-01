@@ -14,5 +14,5 @@ export default (app) => {
   // app.get('/api/v1/recipes', handleRecipeMethod.getAllRecipe);
   app.put('/api/v1/recipes/:recipeId', authentication.verifyUser, handleRecipeMethod.modifyRecipe);
   // app.delete('/api/v1/recipes/:recipeDeleteId', handleRecipeMethod.deleteRecipe);
-  // app.post('/api/v1/recipes/:recipeId/reviews', reviewHandler.addReview);
+  app.post('/api/v1/recipes/:recipeId/reviews', authentication.verifyUser, reviewHandler.addReview);
 };
