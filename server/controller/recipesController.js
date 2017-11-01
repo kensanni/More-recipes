@@ -14,7 +14,7 @@ class handleRecipesMethod {
    */
   static addRecipes(req, res) {
     const {
-      recipeName, description, indegrient, image
+      recipeName, description, indegrient, image, upvote, downvote,
     } = req.body;
     if (!recipeName) {
       return res.status(400).send({
@@ -50,7 +50,9 @@ class handleRecipesMethod {
           recipeId: recipe.id,
           recipeName: recipe.recipeName,
           indegrient: recipe.indegrient,
-          image: recipe.image
+          image: recipe.image,
+          upvote,
+          downvote,
         }
       }))
       .catch(error => res.status(400).send(error));
