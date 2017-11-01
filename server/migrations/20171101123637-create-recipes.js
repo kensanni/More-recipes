@@ -15,6 +15,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      upvote: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      downvote:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
       image: {
         type: Sequelize.STRING,
         allowNull: false
@@ -39,7 +47,7 @@ module.exports = {
           key: 'id',
           as: 'userId',
         }
-      }
+      },
     }),
   down: queryInterface /* , Sequelize */ => queryInterface.dropTable('Recipes'),
 };
