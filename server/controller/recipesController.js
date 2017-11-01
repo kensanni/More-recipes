@@ -46,9 +46,14 @@ class handleRecipesMethod {
       .then(recipe => res.status(201).send({
         success: true,
         messge: 'Recipe successfully created',
-        recipeName: recipe.recipeName,
-        id: recipe.id,
-      }));
+        data: {
+          recipeId: recipe.id,
+          recipeName: recipe.recipeName,
+          indegrient: recipe.indegrient,
+          image: recipe.image
+        }
+      }))
+      .catch(error => res.status(400).send(error));
   }
 }
 export default handleRecipesMethod;
