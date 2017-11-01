@@ -55,5 +55,34 @@ class handleRecipesMethod {
       }))
       .catch(error => res.status(400).send(error));
   }
+  /**
+   * @description modify a recipe
+   * @param {*} req
+   * @param {*} res
+   * @returns  {JSON} Returns a JSON object
+   */
+  static modifyRecipe(req, res) {
+    const {
+      recipeName, description, indegrient, image
+    } = req.body;
+    Recipes.findById(req.params.recipeId)
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(404)
+            .send({ message: 'Recipe does not exist in this catalog' });
+        }
+        recipe.update({
+          recipeName,
+          description,
+          indegrient,
+          image,
+        })
+          .then((updatedRecipe) => {
+            res.status(200).send({ updatedRecipe });
+          })
+          .catch(error => res.status(400).send(error));
+      })
+      .catch(error => res.status(400).send(error));
+  }
 }
 export default handleRecipesMethod;

@@ -5,7 +5,7 @@ const secret = 'sannikay';
 const authenticaton = {
   verifyUser: (req, res, next) => {
     // jsonwebtoken string
-    const token = req.header['x-access-token'] || req.header.token;
+    const token = req.headers['x-access-token'] || req.headers.token;
     if (!token) {
       return res.status(403).send({
         success: false,
