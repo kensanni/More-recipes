@@ -8,8 +8,8 @@ const { Recipes } = model;
 class handleRecipesMethod {
   /**
    * @description Adds a recipe
-   * @param {*} req
-   * @param {*} res
+   * @param {*} req HTTP request object
+   * @param {*} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static addRecipes(req, res) {
@@ -57,8 +57,8 @@ class handleRecipesMethod {
   }
   /**
    * @description modify a recipe
-   * @param {*} req
-   * @param {*} res
+   * @param {*} req HTTP request object
+   * @param {*} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static modifyRecipe(req, res) {
