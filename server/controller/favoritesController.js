@@ -6,7 +6,7 @@ const { Favorites } = model;
 */
 class handleFavoritesMethod {
   /**
-   * @description Adds a recipe
+   * @description Adds a recipe into favorite
    * @param {*} req HTTP request object
    * @param {*} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
@@ -21,6 +21,25 @@ class handleFavoritesMethod {
         success: true,
         message: 'recipe sucessfully added to favorite',
         data: fav
+      }))
+      .catch(error => res.status(400).send(error));
+  }
+  /**
+   * @description Adds a recipe into favorite
+   * @param {*} req HTTP request object
+   * @param {*} res   HTTP response object
+   * @returns  {JSON} Returns a JSON object
+   */
+  static getFavorite(req, res) {
+    return Favorites
+      .find({
+        where: {
+          userId: req.decoded.id
+        }
+      })
+      .then(favorite => res.status(200).send({
+        success: true,
+        data: favorite
       }))
       .catch(error => res.status(400).send(error));
   }
