@@ -90,10 +90,10 @@ class handleRecipesMethod {
     console.log(model.Reviews);
     return Recipes
       .findAll({
-        // include: [{
-        //   model: model.Reviews,
-        //   as: 'recipeId'
-        // }],
+        include: [{
+          model: model.Reviews,
+          as: 'recipeId'
+        }],
       })
       .then(getRecipe => res.status(200).send({
         success: true,
