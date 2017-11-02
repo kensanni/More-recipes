@@ -4,7 +4,7 @@ const { Favorites } = model;
 /**
  * @class favoritesController
 */
-class handleFavoritesMethod {
+class FavoritiesController {
   /**
    * @description Adds a recipe into favorite
    * @param {*} req HTTP request object
@@ -44,4 +44,4 @@ class handleFavoritesMethod {
       .catch(error => res.status(400).send(error));
   }
 }
-export default handleFavoritesMethod;
+export default FavoritiesController;

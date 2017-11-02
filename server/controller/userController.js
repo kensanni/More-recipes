@@ -4,16 +4,16 @@ import model from '../models';
 
 const { User } = model;
 /**
- * @class userController
+ * @class UserController
 */
-class handleUserMethod {
+class UserController {
   /**
+   * @description User signup method
    * @param {*} req
    * @param {*} res
    * @returns  {JSON} Returns a JSON object
    */
-  static userSignUp(req, res) {
-    // Initialize the req.body attributes to a const
+  static signUp(req, res) {
     const {
       firstname, lastname, username, email, image
     } = req.body;
@@ -40,7 +40,6 @@ class handleUserMethod {
       });
     }
     return User
-      // Create the  user details
       .create({
         firstname,
         lastname,
@@ -50,13 +49,13 @@ class handleUserMethod {
         image,
       })
       .then((created) => {
-        const payload = { id: created.id, username: created.username };
+        const payload = { id: created.id, username: created.username, email: created.email };
         const token = jwt.sign(payload, 'sannikay', {
           expiresIn: '3h',
         });
         res.status(201).send({
           success: true,
-          message: 'Account successfully created',
+          message: 'User created',
           token
         });
       })
@@ -67,7 +66,7 @@ class handleUserMethod {
    * @param {*} res
    * @returns  {JSON} Returns a JSON object
    */
-  static userSignIn(req, res) {
+  static signIn(req, res) {
     return User
       .findOne({
         where: {
@@ -81,7 +80,7 @@ class handleUserMethod {
           });
         }
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          const payload = { id: user.id, username: user.username };
+          const payload = { id: user.id, username: user.username, email: user.email };
           const token = jwt.sign(payload, 'sannikay', {
             expiresIn: '3h',
           });
@@ -100,4 +99,4 @@ class handleUserMethod {
   }
 }
 
-export default handleUserMethod;
+export default UserController;

@@ -14,14 +14,14 @@ export default (sequelize, DataTypes) => {
         msg: 'Please Input a description for your recipes'
       }
     },
-    upvote: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    downvote: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
+    // upvote: {
+    //   type: DataTypes.INTEGER,
+    //   defaultValue: 0,
+    // },
+    // downvote: {
+    //   type: DataTypes.INTEGER,
+    //   defaultValue: 0,
+    // },
     image: {
       type: DataTypes.STRING,
       allowNull: {

@@ -1,11 +1,11 @@
 import model from '../models';
 
-const { Recipes, Reviews } = model;
+const { Recipes } = model;
 
 /**
- * @class recipesController
+ * @class RecipesController
 */
-class handleRecipesMethod {
+class RecipesController {
   /**
    * @description Adds a recipe
    * @param {*} req HTTP request object
@@ -28,7 +28,7 @@ class handleRecipesMethod {
     }
     if (!indegrient) {
       return res.status(400).send({
-        message: 'Please input a description for your recipe'
+        message: 'Please input a indegrient for your recipe'
       });
     }
     if (!image) {
@@ -43,8 +43,8 @@ class handleRecipesMethod {
         description,
         indegrient,
         image,
-        upvote,
-        downvote
+        // upvote,
+        // downvote
       })
       .then(recipe => res.status(201).send({
         success: true,
@@ -76,7 +76,7 @@ class handleRecipesMethod {
           image,
         })
           .then((updatedRecipe) => {
-            res.status(200).send({ updatedRecipe });
+            res.status(200).send(updatedRecipe);
           })
           .catch(error => res.status(400).send(error));
       })
@@ -88,7 +88,7 @@ class handleRecipesMethod {
    * @param {*} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static getAllRecipe(req, res) {
+  static getRecipes(req, res) {
     return Recipes
       .findAll({
         include: [{
@@ -108,7 +108,7 @@ class handleRecipesMethod {
    * @param {*} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static deleteRecipe(req, res) {
+  static deleteRecipes(req, res) {
     return Recipes
       .findById(req.params.recipeId)
       .then((recipe) => {
@@ -126,4 +126,4 @@ class handleRecipesMethod {
       });
   }
 }
-export default handleRecipesMethod;
+export default RecipesController;
