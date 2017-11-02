@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Recipes } = model;
+const { Recipes, Reviews } = model;
 
 /**
  * @class recipesController
@@ -33,11 +33,12 @@ class handleRecipesMethod {
     }
     if (!image) {
       return res.status(400).send({
-        message: 'Please upload an image of your recipes'
+        message: 'Please upload an image for your recipes'
       });
     }
     return Recipes
       .create({
+        userId: req.decoded.id,
         recipeName,
         description,
         indegrient,
@@ -45,15 +46,8 @@ class handleRecipesMethod {
       })
       .then(recipe => res.status(201).send({
         success: true,
-        messge: 'Recipe successfully created',
-        data: {
-          recipeId: recipe.id,
-          recipeName: recipe.recipeName,
-          indegrient: recipe.indegrient,
-          image: recipe.image,
-          upvote,
-          downvote,
-        }
+        message: 'Recipe successfully created',
+        data: recipe
       }))
       .catch(error => res.status(400).send(error));
   }
@@ -84,6 +78,27 @@ class handleRecipesMethod {
           })
           .catch(error => res.status(400).send(error));
       })
+      .catch(error => res.status(400).send(error));
+  }
+  /**
+   * @description get all recipe
+   * @param {*} req HTTP request object
+   * @param {*} res  HTTP response object
+   * @returns  {JSON} Returns a JSON object
+   */
+  static getAllRecipe(req, res) {
+    console.log(model.Reviews);
+    return Recipes
+      .findAll({
+        // include: [{
+        //   model: model.Reviews,
+        //   as: 'recipeId'
+        // }],
+      })
+      .then(getRecipe => res.status(200).send({
+        success: true,
+        data: getRecipe,
+      }))
       .catch(error => res.status(400).send(error));
   }
 }
