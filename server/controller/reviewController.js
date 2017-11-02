@@ -3,26 +3,32 @@ import model from '../models';
 const { Reviews } = model;
 
 /**
- * @class reviewController
+ * @class ReviewController
 */
-export default class reviewHandler {
+export default class ReviewController {
   /**
-   * @description get  all Recipe
+   * @description Add  a review for recipes
    * @param {object} req
    * @param {object} res
    * @returns  {JSON} Returns a JSON object
    */
   static addReview(req, res) {
+    const { review } = req.body;
+    if (!review) {
+      return res.status(400).send({
+        message: 'Please input a review'
+      });
+    }
     return Reviews
       .create({
         recipeId: req.params.recipeId,
-        review: req.body.review,
+        review,
         userId: req.decoded.id,
       })
-      .then(review => res.status(200).send({
+      .then(reviews => res.status(200).send({
         success: true,
         message: 'Review posted succesfully',
-        data: review
+        data: reviews
       }))
       .catch(error => res.status(400).send(error));
   }
