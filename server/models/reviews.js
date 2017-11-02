@@ -28,7 +28,7 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'recipeId',
       onDelete: 'CASCADE'
     });
-    Reviews.belongsTo(models.Users, {
+    Reviews.belongsTo(models.User, {
       foreignKey: 'recipeId',
       onDelete: 'CASCADE'
     });
