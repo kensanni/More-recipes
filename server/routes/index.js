@@ -2,6 +2,7 @@ import handleUserMethod from '../controller/userController';
 import handleRecipeMethod from '../controller/recipesController';
 import authentication from '../middlewares/authenticate'
 import reviewHandler from '../controller/reviewController';
+import handleFavoritesMethod from '../controller/favoritesController';
 
 export default (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -16,5 +17,5 @@ export default (app) => {
   // app.delete('/api/v1/recipes/:recipeDeleteId', handleRecipeMethod.deleteRecipe);
   app.post('/api/v1/recipes/:recipeId/reviews', authentication.verifyUser, reviewHandler.addReview);
   app.delete('/api/v1/recipes/:recipeId', handleRecipeMethod.deleteRecipe);
-  // app.post('/api/v1/recipes/:recipeId/reviews', reviewHandler.addReview);
+  app.post('/api/v1/recipes/:recipeId/favorites', authentication.verifyUser, handleFavoritesMethod.addFavorite);
 };

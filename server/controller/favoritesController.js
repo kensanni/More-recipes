@@ -1,0 +1,28 @@
+import model from '../models';
+
+const { Favorites } = model;
+/**
+ * @class favoritesController
+*/
+class handleFavoritesMethod {
+  /**
+   * @description Adds a recipe
+   * @param {*} req HTTP request object
+   * @param {*} res   HTTP response object
+   * @returns  {JSON} Returns a JSON object
+   */
+  static addFavorite(req, res) {
+    return Favorites
+      .create({
+        recipeId: req.params.recipeId,
+        userId: req.decoded.id,
+      })
+      .then(fav => res.status(200).send({
+        success: true,
+        message: 'recipe sucessfully added to favorite',
+        data: fav
+      }))
+      .catch(error => res.status(400).send(error));
+  }
+}
+export default handleFavoritesMethod;
