@@ -25,7 +25,7 @@ class handleFavoritesMethod {
       .catch(error => res.status(400).send(error));
   }
   /**
-   * @description Adds a recipe into favorite
+   * @description get favorite recipe from database
    * @param {*} req HTTP request object
    * @param {*} res   HTTP response object
    * @returns  {JSON} Returns a JSON object

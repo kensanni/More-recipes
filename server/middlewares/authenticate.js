@@ -12,6 +12,7 @@ const authenticaton = {
         message: 'Not Authorized',
       });
     }
+    // Encrypt user details
     jwt.verify(token, secret, (error, decoded) => {
       if (error) {
         return res.status(401).send({
