@@ -1,6 +1,6 @@
-# More-Recipes [https://kensanni.github.io/More-recipes/template/]
+# More-Recipes
 **STATUS**
-[![Build Status](https://travis-ci.org/kensanni/More-recipes.svg?branch=develop) ![Coverage Status](https://coveralls.io/repos/github/kensanni/More-recipes/badge.svg)](https://coveralls.io/github/kensanni/More-recipes)]
+![Build Status](https://travis-ci.org/kensanni/More-recipes.svg?branch=develop) ![Coverage Status](https://coveralls.io/repos/github/kensanni/More-recipes/badge.svg)](https://coveralls.io/github/kensanni/More-recipes)
 
 More-Recipes provides a platform for users to share the awesome and exciting  recipe ideas they have invented or learnt.  Suppose a user comes up with a food recipe,  he/she can post it on More-Recipes and  get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.
 
@@ -31,19 +31,32 @@ The app will be running at http://localhost:8000
 ## API
 The routes currently specified in the application are as follows:
 
+-**'api/v1.users/signup'**
+   - **POST** - API route for user to create an account
+
+-**'api/v1.users/signin'**
+   - **POST** - API route for user to sign in
+
 - **'api/v1/recipes'**
-    - **POST** - Creates a new recipe in the catalog
+    - **POST** -   API route that allows authenticated user to add a recipe
 
 - **'api/v1/recipes/:recipeId'**
-    - **PUT** - Enables User to edit or update information about a recipe.
+    - **PUT** - API routw that allow an authenticated user to modify a recipe
+
 - **'api/v1/recipes'**
-    - **GET** - Retrieve all recipes in catalog
-- **'api/v1/recipes?sort=upvotes&order=des'**
-    - **GET** - Get all recipes based on most voted.
+    - **GET** - Allows an autheticated user to get all recipes
+
 - **'api/v1/recipes/:recipeId/reviews'**
-    - **POST** - allows users to post a review for recipe  
+    - **POST** - Allows an authenticated user to post a review for recipe  
+
 - **'api/v1/recipes/:recipeId'**
-    - **DETELE** - allows users to delete recipe
+    - **DETELE** - Allows an authenticated users to delete recipe
+
+- **'/api/v1/recipes/:recipeId/favorites'**
+    - **POST** - Allow an authenticated user to add a recipe to favorite
+
+- **'api/v1/recipes'**
+    - **GET** - Allow an authenticated user to get all favorite recipes
 
 #### Technologies and Services
 
