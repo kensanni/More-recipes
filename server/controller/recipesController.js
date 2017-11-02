@@ -42,7 +42,9 @@ class handleRecipesMethod {
         recipeName,
         description,
         indegrient,
-        image
+        image,
+        upvote,
+        downvote
       })
       .then(recipe => res.status(201).send({
         success: true,
@@ -87,7 +89,6 @@ class handleRecipesMethod {
    * @returns  {JSON} Returns a JSON object
    */
   static getAllRecipe(req, res) {
-    console.log(model.Reviews);
     return Recipes
       .findAll({
         include: [{

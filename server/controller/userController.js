@@ -19,6 +19,26 @@ class handleUserMethod {
     } = req.body;
     let { password } = req.body;
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    if (!firstname) {
+      return res.status(400).send({
+        message: 'Please input your first name'
+      });
+    }
+    if (!lastname) {
+      return res.status(400).send({
+        message: 'Please input your last name'
+      });
+    }
+    if (!username) {
+      return res.status(400).send({
+        message: 'Please input your username'
+      });
+    }
+    if (!email) {
+      return res.status(400).send({
+        message: 'Please input  a valid email address'
+      });
+    }
     return User
       // Create the  user details
       .create({
@@ -29,12 +49,17 @@ class handleUserMethod {
         password,
         image,
       })
-      .then(user => res.status(201).send({
-        success: true,
-        messge: 'Account successfully created',
-        username: user.username,
-        id: user.id,
-      }))
+      .then((created) => {
+        const payload = { id: created.id, username: created.username };
+        const token = jwt.sign(payload, 'sannikay', {
+          expiresIn: '3h',
+        });
+        res.status(201).send({
+          success: true,
+          message: 'Account successfully created',
+          token
+        });
+      })
       .catch(error => res.status(400).send(error));
   }
   /**
@@ -62,8 +87,7 @@ class handleUserMethod {
           });
           res.status(200).send({
             success: true,
-            message: 'Token Generated. Signin successful',
-            userId: user.id,
+            message: 'Signin successful',
             token,
           });
         } else {
