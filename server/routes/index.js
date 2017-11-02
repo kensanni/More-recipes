@@ -13,6 +13,6 @@ export default (app) => {
   app.post('/api/v1/recipes', authentication.verifyUser, handleRecipeMethod.addRecipes);
   // app.get('/api/v1/recipes', handleRecipeMethod.getAllRecipe);
   app.put('/api/v1/recipes/:recipeId', authentication.verifyUser, handleRecipeMethod.modifyRecipe);
-  // app.delete('/api/v1/recipes/:recipeDeleteId', handleRecipeMethod.deleteRecipe);
+  app.delete('/api/v1/recipes/:recipeId', handleRecipeMethod.deleteRecipe);
   // app.post('/api/v1/recipes/:recipeId/reviews', reviewHandler.addReview);
 };
