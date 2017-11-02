@@ -101,5 +101,28 @@ class handleRecipesMethod {
       }))
       .catch(error => res.status(400).send(error));
   }
+  /**
+   * @description delete a recipe
+   * @param {*} req HTTP request object
+   * @param {*} res  HTTP response object
+   * @returns  {JSON} Returns a JSON object
+   */
+  static deleteRecipe(req, res) {
+    return Recipes
+      .findById(req.params.recipeId)
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(400).send({
+            message: 'Recipe Not Found',
+          });
+        }
+        return recipe
+          .destroy()
+          .then(() => res.status(200).send({
+            message: 'Recipe successfully deleted'
+          }))
+          .catch(error => res.status(400).send(error));
+      });
+  }
 }
 export default handleRecipesMethod;
