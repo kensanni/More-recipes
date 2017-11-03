@@ -63,6 +63,21 @@ class RecipesController {
     const {
       recipeName, description, indegrient, image
     } = req.body;
+    if (!recipeName) {
+      return res.status(400).send({
+        message: 'Name cannnot be empty be an empty field'
+      });
+    }
+    if (!description) {
+      return res.status(400).send({
+        message: 'Description cannot be empty cannot be an empty field'
+      });
+    }
+    if (!indegrient) {
+      return res.status(400).send({
+        message: 'Indigrient cannot be an empty field'
+      });
+    }
     Recipes.findById(req.params.recipeId)
       .then((recipe) => {
         if (!recipe) {

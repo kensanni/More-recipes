@@ -15,7 +15,7 @@ export default (app) => {
   app.get('/api/v1/recipes', RecipesController.getRecipes);
   app.put('/api/v1/recipes/:recipeId', authentication.verifyUser, RecipesController.modifyRecipe);
   app.post('/api/v1/recipes/:recipeId/reviews', authentication.verifyUser, ReviewController.addReview);
-  app.delete('/api/v1/recipes/:recipeId', RecipesController.deleteRecipes);
+  app.delete('/api/v1/recipes/:recipeId', authentication.verifyUser, RecipesController.deleteRecipes);
   app.post('/api/v1/recipes/:recipeId/favorites', authentication.verifyUser, FavoriteController.addFavorite);
   app.get('/api/v1/recipes/favorite', authentication.verifyUser, FavoriteController.getFavorite);
 };
