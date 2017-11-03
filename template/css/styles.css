@@ -10,36 +10,33 @@
 	width: 50px;
 }
 .form-bg {
-	background-color: #BCD99A
+	background-color: rgba(233, 151, 10, 0.863);
 }
-.card {
-    background-color: #fff;
-    padding: 30px;
-}
+
 .img-size {
 	width: 100px;
 }
 a {
-    color: #5CB85C;
+    color: orange;
 	text-decoration: none;
-    text-decoration-color: #5CB85C;
+    text-decoration-color: orange;
 }
 .text-align {
 	text-align: left;
 }
 
 .signin-text {
-	color: #5CB85C;
+	color: orange;
 }
 
 #pagination-color {
-	color: #5CB85C;
+	color: orange;
 }
 .p-a-0 {
     padding: 0!important;
 }
 .bg-green {
-	background-color: #5CB85C;
+	background-color: orange;
 }
 .top-nav-bar {
 	padding-top: 30px;
@@ -62,7 +59,7 @@ a {
     height: 40px;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #5CB85C;
+    background-color: orange;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -77,12 +74,12 @@ a {
 }
 .header-bg {
 	padding-top: 5px;
-	background-color: #5CB85C;
+	background-color: orange;
 	color: #fff;
 	text-align: center;
 }
 .header-nav {
-	background-color: #5CB85C;
+	background-color: orange;
 	color: #fff;
 }
 #header-link {
@@ -125,8 +122,8 @@ a {
 }
 
 #text-dec {
-    color: #5CB85C;
-    text-decoration-color: #5CB85C;
+    color: orange;
+    text-decoration-color: orange;
 }
 .signin-btn {
 	text-decoration: none;
@@ -154,4 +151,24 @@ a {
 	color: #fff;
 	text-align: center;
 }
+.card-tile {
+	background-color: Orange;
+}
 
+a:hover {
+	color: orange;
+	text-decoration: none;
+}
+.favorite-btn {
+	cursor: pointer;
+	color: #fff;
+}
+.favorite-btn:hover {
+	color: rgb(95, 86, 71);
+}
+.btn-white {
+	color: white;
+}
+.btn-orange {
+	background-color: orange;
+}
