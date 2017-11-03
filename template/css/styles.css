@@ -1,0 +1,174 @@
+.m-x-auto {
+    margin-right: auto!important;
+    margin-left: auto!important;
+}
+.app-login-form {
+    max-width: 380px;
+    margin-top: -25px;
+}
+.chat-image {
+	width: 50px;
+}
+.form-bg {
+	background-color: rgba(233, 151, 10, 0.863);
+}
+
+.img-size {
+	width: 100px;
+}
+a {
+    color: orange;
+	text-decoration: none;
+    text-decoration-color: orange;
+}
+.text-align {
+	text-align: left;
+}
+
+.signin-text {
+	color: orange;
+}
+
+#pagination-color {
+	color: orange;
+}
+.p-a-0 {
+    padding: 0!important;
+}
+.bg-green {
+	background-color: orange;
+}
+.top-nav-bar {
+	padding-top: 30px;
+}
+.br-right {
+	border-right: 30px;
+ 
+}
+.pd-remove {
+	padding-bottom: 0px;
+}
+.font-stye {
+	color: yellow;
+}
+.rfloat {
+	float: right;
+}
+.footer {
+	bottom: 0px;
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: orange;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.chat-body-text {
+	position: relative;
+    padding: 10px 15px;
+    background-color: rgba(107, 216, 51, 0.65);
+    border-radius: 9px;
+}
+.profile-bg {
+	background-color: #f3f3f3;
+}
+.header-bg {
+	padding-top: 5px;
+	background-color: orange;
+	color: #fff;
+	text-align: center;
+}
+.header-nav {
+	background-color: orange;
+	color: #fff;
+}
+#header-link {
+	text-decoration: none;
+	color: #212529;
+}
+.navbar-link {
+	padding-right: 0;
+    padding-left: 0;
+	display: block;
+    padding: .5rem 1rem;
+	color: #fff;
+	text-decoration: none
+}
+.search-btn {
+	border-color: yellow;
+	color: #fff;
+	background-color: transparent;
+}
+
+.vl {
+    border-left: 3px solid black;
+    height: 35px;
+}
+
+.user-profile {
+	padding-top: 10px;
+	padding-bottom: 40px;
+	text-align: center
+}
+.user-text {
+	padding-left: 10px;
+}
+#navlink {
+	text-decoration: none;
+    color: #fff;
+}
+.black {
+	color: black;
+}
+
+#text-dec {
+    color: orange;
+    text-decoration-color: orange;
+}
+.signin-btn {
+	text-decoration: none;
+	color: #fff;
+}
+#signn-btn {
+	color: #fff;
+	text-decoration: none;
+	text-decoration-color: #FFF;
+}
+
+.font, h1, h3 {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.rating-cl {
+	color: #feaa26;
+}
+
+.header-text {
+	font-size: 30px;
+}
+
+.copyright {
+	color: #fff;
+	text-align: center;
+}
+.card-tile {
+	background-color: Orange;
+}
+
+a:hover {
+	color: orange;
+	text-decoration: none;
+}
+.favorite-btn {
+	cursor: pointer;
+	color: #fff;
+}
+.favorite-btn:hover {
+	color: rgb(95, 86, 71);
+}
+.btn-white {
+	color: white;
+}
+.btn-orange {
+	background-color: orange;
+}
