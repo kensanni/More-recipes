@@ -1,243 +1,394 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>More recipe</title>
+<title>Hello, world!</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-<header>
-<nav class="navbar navbar-expand-lg navbar-light bg-green">
-  <a class="navbar-link" id="navlink" href="userRecipe.html">More recipe</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="navbar-link" href="recipe.html" id="navlink">Recipes</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navlink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          User profile
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="userProfileFav.html">Profile</a>
-          <a class="dropdown-item" href="userFavRecipe.html">My recipe</a>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-green">
+      <a class="navbar-link" id="navlink" href="recipe.html">More recipe</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="navbar-link" href="recipe.html" id="navlink">Recipe</a>
+            </li>
+             <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navlink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              User profile
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="userProfileFav.html">Profile</a>
+              <a class="dropdown-item" href="userFavRecipe.html">My recipe</a>
+            </div>
+          </li>
+             <li class="nav-item">
+              <a class="navbar-link" href="signin.html" id="navlink">Signout</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+           <button class="btn search-btn my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+  <div class="container pt-4">
+    <div class="row">
+      <section class="col-md-12">
+        <h1>
+          Favorite recipes
+        </h1>
+        <div>
+          <hr>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="navbar-link" href="signin.html" id="navlink">Signout</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn search-btn my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      </section>
+      <div class="col-sm-6 col-md-4 pb-4">
+          <div class="card">
+              <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <a href="">
+                  <h4 class="card-title">Pepper Soup with goat meat</h4>
+                </a>
+                <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                <span class="small">12k</span>
+                <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item card-tile">
+                      <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                      <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                        <span class="small pr-2">
+                          1k
+                        </span>
+                      </i>
+                      <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                          <span class="small pr-2">
+                              10
+                          </span>
+                      </i>
+                    </li>
+              </ul>
+            </div>
+          </div>
+    <div class="col-sm-6 col-md-4 pb-4">
+      <div class="card">
+         <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-4 (1).jpg" alt="Card image cap">
+         <div class="card-body">
+            <a href="">
+              <h4 class="card-title">Pepper Soup with goat meat</h4>
+            </a>
+            <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+            <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+            <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+            <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+            <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+            <span class="small">9k</span>
+            <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+         </div>
+         <ul class="list-group list-group-flush">
+            <li class="list-group-item card-tile">
+                <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                  <span class="small pr-2">
+                    1k
+                  </span>
+                </i>
+                <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                    <span class="small pr-2">
+                        10
+                    </span>
+                </i>
+              </li>
+        </ul>
+      </div>
   </div>
-</nav>
-</header>
-<div class="container top-nav-bar">
-   <section class="row">
-    	<div class="col-md-12">
-    		<h1 class="header-bg">
-    		<i class="fa fa-star" aria-hidden="true"></i>
-          <span class="display-4">favorite recipes</span> 
-    		<i class="fa fa-star" aria-hidden="true"></i>
-    		</h1>
-    	</div>
-   </section>
-    <section class="row">
-    	<div class="col-md-4 col-sm-4 col-lg-4">
-    		<img class="img-fluid" src="../image/banner-img-4.jpg" alt="">
-			  <a href="recipeDetail.html" id="header-link">
-          <h1 class="font">chinese spicy</h1>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-          <span>10k</span>
-          <p>A guilt free and totally delicious savory bread</p>
-        </a>
-    	</div>
-    	<div class="col-md-4 col-sm-4 col-lg-4">
-    		<img class="img-fluid" src="../image/banner-img-4.jpg" alt="">
-			  <a href="recipeDetail.html" id="header-link">
-          <h1>chinese spicy</h1>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-          <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-          <span>8k</span>
-          <p>A guilt free and totally delicious savory bread</p>
-        </a>
-    	</div>
-    	<div class="col-md-4 col-sm-4 col-lg-4">
-    		<img class="img-fluid" src="../image/banner-img-4.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>6k</span>
-        <p>A guilt free and totally delicious savory bread</p>
-      </a>
-    	</div>
-    </section>
-    <hr>
+      <div class="col-sm-6 col-md-4 pb-4">
+        <div class="card">
+          <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-4 (1).jpg" alt="Card image cap">
+            <div class="card-body">
+              <a href="">
+                <h4 class="card-title">Pepper Soup with goat meat</h4>
+              </a>
+              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+              <span class="small">10k</span>
+              <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item card-tile">
+                    <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                    <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                      <span class="small pr-2">
+                        1k
+                      </span>
+                    </i>
+                    <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                        <span class="small pr-2">
+                            10
+                        </span>
+                    </i>
+                  </li>
+            </ul>
+        </div>
+      </div>
+    </div>
     <section class="pt-3">
-      <h3 class="header-bg display-4">All recipes</h3>
+        <h2>All recipes</h2>
+        <hr>
     </section>
-	<section class="row">
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-4.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>5k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes.</p>
-			<button type="button" class="btn btn-success">
-				<a href="recipeDetail.html" class="signin-btn" id="signn-btn">view recipe</a>
-			</button>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-1.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>2k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes.</p>
-			<button type="button" class="btn btn-success">
-				<a href="recipeDetail.html" class="signin-btn" id="signn-btn">view recipe</a>
-			</button>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-2.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>5k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes.</p>
-			<button type="button" class="btn btn-success">
-				<a href="recipeDetail.html" class="signin-btn" id="signn-btn">view recipe</a>
-			</button>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-4.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>780</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes.</p>
-			<button type="button" class="btn btn-success">
-				<a href="recipeDetail.html" class="signin-btn" id="signn-btn">view recipe</a>
-			</button>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-1.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>3k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes.</p>
-			<button type="button" class="btn btn-success">
-				<a href="recipeDetail.html" class="signin-btn" id="signn-btn">view recipe</a>
-			</button>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-2.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>5k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes.</p>
-			<button type="button" class="btn btn-success">
-				<a href="recipeDetail.html" class="signin-btn" id="signn-btn">view recipe</a>
-			</button>
-		</div>
-	</section>
-<nav aria-label="Page navigation example" class="pt-3">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">1</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link"  id="pagination-color" href="#">2</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">3</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">4</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">5</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">6</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">7</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">8</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" id="pagination-color" href="#">9</a>
-    </li>
-    <li class="page-item" id="pagination-color">
-      <a class="page-link" id="pagination-color" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-</div>
-<footer class="footer text-center">
-    <strong class="copyright">More-Recipes © 2017, All Rights Reserved, Design &amp; Developed By: Sanni Kehinde</strong>
-</footer>
+    <section class="row">
+        <div class="col-sm-6 col-md-4 pb-4">
+            <div class="card">
+                <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <a href="">
+                    <h4 class="card-title">Pepper Soup with goat meat</h4>
+                  </a>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <span class="small">5k</span>
+                  <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item card-tile">
+                        <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                        <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                          <span class="small pr-2">
+                            1k
+                          </span>
+                        </i>
+                        <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                            <span class="small pr-2">
+                                10
+                            </span>
+                        </i>
+                      </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4 pb-4">
+                <div class="card">
+                    <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <a href="">
+                        <h4 class="card-title">Pepper Soup with goat meat</h4>
+                      </a>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <span class="small">7k</span>
+                      <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item card-tile">
+                            <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                            <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                              <span class="small pr-2">
+                                1k
+                              </span>
+                            </i>
+                            <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                                <span class="small pr-2">
+                                    10
+                                </span>
+                            </i>
+                          </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4 pb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                          <a href="">
+                            <h4 class="card-title">Pepper Soup with goat meat</h4>
+                          </a>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <span class="small">780</span>
+                          <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item card-tile">
+                                <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                                <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                                  <span class="small pr-2">
+                                    1k
+                                  </span>
+                                </i>
+                                <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                                    <span class="small pr-2">
+                                        10
+                                    </span>
+                                </i>
+                              </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 pb-4">
+                        <div class="card">
+                            <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <a href="">
+                                <h4 class="card-title">Pepper Soup with goat meat</h4>
+                              </a>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <span class="small">500</span>
+                              <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item card-tile">
+                                    <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                                    <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                                      <span class="small pr-2">
+                                        1k
+                                      </span>
+                                    </i>
+                                    <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                                        <span class="small pr-2">
+                                            10
+                                        </span>
+                                    </i>
+                                  </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 pb-4">
+                            <div class="card">
+                                <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                  <a href="">
+                                    <h4 class="card-title">Pepper Soup with goat meat</h4>
+                                  </a>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <span class="small">200</span>
+                                  <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item card-tile">
+                                        <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                                        <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                                          <span class="small pr-2">
+                                            1k
+                                          </span>
+                                        </i>
+                                        <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                                            <span class="small pr-2">
+                                                10
+                                            </span>
+                                        </i>
+                                      </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 pb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                      <a href="">
+                                        <h4 class="card-title">Pepper Soup with goat meat</h4>
+                                      </a>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <span class="small">6k</span>
+                                      <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item card-tile">
+                                            <i class="fa fa-heart fa-2x favorite-btn" aria-hidden="true"></i>
+                                            <i class="fa fa-thumbs-up fa-2x ml-5 favorite-btn" aria-hidden="true">
+                                              <span class="small pr-2">
+                                                1k
+                                              </span>
+                                            </i>
+                                            <i class="fa fa-thumbs-down fa-2x favorite-btn" aria-hidden="true">
+                                                <span class="small pr-2">
+                                                    10
+                                                </span>
+                                            </i>
+                                          </li>
+                                    </ul>
+                                  </div>
+                                </div>
+    </section>
+    <nav aria-label="Page navigation example" class="pt-3">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">5</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">6</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">7</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">8</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" id="pagination-color" href="#">9</a>
+          </li>
+          <li class="page-item" id="pagination-color">
+            <a class="page-link" id="pagination-color" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+
+  </div>
+  <footer class="footer text-center">
+      <strong class="copyright">More-Recipes © 2017, All Rights Reserved, Design &amp; Developed By: Sanni Kehinde</strong>
+  </footer>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -44,441 +44,536 @@
     </div>
   </nav>
   <div class="container top-nav-bar">
-	  <div class="row header-nav">
+	  <div class="row header-nav ">
 		  <div class="col-sm-6 col-6">
 			  <p class="pt-3 font">Add New recipe</p>
 		  </div>
 		  <div class="col-sm-6 col-6 pt-2 pb-2">
-			  <button type="button" class="btn btn-success rfloat" data-toggle="modal" data-target="#exampleModal">
+			  <button type="button" class="btn rfloat" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-plus-square-o" aria-hidden="true"></i>
         </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header black">
-                <h5 class="modal-title black" id="exampleModalLabel">
-                  Add new recipe
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-             </div>
-             <div class="modal-body">
-               <form>
-                 <div class="form-group">
-                  <label for="recipient-name" class="col-form-label black">Title &#58;</label>
-                  <input type="text" class="form-control" id="recipient-name">
-                 </div>
-                 <div class="form-group">
-                   <label for="message-text" class="col-form-label black">Description &#58;</label>
-                   <textarea class="form-control" id="message-text"></textarea>
-                 </div>
-               </form>
-             </div>
-             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               <button type="button" class="btn btn-success">Add recipe</button>
-             </div>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header black">
+                  <h5 class="modal-title black" id="exampleModalLabel">
+                    Add new recipe
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                 <form>
+                   <div class="form-group">
+                    <label for="recipient-name" class="col-form-label black">Title &#58;</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                   </div>
+                   <div class="form-group">
+                     <label for="message-text" class="col-form-label black">Description &#58;</label>
+                     <textarea class="form-control" id="message-text"></textarea>
+                   </div>
+                 </form>
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-orange">Add recipe</button>
+               </div>
+              </div>
             </div>
           </div>
-        </div>
 		  </div>
-	  </div>
-	<div class="row pt-4">
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-4.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>8k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes</p>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal7" data-whatever="@getbootstrap">edit</button>
-			<div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+    </div>
+    <section class="row pt-4">
+        <div class="col-sm-6 col-md-4 pb-4">
+            <div class="card">
+                <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <a href="">
+                    <h4 class="card-title">Pepper Soup with goat meat</h4>
+                  </a>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                  <span class="small">5k</span>
+                  <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item card-tile">
+                            <button type="button" class="btn btn-white" data-toggle="modal" data-target="#exampleModal1" data-whatever="@getbootstrap">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Title</label>
+                                        <input type="text" class="form-control" id="recipient-name">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="message-text" class="col-form-label">description</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                      </div>
+                                   </form>
+                                  </div>
+                                 <div class="modal-footer">
+                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                   <button type="button" class="btn btn-orange">Update recipe</button>
+                                 </div>
+                               </div>
+                              </div>
+                            </div>
+                        </button>
+                        <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal10" data-whatever="@getbootstrap">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel1">Delete recipe</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  This action is irrevesible, pls process with caution
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-danger">Delete recipe</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </li>
+                </ul>
+              </div>
             </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Title</label>
-                <input type="text" class="form-control" id="recipient-name">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">description</label>
-                <textarea class="form-control" id="message-text"></textarea>
-              </div>
-           </form>
-          </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-success">Update recipe</button>
-         </div>
-       </div>
+            <div class="col-sm-6 col-md-4 pb-4">
+                <div class="card">
+                    <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <a href="">
+                        <h4 class="card-title">Pepper Soup with goat meat</h4>
+                      </a>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                      <span class="small">7k</span>
+                      <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item card-tile">
+                            <button type="button" class="btn btn-white" data-toggle="modal" data-target="#exampleModal3" data-whatever="@getbootstrap">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Title</label>
+                                        <input type="text" class="form-control" id="recipient-name">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="message-text" class="col-form-label">description</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                      </div>
+                                   </form>
+                                  </div>
+                                 <div class="modal-footer">
+                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                   <button type="button" class="btn btn-orange">Update recipe</button>
+                                 </div>
+                               </div>
+                              </div>
+                            </div>
+                        </button>
+                        <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal11" data-whatever="@getbootstrap">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel2">Delete rcipe</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  This action is irrevesible, pls process with caution
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-danger">Delete recipe</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4 pb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                          <a href="">
+                            <h4 class="card-title">Pepper Soup with goat meat</h4>
+                          </a>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                          <span class="small">780</span>
+                          <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item card-tile">
+                                <button type="button" class="btn btn-white" data-toggle="modal" data-target="#exampleModal4" data-whatever="@getbootstrap">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                                <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                      <div class="modal-body">
+                                        <form>
+                                          <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Title</label>
+                                            <input type="text" class="form-control" id="recipient-name">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="message-text" class="col-form-label">description</label>
+                                            <textarea class="form-control" id="message-text"></textarea>
+                                          </div>
+                                       </form>
+                                      </div>
+                                     <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                       <button type="button" class="btn btn-orange">Update recipe</button>
+                                     </div>
+                                   </div>
+                                  </div>
+                                </div>
+                            <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal12" data-whatever="@getbootstrap">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                            <div class="modal fade" id="exampleModal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel2">Delete rcipe</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      This action is irrevesible, pls process with caution
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-danger">Delete recipe</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 pb-4">
+                        <div class="card">
+                            <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <a href="">
+                                <h4 class="card-title">Pepper Soup with goat meat</h4>
+                              </a>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                              <span class="small">500</span>
+                              <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item card-tile">
+                                    <button type="button" class="btn btn-white" data-toggle="modal" data-target="#exampleModal5" data-whatever="@getbootstrap">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabe5">Update recipe</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                          <div class="modal-body">
+                                            <form>
+                                              <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Title</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="message-text" class="col-form-label">description</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                              </div>
+                                           </form>
+                                          </div>
+                                         <div class="modal-footer">
+                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                           <button type="button" class="btn btn-orange">Update recipe</button>
+                                         </div>
+                                       </div>
+                                      </div>
+                                    </div>
+                                </button>
+                                <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal13" data-whatever="@getbootstrap">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                                <div class="modal fade" id="exampleModal13" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel2">Delete rcipe</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          This action is irrevesible, pls process with caution
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-danger">Delete recipe</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 pb-4">
+                            <div class="card">
+                                <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                  <a href="">
+                                    <h4 class="card-title">Pepper Soup with goat meat</h4>
+                                  </a>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                  <span class="small">200</span>
+                                  <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item card-tile">
+                                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#exampleModal6" data-whatever="@getbootstrap">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </button>
+                                    </button>
+                                    <div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                          <div class="modal-body">
+                                            <form>
+                                              <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Title</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="message-text" class="col-form-label">description</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                              </div>
+                                           </form>
+                                          </div>
+                                         <div class="modal-footer">
+                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                           <button type="button" class="btn btn-orange">Update recipe</button>
+                                         </div>
+                                       </div>
+                                      </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal14" data-whatever="@getbootstrap">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="modal fade" id="exampleModal14" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel2">Delete rcipe</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              This action is irrevesible, pls process with caution
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              <button type="button" class="btn btn-danger">Delete recipe</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 pb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="c:\Users\Bootcamp\Desktop\New folder\image\banner-img-1.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                      <a href="">
+                                        <h4 class="card-title">Pepper Soup with goat meat</h4>
+                                      </a>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <i class="fa fa-star rating-cl" aria-hidden="true"></i>
+                                      <span class="small">6k</span>
+                                      <p class="card-text pt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item card-tile">
+                                            <button type="button" class="btn btn-white" data-toggle="modal" data-target="#exampleModal8" data-whatever="@getbootstrap">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                  <div class="modal-body">
+                                                    <form>
+                                                      <div class="form-group">
+                                                        <label for="recipient-name" class="col-form-label">Title</label>
+                                                        <input type="text" class="form-control" id="recipient-name">
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">description</label>
+                                                        <textarea class="form-control" id="message-text"></textarea>
+                                                      </div>
+                                                   </form>
+                                                  </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                   <button type="button" class="btn btn-orange">Update recipe</button>
+                                                 </div>
+                                               </div>
+                                              </div>
+                                            </div>
+        
+                                        <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal15" data-whatever="@getbootstrap">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                        <div class="modal fade" id="exampleModal15" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel2">Delete rcipe</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  This action is irrevesible, pls process with caution
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                  <button type="button" class="btn btn-danger">Delete recipe</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </li>
+                                    </ul>
+                                  </div>
+                                </div>
+    </section>		
+      <nav aria-label="Page navigation example" class="pt-3">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">4</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">5</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">6</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">7</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">8</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" id="pagination-color" href="#">9</a>
+            </li>
+            <li class="page-item" id="pagination-color">
+              <a class="page-link" id="pagination-color" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+  
       </div>
-    </div>
-		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">delete</button>
-			<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel2">Delete rcipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This action is irrevesible, pls process with caution
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-1.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>10k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes</p>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal8" data-whatever="@getbootstrap">edit</button>
-			 <div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">description</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Update recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal3">delete</button>
-			<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel3">Delete rcipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This action is irrevesible, pls process with caution
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-2.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>10k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes</p>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal9" data-whatever="@getbootstrap">edit</button>
-			 <div class="modal fade" id="exampleModal9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">description</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Update recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal4">delete</button>
-			<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel4">Delete rcipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This action is irrevesible, pls process with caution
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-4.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>7k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes</p>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal10" data-whatever="@getbootstrap">edit</button>
-			 <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">description</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Update recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal5">delete</button>
-			<div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel5">Delete recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This action is irrevesible, pls process with caution
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-1.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>5k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes</p>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal11" data-whatever="@getbootstrap">edit</button>
-			 <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">description</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Update recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal6">delete</button>
-			<div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel6">Delete rcipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This action is irrevesible, pls process with caution
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
-			<img class="img-fluid" src="../image/banner-img-2.jpg" alt="">
-			<a href="recipeDetail.html" id="header-link">
-        <h1>chinese spicy</h1>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star rating-cl" aria-hidden="true"></i>
-        <i class="fa fa-star-half rating-cl" aria-hidden="true"></i>
-        <span>4k</span>
-      </a>
-			<p>If you love the Zuppa Toscana at your local chain Italian restaurant, you will adore this soup. The rich soup is made with Italian sausage, potatoes, cream, and crushed red pepper. It is truly satisfying and irresistible. Tuck into this on a cold day and you are sure to be warmed all the way down to your toes</p>
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal12" data-whatever="@getbootstrap">edit</button>
-			 <div class="modal fade" id="exampleModal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">description</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Update recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal7">delete</button>
-			<div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel7">Delete rcipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This action is irrevesible, pls process with caution
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete recipe</button>
-      </div>
-    </div>
-  </div>
-</div>
-		</div>
-	</div>
-	<nav aria-label="Page navigation example" class="pt-3">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">1</a></li>
-    <li class="page-item"><a class="page-link"  id="pagination-color" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">4</a></li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">5</a></li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">6</a></li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">7</a></li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">8</a></li>
-    <li class="page-item"><a class="page-link" id="pagination-color" href="#">9</a></li>
-    <li class="page-item" id="pagination-color">
-      <a class="page-link" id="pagination-color" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-</div>
 <footer class="footer text-center">
     <strong class="copyright">More-Recipes © 2017, All Rights Reserved, Design &amp; Developed By: Sanni Kehinde</strong>
 </footer>
