@@ -172,3 +172,7 @@ a:hover {
 .btn-orange {
 	background-color: orange;
 }
+.card {
+    background-color: #fff;
+    padding: 30px;
+}
