@@ -91,10 +91,7 @@ class RecipesController {
   static getRecipes(req, res) {
     return Recipes
       .findAll({
-        include: [{
-          model: model.Reviews,
-          as: 'recipeId'
-        }],
+        
       })
       .then(getRecipe => res.status(200).send({
         success: true,
