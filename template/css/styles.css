@@ -172,3 +172,7 @@ a:hover {
 .btn-orange {
 	background-color: orange;
 }
+.card-login {
+	padding: 30px;
+	color: #fff;
+}
