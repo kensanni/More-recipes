@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      recipeName: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -15,13 +15,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      upvote: {
+      upvotes: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        allowNull: false,
+        defaultValue: 0
       },
-      downvote: {
+      downvotes: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        allowNull: false,
+        defaultValue: 0
+      },
+      views: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       },
       image: {
         type: Sequelize.STRING,
