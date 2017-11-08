@@ -3,9 +3,9 @@ import model from '../models';
 const { Reviews } = model;
 
 /**
- * @class ReviewController
+ * @class Reviews
 */
-export default class ReviewController {
+export default class Review {
   /**
    * @description Add  a review for recipes
    * @param {object} req

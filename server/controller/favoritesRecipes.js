@@ -2,9 +2,9 @@ import model from '../models';
 
 const { Favorites } = model;
 /**
- * @class favoritesController
+ * @class favoritesRecipes
 */
-class FavoritiesController {
+class FavoritesRecipes {
   /**
    * @description Adds a recipe into favorite
    * @param {*} req HTTP request object
@@ -44,4 +44,4 @@ class FavoritiesController {
       .catch(error => res.status(400).send(error));
   }
 }
-export default FavoritiesController;
+export default FavoritesRecipes;

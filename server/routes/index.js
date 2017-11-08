@@ -1,21 +1,21 @@
-import UserController from '../controller/userController';
-import RecipesController from '../controller/recipesController';
+import Users from '../controller/users';
+import Recipe from '../controller/recipe';
 import authentication from '../middlewares/authentication';
-import ReviewController from '../controller/reviewController';
-import FavoriteController from '../controller/favoritesController';
+import Review from '../controller/review';
+import FavoritesRecipes from '../controller/favoritesRecipes';
 
 export default (app) => {
   app.get('/api', (req, res) => res.status(200).send({
     message: 'welcome to the world of great recipes',
   }));
 
-  app.post('/api/v1/users/signup', UserController.signUp);
-  app.post('/api/v1/users/signin', UserController.signIn);
-  app.post('/api/v1/recipes', authentication.verifyUser, RecipesController.addRecipes);
-  app.get('/api/v1/recipes', RecipesController.getRecipes);
-  app.put('/api/v1/recipes/:recipeId', authentication.verifyUser, RecipesController.modifyRecipe);
-  app.post('/api/v1/recipes/:recipeId/reviews', authentication.verifyUser, ReviewController.addReview);
-  app.delete('/api/v1/recipes/:recipeId', authentication.verifyUser, RecipesController.deleteRecipes);
-  app.post('/api/v1/recipes/:recipeId/favorites', authentication.verifyUser, FavoriteController.addFavorite);
-  app.get('/api/v1/recipes/favorite', authentication.verifyUser, FavoriteController.getFavorite);
+  app.post('/api/v1/users/signup', Users.signUp);
+  app.post('/api/v1/users/signin', Users.signIn);
+  app.post('/api/v1/recipes', authentication.verifyUser, Recipe.addRecipes);
+  app.get('/api/v1/recipes', Recipe.getRecipes);
+  app.put('/api/v1/recipes/:recipeId', authentication.verifyUser, Recipe.modifyRecipe);
+  app.post('/api/v1/recipes/:recipeId/reviews', authentication.verifyUser, Review.addReview);
+  app.delete('/api/v1/recipes/:recipeId', authentication.verifyUser, Recipe.deleteRecipes);
+  app.post('/api/v1/recipes/:recipeId/favorites', authentication.verifyUser, FavoritesRecipes.addFavorite);
+  app.get('/api/v1/recipes/favorite', authentication.verifyUser, FavoritesRecipes.getFavorite);
 };

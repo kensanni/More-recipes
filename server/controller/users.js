@@ -4,9 +4,9 @@ import model from '../models';
 
 const { User } = model;
 /**
- * @class UserController
+ * @class User
 */
-class UserController {
+class Users {
   /**
    * @description User signup method
    * @param {*} req
@@ -15,7 +15,7 @@ class UserController {
    */
   static signUp(req, res) {
     const {
-      firstname, lastname, username, email, image
+      firstname, lastname, username, email, profileImage
     } = req.body;
     let { password } = req.body;
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -46,7 +46,7 @@ class UserController {
         username,
         email,
         password,
-        image,
+        profileImage,
       })
       .then((created) => {
         const payload = { id: created.id, username: created.username, email: created.email };
@@ -99,4 +99,4 @@ class UserController {
   }
 }
 
-export default UserController;
+export default Users;
