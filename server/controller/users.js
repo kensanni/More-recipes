@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import model from '../models';
 
+const secret = process.env.JWT_SECRET;
+
 const { User } = model;
 /**
  * @class User
@@ -50,7 +52,7 @@ class Users {
       })
       .then((created) => {
         const payload = { id: created.id, username: created.username, email: created.email };
-        const token = jwt.sign(payload, 'sannikay', {
+        const token = jwt.sign(payload, secret, {
           expiresIn: '3h',
         });
         res.status(201).send({
@@ -91,7 +93,7 @@ class Users {
           });
         }
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          const payload = { id: user.id, username: user.username, email: user.email };
+          const payload = { id: user.id, email: user.email };
           const token = jwt.sign(payload, 'sannikay', {
             expiresIn: '3h',
           });

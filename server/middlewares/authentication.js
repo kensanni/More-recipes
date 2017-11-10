@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const secret = 'sannikay';
+const secret = process.env.JWT_SECRET;
 
 const authenticaton = {
   verifyUser: (req, res, next) => {

@@ -124,6 +124,46 @@ class Recipe {
       .catch(error => res.status(400).send(error));
   }
   /**
+     * @description get one recipe
+     * @param {*} req HTTP request object
+     * @param {*} res  HTTP response object
+     * @returns  {JSON} Returns a JSON object
+     */
+  static getARecipe(req, res) {
+    const id = req.params.recipeId;
+    if (isNaN(id)) {
+      return res.status(400).send({
+        message: 'RecipeId parameter should be a number'
+      });
+    }
+    return Recipes
+      .findOne({
+        where: {
+          id
+        },
+        include: [{
+          model: model.Reviews,
+          attributes: ['review'],
+          include: [{
+            model: model.User,
+            attributes: ['username', 'updatedAt'],
+          }]
+        }],
+      })
+      .then((recipe) => {
+        if (recipe.length < 1) {
+          return res.status(404).send({
+            message: 'No Recipe found'
+          });
+        }
+        recipe.increment('views').then(() => {
+          recipe.reload()
+            .then(() => res.status(200).send(recipe));
+        });
+      })
+      .catch(error => res.status(400).send(error));
+  }
+  /**
    * @description delete a recipe
    * @param {*} req HTTP request object
    * @param {*} res  HTTP response object
@@ -137,7 +177,7 @@ class Recipe {
       });
     }
     return Recipes
-      .findById(req.params.recipeId)
+      .findById(id)
       .then((recipe) => {
         if (!recipe) {
           return res.status(400).send({

@@ -13,6 +13,7 @@ export default (app) => {
   app.post('/api/v1/users/signin', Users.signIn);
   app.post('/api/v1/recipes', authentication.verifyUser, Recipe.addRecipes);
   app.get('/api/v1/recipes', Recipe.getRecipes);
+  app.get('/api/v1/recipes/:recipeId', Recipe.getARecipe);
   app.put('/api/v1/recipes/:recipeId', authentication.verifyUser, Recipe.modifyRecipe);
   app.post('/api/v1/recipes/:recipeId/reviews', authentication.verifyUser, Review.addReview);
   app.delete('/api/v1/recipes/:recipeId', authentication.verifyUser, Recipe.deleteRecipes);
