@@ -92,6 +92,68 @@ describe('Testing API endpoints', () => {
           done();
         });
     });
+    it('should add recipe with authorization', (done) => {
+      chai.request(app)
+        .post('/api/v1/recipes')
+        .set('x-access-token', value)
+        .send({
+          name: 'Rice',
+          description: 'Boil for three mins',
+          indegrient: 'Rice, water, pepper',
+          image: 'dummy'
+        })
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.message).equal('Recipe successfully created');
+          done();
+        });
+    });
+    it('should modify recipe with authorization', (done) => {
+      chai.request(app)
+        .put('/api/v1/recipes/1')
+        .set('x-access-token', value)
+        .send({
+          name: 'Rice',
+          description: 'Boil for three mins',
+          indegrient: 'Rice, water, pepper',
+          image: 'dummy'
+        })
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res).to.have.status(200);
+          expect(res.body.message).equal('Recipe updated successfully');
+          done();
+        });
+    });
+    it('should get all recipes from catalog with authorization', (done) => {
+      chai.request(app)
+        .get('/api/v1/recipes/1')
+        .set('x-access-token', value)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+    it('should delete a recipes from catalog with authorization', (done) => {
+      chai.request(app)
+        .delete('/api/v1/recipes/2')
+        .set('x-access-token', value)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res).to.have.status(200);
+          expect(res.body.message).equal('Recipe successfully deleted');
+          done();
+        });
+    });
   });
 });
 describe('Validating recipe input', () => {
@@ -129,21 +191,6 @@ describe('Validating recipe input', () => {
         done();
       });
   });
-  it('validate review input', (done) => {
-    chai.request(app)
-      .post('/api/v1/recipes/1/reviews')
-      .set('x-access-token', value)
-      .send({
-        userId: 2,
-        recipeId: 1,
-        review: '',
-      })
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body.message).equal('Please input a review');
-        done();
-      });
-  });
 });
 describe('API endpoint to test review', () => {
   it('Should add a new review for recipe', (done) => {
@@ -164,23 +211,52 @@ describe('API endpoint to test review', () => {
         done();
       });
   });
-  // it('Should give error message for invalid recipeId parameter', (done) => {
-  //   chai.request(app)
-  //     .post('/api/v1/recipes/ken/reviews')
-  //     .set('x-access-token', value)
-  //     .send({
-  //       userId: 2,
-  //       recipeId: 8,
-  //       review: 'awesome recipe',
-  //     })
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       expect(res).to.have.status(404);
-  //       expect(res.body.message).equal('Recipe not found');
-  //       done();
-  //     });
-  // });
+  it('Should validate review input', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes/1/reviews')
+      .set('x-access-token', value)
+      .send({
+        userId: 2,
+        recipeId: 1,
+        review: '',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.message).equal('Please input a review');
+        done();
+      });
+  });
+});
+describe('API endpoint to test favorite recipe', () => {
+  it('Should add a recipe to favorite list', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes/1/favorites')
+      .set('x-access-token', value)
+      .send({
+        recipeId: 1,
+        userId: 1,
+      })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res).to.have.status(200);
+        expect(res.body.message).equal('recipe sucessfully added to favorite');
+        done();
+      });
+  });
+  it('Should get recipe from favorite list', (done) => {
+    chai.request(app)
+      .get('/api/v1/recipes/favorites')
+      .set('x-access-token', value)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res).to.have.status(200);
+        expect(res.body.success).equal(true);
+        done();
+      });
+  });
 });
 
