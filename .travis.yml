@@ -7,3 +7,8 @@ script:
     - npm test
 cache: 
   - npm install
+before_script:
+  - createdb more-recipes --username=postgres
+  - sequelize db:migrate
+after_success:
+  - npm run coveralls
