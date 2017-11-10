@@ -67,6 +67,17 @@ class Users {
    * @returns  {JSON} Returns a JSON object
    */
   static signIn(req, res) {
+    const { username, password } = req.body;
+    if (!username) {
+      return res.status(400).send({
+        message: 'Please input your username'
+      });
+    }
+    if (!password) {
+      return res.status(400).send({
+        message: 'Please input your password to signin'
+      });
+    }
     return User
       .findOne({
         where: {
@@ -76,7 +87,7 @@ class Users {
       .then((user) => {
         if (!user) {
           return res.status(400).send({
-            message: 'User not found',
+            message: 'Please enter username',
           });
         }
         if (bcrypt.compareSync(req.body.password, user.password)) {

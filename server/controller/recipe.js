@@ -61,7 +61,12 @@ class Recipe {
     const {
       name, description, indegrient, image
     } = req.body;
-
+    const id = req.params.recipeId;
+    if (isNaN(id)) {
+      return res.status(400).send({
+        message: 'RecipeId parameter should be a number'
+      });
+    }
     Recipes.findById(req.params.recipeId)
       .then((recipe) => {
         if (!recipe) {
@@ -125,6 +130,12 @@ class Recipe {
    * @returns  {JSON} Returns a JSON object
    */
   static deleteRecipes(req, res) {
+    const id = req.params.recipeId;
+    if (isNaN(id)) {
+      return res.status(400).send({
+        message: 'RecipeId parameter should be a number'
+      });
+    }
     return Recipes
       .findById(req.params.recipeId)
       .then((recipe) => {
