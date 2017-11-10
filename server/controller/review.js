@@ -25,7 +25,7 @@ export default class Review {
         message: 'RecipeId parameter should be a number'
       });
     }
-    return Recipes.findById(req.params.recipeId)
+    return Recipes.findById(id)
       .then((recipe) => {
         if (!recipe) {
           return res.status(404)
@@ -33,7 +33,7 @@ export default class Review {
         }
         Reviews
           .create({
-            recipeId: req.params.recipeId,
+            recipeId: id,
             review,
             userId: req.decoded.id,
           })
