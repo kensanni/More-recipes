@@ -3,9 +3,9 @@ import model from '../models';
 const { Recipes } = model;
 
 /**
- * @class Recipes
+ * @class RecipesController
 */
-class Recipe {
+class RecipesController {
   /**
    * @description Adds a recipe
    * @param {*} req HTTP request object
@@ -14,9 +14,9 @@ class Recipe {
    */
   static addRecipes(req, res) {
     const {
-      name, description, indegrient, image,
+      recipeName, description, indegrient, image, upvote, downvote,
     } = req.body;
-    if (!name) {
+    if (!recipeName) {
       return res.status(400).send({
         message: 'Please input the name of your recipe'
       });
@@ -28,7 +28,7 @@ class Recipe {
     }
     if (!indegrient) {
       return res.status(400).send({
-        message: 'Please input the indegrient for your recipe'
+        message: 'Please input a indegrient for your recipe'
       });
     }
     if (!image) {
@@ -39,10 +39,12 @@ class Recipe {
     return Recipes
       .create({
         userId: req.decoded.id,
-        name,
+        recipeName,
         description,
         indegrient,
         image,
+        // upvote,
+        // downvote
       })
       .then(recipe => res.status(201).send({
         success: true,
@@ -59,12 +61,21 @@ class Recipe {
    */
   static modifyRecipe(req, res) {
     const {
-      name, description, indegrient, image
+      recipeName, description, indegrient, image
     } = req.body;
-    const id = req.params.recipeId;
-    if (isNaN(id)) {
+    if (!recipeName) {
       return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
+        message: 'Name cannnot be empty be an empty field'
+      });
+    }
+    if (!description) {
+      return res.status(400).send({
+        message: 'Description cannot be empty cannot be an empty field'
+      });
+    }
+    if (!indegrient) {
+      return res.status(400).send({
+        message: 'Indigrient cannot be an empty field'
       });
     }
     Recipes.findById(req.params.recipeId)
@@ -74,22 +85,13 @@ class Recipe {
             .send({ message: 'Recipe does not exist in this catalog' });
         }
         recipe.update({
-          name: name || recipe.name,
-          description: description || recipe.description,
-          indegrient: indegrient || recipe.indegrient,
-          image: image || recipe.image,
+          recipeName,
+          description,
+          indegrient,
+          image,
         })
           .then((updatedRecipe) => {
-            res.status(200).send({
-              success: true,
-              message: 'Recipe updated successfully',
-              data: {
-                name: updatedRecipe.name,
-                description: updatedRecipe.description,
-                indegrient: updatedRecipe.indegrient,
-                image: updatedRecipe.image
-              }
-            });
+            res.status(200).send(updatedRecipe);
           })
           .catch(error => res.status(400).send(error));
       })
@@ -104,63 +106,12 @@ class Recipe {
   static getRecipes(req, res) {
     return Recipes
       .findAll({
-        include: [{
-          model: model.Reviews,
-          attributes: ['review'],
-          include: [{
-            model: model.User,
-            attributes: ['username'],
-          }]
-        }],
+        
       })
-      .then((recipe) => {
-        if (recipe.length < 1) {
-          return res.status(404).send({
-            message: 'No Recipe found'
-          });
-        }
-        return res.status(200).send(recipe);
-      })
-      .catch(error => res.status(400).send(error));
-  }
-  /**
-     * @description get one recipe
-     * @param {*} req HTTP request object
-     * @param {*} res  HTTP response object
-     * @returns  {JSON} Returns a JSON object
-     */
-  static getARecipe(req, res) {
-    const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
-      });
-    }
-    return Recipes
-      .findOne({
-        where: {
-          id
-        },
-        include: [{
-          model: model.Reviews,
-          attributes: ['review'],
-          include: [{
-            model: model.User,
-            attributes: ['username', 'updatedAt'],
-          }]
-        }],
-      })
-      .then((recipe) => {
-        if (recipe.length < 1) {
-          return res.status(404).send({
-            message: 'No Recipe found'
-          });
-        }
-        recipe.increment('views').then(() => {
-          recipe.reload()
-            .then(() => res.status(200).send(recipe));
-        });
-      })
+      .then(getRecipe => res.status(200).send({
+        success: true,
+        data: getRecipe,
+      }))
       .catch(error => res.status(400).send(error));
   }
   /**
@@ -170,14 +121,8 @@ class Recipe {
    * @returns  {JSON} Returns a JSON object
    */
   static deleteRecipes(req, res) {
-    const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
-      });
-    }
     return Recipes
-      .findById(id)
+      .findById(req.params.recipeId)
       .then((recipe) => {
         if (!recipe) {
           return res.status(400).send({
@@ -193,4 +138,4 @@ class Recipe {
       });
   }
 }
-export default Recipe;
+export default RecipesController;

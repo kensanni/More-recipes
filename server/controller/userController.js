@@ -2,13 +2,11 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import model from '../models';
 
-const secret = process.env.JWT_SECRET;
-
 const { User } = model;
 /**
- * @class User
+ * @class UserController
 */
-class Users {
+class UserController {
   /**
    * @description User signup method
    * @param {*} req
@@ -17,7 +15,7 @@ class Users {
    */
   static signUp(req, res) {
     const {
-      firstname, lastname, username, email, profileImage
+      firstname, lastname, username, email, image
     } = req.body;
     let { password } = req.body;
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -48,11 +46,11 @@ class Users {
         username,
         email,
         password,
-        profileImage,
+        image,
       })
       .then((created) => {
-        const payload = { id: created.id };
-        const token = jwt.sign(payload, secret, {
+        const payload = { id: created.id, username: created.username, email: created.email };
+        const token = jwt.sign(payload, 'sannikay', {
           expiresIn: '3h',
         });
         res.status(201).send({
@@ -69,17 +67,6 @@ class Users {
    * @returns  {JSON} Returns a JSON object
    */
   static signIn(req, res) {
-    const { username, password } = req.body;
-    if (!username) {
-      return res.status(400).send({
-        message: 'Please input your username'
-      });
-    }
-    if (!password) {
-      return res.status(400).send({
-        message: 'Please input your password to signin'
-      });
-    }
     return User
       .findOne({
         where: {
@@ -89,12 +76,12 @@ class Users {
       .then((user) => {
         if (!user) {
           return res.status(400).send({
-            message: 'Incorrect Login details',
+            message: 'User not found',
           });
         }
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          const payload = { id: user.id };
-          const token = jwt.sign(payload, secret, {
+          const payload = { id: user.id, username: user.username, email: user.email };
+          const token = jwt.sign(payload, 'sannikay', {
             expiresIn: '3h',
           });
           res.status(200).send({
@@ -104,7 +91,7 @@ class Users {
           });
         } else {
           res.status(400).send({
-            message: 'Incorrect Login details',
+            error: 'Incorrect Login details',
           });
         }
       })
@@ -112,4 +99,4 @@ class Users {
   }
 }
 
-export default Users;
+export default UserController;
