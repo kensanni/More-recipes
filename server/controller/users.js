@@ -51,7 +51,7 @@ class Users {
         profileImage,
       })
       .then((created) => {
-        const payload = { id: created.id, username: created.username, email: created.email };
+        const payload = { id: created.id };
         const token = jwt.sign(payload, secret, {
           expiresIn: '3h',
         });
@@ -89,12 +89,12 @@ class Users {
       .then((user) => {
         if (!user) {
           return res.status(400).send({
-            message: 'Please enter username',
+            message: 'Incorrect Login details',
           });
         }
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          const payload = { id: user.id, email: user.email };
-          const token = jwt.sign(payload, 'sannikay', {
+          const payload = { id: user.id };
+          const token = jwt.sign(payload, secret, {
             expiresIn: '3h',
           });
           res.status(200).send({
@@ -104,7 +104,7 @@ class Users {
           });
         } else {
           res.status(400).send({
-            error: 'Incorrect Login details',
+            message: 'Incorrect Login details',
           });
         }
       })

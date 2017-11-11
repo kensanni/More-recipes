@@ -28,7 +28,7 @@ class Recipe {
     }
     if (!indegrient) {
       return res.status(400).send({
-        message: 'Please input a indegrient for your recipe'
+        message: 'Please input the indegrient for your recipe'
       });
     }
     if (!image) {
@@ -109,7 +109,7 @@ class Recipe {
           attributes: ['review'],
           include: [{
             model: model.User,
-            attributes: ['username', 'updatedAt'],
+            attributes: ['username'],
           }]
         }],
       })
