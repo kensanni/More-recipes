@@ -1,8 +1,18 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const secret = 'sannikay';
+const secret = process.env.JWT_SECRET;
 
 const authenticaton = {
+
+  /**
+   * @description verify user identity
+   * @param {object} req - request
+   * @param {object} res - response
+   * @param {object} next - process to next function
+   * @returns {object} return
+   */
+
   verifyUser: (req, res, next) => {
     const token = req.headers['x-access-token'] || req.headers.token;
     if (!token) {

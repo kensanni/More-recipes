@@ -1,6 +1,5 @@
-import dotenv from 'dotenv';
+require('dotenv').config();
 
-dotenv.config();
 module.exports = {
   development: {
     username: process.env.DATABASE_USERNAME,
@@ -20,4 +19,4 @@ module.exports = {
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres'
   }
-}
+};
