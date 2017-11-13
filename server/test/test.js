@@ -48,6 +48,7 @@ describe('Testing API endpoints', () => {
           profileImage: 'dummydata'
         })
         .end((err, res) => {
+          console.log(res.body);
           expect(res.body.message).equal('User created');
           expect(res).to.have.status(201);
           done();
@@ -73,9 +74,6 @@ describe('Testing API endpoints', () => {
           username: 'sannikay',
         })
         .end((err, res) => {
-          // if (err) {
-          //   return done(err);
-          // }
           expect(res.body.message).equal('Please input your password to signin');
           done();
         });
@@ -87,9 +85,6 @@ describe('Testing API endpoints', () => {
           password: 'develop',
         })
         .end((err, res) => {
-          // if (err) {
-          //   return done(err);
-          // }
           expect(res.body.message).equal('Please input your username');
           done();
         });
@@ -102,9 +97,6 @@ describe('Testing API endpoints', () => {
           password: 'develo',
         })
         .end((err, res) => {
-          // if (err) {
-          //   return done(err);
-          // }
           expect(res.body.message).equal('Incorrect Login details');
           done();
         });
@@ -117,9 +109,6 @@ describe('Testing API endpoints', () => {
           password: 'develop',
         })
         .end((err, res) => {
-          // if (err) {
-          //   return done(err);
-          // }
           expect(res.body.message).equal('Incorrect Login details');
           done();
         });
