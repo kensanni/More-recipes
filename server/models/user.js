@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const Users = sequelize.define('Users', {
     firstname: {
       type: DataTypes.STRING,
       allowNull: {
@@ -58,17 +58,17 @@ export default (sequelize, DataTypes) => {
     },
     profileImage: DataTypes.STRING,
   });
-  User.associate = (models) => {
-    User.hasMany(models.Recipes, {
+  Users.associate = (models) => {
+    Users.hasMany(models.Recipes, {
       foreignKey: 'userId',
       as: 'recipes',
     });
-    User.hasMany(models.Reviews, {
+    Users.hasMany(models.Reviews, {
       foreignKey: 'userId'
     });
-    User.hasMany(models.Favorites, {
+    Users.hasMany(models.Favorites, {
       foreignKey: 'userId',
     });
   };
-  return User;
+  return Users;
 };

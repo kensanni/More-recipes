@@ -108,7 +108,7 @@ class Recipe {
           model: model.Reviews,
           attributes: ['review'],
           include: [{
-            model: model.User,
+            model: model.Users,
             attributes: ['username'],
           }]
         }],
@@ -145,7 +145,7 @@ class Recipe {
           model: model.Reviews,
           attributes: ['review'],
           include: [{
-            model: model.User,
+            model: model.Users,
             attributes: ['username', 'updatedAt'],
           }]
         }],

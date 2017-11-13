@@ -4,7 +4,7 @@ import model from '../models';
 
 const secret = process.env.JWT_SECRET;
 
-const { User } = model;
+const User = model.Users;
 /**
  * @class User
 */

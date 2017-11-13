@@ -13,7 +13,7 @@ export default (sequelize, DataTypes) => {
     Favorites.belongsTo(models.Recipes, {
       foreignKey: 'recipeId',
     });
-    Favorites.belongsTo(models.User, {
+    Favorites.belongsTo(models.Users, {
       foreignKey: 'userId',
     });
   };

@@ -53,7 +53,7 @@ export default (sequelize, DataTypes) => {
     },
   });
   Recipes.associate = (models) => {
-    Recipes.belongsTo(models.User, {
+    Recipes.belongsTo(models.Users, {
       foreignKey: 'userId',
     });
     Recipes.hasMany(models.Favorites, {

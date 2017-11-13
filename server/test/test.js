@@ -1,14 +1,14 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
-import { User, Recipes, Reviews, Favorites } from '../models';
+import { Users, Recipes, Reviews, Favorites } from '../models';
 
 
 const { expect } = chai;
 
 chai.use(chaiHttp);
 
-User.destroy({
+Users.destroy({
   cascade: true,
   truncate: true,
   restartIdentity: true
@@ -293,6 +293,7 @@ describe('Testing API endpoints', () => {
     it('should get all recipes from catalog', (done) => {
       chai.request(app)
         .get('/api/v1/recipes')
+        .set('x-access-token', value)
         .end((err, res) => {
           expect(res).to.have.status(200);
           done();
@@ -301,6 +302,7 @@ describe('Testing API endpoints', () => {
     it('should get one recipes from catalog with authorization', (done) => {
       chai.request(app)
         .get('/api/v1/recipes/1')
+        .set('x-access-token', value)
         .end((err, res) => {
           expect(res).to.have.status(200);
           done();
