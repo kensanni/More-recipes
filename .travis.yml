@@ -10,7 +10,7 @@ script:
 cache: 
   - npm install
 before_script:
-  - createdb more-recipes --username=postgres
+  - psql -c 'create database travis_ci_test;' -U postgres
   - sequelize db:migrate
 after_success:
   - npm run coveralls
