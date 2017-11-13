@@ -1,6 +1,4 @@
 language: node_js
-services:
-  - postgresql
 node_js:
     - "6.10.2"
 install:
@@ -9,8 +7,10 @@ script:
     - npm test
 cache: 
   - npm install
+env: 
+  - NODE_ENV=development
 before_script:
-  - psql -c 'create database more-recipes;' -U postgres
-  - sequelize db:migrate --env development
+  - createdb more-recipes --username=postgres
+  - sequelize db:migrate 
 after_success:
   - npm run coveralls
