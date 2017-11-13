@@ -10,7 +10,7 @@ cache:
 env: 
   - NODE_ENV=development
 before_script:
-  - createdb more-recipes --username=postgres
+  - createdb more-recipe --username=postgres
   - sequelize db:migrate 
 after_success:
   - npm run coveralls
