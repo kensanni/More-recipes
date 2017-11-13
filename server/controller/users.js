@@ -4,11 +4,11 @@ import model from '../models';
 
 const secret = process.env.JWT_SECRET;
 
-const User = model.Users;
+const { Users } = model;
 /**
  * @class User
 */
-class Users {
+class User {
   /**
    * @description User signup method
    * @param {*} req
@@ -41,7 +41,7 @@ class Users {
         message: 'Please input  a valid email address'
       });
     }
-    return User
+    return Users
       .create({
         firstname,
         lastname,
@@ -64,6 +64,7 @@ class Users {
       .catch(error => res.status(400).send(error));
   }
   /**
+   * @description User signin method
    * @param {*} req
    * @param {*} res
    * @returns  {JSON} Returns a JSON object
@@ -80,7 +81,7 @@ class Users {
         message: 'Please input your password to signin'
       });
     }
-    return User
+    return Users
       .findOne({
         where: {
           username: req.body.username
@@ -112,4 +113,4 @@ class Users {
   }
 }
 
-export default Users;
+export default User;
