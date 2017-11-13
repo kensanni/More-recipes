@@ -556,4 +556,3 @@ describe('API endpoint to test favorite recipe', () => {
       });
   });
 });
-
