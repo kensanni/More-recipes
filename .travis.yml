@@ -8,7 +8,7 @@ script:
 cache: 
   - npm install
 env: 
-  - NODE_ENV=development
+  - NODE_ENV=test
 before_script:
   - createdb more-recipe --username=postgres
   - sequelize db:migrate 

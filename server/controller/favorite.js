@@ -4,7 +4,7 @@ const { Favorites, Recipes } = model;
 /**
  * @class favoritesRecipes
 */
-class FavoritesRecipes {
+class Favorite {
   /**
    * @description Adds a recipe into favorite
    * @param {*} req HTTP request object
@@ -58,4 +58,4 @@ class FavoritesRecipes {
       .catch(error => res.status(400).send(error));
   }
 }
-export default FavoritesRecipes;
+export default Favorite;

@@ -1,8 +1,8 @@
-import Users from '../controller/users';
+import User from '../controller/user';
 import Recipe from '../controller/recipe';
 import authentication from '../middlewares/authentication';
 import Review from '../controller/review';
-import FavoritesRecipes from '../controller/favoritesRecipes';
+import Favorite from '../controller/favorite';
 
 export default (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -11,11 +11,11 @@ export default (app) => {
 
   /**
    * @description user signup route
-   * @param {} Users.signUp
+   * @param {} User.signUp
    */
   app.post(
     '/api/v1/users/signup',
-    Users.signUp
+    User.signUp
   );
 
   /**
@@ -24,7 +24,7 @@ export default (app) => {
    */
   app.post(
     '/api/v1/users/signin',
-    Users.signIn
+    User.signIn
   );
 
   /**
@@ -97,7 +97,7 @@ export default (app) => {
   app.post(
     '/api/v1/recipes/:recipeId/favorites',
     authentication.verifyUser,
-    FavoritesRecipes.addFavorite
+    Favorite.addFavorite
   );
 
   /**
@@ -108,6 +108,6 @@ export default (app) => {
   app.get(
     '/api/v1/users/:userId/recipes',
     authentication.verifyUser,
-    FavoritesRecipes.getFavorite
+    Favorite.getFavorite
   );
 };
