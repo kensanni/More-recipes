@@ -1,11 +1,27 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import webpack from 'webpack';
+import path from 'path';
+import open from 'open';
+import config from '../webpack.config';
 import routes from '../server/routes';
 
 require('dotenv').config();
 // Set up the express app
 const app = express();
+const compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+
+app.use(require('webpack-hot-middleware')(compiler));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 // Log requests to the console.
 app.use(logger('dev'));
