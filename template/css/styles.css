@@ -17,26 +17,26 @@
 	width: 100px;
 }
 a {
-    color: orange;
+    color: #723f5f;
 	text-decoration: none;
-    text-decoration-color: orange;
+    text-decoration-color: #723f5f;
 }
 .text-align {
 	text-align: left;
 }
 
 .signin-text {
-	color: orange;
+	color: #723f5f;
 }
 
 #pagination-color {
-	color: orange;
+	color: #723f5f;
 }
 .p-a-0 {
     padding: 0!important;
 }
 .bg-green {
-	background-color: orange;
+	background-color: #723f5f;
 }
 .top-nav-bar {
 	padding-top: 30px;
@@ -55,11 +55,13 @@ a {
 	float: right;
 }
 .footer {
+	position: fixed;
+	left: 0px;
 	bottom: 0px;
-    height: 40px;
+	width: 100%;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: orange;
+    background-color: #723f5f;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -74,12 +76,12 @@ a {
 }
 .header-bg {
 	padding-top: 5px;
-	background-color: orange;
+	background-color: #723f5f;
 	color: #fff;
 	text-align: center;
 }
 .header-nav {
-	background-color: orange;
+	background-color: #723f5f;
 	color: #fff;
 }
 #header-link {
@@ -122,8 +124,8 @@ a {
 }
 
 #text-dec {
-    color: orange;
-    text-decoration-color: orange;
+    color: #723f5f;
+    text-decoration-color: #723f5f;
 }
 .signin-btn {
 	text-decoration: none;
@@ -135,8 +137,11 @@ a {
 	text-decoration-color: #FFF;
 }
 
-.font, h1, h3 {
-	font-family: 'Open Sans', sans-serif;
+.font {
+	color: #fff;
+	font-family: 'Dosis',sans-serif;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .rating-cl {
@@ -152,11 +157,11 @@ a {
 	text-align: center;
 }
 .card-tile {
-	background-color: Orange;
+	background-color: #723f5f;
 }
 
 a:hover {
-	color: orange;
+	color: #723f5f;
 	text-decoration: none;
 }
 .favorite-btn {
@@ -170,9 +175,64 @@ a:hover {
 	color: white;
 }
 .btn-orange {
-	background-color: orange;
+	background-color: #723f5f;
 }
 .card-login {
-	padding: 30px;
-	background-color: #fff;
+    background-color: #fff;
+    padding: 30px;
+}
+
+.nav-text {
+	font-family: 'Dosis',sans-serif;
+    font-size: 22px;
+}
+
+.title {
+	color: #723f5f;
+    font-family: 'Dosis',sans-serif;
+    font-size: 29px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+p {
+	color: #515251;
+    font-family: 'Bitter',serif;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.46;
+}
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    border-top: none;
 }
