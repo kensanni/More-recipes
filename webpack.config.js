@@ -30,7 +30,11 @@ export default {
         ],
         include: path.join(__dirname, '/client'),
         exclude: /node_modules/,
-      }
+      },
+      {
+        test: /(\.s?css)$/,
+        loader: ['css-loader']
+      },
     ]
   }
 };
