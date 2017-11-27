@@ -10,7 +10,7 @@
 	width: 50px;
 }
 .form-bg {
-	background-color: rgba(233, 151, 10, 0.863);
+	background-color: #DCEEFB;
 }
 
 .img-size {
@@ -169,7 +169,7 @@ a:hover {
 	color: #fff;
 }
 .favorite-btn:hover {
-	color: rgb(95, 86, 71);
+	color: rgb(194, 196, 81);
 }
 .btn-white {
 	color: white;
@@ -202,37 +202,67 @@ p {
     font-weight: 200;
     line-height: 1.46;
 }
+.headline {
+	margin-top: 30px;
+	text-align: left;
+	z-index: 2;
+  }
+  
+  .heading {
+	margin-bottom: 15px;
+  }
+  
+  .brief {
+	margin-bottom: 30px;
+	color: #757575;
+  }
 
-/* Style the tab */
-div.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-
-/* Style the buttons inside the tab */
-div.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
+  .btn-create {
+    text-decoration: none;
+    font-weight: 700;
+    min-width: 120px;
+    font-size: 1.4rem !important;
+    font-weight: 900;
+    color: #fff;
+    background-color: #723f5f;
+    text-align: center;
+    letter-spacing: .5px;
     cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
 }
 
-/* Change background color of buttons on hover */
-div.tab button:hover {
-    background-color: #ddd;
+.quick-access p {
+    display: inline-block;
+    margin-left: 15px;
+    color: #757575;
 }
 
-/* Create an active/current tablink class */
-div.tab button.active {
-    background-color: #ccc;
+.page-footer {
+    background: transparent;
+    color: #616161;
+    padding-top: 60px;
+}
+.page-footer .divider {
+    background-color: #616161;
+}
+.page-footer li {
+    display: inline-block;
+    margin-right: 20px;
+    margin-right: 2rem;
+}
+.page-footer i {
+    font-size: 24px;
+}
+.page-footer .copyright {
+    min-height: 50px;
+    align-items: center;
+    padding: 10px 0px;
+    color: black;
 }
 
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    border-top: none;
+.divider {
+    height: 1px;
+    overflow: hidden;
+}
+.left {
+    float: left !important;
 }
