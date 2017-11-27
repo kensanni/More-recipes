@@ -3,7 +3,6 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import webpack from 'webpack';
 import path from 'path';
-import open from 'open';
 import config from '../webpack.config';
 import routes from '../server/routes';
 
@@ -19,10 +18,6 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/index.html'));
-});
-
 // Log requests to the console.
 app.use(logger('dev'));
 
@@ -32,8 +27,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 routes(app);
 // Setup a default catch-all route that sends back a welcome message in JSON format.
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Resources Not found.',
-}));
+// app.get('*', (req, res) => res.status(200).send({
+//   message: 'Resources Not found.',
+// }));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 export default app;

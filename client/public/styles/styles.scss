@@ -1,0 +1,280 @@
+$main-color: #723f5f;
+$bg-color: rgba(89, 17, 105, 0.863);
+$white-color: #fff;
+
+
+.m-x-auto {
+  margin-right: auto!important;
+  margin-left: auto!important;
+}
+
+.app-login-form {
+  max-width: 380px;
+  margin-top: -25px;
+}
+
+.chat-image {
+  width: 50px;
+}
+
+.form-bg {
+  background-color: $bg-color;
+}
+
+.img-size {
+  width: 100px;
+}
+
+a {
+  color: $main-color;
+  text-decoration: none;
+  text-decoration-color: $main-color;
+}
+.text-align {
+  text-align: left;
+}
+
+.signin-text {
+  color: $main-color;
+}
+
+#pagination-color {
+  color: $main-color;
+}
+.p-a-0 {
+  padding: 0!important;
+}
+.bg-green {
+  background-color: $main-color;
+}
+.top-nav-bar {
+  padding-top: 30px;
+}
+.br-right {
+  border-right: 30px;
+
+}
+.pd-remove {
+  padding-bottom: 0px;
+}
+
+.rfloat {
+  float: right;
+}
+.footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: $main-color;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.profile-bg {
+  background-color: #f3f3f3;
+}
+
+.header-bg {
+  padding-top: 5px;
+  background-color: $main-color;
+  color: $white-color;
+  text-align: center;
+}
+
+.header-nav {
+  background-color: $main-color;
+  color: $white-color;
+}
+#header-link {
+  text-decoration: none;
+  color: #212529;
+}
+.navbar-link {
+  padding-right: 0;
+  padding-left: 0;
+  display: block;
+  padding: .5rem 1rem;
+  color: $white-color;
+  text-decoration: none
+}
+.search-btn {
+  border-color: yellow;
+  color: $white-color;
+  background-color: transparent;
+}
+
+.vl {
+  border-left: 3px solid black;
+  height: 35px;
+}
+
+.user-profile {
+  padding-top: 10px;
+  padding-bottom: 40px;
+  text-align: center
+}
+
+.user-text {
+  padding-left: 10px;
+}
+
+#navlink {
+  text-decoration: none;
+  color: $white-color;
+}
+
+.black {
+  color: black;
+}
+
+#text-dec {
+  color: $main-color;
+  text-decoration-color: $main-color;
+}
+.signin-btn {
+  text-decoration: none;
+  color: $white-color;
+}
+#signn-btn {
+  color: $white-color;
+  text-decoration: none;
+  text-decoration-color: $white-color;
+}
+
+.font {
+  color: $white-color;
+  font-family: 'Dosis',sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.rating-cl {
+color: #feaa26;
+}
+
+.header-text {
+font-size: 30px;
+}
+
+.copyright {
+  color: $white-color;
+  text-align: center;
+}
+.card-tile {
+  background-color: $main-color;
+}
+
+a:hover {
+  color: $main-color;
+  text-decoration: none;
+}
+.favorite-btn {
+  cursor: pointer;
+  color: $white-color;
+}
+.favorite-btn:hover {
+  color: rgb(194, 196, 81);
+}
+.btn-white {
+  color: white;
+}
+.btn-orange {
+  background-color: $main-color;
+}
+.card-login {
+  background-color: $white-color;
+  padding: 30px;
+}
+
+.nav-text {
+  font-family: 'Dosis',sans-serif;
+  font-size: 22px;
+}
+
+.title {
+  color: $main-color;
+  font-family: 'Dosis',sans-serif;
+  font-size: 29px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+p {
+  color: #515251;
+  font-family: 'Bitter',serif;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 1.46;
+}
+
+.headline {
+  margin-top: 80px;
+  text-align: left;
+  z-index: 2;
+}
+
+.heading {
+  margin-bottom: 15px;
+}
+
+.brief {
+  margin-bottom: 30px;
+  color: #757575;
+}
+
+.btn-create {
+  text-decoration: none;
+  font-weight: 700;
+  min-width: 120px;
+  font-size: 1.4rem !important;
+  font-weight: 900;
+  color: #fff;
+  background-color: #723f5f;
+  text-align: center;
+  letter-spacing: .5px;
+  cursor: pointer;
+}
+
+.quick-access {
+  .p {
+    display: inline-block;
+    margin-left: 15px;
+    color: #757575;
+  }
+}
+
+.page-footer {
+  background: transparent;
+  color: #616161;
+  padding-top: 60px;
+  .divider {
+    background-color: #616161;
+  }
+  li {
+    display: inline-block;
+    margin-right: 20px;
+    margin-right: 2rem;
+  }
+  i {
+    font-size: 24px;
+  }
+  .copyright {
+    min-height: 50px;
+    align-items: center;
+    padding: 10px 0px;
+    color: black;
+  }
+}
+
+.divider {
+  height: 1px;
+  overflow: hidden;
+}
+
+.left {
+  float: left !important;
+}
+
