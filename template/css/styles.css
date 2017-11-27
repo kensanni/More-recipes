@@ -10,33 +10,33 @@
 	width: 50px;
 }
 .form-bg {
-	background-color: rgba(233, 151, 10, 0.863);
+	background-color: #DCEEFB;
 }
 
 .img-size {
 	width: 100px;
 }
 a {
-    color: orange;
+    color: #723f5f;
 	text-decoration: none;
-    text-decoration-color: orange;
+    text-decoration-color: #723f5f;
 }
 .text-align {
 	text-align: left;
 }
 
 .signin-text {
-	color: orange;
+	color: #723f5f;
 }
 
 #pagination-color {
-	color: orange;
+	color: #723f5f;
 }
 .p-a-0 {
     padding: 0!important;
 }
 .bg-green {
-	background-color: orange;
+	background-color: #723f5f;
 }
 .top-nav-bar {
 	padding-top: 30px;
@@ -55,11 +55,13 @@ a {
 	float: right;
 }
 .footer {
+	position: fixed;
+	left: 0px;
 	bottom: 0px;
-    height: 40px;
+	width: 100%;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: orange;
+    background-color: #723f5f;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -74,12 +76,12 @@ a {
 }
 .header-bg {
 	padding-top: 5px;
-	background-color: orange;
+	background-color: #723f5f;
 	color: #fff;
 	text-align: center;
 }
 .header-nav {
-	background-color: orange;
+	background-color: #723f5f;
 	color: #fff;
 }
 #header-link {
@@ -122,8 +124,8 @@ a {
 }
 
 #text-dec {
-    color: orange;
-    text-decoration-color: orange;
+    color: #723f5f;
+    text-decoration-color: #723f5f;
 }
 .signin-btn {
 	text-decoration: none;
@@ -135,8 +137,11 @@ a {
 	text-decoration-color: #FFF;
 }
 
-.font, h1, h3 {
-	font-family: 'Open Sans', sans-serif;
+.font {
+	color: #fff;
+	font-family: 'Dosis',sans-serif;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .rating-cl {
@@ -152,11 +157,11 @@ a {
 	text-align: center;
 }
 .card-tile {
-	background-color: Orange;
+	background-color: #723f5f;
 }
 
 a:hover {
-	color: orange;
+	color: #723f5f;
 	text-decoration: none;
 }
 .favorite-btn {
@@ -164,15 +169,100 @@ a:hover {
 	color: #fff;
 }
 .favorite-btn:hover {
-	color: rgb(95, 86, 71);
+	color: rgb(194, 196, 81);
 }
 .btn-white {
 	color: white;
 }
 .btn-orange {
-	background-color: orange;
+	background-color: #723f5f;
 }
 .card-login {
     background-color: #fff;
     padding: 30px;
+}
+
+.nav-text {
+	font-family: 'Dosis',sans-serif;
+    font-size: 22px;
+}
+
+.title {
+	color: #723f5f;
+    font-family: 'Dosis',sans-serif;
+    font-size: 29px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+p {
+	color: #515251;
+    font-family: 'Bitter',serif;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.46;
+}
+.headline {
+	margin-top: 30px;
+	text-align: left;
+	z-index: 2;
+  }
+  
+  .heading {
+	margin-bottom: 15px;
+  }
+  
+  .brief {
+	margin-bottom: 30px;
+	color: #757575;
+  }
+
+  .btn-create {
+    text-decoration: none;
+    font-weight: 700;
+    min-width: 120px;
+    font-size: 1.4rem !important;
+    font-weight: 900;
+    color: #fff;
+    background-color: #723f5f;
+    text-align: center;
+    letter-spacing: .5px;
+    cursor: pointer;
+}
+
+.quick-access p {
+    display: inline-block;
+    margin-left: 15px;
+    color: #757575;
+}
+
+.page-footer {
+    background: transparent;
+    color: #616161;
+    padding-top: 60px;
+}
+.page-footer .divider {
+    background-color: #616161;
+}
+.page-footer li {
+    display: inline-block;
+    margin-right: 20px;
+    margin-right: 2rem;
+}
+.page-footer i {
+    font-size: 24px;
+}
+.page-footer .copyright {
+    min-height: 50px;
+    align-items: center;
+    padding: 10px 0px;
+    color: black;
+}
+
+.divider {
+    height: 1px;
+    overflow: hidden;
+}
+.left {
+    float: left !important;
 }
