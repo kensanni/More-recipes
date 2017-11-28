@@ -27,7 +27,6 @@ const Carousel = () => {
                 to share the awesome
                 and exciting recipe ideas they have invented or learnt
               </h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
           <div className="carousel-item">
@@ -42,7 +41,6 @@ const Carousel = () => {
                 to share the awesome and exciting recipe
                 ideas they have invented or learnt
               </h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
         </div>
@@ -58,7 +56,6 @@ const Carousel = () => {
               to share the awesome and exciting recipe ideas t
               hey have invented or learnt
             </h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </div>
         </div>
       </div>

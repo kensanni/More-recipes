@@ -4,7 +4,7 @@ import Carousel from '../Include/carousel';
 import IndexMain from '../Include/IndexMain';
 import IndexFooter from '../common/IndexFooter';
 
-const HomePage = () => {
+const LandingPage = () => {
   return (
     <div>
       <IndexHeader />
@@ -15,4 +15,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;
