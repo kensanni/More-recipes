@@ -21,16 +21,6 @@ export default (sequelize, DataTypes) => {
         msg: 'Please input the required indegrient for your recipes'
       }
     },
-    upvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
     views: {
       type: DataTypes.INTEGER,
       allowNull: false,

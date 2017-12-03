@@ -1,19 +1,5 @@
 export default (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
-    firstname: {
-      type: DataTypes.STRING,
-      allowNull: {
-        args: false,
-        msg: 'Please input your first name'
-      }
-    },
-    lastname: {
-      type: DataTypes.STRING,
-      allowNull: {
-        args: false,
-        msg: 'Please input your last name'
-      }
-    },
     username: {
       type: DataTypes.STRING,
       allowNull: {

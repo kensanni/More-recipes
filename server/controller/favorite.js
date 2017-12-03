@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Favorites, Recipes } = model;
+const { Favorites } = model;
 /**
  * @class favoritesRecipes
 */
@@ -13,30 +13,19 @@ class Favorite {
    */
   static addFavorite(req, res) {
     const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
-      });
-    }
-    return Recipes
-      .findById(id)
-      .then((recipe) => {
-        if (!recipe) {
-          return res.status(404)
-            .send({ message: 'Recipe not found' });
-        }
-        Favorites
-          .create({
-            recipeId: id,
-            userId: req.decoded.id,
-          })
-          .then(fav => res.status(200).send({
-            success: true,
-            message: 'recipe sucessfully added to favorite',
-            data: fav
-          }))
-          .catch(error => res.status(400).send(error));
-      });
+    return Favorites
+      .create({
+        recipeId: id,
+        userId: req.decoded.id,
+      })
+      .then((favoritedRecipe) => {
+        res.status(200).send({
+          success: true,
+          message: 'recipe sucessfully added to favorite',
+          data: favoritedRecipe
+        });
+      })
+      .catch(error => res.status(400).send(error));
   }
   /**
    * @description get favorite recipe from database
