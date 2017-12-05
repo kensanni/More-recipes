@@ -21,12 +21,15 @@ describe('Testing API endpoints associated with favorites', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'testfavorites',
         email: 'testfavorites@example.com',
         password: 'developer',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
+        console.log(res.body)
         expect(res.body.message).equal('User created');
         expect(res).to.have.status(201);
         done();

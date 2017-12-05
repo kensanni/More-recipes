@@ -20,7 +20,17 @@ class Validation {
    * @returns {JSON} Returns a JSON object
    */
   static checkUserInput(req, res, next) {
-    const { username, email, password } = req.body;
+    const {firstname, lastname, username, email, password } = req.body;
+    if (!firstname) {
+      return res.status(400).send({
+        message: 'Firstname field cannot be empty'
+      });
+    }
+    if (!lastname) {
+      return res.status(400).send({
+        message: 'Lastname field cannot be empty'
+      });
+    }
     if (!username) {
       return res.status(400).send({
         message: 'Username field cannot be empty'

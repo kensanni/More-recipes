@@ -18,6 +18,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -29,10 +31,46 @@ describe('Testing User endpoints', () => {
         done();
       });
   });
+  it('Should not create a new User without firstname', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send({
+        firstname: '',
+        lastname: 'sanni',
+        username: 'kennikay',
+        email: 'kennikay@example.com',
+        password: 'developer',
+        profileImage: 'dummydata'
+      })
+      .end((err, res) => {
+        expect(res.body.message).equal('Firstname field cannot be empty');
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('Should not create a new User without lastname', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send({
+        firstname: 'kehinde',
+        lastname: '',
+        username: 'kennikay',
+        email: 'kennikay@example.com',
+        password: 'developer',
+        profileImage: 'dummydata'
+      })
+      .end((err, res) => {
+        expect(res.body.message).equal('Lastname field cannot be empty');
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
   it('Should not create a new User without username', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: '',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -48,6 +86,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikay',
         email: '',
         password: 'developer',
@@ -63,6 +103,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: '',
@@ -78,6 +120,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sanni',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -92,6 +136,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikay',
         email: 'kennikay.com',
         password: 'developer',
@@ -106,6 +152,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: 'deve',
@@ -120,6 +168,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: '   sanni',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -135,6 +185,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: '  deve  loper',
@@ -150,6 +202,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -165,6 +219,8 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'sannikayz',
         email: 'kennikay@example.com',
         password: 'developer',

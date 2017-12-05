@@ -21,6 +21,8 @@ describe('Testing API endpoints associated with review', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
+        firstname: 'kehinde',
+        lastname: 'sanni',
         username: 'testreview',
         email: 'testreview@example.com',
         password: 'developer',

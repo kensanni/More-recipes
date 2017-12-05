@@ -17,12 +17,14 @@ class User {
    */
   static signUp(req, res) {
     const {
-      username, email, profileImage
+      firstname, lastname, username, email, profileImage
     } = req.body;
     let { password } = req.body;
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     return Users
       .create({
+        firstname,
+        lastname,
         username,
         email,
         password,
