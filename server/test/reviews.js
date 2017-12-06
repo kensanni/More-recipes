@@ -14,31 +14,15 @@ Reviews.destroy({
   restartIdentity: true
 });
 
+
 let value;
 
 describe('Testing API endpoints associated with review', () => {
-  it('Should create a new User', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
-        username: 'testreview',
-        email: 'testreview@example.com',
-        password: 'developer',
-        profileImage: 'dummydata'
-      })
-      .end((err, res) => {
-        expect(res.body.message).equal('User created');
-        expect(res).to.have.status(201);
-        done();
-      });
-  });
   it('should login a user', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
-        username: 'testreview',
+        username: 'sannikay',
         password: 'developer'
       })
       .end((err, res) => {
@@ -68,7 +52,7 @@ describe('Testing API endpoints associated with review', () => {
       .post('/api/v1/recipes/2/reviews')
       .set('x-access-token', value)
       .send({
-        userId: 2,
+        userId: 1,
         recipeId: 2,
         review: '',
       })
@@ -108,8 +92,8 @@ describe('Testing API endpoints associated with review', () => {
     chai.request(app)
       .post('/api/v1/recipes/1/reviews')
       .send({
-        recipeId: 2,
-        userId: 2,
+        recipeId: 1,
+        userId: 1,
       })
       .end((err, res) => {
         expect(res).to.have.status(403);
@@ -122,8 +106,8 @@ describe('Testing API endpoints associated with review', () => {
       .post('/api/v1/recipes/2/reviews')
       .set('x-access-token', value)
       .send({
-        userId: 2,
-        recipeId: 2,
+        userId: 1,
+        recipeId: 1,
         review: 'awesome recipe',
       })
       .end((err, res) => {

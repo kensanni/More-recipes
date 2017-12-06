@@ -17,23 +17,6 @@ Recipes.destroy({
 let value;
 
 describe('Testing recipe endpoints', () => {
-  it('Should create a new User', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
-        username: 'sannikays',
-        email: 'kennikayz@example.com',
-        password: 'developer',
-        profileImage: 'dummydata'
-      })
-      .end((err, res) => {
-        expect(res.body.message).equal('User created');
-        expect(res).to.have.status(201);
-        done();
-      });
-  });
   it('should login a user', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')

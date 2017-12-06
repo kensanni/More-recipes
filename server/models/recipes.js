@@ -52,6 +52,12 @@ export default (sequelize, DataTypes) => {
     Recipes.hasMany(models.Reviews, {
       foreignKey: 'recipeId',
     });
+    Recipes.hasMany(models.Upvotes, {
+      foreignKey: 'recipeId',
+    });
+    Recipes.hasMany(models.Downvotes, {
+      foreignKey: 'recipeId',
+    });
   };
   return Recipes;
 };

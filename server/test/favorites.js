@@ -8,43 +8,36 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-Favorites.destroy({
-  cascade: true,
-  truncate: true,
-  restartIdentity: true
-});
+const doBeforeAll = () => {
+  before((done) => {
+    Favorites.destroy({
+      cascade: true,
+      truncate: true,
+      restartIdentity: true
+    });
+    done();
+  });
+};
 
 let value;
 
 describe('Testing API endpoints associated with favorites', () => {
+  doBeforeAll();
   it('Should create a new User', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
         firstname: 'kehinde',
         lastname: 'sanni',
-        username: 'testfavorites',
+        username: 'sannikay',
         email: 'testfavorites@example.com',
         password: 'developer',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        console.log(res.body)
+        value = res.body.token;
         expect(res.body.message).equal('User created');
         expect(res).to.have.status(201);
-        done();
-      });
-  });
-  it('should login a user', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signin')
-      .send({
-        username: 'testfavorites',
-        password: 'developer'
-      })
-      .end((err, res) => {
-        expect(res.body.message).equal('Signin successful');
-        value = res.body.token;
         done();
       });
   });

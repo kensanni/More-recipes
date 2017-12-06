@@ -7,20 +7,27 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-Users.destroy({
-  cascade: true,
-  truncate: true,
-  restartIdentity: true
-});
+const doBeforeAll = () => {
+  before((done) => {
+    Users.destroy({
+      cascade: true,
+      truncate: true,
+      restartIdentity: true
+    });
+    done();
+  });
+};
+
 
 describe('Testing User endpoints', () => {
+  doBeforeAll();
   it('Should create a new User', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
         firstname: 'kehinde',
         lastname: 'sanni',
-        username: 'sannikay',
+        username: 'sannikays',
         email: 'kennikay@example.com',
         password: 'developer',
         profileImage: 'dummydata'
@@ -204,7 +211,7 @@ describe('Testing User endpoints', () => {
       .send({
         firstname: 'kehinde',
         lastname: 'sanni',
-        username: 'sannikay',
+        username: 'sannikays',
         email: 'kennikay@example.com',
         password: 'developer',
         profileImage: 'dummydata'
@@ -236,7 +243,7 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
-        username: 'sannikay',
+        username: 'sannikays',
         password: 'developer'
       })
       .end((err, res) => {
