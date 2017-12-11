@@ -1,5 +1,4 @@
 $main-color: #723f5f;
-$bg-color: rgba(89, 17, 105, 0.863);
 $white-color: #fff;
 
 
@@ -18,7 +17,7 @@ $white-color: #fff;
 }
 
 .form-bg {
-  background-color: $bg-color;
+  background-image: url(../images/blog-img-01.jpg)
 }
 
 .img-size {
@@ -211,7 +210,7 @@ p {
 }
 
 .headline {
-  margin-top: 80px;
+  margin-top: 30px;
   text-align: left;
   z-index: 2;
 }
@@ -238,12 +237,11 @@ p {
   cursor: pointer;
 }
 
-.quick-access {
-  .p {
-    display: inline-block;
-    margin-left: 15px;
-    color: #757575;
-  }
+
+.text-inline {
+  display: inline-block;
+  margin-left: 15px;
+  color: #757575;
 }
 
 .page-footer {

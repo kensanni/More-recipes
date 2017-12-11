@@ -21,26 +21,6 @@ class User {
     } = req.body;
     let { password } = req.body;
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-    if (!firstname) {
-      return res.status(400).send({
-        message: 'Please input your first name'
-      });
-    }
-    if (!lastname) {
-      return res.status(400).send({
-        message: 'Please input your last name'
-      });
-    }
-    if (!username) {
-      return res.status(400).send({
-        message: 'Please input your username'
-      });
-    }
-    if (!email) {
-      return res.status(400).send({
-        message: 'Please input  a valid email address'
-      });
-    }
     return Users
       .create({
         firstname,
@@ -60,8 +40,7 @@ class User {
           message: 'User created',
           token
         });
-      })
-      .catch(error => res.status(400).send(error));
+      });
   }
   /**
    * @description User signin method
@@ -70,17 +49,6 @@ class User {
    * @returns  {JSON} Returns a JSON object
    */
   static signIn(req, res) {
-    const { username, password } = req.body;
-    if (!username) {
-      return res.status(400).send({
-        message: 'Please input your username'
-      });
-    }
-    if (!password) {
-      return res.status(400).send({
-        message: 'Please input your password to signin'
-      });
-    }
     return Users
       .findOne({
         where: {
@@ -88,28 +56,16 @@ class User {
         },
       })
       .then((user) => {
-        if (!user) {
-          return res.status(400).send({
-            message: 'Incorrect Login details',
-          });
-        }
-        if (bcrypt.compareSync(req.body.password, user.password)) {
-          const payload = { id: user.id };
-          const token = jwt.sign(payload, secret, {
-            expiresIn: '3h',
-          });
-          res.status(200).send({
-            success: true,
-            message: 'Signin successful',
-            token,
-          });
-        } else {
-          res.status(400).send({
-            message: 'Incorrect Login details',
-          });
-        }
-      })
-      .catch(error => res.status(400).send(error));
+        const payload = { id: user.id };
+        const token = jwt.sign(payload, secret, {
+          expiresIn: '3h',
+        });
+        res.status(200).send({
+          success: true,
+          message: 'Signin successful',
+          token,
+        });
+      });
   }
 }
 

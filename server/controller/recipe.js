@@ -16,26 +16,6 @@ class Recipe {
     const {
       name, description, indegrient, image,
     } = req.body;
-    if (!name) {
-      return res.status(400).send({
-        message: 'Please input the name of your recipe'
-      });
-    }
-    if (!description) {
-      return res.status(400).send({
-        message: 'Please input a description for your recipe'
-      });
-    }
-    if (!indegrient) {
-      return res.status(400).send({
-        message: 'Please input the indegrient for your recipe'
-      });
-    }
-    if (!image) {
-      return res.status(400).send({
-        message: 'Please upload an image for your recipes'
-      });
-    }
     return Recipes
       .create({
         userId: req.decoded.id,
@@ -61,18 +41,8 @@ class Recipe {
     const {
       name, description, indegrient, image
     } = req.body;
-    const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
-      });
-    }
     Recipes.findById(req.params.recipeId)
       .then((recipe) => {
-        if (!recipe) {
-          return res.status(404)
-            .send({ message: 'Recipe does not exist in this catalog' });
-        }
         recipe.update({
           name: name || recipe.name,
           description: description || recipe.description,
@@ -131,11 +101,6 @@ class Recipe {
      */
   static getARecipe(req, res) {
     const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
-      });
-    }
     return Recipes
       .findOne({
         where: {
@@ -171,11 +136,6 @@ class Recipe {
    */
   static deleteRecipes(req, res) {
     const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
-      });
-    }
     return Recipes
       .findById(id)
       .then((recipe) => {

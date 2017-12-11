@@ -15,16 +15,6 @@ export default class Review {
   static addReview(req, res) {
     const { review } = req.body;
     const id = req.params.recipeId;
-    if (!review) {
-      return res.status(400).send({
-        message: 'Please input a review'
-      });
-    }
-    if (isNaN(id)) {
-      return res.status(400).send({
-        message: 'RecipeId parameter should be a number'
-      });
-    }
     return Recipes.findById(id)
       .then((recipe) => {
         if (!recipe) {

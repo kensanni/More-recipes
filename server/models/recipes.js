@@ -21,16 +21,6 @@ export default (sequelize, DataTypes) => {
         msg: 'Please input the required indegrient for your recipes'
       }
     },
-    upvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
     views: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -60,6 +50,12 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'recipeId'
     });
     Recipes.hasMany(models.Reviews, {
+      foreignKey: 'recipeId',
+    });
+    Recipes.hasMany(models.Upvotes, {
+      foreignKey: 'recipeId',
+    });
+    Recipes.hasMany(models.Downvotes, {
       foreignKey: 'recipeId',
     });
   };

@@ -4,14 +4,14 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: {
         args: false,
-        msg: 'Please input your first name'
+        msg: 'Please enter your first name',
       }
     },
     lastname: {
       type: DataTypes.STRING,
       allowNull: {
         args: false,
-        msg: 'Please input your last name'
+        msg: 'Please enter your lastname name',
       }
     },
     username: {
