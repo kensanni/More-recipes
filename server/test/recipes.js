@@ -21,7 +21,7 @@ describe('Testing recipe endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
-        username: 'sannikays',
+        username: 'sannikay',
         password: 'developer'
       })
       .end((err, res) => {

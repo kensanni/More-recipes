@@ -7,7 +7,7 @@ export default {
     './client/index.jsx'
   ],
   output: {
-    path: path.join(__dirname, 'client/dist/'), // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.join(__dirname, 'client/dist/'),
     publicPath: '/',
     filename: 'bundle.js'
   },
