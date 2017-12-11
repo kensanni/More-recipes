@@ -7,6 +7,8 @@ import validator from 'express-validator';
 import config from '../webpack.config';
 import routes from '../server/routes';
 
+require('babel-core/register');
+require('babel-polyfill');
 require('dotenv').config();
 
 const app = express();
