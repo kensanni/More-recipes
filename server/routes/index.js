@@ -10,14 +10,6 @@ export default (app) => {
     message: 'welcome to the world of great recipes',
   }));
 
-  /**
-   * @description user signup route
-   * @param {} User.signUp
-   * @param {} Validation.checkUserInput
-   * @param {} Validation.validateUserInput
-   * @param {} Validation.invalidUserInput
-   * @param {} Validation.validateUsers,
-   */
   app.post(
     '/api/v1/users/signup',
     Validation.checkUserInput,
@@ -27,24 +19,12 @@ export default (app) => {
     User.signUp
   );
 
-  /**
-   * @description user signin route
-   * @param {} Validation.validateUserSignin
-   * @param {} Users.signIn
-   */
   app.post(
     '/api/v1/users/signin',
     Validation.validateUserSignin,
     User.signIn
   );
 
-  /**
-   * @description add new recipe
-   * @param {} authentication.verifyUser
-   * @param {} Recipe.addRecipes
-   * @param {} Validation.checkRecipeInput
-   * @param {} Validation.checkRecipeInvalidInput
-   */
   app.post(
     '/api/v1/recipes',
     authentication.verifyUser,
@@ -53,21 +33,11 @@ export default (app) => {
     Recipe.addRecipes
   );
 
-  /**
-   * @description get all recipe
-   * @param {} Recipe.getRecipes
-   */
   app.get(
     '/api/v1/recipes',
     Recipe.getRecipes
   );
 
-  /**
-   * @description get one recipe
-   * @param {} authentication.verifyUser
-   * @param {} Recipe.getRecipes
-   * @param {} Validation.checkRecipeId
-   */
   app.get(
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
@@ -75,12 +45,6 @@ export default (app) => {
     Recipe.getARecipe
   );
 
-  /**
-   * @description modify a recipe
-   * @param {} authentication.verifyUser
-   * @param {} Recipe.modifyRecipe
-   * @param {} Validation.checkRecipeId
-   */
   app.put(
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
@@ -88,13 +52,6 @@ export default (app) => {
     Recipe.modifyRecipe
   );
 
-  /**
-   * @description post review for recipe
-   * @param {} authentication.verifyUser
-   * @param {} Review.addReview
-   * @param {} Validation.checkRecipeId
-   * @param {} Validation.checkReviewInput
-   */
   app.post(
     '/api/v1/recipes/:recipeId/reviews',
     authentication.verifyUser,
@@ -103,12 +60,6 @@ export default (app) => {
     Review.addReview
   );
 
-  /**
-   * @description delete a recipe
-   * @param {} authentication.verifyUser
-   * @param {} Recipe.deleteRecipes
-   * @param {} Validation.checkRecipeId
-   */
   app.delete(
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
@@ -116,13 +67,6 @@ export default (app) => {
     Recipe.deleteRecipes
   );
 
-  /**
-   * @description Add a recipe to favorite
-   * @param {} authentication.verifyUser
-   * @param {} FavoritesRecipes.addFavorite
-   * @param {} Validation.checkRecipeId
-   * @param {} Validation.checkFavRecipe
-   */
   app.post(
     '/api/v1/recipes/:recipeId/favorites',
     authentication.verifyUser,
@@ -131,12 +75,6 @@ export default (app) => {
     Favorite.addFavorite
   );
 
-  /**
-   * @description get all favorite recipe
-   * @param {} authentication.verifyUser
-   * @param {} FavoritesRecipes.addFavorite
-   * @param {} Validation.checkUserId
-   */
   app.get(
     '/api/v1/users/:userId/recipes',
     authentication.verifyUser,
