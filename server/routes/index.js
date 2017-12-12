@@ -16,7 +16,6 @@ export default (app) => {
     '/api/v1/users/signup',
     Validation.checkUserInput,
     Validation.validateUserInput,
-    Validation.invalidUserInput,
     Validation.validateUsers,
     User.signUp
   );

@@ -64,6 +64,10 @@ class Validation {
         isLength: {
           options: [{ min: 6 }],
           errMessage: 'User should be atleast 6 characters'
+        },
+        matches: {
+          options: [(/^[A-Za-z0-9]+$/g)],
+          errorMessage: 'Invalid Username, kindly ensure your username is alphanumeric'
         }
       },
       email: {
@@ -77,6 +81,10 @@ class Validation {
         isLength: {
           options: [{ min: 8 }],
           errorMessage: 'Please input a valid password with atleast 8 characters'
+        },
+        matches: {
+          options: [(/^([^ ]+)*$/g)],
+          errorMessage: 'Invalid password,ensure your password contain only uppercase, lowercase and any special character'
         }
       }
     });
@@ -89,23 +97,6 @@ class Validation {
         });
       });
       return res.status(409).send(allErrors);
-    }
-    next();
-  }
-  /**
-   * @description check for user invalid input
-   * @param  {object} req - request
-   * @param  {object} res - response
-   * @param  {object} next - next
-   * @returns {JSON} Returns a JSON object
-   */
-  static invalidUserInput(req, res, next) {
-    const { username, password } = req.body;
-    if (username.match(/^[A-Za-z0-9]+$/g) == null) {
-      return res.status(409).send({ message: 'Invalid Username, kindly ensure your username is alphanumeric' });
-    }
-    if (password.match(/^([^ ]+)*$/g) == null) {
-      return res.status(409).send({ message: 'Invalid password,ensure your password contain only uppercase,lowercase and any special character' });
     }
     next();
   }
