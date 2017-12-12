@@ -99,7 +99,7 @@ class Recipe {
      * @param {object} res  HTTP response object
      * @returns  {JSON} Returns a JSON object
      */
-  static getARecipe(req, res) {
+  static getRecipeById(req, res) {
     const id = req.params.recipeId;
     return Recipes
       .findOne({

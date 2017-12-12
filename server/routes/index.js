@@ -43,7 +43,7 @@ export default (app) => {
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
     Validation.checkRecipeId,
-    Recipe.getARecipe
+    Recipe.getRecipeById
   );
 
   app.put(
