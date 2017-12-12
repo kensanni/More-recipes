@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Downvotes, Upvotes } = model;
+const { Downvotes, Upvotes, Recipes } = model;
 /**
  * @class downvoteRecipe
  */
@@ -11,34 +11,72 @@ class Downvote {
    * @param {*} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static downvoteRecipe(req, res) {
+  static async downvoteRecipe(req, res) {
     const id = req.params.recipeId;
-    return Upvotes
-      .find({
+    const checkRecipeExist = await Recipes.find({
+      where: {
+        id,
+        userId: req.decoded.id
+      }
+    });
+    if (!checkRecipeExist) {
+      return res.status(404).send({ message: 'Recipe does not exist in this catalog' });
+    }
+    const upvotedRecipe = await Upvotes.find({
+      where: {
+        id,
+        userId: req.decoded.id
+      }
+    });
+
+    if (upvotedRecipe) {
+      await upvotedRecipe.destroy();
+      Recipes.update({
+        upvotes: checkRecipeExist.upvotes - 1,
+      }, {
         where: {
-          recipeId: id,
-          userId: req.decoded.id
+          id: checkRecipeExist.id,
         }
-      })
-      .then((alreadyUpvoted) => {
-        if (alreadyUpvoted) {
-          return alreadyUpvoted
-            .destroy();
+      });
+    }
+
+    const downvote = await Downvotes.find({
+      where: {
+        id,
+        userId: req.decoded.id
+      }
+    });
+
+    if (downvote) {
+      await downvote.destroy();
+      Recipes.update({
+        downvotes: checkRecipeExist.downvotes - 1,
+      }, {
+        where: {
+          id: checkRecipeExist.id,
         }
-        return Downvotes
-          .create({
-            recipeId: id,
-            userId: req.decoded.id
-          })
-          .then((downvotedRecipe) => {
-            res.status(200).send({
-              success: true,
-              message: 'Recipe succesfully downvoted',
-              data: downvotedRecipe
-            });
-          });
-      })
-      .catch(error => res.status(400).send(error));
+      });
+      return res.status(200).send({
+        success: true,
+        message: 'Recipe downvote successfully removed'
+      });
+    }
+    const newDownvote = await Downvotes.create({
+      recipeId: id,
+      userId: req.decoded.id
+    });
+    Recipes.update({
+      downvotes: checkRecipeExist.downvotes + 1,
+    }, {
+      where: {
+        id: checkRecipeExist.id,
+      }
+    });
+    return res.status(200).send({
+      success: true,
+      message: 'Recipe successfully downvoted',
+      data: newDownvote
+    });
   }
 }
 export default Downvote;
