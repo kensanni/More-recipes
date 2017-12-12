@@ -4,6 +4,8 @@ import authentication from '../middlewares/authentication';
 import Review from '../controller/review';
 import Favorite from '../controller/favorite';
 import Validation from '../middlewares/validation';
+import Upvote from '../controller/upvotes';
+import Downvote from '../controller/downvotes';
 
 export default (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -80,5 +82,19 @@ export default (app) => {
     authentication.verifyUser,
     Validation.checkUserId,
     Favorite.getFavorite
+  );
+
+  app.post(
+    '/api/v1/recipes/:recipeId/upvote',
+    authentication.verifyUser,
+    Validation.checkRecipeId,
+    Upvote.upvoteRecipe
+  );
+
+  app.post(
+    '/api/v1/recipes/:recipeId/downvote',
+    authentication.verifyUser,
+    Validation.checkRecipeId,
+    Downvote.downvoteRecipe
   );
 };
