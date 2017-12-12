@@ -2,7 +2,7 @@ import model from '../models';
 
 const { Favorites } = model;
 /**
- * @class favoritesRecipes
+ * @class Favorite
 */
 class Favorite {
   /**

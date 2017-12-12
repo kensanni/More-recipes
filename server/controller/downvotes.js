@@ -2,7 +2,7 @@ import model from '../models';
 
 const { Downvotes, Upvotes, Recipes } = model;
 /**
- * @class downvote
+ * @class Downvote
  */
 class Downvote {
   /**
