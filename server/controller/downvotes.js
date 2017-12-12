@@ -2,13 +2,13 @@ import model from '../models';
 
 const { Downvotes, Upvotes, Recipes } = model;
 /**
- * @class downvoteRecipe
+ * @class downvote
  */
 class Downvote {
   /**
    * @description Downvote a recipe
-   * @param {*} req HTTP request object
-   * @param {*} res   HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async downvoteRecipe(req, res) {

@@ -7,8 +7,8 @@ const { Downvotes, Upvotes, Recipes } = model;
 class Upvote {
   /**
    * @description Upvote a recipe
-   * @param {Object} req HTTP request object
-   * @param {*} res   HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async upvoteRecipe(req, res) {
