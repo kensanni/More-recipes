@@ -116,7 +116,7 @@ class Validation {
       })
       .then((user) => {
         if (user) {
-          return res.status(400).send({ message: 'Username has already been chosen' });
+          return res.status(409).send({ message: 'Username has already been chosen' });
         }
         Users
           .findOne({
@@ -126,7 +126,7 @@ class Validation {
           })
           .then((email) => {
             if (email) {
-              return res.status(400).send({ message: 'Email already exist' });
+              return res.status(409).send({ message: 'Email already exist' });
             }
             next();
           });

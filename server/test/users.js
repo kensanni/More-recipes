@@ -216,7 +216,7 @@ describe('Testing User endpoints', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Username has already been chosen');
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(409);
         done();
       });
   });
@@ -233,7 +233,7 @@ describe('Testing User endpoints', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Email already exist');
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(409);
         done();
       });
   });
