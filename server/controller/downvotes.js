@@ -16,7 +16,6 @@ class Downvote {
     const checkRecipeExist = await Recipes.find({
       where: {
         id,
-        userId: req.decoded.id
       }
     });
     if (!checkRecipeExist) {
