@@ -71,7 +71,7 @@ class Upvote {
         id: checkRecipeExist.id,
       }
     });
-    return res.status(200).send({
+    return res.status(201).send({
       success: true,
       message: 'Recipe successfully upvoted',
       data: newUpvote

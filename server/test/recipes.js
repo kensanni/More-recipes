@@ -130,8 +130,7 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy.com'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Invalid recipe name');
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -146,8 +145,7 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy.com'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Invalid description format');
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -162,8 +160,7 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy.com'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Invalid indegrient format');
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });

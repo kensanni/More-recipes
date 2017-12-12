@@ -135,7 +135,7 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -151,7 +151,7 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -167,7 +167,7 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -183,8 +183,7 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Invalid Username, kindly ensure your username is alphanumeric');
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -200,8 +199,7 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Invalid password,ensure your password contain only uppercase,lowercase and any special character');
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         done();
       });
   });
