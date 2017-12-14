@@ -11,8 +11,8 @@ const { Users } = model;
 class User {
   /**
    * @description User signup method
-   * @param {*} req
-   * @param {*} res
+   * @param {object} req
+   * @param {object} res
    * @returns  {JSON} Returns a JSON object
    */
   static signUp(req, res) {
@@ -44,8 +44,8 @@ class User {
   }
   /**
    * @description User signin method
-   * @param {*} req
-   * @param {*} res
+   * @param {object} req
+   * @param {object} res
    * @returns  {JSON} Returns a JSON object
    */
   static signIn(req, res) {

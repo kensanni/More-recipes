@@ -3,13 +3,13 @@ import model from '../models';
 const { Recipes } = model;
 
 /**
- * @class Recipes
+ * @class Recipe
 */
 class Recipe {
   /**
    * @description Adds a recipe
-   * @param {*} req HTTP request object
-   * @param {*} res   HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static addRecipes(req, res) {
@@ -33,8 +33,8 @@ class Recipe {
   }
   /**
    * @description modify a recipe
-   * @param {*} req HTTP request object
-   * @param {*} res  HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static modifyRecipe(req, res) {
@@ -67,8 +67,8 @@ class Recipe {
   }
   /**
    * @description get all recipe
-   * @param {*} req HTTP request object
-   * @param {*} res  HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static getRecipes(req, res) {
@@ -95,11 +95,11 @@ class Recipe {
   }
   /**
      * @description get one recipe
-     * @param {*} req HTTP request object
-     * @param {*} res  HTTP response object
+     * @param {object} req HTTP request object
+     * @param {object} res  HTTP response object
      * @returns  {JSON} Returns a JSON object
      */
-  static getARecipe(req, res) {
+  static getRecipeById(req, res) {
     const id = req.params.recipeId;
     return Recipes
       .findOne({
@@ -130,8 +130,8 @@ class Recipe {
   }
   /**
    * @description delete a recipe
-   * @param {*} req HTTP request object
-   * @param {*} res  HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static deleteRecipes(req, res) {

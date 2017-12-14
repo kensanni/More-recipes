@@ -3,7 +3,7 @@ import model from '../models';
 const { Reviews, Recipes } = model;
 
 /**
- * @class Reviews
+ * @class Review
 */
 export default class Review {
   /**

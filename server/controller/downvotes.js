@@ -2,7 +2,7 @@ import model from '../models';
 
 const { Downvotes, Upvotes, Recipes } = model;
 /**
- * @class downvote
+ * @class Downvote
  */
 class Downvote {
   /**
@@ -71,7 +71,7 @@ class Downvote {
         id: checkRecipeExist.id,
       }
     });
-    return res.status(200).send({
+    return res.status(201).send({
       success: true,
       message: 'Recipe successfully downvoted',
       data: newDownvote
