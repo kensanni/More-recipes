@@ -2,13 +2,13 @@ import model from '../models';
 
 const { Favorites } = model;
 /**
- * @class favoritesRecipes
+ * @class Favorite
 */
 class Favorite {
   /**
    * @description Adds a recipe into favorite
-   * @param {*} req HTTP request object
-   * @param {*} res   HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async addFavorite(req, res) {
@@ -16,7 +16,7 @@ class Favorite {
       recipeId: req.params.recipeId,
       userId: req.decoded.id,
     });
-    return res.status(200).send({
+    return res.status(201).send({
       success: true,
       message: 'recipe sucessfully added to favorite',
       data: addFavorite
@@ -24,8 +24,8 @@ class Favorite {
   }
   /**
    * @description get favorite recipe from database
-   * @param {*} req HTTP request object
-   * @param {*} res   HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async getFavorite(req, res) {

@@ -5,7 +5,7 @@ import model from '../models';
 dotenv.config();
 
 const {
-  Recipes, Users, Favorites, Votes
+  Recipes, Users, Favorites
 } = model;
 
 /**
@@ -14,7 +14,7 @@ const {
 class Validation {
   /**
    * @description check user input
-   * @param  {object} req - request
+   * @param {object} req - request
    * @param  {object} res - response
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
@@ -64,6 +64,10 @@ class Validation {
         isLength: {
           options: [{ min: 6 }],
           errMessage: 'User should be atleast 6 characters'
+        },
+        matches: {
+          options: [(/^[A-Za-z0-9]+$/g)],
+          errorMessage: 'Invalid Username, kindly ensure your username is alphanumeric'
         }
       },
       email: {
@@ -77,6 +81,10 @@ class Validation {
         isLength: {
           options: [{ min: 8 }],
           errorMessage: 'Please input a valid password with atleast 8 characters'
+        },
+        matches: {
+          options: [(/^([^ ]+)*$/g)],
+          errorMessage: 'Invalid password,ensure your password contain only uppercase, lowercase and any special character'
         }
       }
     });
@@ -88,24 +96,7 @@ class Validation {
           error: error.msg,
         });
       });
-      return res.status(409).send(allErrors);
-    }
-    next();
-  }
-  /**
-   * @description check for user invalid input
-   * @param  {object} req - request
-   * @param  {object} res - response
-   * @param  {object} next - next
-   * @returns {JSON} Returns a JSON object
-   */
-  static invalidUserInput(req, res, next) {
-    const { username, password } = req.body;
-    if (username.match(/^[A-Za-z0-9]+$/g) == null) {
-      return res.status(409).send({ message: 'Invalid Username, kindly ensure your username is alphanumeric' });
-    }
-    if (password.match(/^([^ ]+)*$/g) == null) {
-      return res.status(409).send({ message: 'Invalid password,ensure your password contain only uppercase,lowercase and any special character' });
+      return res.status(400).send(allErrors);
     }
     next();
   }
@@ -123,7 +114,7 @@ class Validation {
       }
     });
     if (findUser) {
-      return res.status(400).send({
+      return res.status(409).send({
         message: 'Username has already been chosen'
       });
     }
@@ -133,7 +124,7 @@ class Validation {
       }
     });
     if (findEmail) {
-      return res.status(400).send({
+      return res.status(409).send({
         message: 'Email already exist'
       });
     }
@@ -186,7 +177,7 @@ class Validation {
   static async checkUserId(req, res, next) {
     const id = req.params.userId;
     const findUserById = await Users.findById(id);
-    if (isNaN(id)) {
+    if (Number.isNaN(parseInt(id, 10))) {
       return res.status(400).send({
         message: 'UserId parameter should be a number'
       });
@@ -238,18 +229,39 @@ class Validation {
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
    */
-  static checkRecipeInvalidInput(req, res, next) {
-    const {
-      name, description, indegrient
-    } = req.body;
-    if (name.match(/^[A-Za-z0-9][^ ]+( [^]+)*$/g) == null) {
-      return res.status(409).send({ message: 'Invalid recipe name' });
-    }
-    if (description.match(/^[A-Za-z0-9][^ ]+( [^]+)*$/g) == null) {
-      return res.status(409).send({ message: 'Invalid description format' });
-    }
-    if (indegrient.match(/^[A-Za-z0-9][^ ]+( [^]+)*$/g) == null) {
-      return res.status(409).send({ message: 'Invalid indegrient format' });
+  static validateRecipeInput(req, res, next) {
+    req.checkBody({
+      name: {
+        notEmpty: true,
+        matches: {
+          options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
+          errorMessage: 'Invalid recipe name'
+        }
+      },
+      description: {
+        notEmpty: true,
+        matches: {
+          options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
+          errorMessage: 'Invalid description format'
+        }
+      },
+      indegrient: {
+        notEmpty: true,
+        matches: {
+          options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
+          errorMessage: 'Invalid indegrient format'
+        }
+      }
+    });
+    const errors = req.validationErrors();
+    if (errors) {
+      const allErrors = [];
+      errors.forEach((error) => {
+        allErrors.push({
+          error: error.msg,
+        });
+      });
+      return res.status(400).send(allErrors);
     }
     next();
   }
@@ -262,7 +274,7 @@ class Validation {
    */
   static async checkRecipeId(req, res, next) {
     const id = req.params.recipeId;
-    if (isNaN(id)) {
+    if (Number.isNaN(parseInt(id, 10))) {
       return res.status(400).send({
         message: 'RecipeId parameter should be a number'
       });

@@ -11,8 +11,8 @@ const { Recipes } = model;
 class Recipe {
   /**
    * @description Adds a recipe
-   * @param {*} req HTTP request object
-   * @param {*} res   HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async addRecipes(req, res) {
@@ -36,8 +36,8 @@ class Recipe {
   }
   /**
    * @description modify a recipe
-   * @param {*} req HTTP request object
-   * @param {*} res  HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async modifyRecipe(req, res) {
@@ -61,8 +61,8 @@ class Recipe {
   }
   /**
    * @description get all recipe
-   * @param {*} req HTTP request object
-   * @param {*} res  HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async getRecipes(req, res) {
@@ -88,8 +88,8 @@ class Recipe {
   }
   /**
      * @description get one recipe
-     * @param {*} req HTTP request object
-     * @param {*} res  HTTP response object
+     * @param {object} req HTTP request object
+     * @param {object} res  HTTP response object
      * @returns  {JSON} Returns a JSON object
      */
   static async getARecipe(req, res) {
@@ -121,8 +121,8 @@ class Recipe {
   }
   /**
    * @description delete a recipe
-   * @param {*} req HTTP request object
-   * @param {*} res  HTTP response object
+   * @param {object} req HTTP request object
+   * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
   static async deleteRecipes(req, res) {

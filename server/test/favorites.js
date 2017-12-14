@@ -99,7 +99,7 @@ describe('Testing API endpoints associated with favorites', () => {
         userId: 1,
       })
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         expect(res.body.message).equal('recipe sucessfully added to favorite');
         done();
       });

@@ -16,7 +16,6 @@ export default (app) => {
     '/api/v1/users/signup',
     Validation.checkUserInput,
     Validation.validateUserInput,
-    Validation.invalidUserInput,
     Validation.validateUsers,
     User.signUp
   );
@@ -31,7 +30,7 @@ export default (app) => {
     '/api/v1/recipes',
     authentication.verifyUser,
     Validation.checkRecipeInput,
-    Validation.checkRecipeInvalidInput,
+    Validation.validateRecipeInput,
     Recipe.addRecipes
   );
 
