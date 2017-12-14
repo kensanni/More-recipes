@@ -1,6 +1,9 @@
 import model from '../models';
+import updateRecipeAttributes from '../helpers/updateRecipeAttributes';
+import updateMultipleRecipeAttributes from '../helpers/updateMultipleRecipeAttributes';
 
 const { Recipes } = model;
+
 
 /**
  * @class Recipe
@@ -12,24 +15,24 @@ class Recipe {
    * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static addRecipes(req, res) {
+  static async addRecipes(req, res) {
     const {
       name, description, indegrient, image,
     } = req.body;
-    return Recipes
-      .create({
-        userId: req.decoded.id,
-        name,
-        description,
-        indegrient,
-        image,
-      })
-      .then(recipe => res.status(201).send({
-        success: true,
-        message: 'Recipe successfully created',
-        data: recipe
-      }))
-      .catch(error => res.status(400).send(error));
+
+    const addRecipes = await Recipes.create({
+      userId: req.decoded.id,
+      name,
+      description,
+      indegrient,
+      image,
+    });
+
+    return res.status(201).send({
+      success: true,
+      message: 'Recipe successfully created',
+      data: addRecipes
+    });
   }
   /**
    * @description modify a recipe
@@ -37,33 +40,24 @@ class Recipe {
    * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static modifyRecipe(req, res) {
+  static async modifyRecipe(req, res) {
     const {
       name, description, indegrient, image
     } = req.body;
-    Recipes.findById(req.params.recipeId)
-      .then((recipe) => {
-        recipe.update({
-          name: name || recipe.name,
-          description: description || recipe.description,
-          indegrient: indegrient || recipe.indegrient,
-          image: image || recipe.image,
-        })
-          .then((updatedRecipe) => {
-            res.status(200).send({
-              success: true,
-              message: 'Recipe updated successfully',
-              data: {
-                name: updatedRecipe.name,
-                description: updatedRecipe.description,
-                indegrient: updatedRecipe.indegrient,
-                image: updatedRecipe.image
-              }
-            });
-          })
-          .catch(error => res.status(400).send(error));
-      })
-      .catch(error => res.status(400).send(error));
+
+    const findRecipe = await Recipes.findById(req.params.recipeId);
+
+    await findRecipe.update({
+      name: name || findRecipe.name,
+      description: description || findRecipe.description,
+      indegrient: indegrient || findRecipe.indegrient,
+      image: image || findRecipe.image,
+    });
+    return res.status(200).send({
+      success: true,
+      message: 'Recipe updated successfully',
+      data: findRecipe
+    });
   }
   /**
    * @description get all recipe
@@ -71,27 +65,26 @@ class Recipe {
    * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static getRecipes(req, res) {
-    return Recipes
-      .findAll({
+  static async getRecipes(req, res) {
+    const getAllRecipes = await Recipes.findAll({
+      include: [{
+        model: model.Reviews,
+        attributes: ['review'],
         include: [{
-          model: model.Reviews,
-          attributes: ['review'],
-          include: [{
-            model: model.Users,
-            attributes: ['username'],
-          }]
-        }],
-      })
-      .then((recipe) => {
-        if (recipe.length < 1) {
-          return res.status(404).send({
-            message: 'No Recipe found'
-          });
-        }
-        return res.status(200).send(recipe);
-      })
-      .catch(error => res.status(400).send(error));
+          model: model.Users,
+          attributes: ['username'],
+        }]
+      }]
+    });
+
+    if (getAllRecipes.length < 1) {
+      return res.status(404).send({
+        message: 'No Recipe found'
+      });
+    }
+
+    const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
+    return res.status(200).send(updatedRecipes);
   }
   /**
      * @description get one recipe
@@ -99,34 +92,32 @@ class Recipe {
      * @param {object} res  HTTP response object
      * @returns  {JSON} Returns a JSON object
      */
-  static getRecipeById(req, res) {
+  static async getARecipe(req, res) {
     const id = req.params.recipeId;
-    return Recipes
-      .findOne({
-        where: {
-          id
-        },
+
+    const recipe = await Recipes.findOne({
+      where: { id },
+      include: [{
+        model: model.Reviews,
+        attributes: ['review'],
         include: [{
-          model: model.Reviews,
-          attributes: ['review'],
-          include: [{
-            model: model.Users,
-            attributes: ['username', 'updatedAt'],
-          }]
-        }],
-      })
-      .then((recipe) => {
-        if (recipe.length < 1) {
-          return res.status(404).send({
-            message: 'No Recipe found'
-          });
-        }
-        recipe.increment('views').then(() => {
-          recipe.reload()
-            .then(() => res.status(200).send(recipe));
-        });
-      })
-      .catch(error => res.status(400).send(error));
+          model: model.Users,
+          attributes: ['username', 'updatedAt'],
+        }]
+      }],
+    });
+
+    if (recipe.length < 1) {
+      return res.status(404).send({
+        message: 'No Recipe found'
+      });
+    }
+
+    await recipe.increment('views');
+    const reloadedRecipe = await recipe.reload();
+    const updatedRecipe = await updateRecipeAttributes(reloadedRecipe);
+
+    return res.status(200).send(updatedRecipe);
   }
   /**
    * @description delete a recipe
@@ -134,23 +125,13 @@ class Recipe {
    * @param {object} res  HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static deleteRecipes(req, res) {
-    const id = req.params.recipeId;
-    return Recipes
-      .findById(id)
-      .then((recipe) => {
-        if (!recipe) {
-          return res.status(400).send({
-            message: 'Recipe Not Found',
-          });
-        }
-        return recipe
-          .destroy()
-          .then(() => res.status(200).send({
-            message: 'Recipe successfully deleted'
-          }))
-          .catch(error => res.status(400).send(error));
-      });
+  static async deleteRecipes(req, res) {
+    const findRecipe = await Recipes.findById(req.params.recipeId);
+
+    await findRecipe.destroy();
+    return res.status(200).send({
+      message: 'Recipe successfully deleted'
+    });
   }
 }
 export default Recipe;

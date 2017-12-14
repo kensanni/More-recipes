@@ -23,38 +23,24 @@ class Downvote {
     }
     const upvotedRecipe = await Upvotes.find({
       where: {
-        id,
+        recipeId: id,
         userId: req.decoded.id
       }
     });
 
     if (upvotedRecipe) {
       await upvotedRecipe.destroy();
-      Recipes.update({
-        upvotes: checkRecipeExist.upvotes - 1,
-      }, {
-        where: {
-          id: checkRecipeExist.id,
-        }
-      });
     }
 
     const downvote = await Downvotes.find({
       where: {
-        id,
+        recipeId: id,
         userId: req.decoded.id
       }
     });
 
     if (downvote) {
       await downvote.destroy();
-      Recipes.update({
-        downvotes: checkRecipeExist.downvotes - 1,
-      }, {
-        where: {
-          id: checkRecipeExist.id,
-        }
-      });
       return res.status(200).send({
         success: true,
         message: 'Recipe downvote successfully removed'
@@ -64,14 +50,7 @@ class Downvote {
       recipeId: id,
       userId: req.decoded.id
     });
-    Recipes.update({
-      downvotes: checkRecipeExist.downvotes + 1,
-    }, {
-      where: {
-        id: checkRecipeExist.id,
-      }
-    });
-    return res.status(201).send({
+    return res.status(200).send({
       success: true,
       message: 'Recipe successfully downvoted',
       data: newDownvote

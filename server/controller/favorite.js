@@ -11,21 +11,16 @@ class Favorite {
    * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static addFavorite(req, res) {
-    const id = req.params.recipeId;
-    return Favorites
-      .create({
-        recipeId: id,
-        userId: req.decoded.id,
-      })
-      .then((favoritedRecipe) => {
-        res.status(201).send({
-          success: true,
-          message: 'recipe sucessfully added to favorite',
-          data: favoritedRecipe
-        });
-      })
-      .catch(error => res.status(400).send(error));
+  static async addFavorite(req, res) {
+    const addFavorite = await Favorites.create({
+      recipeId: req.params.recipeId,
+      userId: req.decoded.id,
+    });
+    return res.status(201).send({
+      success: true,
+      message: 'recipe sucessfully added to favorite',
+      data: addFavorite
+    });
   }
   /**
    * @description get favorite recipe from database
@@ -33,18 +28,17 @@ class Favorite {
    * @param {object} res   HTTP response object
    * @returns  {JSON} Returns a JSON object
    */
-  static getFavorite(req, res) {
-    return Favorites
-      .find({
-        where: {
-          userId: req.decoded.id
-        }
-      })
-      .then(favorite => res.status(200).send({
-        success: true,
-        data: favorite
-      }))
-      .catch(error => res.status(400).send(error));
+  static async getFavorite(req, res) {
+    const getFavoriteRecipes = await Favorites.find({
+      where: {
+        userId: req.decoded.id
+      }
+    });
+
+    return res.status(200).send({
+      success: true,
+      data: getFavoriteRecipes
+    });
   }
 }
 export default Favorite;
