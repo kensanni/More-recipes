@@ -116,30 +116,28 @@ class Validation {
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
    */
-  static validateUsers(req, res, next) {
-    Users
-      .findOne({
-        where: {
-          username: req.body.username
-        }
-      })
-      .then((user) => {
-        if (user) {
-          return res.status(400).send({ message: 'Username has already been chosen' });
-        }
-        Users
-          .findOne({
-            where: {
-              email: req.body.email
-            }
-          })
-          .then((email) => {
-            if (email) {
-              return res.status(400).send({ message: 'Email already exist' });
-            }
-            next();
-          });
+  static async validateUsers(req, res, next) {
+    const findUser = await Users.findOne({
+      where: {
+        username: req.body.username
+      }
+    });
+    if (findUser) {
+      return res.status(400).send({
+        message: 'Username has already been chosen'
       });
+    }
+    const findEmail = await Users.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
+    if (findEmail) {
+      return res.status(400).send({
+        message: 'Email already exist'
+      });
+    }
+    next();
   }
   /**
    * @description validate user login
@@ -148,7 +146,7 @@ class Validation {
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
    */
-  static validateUserSignin(req, res, next) {
+  static async validateUserSignin(req, res, next) {
     const { username, password } = req.body;
     if (!username) {
       return res.status(400).send({
@@ -160,26 +158,23 @@ class Validation {
         message: 'Password field cannot be empty'
       });
     }
-    Users
-      .findOne({
-        where: {
-          username
-        },
-      })
-      .then((user) => {
-        if (!user) {
-          return res.status(400).send({
-            message: 'Incorrect Login details',
-          });
-        }
-        if (bcrypt.compareSync(req.body.password, user.password)) {
-          next();
-        } else {
-          res.status(400).send({
-            message: 'Incorrect Login details',
-          });
-        }
+    const findUser = await Users.findOne({
+      where: {
+        username
+      },
+    });
+    if (!findUser) {
+      return res.status(400).send({
+        message: 'Incorrect Login details',
       });
+    }
+    if (bcrypt.compareSync(req.body.password, findUser.password)) {
+      next();
+    } else {
+      res.status(400).send({
+        message: 'Incorrect Login details',
+      });
+    }
   }
   /**
    * @description check if userId in params is valid
@@ -188,23 +183,20 @@ class Validation {
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
    */
-  static checkUserId(req, res, next) {
+  static async checkUserId(req, res, next) {
     const id = req.params.userId;
+    const findUserById = await Users.findById(id);
     if (isNaN(id)) {
       return res.status(400).send({
         message: 'UserId parameter should be a number'
       });
     }
-    Users
-      .findById(id)
-      .then((user) => {
-        if (!user) {
-          return res.status(404).send({
-            message: 'User doesn\'t exist'
-          });
-        }
-        next();
+    if (!findUserById) {
+      return res.status(404).send({
+        message: 'User doesn\'t exist'
       });
+    }
+    next();
   }
   /**
    * @description check if recipe input is empty
@@ -268,21 +260,20 @@ class Validation {
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
    */
-  static checkRecipeId(req, res, next) {
+  static async checkRecipeId(req, res, next) {
     const id = req.params.recipeId;
     if (isNaN(id)) {
       return res.status(400).send({
         message: 'RecipeId parameter should be a number'
       });
     }
-    Recipes
-      .findById(id)
-      .then((recipe) => {
-        if (!recipe) {
-          return res.status(404).send({ message: 'Recipe does not exist in this catalog' });
-        }
-        next();
+    const findRecipeId = await Recipes.findById(id);
+    if (!findRecipeId) {
+      return res.status(404).send({
+        message: 'Recipe does not exist in this catalog'
       });
+    }
+    next();
   }
   /**
    * @description check if reveiw input is valid
@@ -307,21 +298,20 @@ class Validation {
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
    */
-  static checkFavRecipe(req, res, next) {
+  static async checkFavRecipe(req, res, next) {
     const id = req.params.recipeId;
-    return Favorites
-      .find({
-        where: {
-          id,
-          userId: req.decoded.id
-        }
-      })
-      .then((favrecipe) => {
-        if (favrecipe) {
-          return res.status(400).send({ message: 'This Recipe has already been favorited' });
-        }
-        next();
+    const findFavorite = await Favorites.find({
+      where: {
+        id,
+        userId: req.decoded.id
+      }
+    });
+    if (findFavorite) {
+      return res.status(400).send({
+        message: 'This Recipe has already been favorited'
       });
+    }
+    next();
   }
 }
 
