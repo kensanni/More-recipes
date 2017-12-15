@@ -8,7 +8,7 @@
     "test": "mocha server/test/*.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
-    "start": "npm run ./server/bin/www",
+    "start": "babel-node -- ./server/bin/www",
     "build": "webpack -d  && cp client/src/index.html client/dist/index.html && webpack-dev-server --content-base ./client/src/ --inline --hot",
     "build:prod": "webpack -p  && copy src/index.html"
   },
