@@ -114,8 +114,7 @@ class Recipe {
     }
 
     await recipe.increment('views');
-    const reloadedRecipe = await recipe.reload();
-    const updatedRecipe = await updateRecipeAttributes(reloadedRecipe);
+    const updatedRecipe = await updateRecipeAttributes(recipe);
 
     return res.status(200).send(updatedRecipe);
   }
