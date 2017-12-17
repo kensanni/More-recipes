@@ -14,11 +14,11 @@ export default (sequelize, DataTypes) => {
         msg: 'Please Input a description for your recipes'
       }
     },
-    indegrient: {
+    ingredient: {
       type: DataTypes.STRING,
       allowNull: {
         args: false,
-        msg: 'Please input the required indegrient for your recipes'
+        msg: 'Please input the required ingredient for your recipes'
       }
     },
     views: {

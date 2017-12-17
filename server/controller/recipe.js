@@ -17,14 +17,14 @@ class Recipe {
    */
   static async addRecipes(req, res) {
     const {
-      name, description, indegrient, image,
+      name, description, ingredient, image,
     } = req.body;
 
     const addRecipes = await Recipes.create({
       userId: req.decoded.id,
       name,
       description,
-      indegrient,
+      ingredient,
       image,
     });
 
@@ -42,7 +42,7 @@ class Recipe {
    */
   static async modifyRecipe(req, res) {
     const {
-      name, description, indegrient, image
+      name, description, ingredient, image
     } = req.body;
 
     const findRecipe = await Recipes.findById(req.params.recipeId);
@@ -50,7 +50,7 @@ class Recipe {
     await findRecipe.update({
       name: name || findRecipe.name,
       description: description || findRecipe.description,
-      indegrient: indegrient || findRecipe.indegrient,
+      ingredient: ingredient || findRecipe.ingredient,
       image: image || findRecipe.image,
     });
     return res.status(200).send({
@@ -79,12 +79,16 @@ class Recipe {
 
     if (getAllRecipes.length < 1) {
       return res.status(404).send({
+        success: false,
         message: 'No Recipe found'
       });
     }
 
     const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
-    return res.status(200).send(updatedRecipes);
+    return res.status(200).send({
+      success: true,
+      data: updatedRecipes
+    });
   }
   /**
      * @description get one recipe
@@ -109,6 +113,7 @@ class Recipe {
 
     if (recipe.length < 1) {
       return res.status(404).send({
+        success: false,
         message: 'No Recipe found'
       });
     }
@@ -116,7 +121,10 @@ class Recipe {
     await recipe.increment('views');
     const updatedRecipe = await updateRecipeAttributes(recipe);
 
-    return res.status(200).send(updatedRecipe);
+    return res.status(200).send({
+      success: true,
+      data: updatedRecipe
+    });
   }
   /**
    * @description delete a recipe
@@ -125,10 +133,23 @@ class Recipe {
    * @returns  {JSON} Returns a JSON object
    */
   static async deleteRecipes(req, res) {
-    const findRecipe = await Recipes.findById(req.params.recipeId);
+    const findRecipe = await Recipes.find({
+      where: {
+        id: req.params.recipeId,
+        userId: req.decoded.id
+      }
+    });
+
+    if (!findRecipe) {
+      return res.status(403).send({
+        success: false,
+        message: 'Access denied, you are not allowed to delete this recipe'
+      });
+    }
 
     await findRecipe.destroy();
     return res.status(200).send({
+      success: true,
       message: 'Recipe successfully deleted'
     });
   }

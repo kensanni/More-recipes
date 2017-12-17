@@ -22,7 +22,10 @@ export default class Review {
     });
     if (!findRecipe) {
       return res.status(404)
-        .send({ message: 'Recipe not found' });
+        .send({
+          success: false,
+          message: 'Recipe not found'
+        });
     }
     return res.status(201).send({
       success: true,

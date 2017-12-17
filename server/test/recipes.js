@@ -46,12 +46,28 @@ describe('Testing recipe endpoints', () => {
       .send({
         name: 'Rice',
         description: 'Boil for three mins',
-        indegrient: 'Rice, water, pepper',
+        ingredient: 'Rice, water, pepper',
         image: 'dummy'
       })
       .end((err, res) => {
         expect(res.body.message).equal('Recipe successfully created');
         expect(res).to.have.status(201);
+        done();
+      });
+  });
+  it('should not add recipe when recipe name already exixt', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes')
+      .set('x-access-token', value)
+      .send({
+        name: 'Rice',
+        description: 'Boil for three mins',
+        ingredient: 'Rice, water, pepper',
+        image: 'dummy'
+      })
+      .end((err, res) => {
+        expect(res.body.message).equal('you already have a recipe with the name Rice');
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -62,7 +78,7 @@ describe('Testing recipe endpoints', () => {
       .send({
         name: '',
         description: 'Boil for three mins',
-        indegrient: 'Rice, water, pepper',
+        ingredient: 'Rice, water, pepper',
         image: 'dummy'
       })
       .end((err, res) => {
@@ -78,7 +94,7 @@ describe('Testing recipe endpoints', () => {
       .send({
         name: 'Rice',
         description: '',
-        indegrient: 'Rice, water, pepper',
+        ingredient: 'Rice, water, pepper',
         image: 'dummy'
       })
       .end((err, res) => {
@@ -87,18 +103,18 @@ describe('Testing recipe endpoints', () => {
         done();
       });
   });
-  it('should not add recipe without Indegrient', (done) => {
+  it('should not add recipe without ingredient', (done) => {
     chai.request(app)
       .post('/api/v1/recipes')
       .set('x-access-token', value)
       .send({
         name: 'Rice',
         description: 'simpe dish',
-        indegrient: '',
+        ingredient: '',
         image: 'dummy'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Indegrient field cannot be empty');
+        expect(res.body.message).equal('ingredient field cannot be empty');
         expect(res).to.have.status(400);
         done();
       });
@@ -110,7 +126,7 @@ describe('Testing recipe endpoints', () => {
       .send({
         name: 'Rice',
         description: 'simpe dish',
-        indegrient: 'Rice water maggi',
+        ingredient: 'Rice water maggi',
         image: ''
       })
       .end((err, res) => {
@@ -126,7 +142,7 @@ describe('Testing recipe endpoints', () => {
       .send({
         name: '  Rice',
         description: 'simpe dish',
-        indegrient: 'Rice water maggi',
+        ingredient: 'Rice water maggi',
         image: 'dummy.com'
       })
       .end((err, res) => {
@@ -141,7 +157,7 @@ describe('Testing recipe endpoints', () => {
       .send({
         name: 'Rice',
         description: '  simpe dish',
-        indegrient: 'Rice water maggi',
+        ingredient: 'Rice water maggi',
         image: 'dummy.com'
       })
       .end((err, res) => {
@@ -149,14 +165,14 @@ describe('Testing recipe endpoints', () => {
         done();
       });
   });
-  it('should not add recipe with invalid Indegrient', (done) => {
+  it('should not add recipe with invalid ingredient', (done) => {
     chai.request(app)
       .post('/api/v1/recipes')
       .set('x-access-token', value)
       .send({
         name: 'Rice',
         description: 'simpe dish',
-        indegrient: '  Rice water maggi',
+        ingredient: '  Rice water maggi',
         image: 'dummy.com'
       })
       .end((err, res) => {
@@ -180,7 +196,7 @@ describe('Testing recipe endpoints', () => {
       .send({
         name: 'Rice',
         description: 'Boil for three mins',
-        indegrient: 'Rice, water, pepper',
+        ingredient: 'Rice, water, pepper',
         image: 'dummy'
       })
       .end((err, res) => {

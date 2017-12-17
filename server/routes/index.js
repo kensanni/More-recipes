@@ -31,6 +31,7 @@ export default (app) => {
     authentication.verifyUser,
     Validation.checkRecipeInput,
     Validation.validateRecipeInput,
+    Validation.checkRecipeName,
     Recipe.addRecipes
   );
 
@@ -72,7 +73,6 @@ export default (app) => {
     '/api/v1/recipes/:recipeId/favorites',
     authentication.verifyUser,
     Validation.checkRecipeId,
-    Validation.checkFavRecipe,
     Favorite.addFavorite
   );
 

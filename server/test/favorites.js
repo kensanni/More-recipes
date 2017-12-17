@@ -48,7 +48,7 @@ describe('Testing API endpoints associated with favorites', () => {
       .send({
         name: 'Rice',
         description: 'Boil for three mins',
-        indegrient: 'Rice, water, pepper',
+        ingredient: 'Rice, water, pepper',
         image: 'dummy'
       })
       .end((err, res) => {

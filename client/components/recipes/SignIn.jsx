@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import avatar from '../../public/images/avatar.png';
 import backgroundImage from '../../public/images/blog-img-01.jpg';
 

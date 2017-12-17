@@ -25,26 +25,31 @@ class Validation {
     } = req.body;
     if (!firstname) {
       return res.status(400).send({
+        success: false,
         message: 'Firstname field cannot be empty'
       });
     }
     if (!lastname) {
       return res.status(400).send({
+        success: false,
         message: 'Lastname field cannot be empty'
       });
     }
     if (!username) {
       return res.status(400).send({
+        success: false,
         message: 'Username field cannot be empty'
       });
     }
     if (!email) {
       return res.status(400).send({
+        success: false,
         message: 'Email field cannot be empty'
       });
     }
     if (!password) {
       return res.status(400).send({
+        success: false,
         message: 'Password field cannot be empty'
       });
     }
@@ -93,6 +98,7 @@ class Validation {
       const allErrors = [];
       errors.forEach((error) => {
         allErrors.push({
+          success: false,
           error: error.msg,
         });
       });
@@ -115,6 +121,7 @@ class Validation {
     });
     if (findUser) {
       return res.status(409).send({
+        success: false,
         message: 'Username has already been chosen'
       });
     }
@@ -125,6 +132,7 @@ class Validation {
     });
     if (findEmail) {
       return res.status(409).send({
+        success: false,
         message: 'Email already exist'
       });
     }
@@ -141,6 +149,7 @@ class Validation {
     const { username, password } = req.body;
     if (!username) {
       return res.status(400).send({
+        success: false,
         message: 'Username field cannot be empty'
       });
     }
@@ -156,6 +165,7 @@ class Validation {
     });
     if (!findUser) {
       return res.status(400).send({
+        success: false,
         message: 'Incorrect Login details',
       });
     }
@@ -163,6 +173,7 @@ class Validation {
       next();
     } else {
       res.status(400).send({
+        success: false,
         message: 'Incorrect Login details',
       });
     }
@@ -179,11 +190,13 @@ class Validation {
     const findUserById = await Users.findById(id);
     if (Number.isNaN(parseInt(id, 10))) {
       return res.status(400).send({
+        success: false,
         message: 'UserId parameter should be a number'
       });
     }
     if (!findUserById) {
       return res.status(404).send({
+        success: false,
         message: 'User doesn\'t exist'
       });
     }
@@ -198,25 +211,29 @@ class Validation {
    */
   static checkRecipeInput(req, res, next) {
     const {
-      name, description, indegrient, image
+      name, description, ingredient, image
     } = req.body;
     if (!name) {
       return res.status(400).send({
+        success: false,
         message: 'Name field cannot be empty'
       });
     }
     if (!description) {
       return res.status(400).send({
+        success: false,
         message: 'Description field cannot be empty'
       });
     }
-    if (!indegrient) {
+    if (!ingredient) {
       return res.status(400).send({
-        message: 'Indegrient field cannot be empty'
+        success: false,
+        message: 'ingredient field cannot be empty'
       });
     }
     if (!image) {
       return res.status(400).send({
+        success: false,
         message: 'Please upload an image for your recipes'
       });
     }
@@ -245,11 +262,11 @@ class Validation {
           errorMessage: 'Invalid description format'
         }
       },
-      indegrient: {
+      ingredient: {
         notEmpty: true,
         matches: {
           options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
-          errorMessage: 'Invalid indegrient format'
+          errorMessage: 'Invalid ingredient format'
         }
       }
     });
@@ -258,6 +275,7 @@ class Validation {
       const allErrors = [];
       errors.forEach((error) => {
         allErrors.push({
+          success: false,
           error: error.msg,
         });
       });
@@ -276,12 +294,14 @@ class Validation {
     const id = req.params.recipeId;
     if (Number.isNaN(parseInt(id, 10))) {
       return res.status(400).send({
+        success: false,
         message: 'RecipeId parameter should be a number'
       });
     }
     const findRecipeId = await Recipes.findById(id);
     if (!findRecipeId) {
       return res.status(404).send({
+        success: false,
         message: 'Recipe does not exist in this catalog'
       });
     }
@@ -298,29 +318,31 @@ class Validation {
     const { review } = req.body;
     if (!review) {
       return res.status(400).send({
+        success: false,
         message: 'Please input a review'
       });
     }
     next();
   }
   /**
-   * @description check if recipe has been previously added to favorite
+   * @description check if user already have recipe with the same name
    * @param  {object} req - request
    * @param  {object} res - response
    * @param  {object} next - next
    * @returns {JSON} Returns a JSON object
    */
-  static async checkFavRecipe(req, res, next) {
-    const id = req.params.recipeId;
-    const findFavorite = await Favorites.find({
+  static async checkRecipeName(req, res, next) {
+    const recipeName = await Recipes.find({
       where: {
-        id,
+        name: req.body.name,
         userId: req.decoded.id
       }
     });
-    if (findFavorite) {
+
+    if (recipeName) {
       return res.status(400).send({
-        message: 'This Recipe has already been favorited'
+        success: false,
+        message: `you already have a recipe with the name ${req.body.name}`,
       });
     }
     next();

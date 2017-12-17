@@ -12,9 +12,22 @@ class Favorite {
    * @returns  {JSON} Returns a JSON object
    */
   static async addFavorite(req, res) {
+    const findFavRecipe = await Favorites.find({
+      where: {
+        recipeId: req.params.recipeId,
+        userId: req.decoded.id
+      }
+    });
+    if (findFavRecipe) {
+      findFavRecipe.destroy();
+      return res.status(200).send({
+        success: true,
+        message: 'Recipe successfully unfavorited'
+      });
+    }
     const addFavorite = await Favorites.create({
       recipeId: req.params.recipeId,
-      userId: req.decoded.id,
+      userId: req.decoded.id
     });
     return res.status(201).send({
       success: true,

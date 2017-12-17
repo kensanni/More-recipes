@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Downvotes, Upvotes, Recipes } = model;
+const { Downvotes, Upvotes } = model;
 /**
  * @class Upvote
  */
@@ -13,14 +13,6 @@ class Upvote {
    */
   static async upvoteRecipe(req, res) {
     const id = req.params.recipeId;
-    const checkRecipeExist = await Recipes.find({
-      where: {
-        id,
-      }
-    });
-    if (!checkRecipeExist) {
-      return res.status(404).send({ message: 'Recipe does not exist in this catalog' });
-    }
     const downvotedRecipe = await Downvotes.find({
       where: {
         recipeId: id,
