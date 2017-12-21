@@ -2,11 +2,21 @@ export default (sequelize, DataTypes) => {
   const Favorites = sequelize.define('Favorites', {
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'userId',
+      }
     },
     recipeId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Recipes',
+        key: 'id',
+        as: 'recipeId',
+      }
     }
   });
   Favorites.associate = (models) => {

@@ -23,37 +23,16 @@ let value;
 
 describe('Testing API endpoints associated with favorites', () => {
   doBeforeAll();
-  it('Should create a new User', (done) => {
+  it('should login a user', (done) => {
     chai.request(app)
-      .post('/api/v1/users/signup')
+      .post('/api/v1/users/signin')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
-        username: 'sannikay',
-        email: 'testfavorites@example.com',
-        password: 'developer',
-        profileImage: 'dummydata'
+        username: 'sannikays',
+        password: 'developer'
       })
       .end((err, res) => {
+        expect(res.body.message).equal('Signin successful');
         value = res.body.token;
-        expect(res.body.message).equal('User created');
-        expect(res).to.have.status(201);
-        done();
-      });
-  });
-  it('should add recipe with authorization', (done) => {
-    chai.request(app)
-      .post('/api/v1/recipes')
-      .set('x-access-token', value)
-      .send({
-        name: 'Rice',
-        description: 'Boil for three mins',
-        ingredient: 'Rice, water, pepper',
-        image: 'dummy'
-      })
-      .end((err, res) => {
-        expect(res.body.message).equal('Recipe successfully created');
-        expect(res).to.have.status(201);
         done();
       });
   });
@@ -92,7 +71,7 @@ describe('Testing API endpoints associated with favorites', () => {
   });
   it('Should add a recipe to favorite list with authentication', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/1/favorites')
+      .post('/api/v1/recipes/2/favorites')
       .set('x-access-token', value)
       .send({
         recipeId: 1,

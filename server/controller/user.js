@@ -47,14 +47,14 @@ class User {
    * @param {object} res
    * @returns  {JSON} Returns a JSON object
    */
-  static signIn(req, res) {
-    const findUserdetails = Users.findOne({
+  static async signIn(req, res) {
+    const findUserdetails = await Users.findOne({
       where: {
         username: req.body.username
       }
     });
     if (findUserdetails) {
-      const payload = { id: findUserdetails.id };
+      const payload = { id: findUserdetails.get().id };
       const token = jwt.sign(payload, secret, {
         expiresIn: '3h',
       });

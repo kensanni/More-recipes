@@ -22,7 +22,7 @@ describe('Testing API endpoints associated with review', () => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
-        username: 'sannikay',
+        username: 'sannikays',
         password: 'developer'
       })
       .end((err, res) => {

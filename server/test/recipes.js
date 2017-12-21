@@ -21,7 +21,7 @@ describe('Testing recipe endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
-        username: 'sannikay',
+        username: 'sannikays',
         password: 'developer'
       })
       .end((err, res) => {
@@ -52,22 +52,6 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         expect(res.body.message).equal('Recipe successfully created');
         expect(res).to.have.status(201);
-        done();
-      });
-  });
-  it('should not add recipe when recipe name already exixt', (done) => {
-    chai.request(app)
-      .post('/api/v1/recipes')
-      .set('x-access-token', value)
-      .send({
-        name: 'Rice',
-        description: 'Boil for three mins',
-        ingredient: 'Rice, water, pepper',
-        image: 'dummy'
-      })
-      .end((err, res) => {
-        expect(res.body.message).equal('you already have a recipe with the name Rice');
-        expect(res).to.have.status(400);
         done();
       });
   });
@@ -131,6 +115,22 @@ describe('Testing recipe endpoints', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Please upload an image for your recipes');
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('should add recipe with authorization', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes')
+      .set('x-access-token', value)
+      .send({
+        name: 'Rice',
+        description: 'Boil for three mins',
+        ingredient: 'Rice, water, pepper',
+        image: 'dummy'
+      })
+      .end((err, res) => {
+        expect(res.body.message).equal('you already have a recipe with the name Rice');
         expect(res).to.have.status(400);
         done();
       });

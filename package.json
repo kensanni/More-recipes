@@ -5,12 +5,16 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon --exec babel-node -- ./server/bin/www",
-    "test": "mocha server/test/*.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000",
+    "test": "mocha server/test/testPath/test.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000",    
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "start": "babel-node -- ./server/bin/www",
     "build": "webpack -d  && cp client/src/index.html client/dist/index.html && webpack-dev-server --content-base ./client/src/ --inline --hot",
-    "build:prod": "webpack -p  && copy src/index.html"
+    "build:prod": "webpack -p  && copy src/index.html",
+    "user:test": "mocha server/test/users.js server/test/recipes.js  recipes:test --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000",
+    "recipes:test": "mocha server/test/recipes.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000",
+    "reviews:test": "mocha server/test/reviews.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000",
+    "favorites:test": "mocha server/test/favorites.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000"
   },
   "repository": {
     "type": "git",
