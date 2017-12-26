@@ -14,6 +14,10 @@ class SignIn extends Component {
   componentWillMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
   }
+  handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
   /**
    * @description render - render signin page
    * @return {object} returns an object

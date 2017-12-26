@@ -4,6 +4,7 @@ import path from 'path';
 export default {
   devtool: 'inline-source-map',
   entry: [
+    'webpack-hot-middleware/client?reload=true',
     './client/index.jsx'
   ],
   output: {

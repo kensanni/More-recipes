@@ -5,7 +5,7 @@ import model from '../models';
 dotenv.config();
 
 const {
-  Recipes, Users, Favorites
+  Recipes, Users
 } = model;
 
 /**
