@@ -34,7 +34,6 @@ class Upvote {
     if (upvote) {
       await upvote.destroy();
       return res.status(200).send({
-        success: true,
         message: 'Recipe upvote successfully removed'
       });
     }
@@ -44,7 +43,6 @@ class Upvote {
       userId: req.decoded.id
     });
     return res.status(201).send({
-      success: true,
       message: 'Recipe successfully upvoted',
       data: newUpvote
     });

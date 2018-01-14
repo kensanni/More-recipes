@@ -1,12 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import LandingPage from './recipes/LandingPage';
-import SignUp from './recipes/SignUp';
+import SignUp from './signupPage/connectedComponent/SignUp';
 import SignIn from './recipes/SignIn';
+
+
+const history = createBrowserHistory();
 
 const App = () => {
   return (
-    <Router>
+    <Router history={history}>
       <div>
         <Switch>
           <Route exact path="/" component={LandingPage} />

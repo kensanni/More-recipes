@@ -21,7 +21,6 @@ class Favorite {
     if (findFavRecipe) {
       findFavRecipe.destroy();
       return res.status(200).send({
-        success: true,
         message: 'Recipe successfully unfavorited'
       });
     }
@@ -30,7 +29,6 @@ class Favorite {
       userId: req.decoded.id
     });
     return res.status(201).send({
-      success: true,
       message: 'recipe sucessfully added to favorite',
       data: addFavorite
     });
@@ -49,7 +47,6 @@ class Favorite {
     });
 
     return res.status(200).send({
-      success: true,
       data: getFavoriteRecipes
     });
   }

@@ -14,7 +14,6 @@ export default (app) => {
 
   app.post(
     '/api/v1/users/signup',
-    Validation.checkUserInput,
     Validation.validateUserInput,
     Validation.validateUsers,
     User.signUp
@@ -29,7 +28,6 @@ export default (app) => {
   app.post(
     '/api/v1/recipes',
     authentication.verifyUser,
-    Validation.checkRecipeInput,
     Validation.validateRecipeInput,
     Validation.checkRecipeName,
     Recipe.addRecipes

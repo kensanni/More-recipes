@@ -10,7 +10,8 @@
 	width: 50px;
 }
 .form-bg {
-	background-image: url('../image/blog-img-01.jpg')
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .img-size {

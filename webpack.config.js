@@ -35,7 +35,7 @@ export default {
         include: path.join(__dirname, '/client')
       },
       {
-        test: /\.(jpg|png|svg)$/,
+        test: /\.(jpg|png|svg|jpeg)$/,
         use: {
           loader: 'file-loader',
           options: {

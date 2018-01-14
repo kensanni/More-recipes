@@ -8,6 +8,17 @@ import backgroundImage from '../../public/images/blog-img-01.jpg';
  */
 class SignIn extends Component {
   /**
+   * @description create an instance of Signin
+   * @param {*} props
+   */
+  constructor() {
+    super(props)
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+  /**
    * @description mount - mount background image
    * @return {image} returns an image
    */

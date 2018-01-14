@@ -34,7 +34,6 @@ class Downvote {
     if (downvote) {
       await downvote.destroy();
       return res.status(200).send({
-        success: true,
         message: 'Recipe downvote successfully removed'
       });
     }
@@ -43,7 +42,6 @@ class Downvote {
       userId: req.decoded.id
     });
     return res.status(200).send({
-      success: true,
       message: 'Recipe successfully downvoted',
       data: newDownvote
     });

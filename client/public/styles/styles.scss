@@ -15,9 +15,14 @@ $white-color: #fff;
 .chat-image {
   width: 50px;
 }
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-.form-bg {
-  background-image: url(../images/blog-img-01.jpg)
+.error-message {
+  color: red;
+  font-size: 12px;
 }
 
 .img-size {

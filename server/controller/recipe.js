@@ -29,7 +29,6 @@ class Recipe {
     });
 
     return res.status(201).send({
-      success: true,
       message: 'Recipe successfully created',
       data: addRecipes
     });
@@ -54,7 +53,6 @@ class Recipe {
       image: image || findRecipe.image,
     });
     return res.status(200).send({
-      success: true,
       message: 'Recipe updated successfully',
       data: findRecipe
     });
@@ -79,14 +77,12 @@ class Recipe {
 
     if (getAllRecipes.length < 1) {
       return res.status(404).send({
-        success: false,
         message: 'No Recipe found'
       });
     }
 
     const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
     return res.status(200).send({
-      success: true,
       data: updatedRecipes
     });
   }
@@ -113,7 +109,6 @@ class Recipe {
 
     if (recipe.length < 1) {
       return res.status(404).send({
-        success: false,
         message: 'No Recipe found'
       });
     }
@@ -122,7 +117,6 @@ class Recipe {
     const updatedRecipe = await updateRecipeAttributes(recipe);
 
     return res.status(200).send({
-      success: true,
       data: updatedRecipe
     });
   }
@@ -142,14 +136,12 @@ class Recipe {
 
     if (!findRecipe) {
       return res.status(403).send({
-        success: false,
         message: 'Access denied, you are not allowed to delete this recipe'
       });
     }
 
     await findRecipe.destroy();
     return res.status(200).send({
-      success: true,
       message: 'Recipe successfully deleted'
     });
   }
