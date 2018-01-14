@@ -21,6 +21,7 @@ const Form = (props) => {
               placeholder="Name"
               onChange={onChange}
               onFocus={onFocus}
+              value={props.value.name}
               type="text"
               required
             />
