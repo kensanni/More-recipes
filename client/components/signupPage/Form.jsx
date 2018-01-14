@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Form = (props) => {
   const { onChange, onFocus, handleSubmit } = props;
@@ -112,5 +113,9 @@ const Form = (props) => {
     </div>
   );
 };
+
+// Form.propTypes = {
+//   value: PropTypes.
+// }
 
 export default Form;

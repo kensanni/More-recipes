@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import LandingPage from './recipes/LandingPage';
 import SignUp from './signupPage/connectedComponent/SignUp';
-import SignIn from './recipes/SignIn';
+import SignIn from './signinPage/connectedComponent/SignIn';
 
 
 const history = createBrowserHistory();

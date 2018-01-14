@@ -6,7 +6,8 @@
         "mocha": true
       },
       "globals": {
-          "document": true
+          "document": true,
+          "localStorage": true
       },
       "rules": {
         "one-var": 0,

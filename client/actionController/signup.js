@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
 import Helper from '../Helpers/helper';
 import { signupError, signupRequest, signupSuccess } from '../actions/signupAction';
 
@@ -7,9 +6,9 @@ const URL = '/api/v1';
 
 
 /**
-   * @description register user action
-   * @param {string} userInfo user registration details
-   * @return {JSON} return a JSON object
+   * @description register user's action
+   * @param {object} userdata user registration details
+   * @return {object} Redux action to be dispatched to the store
    */
 export default function signup(userdata) {
   return (dispatch) => {

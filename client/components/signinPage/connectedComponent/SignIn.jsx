@@ -1,62 +1,56 @@
 import React, { Component } from 'react';
-import lodash from 'lodash';
-import toastr from 'toastr';
-import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
-import signUpAction from '../../../actionController/signup';
-import Form from '../../signupPage/Form';
+import lodash from 'lodash';
+import { connect } from 'react-redux';
+import Form from '../../signinPage/Form';
 import backgroundImage from '../../../public/images/recipe-img-bg.jpeg';
-
+import signInAction from '../../../actionController/signin';
 
 /**
- * @class SignUp
- * @description Create user account
+ * @class SignIn
+ * @description Log in existing Users
  */
-class SignUp extends Component {
+class SignIn extends Component {
   /**
-   * @description create an instance of Signup
+   * @description create an instance of Signin
    * @param {*} props
    */
   constructor(props) {
     super(props);
     this.state = {
-      password: '',
-      confirmPassword: '',
       responseMessage: '',
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
   /**
    * @description mount - mount background image
    * @return {image} returns an image
    */
   componentWillMount() {
+    /* eslint-disable no-undef */
     document.body.style.backgroundImage = `url(${backgroundImage})`;
   }
 
   /**
-   * @description jhj
+   * @description
    * @param {*} nextProps
-   * @return {*} null
+   * @return {null} null
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.signupResponse.authenticated) {
-      this.props.history.push('/signin');
-    }
-    if (!lodash.isEmpty(nextProps.signupResponse.errorMessage)) {
+    if (!lodash.isEmpty(nextProps.signinResponse.errorMessage)) {
       this.setState({
-        responseMessage: nextProps.signupResponse.errorMessage
+        responseMessage: nextProps.signinResponse.errorMessage
       });
     }
   }
+
 
   /**
    * @description Handles the input value changes
    * @param {*} event
    * @return {*} null
-   * @memberof SignUp
+   * @memberof SignIn
    */
   handleChange(event) {
     const { name, value } = event.target;
@@ -64,20 +58,19 @@ class SignUp extends Component {
       [name]: value
     });
   }
+
+
   /**
-   *@description Sign up a user when form is submiied
+   * @description log a user in when form is submitted
    * @param {*} event
-   * @return {*} v
+   * @return {*} n
    */
   handleFormSubmit(event) {
     event.preventDefault();
     this.state.responseMessage = '';
-    if (this.state.password === this.state.confirmPassword) {
-      this.props.signUpAction(this.state);
-    } else {
-      toastr.error('Passwords do not match');
-    }
+    this.props.signInAction(this.state);
   }
+
   /**
    * @description render - renders the class component
    * @return {object} returns an object
@@ -86,22 +79,20 @@ class SignUp extends Component {
     return (
       <Form
         value={this.state}
-        onFocus={this.onFocus}
         onChange={this.handleChange}
         handleSubmit={this.handleFormSubmit}
       />
     );
   }
 }
-SignUp.propTypes = {
-  signUpAction: PropTypes.func.isRequired,
-  signupResponse: PropTypes.objectOf(any).isRequired,
-  history: PropTypes.func.isRequired
+
+SignIn.propTypes = {
+  signInAction: PropTypes.func.isRequired,
+  signinResponse: PropTypes.objectOf(any).isRequired,
 };
 
 const mapStateToProps = state => ({
-  signupResponse: state.signupReducer[0]
+  signinResponse: state.signinReducer[0]
 });
 
-
-export default connect(mapStateToProps, { signUpAction })(SignUp);
+export default connect(mapStateToProps, { signInAction })(SignIn);
