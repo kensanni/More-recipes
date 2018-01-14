@@ -64,8 +64,11 @@ describe('Testing API endpoints associated with favorites', () => {
       .post('/api/v1/recipes/20/favorites')
       .set('x-access-token', value)
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Recipe does not exist in this catalog');
+        }
         expect(res).to.have.status(404);
-        expect(res.body.message).equal('Recipe does not exist in this catalog');
         done();
       });
   });
@@ -98,7 +101,6 @@ describe('Testing API endpoints associated with favorites', () => {
       .set('x-access-token', value)
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body.success).equal(true);
         done();
       });
   });

@@ -58,7 +58,10 @@ describe('Testing API endpoints associated with review', () => {
       })
       .end((err, res) => {
         expect(res).to.have.status(400);
-        expect(res.body.message).equal('Please input a review');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Please input a review');
+        }
         done();
       });
   });
@@ -83,8 +86,11 @@ describe('Testing API endpoints associated with review', () => {
         review: 'awesome'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Recipe does not exist in this catalog');
+        }
         expect(res).to.have.status(404);
-        expect(res.body.message).equal('Recipe does not exist in this catalog');
         done();
       });
   });

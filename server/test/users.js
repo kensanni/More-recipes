@@ -20,6 +20,7 @@ const doBeforeAll = () => {
 
 
 describe('Testing User endpoints', () => {
+  doBeforeAll();
   it('Should create a new User', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
@@ -47,7 +48,10 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('name field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('name field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -63,7 +67,10 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Username field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Username field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -79,7 +86,10 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Email field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Email field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -95,7 +105,10 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Password field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Password field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -186,7 +199,10 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Username has already been chosen');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Username has already been chosen');
+        }
         expect(res).to.have.status(409);
         done();
       });
@@ -202,7 +218,10 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Email already exist');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Email already exist');
+        }
         expect(res).to.have.status(409);
         done();
       });
@@ -227,7 +246,10 @@ describe('Testing User endpoints', () => {
         password: 'developer'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Username field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Username field cannot be empty');
+        }
         done();
       });
   });
@@ -239,7 +261,10 @@ describe('Testing User endpoints', () => {
         password: ''
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Password field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Password field cannot be empty');
+        }
         done();
       });
   });
@@ -251,7 +276,10 @@ describe('Testing User endpoints', () => {
         password: 'developer'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Incorrect Login details');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Incorrect Login details');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -264,7 +292,10 @@ describe('Testing User endpoints', () => {
         password: 'develo'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Incorrect Login details');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Incorrect Login details');
+        }
         expect(res).to.have.status(400);
         done();
       });
