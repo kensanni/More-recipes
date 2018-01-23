@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import LandingPage from './recipes/LandingPage';
 import RecipeGrid from './recipes/RecipeGrid';
+import UserRecipes from './recipes/userRecipes/UserRecipes';
 import SignUp from './signupPage/connectedComponent/SignUp';
 import SignIn from './signinPage/connectedComponent/SignIn';
 
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/signup" component={SignUp} />
           <Route path="/signin" component={SignIn} />
           <Route path="/recipes" component={RecipeGrid} />
+          <Route path="/profile" component={UserRecipes} />
         </Switch>
       </div>
     </Router>

@@ -272,6 +272,7 @@ class Validation {
     }
     next();
   }
+
   /**
    * @description check if reveiw input is valid
    * @param  {object} req - request

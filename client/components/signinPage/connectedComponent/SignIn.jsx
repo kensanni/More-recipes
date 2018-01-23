@@ -38,6 +38,9 @@ class SignIn extends Component {
    * @return {null} null
    */
   componentWillReceiveProps(nextProps) {
+    if (nextProps.signinResponse.isAuthenticated) {
+      this.props.history.push('/recipes');
+    }
     if (!lodash.isEmpty(nextProps.signinResponse.errorMessage)) {
       this.setState({
         responseMessage: nextProps.signinResponse.errorMessage
@@ -89,10 +92,11 @@ class SignIn extends Component {
 SignIn.propTypes = {
   signInAction: PropTypes.func.isRequired,
   signinResponse: PropTypes.objectOf(any).isRequired,
+  history: PropTypes.objectOf(any).isRequired,
 };
 
 const mapStateToProps = state => ({
-  signinResponse: state.signinReducer[0]
+  signinResponse: state.signinReducer[0],
 });
 
 export default connect(mapStateToProps, { signInAction })(SignIn);

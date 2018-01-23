@@ -13,6 +13,7 @@ class Upvote {
    */
   static async upvoteRecipe(req, res) {
     const id = req.params.recipeId;
+    let downvoteStatus = 'notDownvoted';
     const downvotedRecipe = await Downvotes.find({
       where: {
         recipeId: id,
@@ -21,6 +22,7 @@ class Upvote {
     });
 
     if (downvotedRecipe) {
+      downvoteStatus = 'downvoted';
       await downvotedRecipe.destroy();
     }
 
@@ -34,7 +36,8 @@ class Upvote {
     if (upvote) {
       await upvote.destroy();
       return res.status(200).send({
-        message: 'Recipe upvote successfully removed'
+        message: 'Recipe upvote successfully removed',
+        downvoteStatus
       });
     }
 
@@ -44,7 +47,8 @@ class Upvote {
     });
     return res.status(201).send({
       message: 'Recipe successfully upvoted',
-      data: newUpvote
+      data: newUpvote,
+      downvoteStatus
     });
   }
 }

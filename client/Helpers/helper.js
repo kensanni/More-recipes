@@ -11,7 +11,7 @@ class Helper {
    */
   static setAuthorizationToken(token) {
     if (token) {
-      axios.defaults.headers.common.Authorization = token;
+      axios.defaults.headers.common['x-access-token'] = token;
     } else {
       delete axios.defaults.headers.common.Authorization;
     }

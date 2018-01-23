@@ -83,7 +83,7 @@ class Recipe {
 
     const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
     return res.status(200).send({
-      data: updatedRecipes
+      recipesData: updatedRecipes
     });
   }
   /**
@@ -118,6 +118,44 @@ class Recipe {
 
     return res.status(200).send({
       data: updatedRecipe
+    });
+  }
+  /**
+   * @description get user recipes
+   * @param {*} req HTTP request object
+   * @param {*} res HTTP responds object
+   * @return {JSON} return a json object
+   */
+  static async getUserRecipes(req, res) {
+    const userId = req.decoded.id;
+    const id = parseInt(req.params.userId, 10);
+
+    if (userId !== id) {
+      return res.status(401).send({
+        message: 'Access denied',
+      });
+    }
+
+    const userRecipe = await Recipes.findAll({
+      where: { userId },
+      include: [{
+        model: model.Reviews,
+        attributes: ['review'],
+        include: [{
+          model: model.Users,
+          attributes: ['username', 'updatedAt'],
+        }]
+      }],
+    });
+
+    if (userRecipe.length < 1) {
+      return res.status(404).send({
+        message: 'No Recipe found'
+      });
+    }
+
+    return res.status(200).send({
+      data: userRecipe
     });
   }
   /**

@@ -2,14 +2,14 @@ export const FAVORITE_RECIPE_REQUEST = 'FAVORITE_RECIPE_REQUEST';
 export const FAVORITE_RECIPE_SUCCESSFUL = 'FAVORITE_RECIPE_SUCCESSFUL';
 export const FAVORITE_RECIPE_ERROR = 'FAVORITE_RECIPE_ERROR ';
 
-export const favoriteRecipeRequest = recipe => ({
+export const favoriteRecipeRequest = recipeId => ({
   type: FAVORITE_RECIPE_REQUEST,
-  recipe,
+  recipeId,
   isFavorited: false
 });
-export const favoriteRecipeSuccess = recipe => ({
+export const favoriteRecipeSuccess = recipeId => ({
   type: FAVORITE_RECIPE_SUCCESSFUL,
-  recipe,
+  recipeId,
   isFavorited: true
 });
 export const favoriteRecipeError = errorMessage => ({

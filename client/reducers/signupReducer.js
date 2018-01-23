@@ -12,7 +12,7 @@ const signupReducer = (state = initialState, action) => {
     case SIGNUP_REQUEST:
       return [{
         userData: action.userData,
-        authenticated: action.isAuthenticated,
+        isAuthenticated: action.isAuthenticated,
         responseMessage: '',
         errorMessage: '',
       },
@@ -21,7 +21,7 @@ const signupReducer = (state = initialState, action) => {
     case SIGNUP_SUCCESSFUL:
       return [{
         userData: {},
-        authenticated: action.isAuthenticated,
+        isAuthenticated: action.isAuthenticated,
         responseMessage: action.responseMessage,
         errorMessage: '',
       },
@@ -30,7 +30,7 @@ const signupReducer = (state = initialState, action) => {
     case SIGNUP_ERROR:
       return [{
         userData: {},
-        authenticated: action.isAuthenticated,
+        isAuthenticated: action.isAuthenticated,
         responseMessage: '',
         errorMessage: action.errorMessage,
       },
