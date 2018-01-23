@@ -42,8 +42,8 @@ class SignUp extends Component {
    * @return {*} null
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.signupResponse.authenticated) {
-      this.props.history.push('/signin');
+    if (nextProps.signupResponse.isAuthenticated) {
+      this.props.history.push('/recipes');
     }
     if (!lodash.isEmpty(nextProps.signupResponse.errorMessage)) {
       this.setState({
@@ -96,7 +96,7 @@ class SignUp extends Component {
 SignUp.propTypes = {
   signUpAction: PropTypes.func.isRequired,
   signupResponse: PropTypes.objectOf(any).isRequired,
-  history: PropTypes.func.isRequired
+  history: PropTypes.objectOf(any).isRequired,
 };
 
 const mapStateToProps = state => ({

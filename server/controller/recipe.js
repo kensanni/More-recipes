@@ -83,7 +83,7 @@ class Recipe {
 
     const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
     return res.status(200).send({
-      data: updatedRecipes
+      recipesData: updatedRecipes
     });
   }
   /**

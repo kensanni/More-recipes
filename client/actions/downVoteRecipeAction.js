@@ -1,6 +1,8 @@
 export const DOWNVOTE_RECIPE_REQUEST = 'DOWNVOTE_RECIPE_REQUEST';
 export const DOWNVOTE_RECIPE_SUCCESSFUL = 'DOWNVOTE_RECIPE_SUCCESSFUL';
 export const DOWNVOTE_RECIPE_ERROR = 'DOWNVOTE_RECIPE_ERROR';
+export const INCREMENT_DOWNVOTE = 'INCREMENT_DOWNVOTE';
+export const DECREMENT_DOWNVOTE = 'DECREMENT_DOWNVOTE';
 
 export const downvoteRecipeRequest = recipe => ({
   type: DOWNVOTE_RECIPE_REQUEST,
@@ -17,3 +19,12 @@ export const downvoteRecipeError = errorMessage => ({
   errorMessage,
   isDownvoted: false
 });
+export const incrementDownvote = recipeId => ({
+  type: INCREMENT_DOWNVOTE,
+  recipeId
+});
+export const decrementDownvote = recipeId => ({
+  type: DECREMENT_DOWNVOTE,
+  recipeId
+});
+

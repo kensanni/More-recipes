@@ -1,41 +1,41 @@
-import { SIGNIN_ERROR, SIGNIN_REQUEST, SIGNIN_SUCCESSFUL } from '../actions/signinAction';
+import { UPVOTE_RECIPE_REQUEST, UPVOTE_RECIPE_SUCCESSFUL, UPVOTE_RECIPE_ERROR } from '../actions/upvoteRecipeAction';
 
 const initialState = [{
-  isAuthenticated: false,
-  userData: {},
+  isUpvoted: false,
+  recipeId: null,
   responseMessage: '',
   errorMessage: ''
 }];
 /**
- * @description sign reducer
+ * @description upvote recipe reducer
  * @param {object} state - default application state
  * @param {object} action - response from the api
  * @return {Object} - Object containg new state
  */
-const signinReducer = (state = initialState, action) => {
+const upvoteRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SIGNIN_REQUEST:
+    case UPVOTE_RECIPE_REQUEST:
       return [{
-        userData: action.userData,
-        isAuthenticated: action.isAuthenticated,
+        recipeId: action.recipeId,
+        isUpvoted: action.isUpvoted,
         responseMessage: '',
         errorMessage: '',
       },
       ...state
       ];
-    case SIGNIN_SUCCESSFUL:
+    case UPVOTE_RECIPE_SUCCESSFUL:
       return [{
-        userData: {},
-        isAuthenticated: action.isAuthenticated,
+        recipeId: action.recipeId,
+        isUpvoted: action.isUpvoted,
         responseMessage: action.responseMessage,
         errorMessage: '',
       },
       ...state
       ];
-    case SIGNIN_ERROR:
+    case UPVOTE_RECIPE_ERROR:
       return [{
-        userData: {},
-        isAuthenticated: action.isAuthenticated,
+        recipeId: null,
+        isUpvoted: action.isUpvoted,
         responseMessage: '',
         errorMessage: action.errorMessage,
       },
@@ -46,4 +46,4 @@ const signinReducer = (state = initialState, action) => {
   }
 };
 
-export default signinReducer;
+export default upvoteRecipeReducer;
