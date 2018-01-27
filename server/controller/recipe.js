@@ -155,7 +155,7 @@ class Recipe {
     }
 
     return res.status(200).send({
-      data: userRecipe
+      recipesData: userRecipe
     });
   }
   /**

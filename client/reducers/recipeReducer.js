@@ -8,7 +8,7 @@ const initialState = [{
   errorMessage: ''
 }];
 /**
- * @description sign reducer
+ * @description recipe reducer
  * @param {object} state - default application state
  * @param {object} action - response from the api
  * @return {Object} - Object containg new state
@@ -34,7 +34,7 @@ const recipeReducer = (state = initialState, action) => {
       ];
     case GET_RECIPE_ERROR:
       return [{
-        isFetched: false,
+        isFetched,
         recipeData: {},
         errorMessage
       },
