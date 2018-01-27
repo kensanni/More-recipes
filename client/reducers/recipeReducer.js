@@ -1,6 +1,10 @@
 import { GET_RECIPE_REQUEST, GET_RECIPE_SUCCESSFUL, GET_RECIPE_ERROR } from '../actions/getRecipeAction';
+<<<<<<< HEAD
 import { INCREMENT_UPVOTE, DECREMENT_UPVOTE } from '../actions/upvoteRecipeAction';
 import { INCREMENT_DOWNVOTE, DECREMENT_DOWNVOTE } from '../actions/downVoteRecipeAction';
+=======
+import { INCREMENT_UPVOTE, DECREMENT_UPVOTE, INCREMENT_DOWNVOTE, DECREMENT_DOWNVOTE } from '../actions/upvoteRecipeAction';
+>>>>>>> cd5298ec5bca43ab7a5c82c8f754efb162e38264
 
 const initialState = [{
   isFetched: false,
