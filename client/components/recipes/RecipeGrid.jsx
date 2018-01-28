@@ -72,7 +72,7 @@ class RecipeGrid extends Component {
 
   /**
    * @description favorite a recipe
-   * @param {*} id id of recipe to be favorited
+   * @param {*} id - id of recipe to be favorited
    * @return {object} object
    */
   favoriteRecipe(id) {

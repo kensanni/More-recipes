@@ -30,7 +30,7 @@ const Form = (props) => {
             placeholder="Password"
             onChange={onChange}
             type="password"
-            value={props.value.password}                   
+            value={props.value.password}
           />
         </section>
         <div>

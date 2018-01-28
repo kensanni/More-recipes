@@ -25,7 +25,7 @@ const signinReducer = (state = initialState, action) => {
       ];
     case SIGNIN_SUCCESSFUL:
       return [{
-        userData: {},
+        userData: action.userData,
         isAuthenticated: action.isAuthenticated,
         responseMessage: action.responseMessage,
         errorMessage: '',

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RecipeCard = (props) => {
-  console.log('Recipe details', props);
+  // console.log('Recipe details', props);
   const { recipeData, upvoteRecipe, downvoteRecipe, favoriteRecipe } = props,
     {
       id,

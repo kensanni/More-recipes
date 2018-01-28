@@ -31,14 +31,65 @@ class UserRecipes extends Component {
    */
   componentDidMount() {
     if (this.props.recipes.isFetched === false) {
-      this.props.getUserRecipe();
+      this.props.getUserRecipe(this.props.userId);
     }
+  }
+
+  /**
+   * @description update the state of user recipes
+   * @param {*} nextProps
+   * @return {*} updated user recipe
+   */
+  componentWillReceiveProps(nextProps) {
+    const { recipeData, isFetched } = nextProps.recipes;
+    if (recipeData !== this.props.recipes.recipeData) {
+      this.setState({
+        recipeData,
+        isFetched
+      });
+    }
+  }
+
+  /**
+   * @description
+   * @return {*} e
+   */
+  editRecipe() {
+
+  }
+
+  /**
+   * @description
+   * @return {*} e
+   */
+  deleteRecipe() {
+
+  }
+
+  /**
+   *@description
+   * @return {*} e
+   */
+  addRecipe() {
+
   }
   /**
    * @description render user recipes
    * @return {*} wfdgsfd
    */
   render() {
+    let renderUserRecipes = <h1>No recipes in your catalog</h1>
+    if (this.state.isFetched) {
+      renderUserRecipes = this.state.recipeData.map((recipeData, key) => (
+        <UserRecipesCard
+          key={key}
+          recipeData={recipeData}
+          deleteRecipe={this.deleteRecipe}
+          editRecipe={this.addRecipe}
+          addRecipe={this.addRecipe}
+        />
+      ));
+    }
     return (
       <div>
         <Header />
@@ -46,7 +97,9 @@ class UserRecipes extends Component {
           <div className="top-nav-bar">
             <AddRecipe />
           </div>
-          <UserRecipesCard />
+          <div className="row">
+            { this.state.isFetched && renderUserRecipes }
+          </div>
           <Footer />
         </div>
       </div>
@@ -55,10 +108,13 @@ class UserRecipes extends Component {
 }
 UserRecipes.propTypes = {
   getUserRecipe: PropTypes.func.isRequired,
+  recipes: PropTypes.objectOf(any).isRequired,
+  // userId: PropTypes.objectOf(any).isRequired,
 };
 
 const mapStateToProps = state => ({
-  recipes: state.getUserRecipeReducer[0]
+  recipes: state.getUserRecipeReducer[0],
+  userId: state.signinReducer[0].userData.id
 });
 
-export default connect(mapStateToProps, { getUserRecipe })(UserRecipes);
+export default connect(mapStateToProps, { getUserRecipe, })(UserRecipes);

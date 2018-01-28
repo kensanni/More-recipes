@@ -7,9 +7,10 @@ export const signinRequest = userData => ({
   userData,
   isAuthenticated: false
 });
-export const signinSuccess = (responseMessage) => ({
+export const signinSuccess = (responseMessage, userData) => ({
   type: SIGNIN_SUCCESSFUL,
   responseMessage,
+  userData,
   isAuthenticated: true
 });
 export const signinError = errorMessage => ({
