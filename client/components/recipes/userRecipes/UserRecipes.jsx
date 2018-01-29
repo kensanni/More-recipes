@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
-
 import getUserRecipe from '../../../actionController/getUserRecipe';
+import addRecipeAction from '../../../actionController/addRecipe';
 import AddRecipe from './AddRecipe';
+import deleteRecipeAction from '../../../actionController/deleteRecipe';
 import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
@@ -23,6 +24,9 @@ class UserRecipes extends Component {
       recipeData: [],
       isFetched: false
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.addRecipe = this.addRecipe.bind(this);
+    this.deleteRecipe = this.deleteRecipe.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -55,23 +59,31 @@ class UserRecipes extends Component {
    * @return {*} e
    */
   editRecipe() {
-
   }
 
   /**
    * @description
    * @return {*} e
    */
-  deleteRecipe() {
+  deleteRecipe(id) {
+    this.props.deleteRecipeAction(id);
+  }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    console.log('name', name)
+    this.setState({
+      [name]: value
+    });
   }
 
   /**
    *@description
    * @return {*} e
    */
-  addRecipe() {
-
+  addRecipe(event) {
+    event.preventDefault();
+    this.props.addRecipeAction();
   }
   /**
    * @description render user recipes
@@ -95,7 +107,12 @@ class UserRecipes extends Component {
         <Header />
         <div className="container">
           <div className="top-nav-bar">
-            <AddRecipe />
+            <AddRecipe
+              value={this.state}
+              onChange={this.handleChange}
+              addRecipe={this.addRecipe}
+            />
+            
           </div>
           <div className="row">
             { this.state.isFetched && renderUserRecipes }
@@ -108,6 +125,8 @@ class UserRecipes extends Component {
 }
 UserRecipes.propTypes = {
   getUserRecipe: PropTypes.func.isRequired,
+  addRecipeAction: PropTypes.func.isRequired,
+  deleteRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
   // userId: PropTypes.objectOf(any).isRequired,
 };
@@ -117,4 +136,8 @@ const mapStateToProps = state => ({
   userId: state.signinReducer[0].userData.id
 });
 
-export default connect(mapStateToProps, { getUserRecipe, })(UserRecipes);
+export default connect(mapStateToProps, {
+  getUserRecipe,
+  addRecipeAction,
+  deleteRecipeAction
+})(UserRecipes);

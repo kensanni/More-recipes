@@ -8,6 +8,7 @@ const URL = '/api/v1';
 
 /**
  * @description downvote recipe's action
+ *
  * @param {*} recipeId
  * @return {*} Redux action to be dispatch to the store
  */

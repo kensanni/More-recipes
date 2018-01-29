@@ -4,16 +4,20 @@ import DeleteRecipe from '../DeleteRecipe';
 
 const UserRecipesCard = (props) => {
   console.log('Recipe details', props);
+  const { recipeData, deleteRecipe } = props,
+    {
+      id,
+      description
+    } = recipeData;
   return (
     <div className="col-sm-6 col-md-6 col-lg-4 pt-4">
       <div className="card">
         <div className="card-body">
           <a href="">
-            <h4 className="card-title">Pepper Soup with goat meat</h4>
+            <h4 className="card-title"></h4>
           </a>
           <p className="card-text pt-2">
-            Some quick example text to build on the card title and make up the
-            bulk of the card content.
+            {description}
           </p>
         </div>
         <div className="card-footer card-tile">

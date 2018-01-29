@@ -45,14 +45,13 @@ const recipeReducer = (state = initialState, action) => {
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
         recipeData: state[0].recipeData.map((recipe) => {
-          if (recipe.id !== action.recipeId) {
-            return recipe;
+          if (recipe.id === action.recipeId) {
+            return {
+              ...recipe,
+              upvotes: recipe.upvotes + 1
+            };
           }
-
-          return {
-            ...recipe,
-            upvotes: recipe.upvotes + 1
-          };
+          return recipe;
         })
       },
       ...state
@@ -62,14 +61,13 @@ const recipeReducer = (state = initialState, action) => {
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
         recipeData: state[0].recipeData.map((recipe) => {
-          if (recipe.id !== action.recipeId) {
-            return recipe;
+          if (recipe.id === action.recipeId) {
+            return {
+              ...recipe,
+              upvotes: recipe.upvotes - 1
+            };
           }
-
-          return {
-            ...recipe,
-            upvotes: recipe.upvotes - 1
-          };
+          return recipe;
         })
       },
       ...state
@@ -79,14 +77,13 @@ const recipeReducer = (state = initialState, action) => {
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
         recipeData: state[0].recipeData.map((recipe) => {
-          if (recipe.id !== action.recipeId) {
-            return recipe;
+          if (recipe.id === action.recipeId) {
+            return {
+              ...recipe,
+              downvotes: recipe.downvotes + 1
+            };
           }
-
-          return {
-            ...recipe,
-            downvotes: recipe.downvotes + 1
-          };
+          return recipe;
         })
       },
       ...state
@@ -96,14 +93,13 @@ const recipeReducer = (state = initialState, action) => {
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
         recipeData: state[0].recipeData.map((recipe) => {
-          if (recipe.id !== action.recipeId) {
-            return recipe;
+          if (recipe.id === action.recipeId) {
+            return {
+              ...recipe,
+              downvotes: recipe.downvotes - 1
+            };
           }
-
-          return {
-            ...recipe,
-            downvotes: recipe.downvotes - 1
-          };
+          return recipe;
         })
       },
       ...state
