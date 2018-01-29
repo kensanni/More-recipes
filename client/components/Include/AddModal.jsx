@@ -36,7 +36,7 @@ const AddModal = (props) => {
                 </label>
                 <input
                   name="name"
-                  onChange={onChange}
+                  onChange={props.onChange}
                   value={props.value.name}
                   type="text"
                   className="form-control"
@@ -49,7 +49,7 @@ const AddModal = (props) => {
                 </label>
                 <textarea
                   name="description"
-                  onChange={onChange}
+                  onChange={props.onChange}
                   value={props.value.description}
                   className="form-control"
                   id="message-text"
@@ -63,7 +63,7 @@ const AddModal = (props) => {
                   id="ingredient"
                   type="text"
                   name="ingredient"
-                  onChange={onChange}
+                  onChange={props.onChange}
                   className="form-control"
                 />
               </div>
@@ -80,7 +80,7 @@ const AddModal = (props) => {
             <button
               type="button"
               className="btn btn-orange"
-              onClick={addRecipe}
+              onClick={props.addRecipe}
             >
               Add recipe
             </button>
