@@ -13,7 +13,6 @@ const EditRecipe = (props) => {
       >
         <i className="fa fa-pencil-square-o" aria-hidden="true" />
       </button>
-      <EditModal />
     </div>
   );
 };

@@ -1,4 +1,6 @@
+import { filter } from 'lodash';
 import { GET_USER_RECIPE_REQUEST, GET_USER_RECIPE_SUCCESSFUL, GET_USER_RECIPE_ERROR } from '../actions/getUserRecipeAction';
+import { DELETE_RECIPE_SUCCESSFUL } from '../actions/deleteRecipeAction';
 
 const initialState = [{
   isFetched: false,
@@ -39,6 +41,15 @@ const getUserRecipeReducer = (state = initialState, action) => {
       },
       ...state
       ];
+    case DELETE_RECIPE_SUCCESSFUL:
+      return [{
+        isFetched: true,
+        recipeData: filter(state[0].recipeData, recipe => recipe.id !== action.recipeId),
+        errorMessage: ''
+      },
+      ...state
+      ];
+
     default:
       return state;
   }

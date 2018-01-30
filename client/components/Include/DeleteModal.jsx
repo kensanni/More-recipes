@@ -1,6 +1,8 @@
 import React from 'react';
 
-const DeleteModal = (prop) => {
+const DeleteModal = (props) => {
+  const { deleteRecipe, recipeId } = props;
+  console.log("Iiiiiiiii", props);
   return (
     <div
       className="modal fade"
@@ -30,14 +32,18 @@ const DeleteModal = (prop) => {
           </div>
           <div className="modal-footer">
             <button
-              onClick={() => deleteRecipe(id)}
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
             >
               Close
             </button>
-            <button type="button" className="btn btn-danger">
+            <button
+              type="button"
+              onClick={() => deleteRecipe(recipeId)}
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >
               Delete recipe
             </button>
           </div>

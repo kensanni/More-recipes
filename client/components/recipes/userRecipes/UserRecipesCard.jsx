@@ -1,6 +1,8 @@
 import React from 'react';
 import EditRecipe from '../EditRecipe';
 import DeleteRecipe from '../DeleteRecipe';
+import EditModal from '../../Include/EditModal';
+import DeleteModal from '../../Include/DeleteModal';
 
 const UserRecipesCard = (props) => {
   console.log('Recipe details', props);
@@ -14,7 +16,7 @@ const UserRecipesCard = (props) => {
       <div className="card">
         <div className="card-body">
           <a href="">
-            <h4 className="card-title"></h4>
+            <h4 className="card-title" />
           </a>
           <p className="card-text pt-2">
             {description}
@@ -24,9 +26,14 @@ const UserRecipesCard = (props) => {
           <div className="row">
             <div className="col-xs-6 ml-3">
               <EditRecipe />
+              <EditModal />
             </div>
             <div className="col-xs-6">
               <DeleteRecipe />
+              <DeleteModal
+                deleteRecipe={deleteRecipe}
+                recipeId={id}
+              />
             </div>
           </div>
         </div>

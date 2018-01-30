@@ -1,8 +1,6 @@
 import React from 'react';
-import DeleteModal from '../Include/DeleteModal';
 
-const DeleteRecipe = (props) => {
-  const { deleteRecipe, recipeData } = props;
+const DeleteRecipe = () => {
   return (
     <div>
       <button
@@ -14,7 +12,6 @@ const DeleteRecipe = (props) => {
       >
         <i className="fa fa-times" aria-hidden="true" />
       </button>
-      <DeleteModal />
     </div>
   );
 };

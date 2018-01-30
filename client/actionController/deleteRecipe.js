@@ -11,10 +11,10 @@ const URL = '/api/v1';
 export default function deleteReleteReducer(recipeId) {
   return (dispatch) => {
     dispatch(deleteRecipeRequest(recipeId));
-    axios.post(`${URL}/recipes/${recipeId}`)
+    axios.delete(`${URL}/recipes/${recipeId}`)
       .then((recipe) => {
         const { message } = recipe.data;
-        dispatch(deleteRecipeSuccessful(message));
+        dispatch(deleteRecipeSuccessful(message, recipeId));
       })
       .catch((error) => {
         const { errors } = error.response.data;

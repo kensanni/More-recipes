@@ -7,14 +7,15 @@ export const deleteRecipeRequest = recipe => ({
   recipe,
   isDeleted: false
 });
-export const deleteRecipeSuccessful = responseMessage => ({
+export const deleteRecipeSuccessful = (responseMessage, recipeId) => ({
   type: 'DELETE_RECIPE_SUCCESSFUL',
   responseMessage,
+  recipeId,
   isDeleted: true
 });
 export const deleteRecipeError = errorMessage => ({
   type: 'DELETE_RECIPE_ERROR',
   errorMessage,
   isDeleted: false
-})
+});
 

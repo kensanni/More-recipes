@@ -9,6 +9,7 @@ import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 
+
 /**
  * @class UserRecipes
  * @description UserRecipes
@@ -66,12 +67,13 @@ class UserRecipes extends Component {
    * @return {*} e
    */
   deleteRecipe(id) {
+    console.log(id);
     this.props.deleteRecipeAction(id);
   }
 
   handleChange(event) {
     const { name, value } = event.target;
-    console.log('name', name)
+    console.log('name', name);
     this.setState({
       [name]: value
     });
@@ -90,7 +92,7 @@ class UserRecipes extends Component {
    * @return {*} wfdgsfd
    */
   render() {
-    let renderUserRecipes = <h1>No recipes in your catalog</h1>
+    let renderUserRecipes = <h1>No recipes in your catalog</h1>;
     if (this.state.isFetched) {
       renderUserRecipes = this.state.recipeData.map((recipeData, key) => (
         <UserRecipesCard
@@ -112,11 +114,12 @@ class UserRecipes extends Component {
               onChange={this.handleChange}
               addRecipe={this.addRecipe}
             />
-            
+
           </div>
           <div className="row">
             { this.state.isFetched && renderUserRecipes }
           </div>
+       
           <Footer />
         </div>
       </div>

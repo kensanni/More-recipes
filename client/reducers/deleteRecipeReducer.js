@@ -2,8 +2,8 @@ import { DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESSFUL, DELETE_RECIPE_ERROR } 
 
 const initialState = [{
   isDeleted: false,
-  deletedRecipe: {},
   errorMessage: '',
+  recipeId: null,
   responseMessage: ''
 }];
 
@@ -15,14 +15,15 @@ const deleteRecipeReducer = (state = initialState, action) => {
         deletedRecipe: action.deletedRecipe,
         errorMessage: '',
         responseMessage: '',
+        recipeId: null,
       },
       ...state,
       ];
     case DELETE_RECIPE_SUCCESSFUL:
       return [{
         isDeleted: action.isDeleted,
-        deletedRecipe: {},
         responseMessage: action.responseMessage,
+        recipeId: null,
         errorMessage: '',
       },
       ...state,
@@ -30,9 +31,9 @@ const deleteRecipeReducer = (state = initialState, action) => {
     case DELETE_RECIPE_ERROR:
       return [{
         isDeleted: action.isDeleted,
-        deletedRecipe: {},
         errorMessage: action.errorMessage,
         responseMessage: '',
+        recipeId: null,
       },
       ...state,
       ];
