@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
+import dotenv from 'dotenv-webpack';
 
 export default {
   devtool: 'inline-source-map',
@@ -17,7 +18,11 @@ export default {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new dotenv({
+      path: './.env',
+      safe: false
+    })
   ],
   resolve: {
     extensions: ['.jsx', '.js']

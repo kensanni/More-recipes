@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
+import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import AddRecipe from './AddRecipe';
 import deleteRecipeAction from '../../../actionController/deleteRecipe';
 import UserRecipesCard from './UserRecipesCard';
@@ -28,6 +29,7 @@ class UserRecipes extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
+    this.saveImageToCloud = this.saveImageToCloud.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -71,6 +73,10 @@ class UserRecipes extends Component {
     this.props.deleteRecipeAction(id);
   }
 
+  /**
+   * @description
+   * @return {*} e
+   */
   handleChange(event) {
     const { name, value } = event.target;
     console.log('name', name);
@@ -85,7 +91,19 @@ class UserRecipes extends Component {
    */
   addRecipe(event) {
     event.preventDefault();
-    this.props.addRecipeAction();
+    this.props.addRecipeAction(this.state);
+  }
+
+  /**
+   *@description
+   * @return {*} e
+   */
+  saveImageToCloud(event) {
+    const image = event.target.files[0];
+    console.log("!!!!!!!!!!!!!!", image);
+    if (image) {
+      this.props.saveImageToCloudAction(image);
+    }
   }
   /**
    * @description render user recipes
@@ -113,6 +131,7 @@ class UserRecipes extends Component {
               value={this.state}
               onChange={this.handleChange}
               addRecipe={this.addRecipe}
+              saveImageToCloud={this.saveImageToCloud}
             />
 
           </div>
@@ -142,5 +161,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getUserRecipe,
   addRecipeAction,
-  deleteRecipeAction
+  deleteRecipeAction,
+  saveImageToCloudAction
 })(UserRecipes);

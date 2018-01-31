@@ -67,6 +67,14 @@ const AddModal = (props) => {
                   className="form-control"
                 />
               </div>
+              <div className="form-group">
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={props.saveImageToCloud}
+                />
+              </div>
             </form>
           </div>
           <div className="modal-footer">

@@ -2,7 +2,6 @@ import React from 'react';
 
 const DeleteModal = (props) => {
   const { deleteRecipe, recipeId } = props;
-  console.log("Iiiiiiiii", props);
   return (
     <div
       className="modal fade"

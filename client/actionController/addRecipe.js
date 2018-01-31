@@ -9,6 +9,7 @@ const URL = '/api/v1';
  * @return {*} redux action to be dispatch to the store
  */
 export default function addRecipe(recipeData) {
+  console.log('DDDDDDDDDDDDDDDD', JSON.stringify(recipeData));
   return (dispatch) => {
     dispatch(addRecipeRequest(recipeData));
     axios.post(`${URL}/recipes`, recipeData)

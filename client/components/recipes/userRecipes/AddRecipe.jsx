@@ -2,7 +2,7 @@ import React from 'react';
 import AddModal from '../../Include/AddModal';
 
 const AddRecipe = (props) => {
-  const { onChange, addRecipe, value } = props;
+  const { onChange, addRecipe, value, saveImageToCloud } = props;
   return (
     <div className="row header-nav ">
       <div className="col-sm-6 col-6">
@@ -18,9 +18,10 @@ const AddRecipe = (props) => {
           <i className="fa fa-plus-square-o" aria-hidden="true" />
         </button>
         <AddModal
-          onChange={props.onChange}
-          addRecipe={props.addRecipe}
-          value={props.value}
+          onChange={onChange}
+          addRecipe={addRecipe}
+          value={value}
+          saveImageToCloud={saveImageToCloud}
         />
       </div>
     </div>

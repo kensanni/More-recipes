@@ -8,7 +8,7 @@ const URL = '/api/v1';
  * @param {*} recipeId
  * @return {*} Redux action to be dispatch to the store
  */
-export default function deleteReleteReducer(recipeId) {
+export default function deleteRelete(recipeId) {
   return (dispatch) => {
     dispatch(deleteRecipeRequest(recipeId));
     axios.delete(`${URL}/recipes/${recipeId}`)
