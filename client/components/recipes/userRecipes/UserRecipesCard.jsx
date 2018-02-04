@@ -1,12 +1,11 @@
 import React from 'react';
-import EditRecipe from '../EditRecipe';
-import DeleteRecipe from '../DeleteRecipe';
+import EditRecipe from './EditRecipe';
+import DeleteRecipe from './DeleteRecipe';
 import EditModal from '../../Include/EditModal';
 import DeleteModal from '../../Include/DeleteModal';
 
 const UserRecipesCard = (props) => {
-  console.log('Recipe details', props);
-  const { recipeData, deleteRecipe } = props,
+  const { recipeData, deleteRecipe, editRecipe,  value, onChange, saveImageToCloud } = props,
     {
       id,
       name,
@@ -29,7 +28,13 @@ const UserRecipesCard = (props) => {
           <div className="row">
             <div className="col-xs-6 ml-3">
               <EditRecipe />
-              <EditModal />
+              <EditModal
+                editRecipe={editRecipe}
+                value={value}
+                onChange={onChange}
+                recipeId={id}
+                saveImageToCloud={saveImageToCloud}
+              />
             </div>
             <div className="col-xs-6">
               <DeleteRecipe />

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const EditModal = (props) => {
+  const { value, onChange, editRecipe, recipeId, saveImageToCloud } = props;
   return (
     <div
       className="modal fade"
@@ -29,9 +30,12 @@ const EditModal = (props) => {
             <form>
               <div className="form-group">
                 <label htmlFor="recipient-name" className="col-form-label">
-                  Title
+                  Name
                 </label>
                 <input
+                  name="name"
+                  onChange={onChange}
+                  value={value.name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -41,7 +45,34 @@ const EditModal = (props) => {
                 <label htmlFor="message-text" className="col-form-label">
                   description
                 </label>
-                <textarea className="form-control" id="message-text" />
+                <textarea
+                  name="description"
+                  onChange={onChange}
+                  value={value.description}
+                  className="form-control"
+                  id="message-text"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="ingredient" className="col-form-label black">
+                  Ingredient &#58;
+                </label>
+                <input
+                  id="ingredient"
+                  type="text"
+                  name="ingredient"
+                  onChange={onChange}
+                  value={value.ingredient}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={saveImageToCloud}
+                />
               </div>
             </form>
           </div>
@@ -53,7 +84,11 @@ const EditModal = (props) => {
             >
               Close
             </button>
-            <button type="button" className="btn btn-orange">
+            <button
+              type="button"
+              className="btn btn-orange"
+              onClick={() => editRecipe(recipeId)}
+            >
               Update recipe
             </button>
           </div>

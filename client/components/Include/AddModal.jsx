@@ -64,6 +64,7 @@ const AddModal = (props) => {
                   type="text"
                   name="ingredient"
                   onChange={props.onChange}
+                  value={props.value.ingredient}
                   className="form-control"
                 />
               </div>

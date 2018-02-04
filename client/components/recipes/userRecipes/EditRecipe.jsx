@@ -1,5 +1,4 @@
 import React from 'react';
-import EditModal from '../Include/EditModal';
 
 const EditRecipe = (props) => {
   return (

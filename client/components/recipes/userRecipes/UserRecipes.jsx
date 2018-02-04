@@ -6,6 +6,7 @@ import addRecipeAction from '../../../actionController/addRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import AddRecipe from './AddRecipe';
 import deleteRecipeAction from '../../../actionController/deleteRecipe';
+import editRecipeAction from '../../../actionController/editRecipe';
 import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
@@ -30,6 +31,7 @@ class UserRecipes extends Component {
     this.addRecipe = this.addRecipe.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
+    this.editRecipe = this.editRecipe.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -61,7 +63,9 @@ class UserRecipes extends Component {
    * @description
    * @return {*} e
    */
-  editRecipe() {
+  editRecipe(id, recipeData) {
+    event.preventDefault();
+    this.props.editRecipeAction(id, recipeData);
   }
 
   /**
@@ -69,7 +73,6 @@ class UserRecipes extends Component {
    * @return {*} e
    */
   deleteRecipe(id) {
-    console.log(id);
     this.props.deleteRecipeAction(id);
   }
 
@@ -79,7 +82,7 @@ class UserRecipes extends Component {
    */
   handleChange(event) {
     const { name, value } = event.target;
-    console.log('name', name);
+    console.log('name', value);
     this.setState({
       [name]: value
     });
@@ -100,7 +103,6 @@ class UserRecipes extends Component {
    */
   saveImageToCloud(event) {
     const image = event.target.files[0];
-    console.log("!!!!!!!!!!!!!!", image);
     if (image) {
       this.props.saveImageToCloudAction(image);
     }
@@ -117,8 +119,11 @@ class UserRecipes extends Component {
           key={key}
           recipeData={recipeData}
           deleteRecipe={this.deleteRecipe}
-          editRecipe={this.addRecipe}
+          editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
+          value={this.state}
+          onChange={this.handleChange}
+          saveImageToCloud={this.saveImageToCloud}
         />
       ));
     }
@@ -137,8 +142,7 @@ class UserRecipes extends Component {
           </div>
           <div className="row">
             { this.state.isFetched && renderUserRecipes }
-          </div>
-       
+          </div> 
           <Footer />
         </div>
       </div>
@@ -149,6 +153,7 @@ UserRecipes.propTypes = {
   getUserRecipe: PropTypes.func.isRequired,
   addRecipeAction: PropTypes.func.isRequired,
   deleteRecipeAction: PropTypes.func.isRequired,
+  editRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
   // userId: PropTypes.objectOf(any).isRequired,
 };
@@ -162,5 +167,6 @@ export default connect(mapStateToProps, {
   getUserRecipe,
   addRecipeAction,
   deleteRecipeAction,
+  editRecipeAction,
   saveImageToCloudAction
 })(UserRecipes);
