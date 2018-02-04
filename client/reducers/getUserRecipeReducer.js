@@ -1,6 +1,7 @@
-import { filter } from 'lodash';
+import { filter, map } from 'lodash';
 import { GET_USER_RECIPE_REQUEST, GET_USER_RECIPE_SUCCESSFUL, GET_USER_RECIPE_ERROR } from '../actions/getUserRecipeAction';
 import { DELETE_RECIPE_SUCCESSFUL } from '../actions/deleteRecipeAction';
+import { ADD_RECIPE_SUCCESSFUL } from '../actions/addRecipeAction';
 
 const initialState = [{
   isFetched: false,
@@ -49,7 +50,14 @@ const getUserRecipeReducer = (state = initialState, action) => {
       },
       ...state
       ];
-
+    // case ADD_RECIPE_SUCCESSFUL:
+    //   return [{
+    //     isFetched: true,
+    //     recipeDate: map(state[0].recipeData, recipe => recipe.id === action.recipeId),
+    //     errorMessage: ''
+    //   },
+    //   ...state
+    //   ];
     default:
       return state;
   }

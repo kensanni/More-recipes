@@ -5,17 +5,20 @@ const RecipeCard = (props) => {
   const { recipeData, upvoteRecipe, downvoteRecipe, favoriteRecipe } = props,
     {
       id,
+      name,
       description,
       upvotes,
+      image,
       downvotes
     } = recipeData;
 
   return (
     <div className="col-sm-6 col-md-4 pt-4 mb-5">
       <div className="card">
+        <img className="card-img-top" src={image} alt="" />
         <div className="card-body">
           <a href="recipeDetail.html">
-            <h4 className="card-title">Pepper Soup with goat meat</h4>
+            <h4 className="card-title">{name}</h4>
           </a>
           <p className="card-text pt-2">
             {description}

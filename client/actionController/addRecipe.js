@@ -9,8 +9,10 @@ const URL = '/api/v1';
  * @return {*} redux action to be dispatch to the store
  */
 export default function addRecipe(recipeData) {
-  console.log('DDDDDDDDDDDDDDDD', JSON.stringify(recipeData));
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const imageUrl = getState().saveImageToCloud[0].image;
+    console.log('ggggggg', imageUrl);
+    recipeData.image = imageUrl;
     dispatch(addRecipeRequest(recipeData));
     axios.post(`${URL}/recipes`, recipeData)
       .then((res) => {

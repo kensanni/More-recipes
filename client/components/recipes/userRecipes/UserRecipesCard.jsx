@@ -9,14 +9,17 @@ const UserRecipesCard = (props) => {
   const { recipeData, deleteRecipe } = props,
     {
       id,
-      description
+      name,
+      description,
+      image
     } = recipeData;
   return (
     <div className="col-sm-6 col-md-6 col-lg-4 pt-4">
       <div className="card">
+        <img className="card-img-top" src={image} alt="" />
         <div className="card-body">
           <a href="">
-            <h4 className="card-title" />
+            <h4 className="card-title">{name}</h4>
           </a>
           <p className="card-text pt-2">
             {description}
