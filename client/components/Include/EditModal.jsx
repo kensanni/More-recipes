@@ -87,7 +87,7 @@ const EditModal = (props) => {
             <button
               type="button"
               className="btn btn-orange"
-              onClick={() => editRecipe(recipeId)}
+              onClick={() => editRecipe(recipeId, recipeData)}
             >
               Update recipe
             </button>

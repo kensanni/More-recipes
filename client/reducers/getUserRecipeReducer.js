@@ -60,11 +60,9 @@ const getUserRecipeReducer = (state = initialState, action) => {
       ...state
       ];
     case ADD_RECIPE_SUCCESSFUL:
-
       return [{
         isFetched: true,
         recipeData: newRecipe,
-        // map(state[0].recipeData, recipe => recipe.id === action.recipeId),
         errorMessage: ''
       },
       ...state
