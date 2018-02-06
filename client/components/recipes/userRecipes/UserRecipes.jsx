@@ -25,7 +25,7 @@ class UserRecipes extends Component {
     super(props);
     this.state = {
       recipeData: [],
-      isFetched: false
+      isFetched: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
@@ -50,15 +50,20 @@ class UserRecipes extends Component {
    * @return {*} updated user recipe
    */
   componentWillReceiveProps(nextProps) {
-    const { recipeData, isFetched } = nextProps.recipes;
+    const { recipeImageUrl, recipes } = nextProps;
+    const { recipeData, isFetched } = recipes;
     if (recipeData !== this.props.recipes.recipeData) {
       this.setState({
         recipeData,
         isFetched
       });
     }
+    if (recipeImageUrl !== this.props.recipeImageUrl) {
+      this.setState({
+        image: recipeImageUrl
+      });
+    }
   }
-
   /**
    * @description
    * @return {*} e
@@ -82,7 +87,6 @@ class UserRecipes extends Component {
    */
   handleChange(event) {
     const { name, value } = event.target;
-    console.log('name', value);
     this.setState({
       [name]: value
     });
@@ -94,7 +98,22 @@ class UserRecipes extends Component {
    */
   addRecipe(event) {
     event.preventDefault();
-    this.props.addRecipeAction(this.state);
+    const {
+      name,
+      image,
+      description,
+      ingredient
+    } = this.state;
+    const newRecipe = {
+      name,
+      image,
+      description,
+      ingredient
+    };
+    this.props.addRecipeAction(newRecipe);
+    this.setState({
+      name: '', image: '', description: '', ingredient: ''
+    });
   }
 
   /**
@@ -141,8 +160,8 @@ class UserRecipes extends Component {
 
           </div>
           <div className="row">
-            { this.state.isFetched && renderUserRecipes }
-          </div> 
+            {this.state.isFetched && renderUserRecipes}
+          </div>
           <Footer />
         </div>
       </div>
@@ -155,12 +174,14 @@ UserRecipes.propTypes = {
   deleteRecipeAction: PropTypes.func.isRequired,
   editRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
+  recipeImageUrl: PropTypes.string.isRequired
   // userId: PropTypes.objectOf(any).isRequired,
 };
 
 const mapStateToProps = state => ({
   recipes: state.getUserRecipeReducer[0],
-  userId: state.signinReducer[0].userData.id
+  userId: state.signinReducer[0].userData.id,
+  recipeImageUrl: state.saveImageToCloud[0].image
 });
 
 export default connect(mapStateToProps, {

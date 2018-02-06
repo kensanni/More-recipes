@@ -90,6 +90,7 @@ const AddModal = (props) => {
               type="button"
               className="btn btn-orange"
               onClick={props.addRecipe}
+              data-dismiss="modal"
             >
               Add recipe
             </button>

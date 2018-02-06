@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import lodash from 'lodash';
-import toastr from 'toastr';
+import miniToastr from 'mini-toastr';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import signUpAction from '../../../actionController/signup';
@@ -75,7 +75,8 @@ class SignUp extends Component {
     if (this.state.password === this.state.confirmPassword) {
       this.props.signUpAction(this.state);
     } else {
-      toastr.error('Passwords do not match');
+      miniToastr.init();
+      miniToastr.error('Passwords do not match');
     }
   }
   /**

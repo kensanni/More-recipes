@@ -7,9 +7,10 @@ export const addRecipeRequest = recipeData => ({
   recipeData,
   isAdded: false
 });
-export const addRecipeSuccess = responseMessage => ({
+export const addRecipeSuccess = (responseMessage, newRecipeData) => ({
   type: ADD_RECIPE_SUCCESSFUL,
   responseMessage,
+  newRecipeData,
   isAdded: true
 });
 export const addRecipeError = errorMessage => ({
