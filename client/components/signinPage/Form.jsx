@@ -1,17 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import avatar from '../../public/images/avatar.png';
 
 const Form = (props) => {
   const { onChange, handleSubmit } = props;
   return (
-    <div className="pt-5" style={{ textAlign: 'center' }}>
+    <div className="pt-5 mt-5" style={{ textAlign: 'center' }}>
       <form className="m-x-auto app-login-form card-login">
         <h1 className="signin-text"> More-recipe</h1>
         <section className="">
           <img className="img-fluid rounded-circle img-size" src={avatar} alt="" />
         </section>
         <div className="error-message">
-        { props.value.responseMessage && `*${props.value.responseMessage}*`}
+          { props.value.responseMessage && `*${props.value.responseMessage}*`}
         </div>
         <section className="pb-4 pt-3">
           <input
@@ -53,6 +54,12 @@ const Form = (props) => {
       </form>
     </div>
   );
+};
+
+Form.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  // value: PropTypes.objectOf.isRequired,
 };
 
 export default Form;

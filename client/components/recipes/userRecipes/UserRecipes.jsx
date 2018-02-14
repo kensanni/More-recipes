@@ -26,7 +26,6 @@ class UserRecipes extends Component {
     this.state = {
       recipeData: [],
       isFetched: false,
-      recipeEditData: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
@@ -65,11 +64,6 @@ class UserRecipes extends Component {
       });
     }
   }
-
-  handleRecipeEdit() {
-    
-  }
-
   /**
    * @description ui
    * @param {recipeData id} recipeData id
@@ -186,7 +180,8 @@ UserRecipes.propTypes = {
   deleteRecipeAction: PropTypes.func.isRequired,
   editRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
-  recipeImageUrl: PropTypes.string.isRequired
+  // recipeImageUrl: PropTypes.string.isRequired,
+  saveImageToCloudAction: PropTypes.func.isRequired,
   // userId: PropTypes.objectOf(any).isRequired,
 };
 

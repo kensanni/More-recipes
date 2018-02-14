@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const RecipeCard = (props) => {
   // console.log('Recipe details', props);
-  const { recipeData, upvoteRecipe, downvoteRecipe, favoriteRecipe } = props,
+  const {
+      recipeData,
+      upvoteRecipe,
+      downvoteRecipe,
+      favoriteRecipe
+    } = props,
     {
       id,
       name,
@@ -15,7 +21,7 @@ const RecipeCard = (props) => {
   return (
     <div className="col-sm-6 col-md-4 pt-4 mb-5">
       <div className="card">
-        <img className="card-img-top" src={image} alt="" />
+        <img className="card-img-top img-max" src={image} alt="" />
         <div className="card-body">
           <a href="recipeDetail.html">
             <h4 className="card-title">{name}</h4>
@@ -53,6 +59,13 @@ const RecipeCard = (props) => {
       </div>
     </div>
   );
+};
+
+RecipeCard.propTypes = {
+  // recipeData: PropTypes.arrayOf.isRequired,
+  upvoteRecipe: PropTypes.func.isRequired,
+  downvoteRecipe: PropTypes.func.isRequired,
+  favoriteRecipe: PropTypes.func.isRequired
 };
 
 export default RecipeCard;

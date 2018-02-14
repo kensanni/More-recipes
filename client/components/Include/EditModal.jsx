@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const EditModal = (props) => {
-  const { value, onChange, editRecipe, recipeId, saveImageToCloud } = props;
+  const {
+    value, onChange, editRecipe, recipeId, saveImageToCloud
+  } = props;
+  const { name, description, ingredient } = value;
   return (
     <div
       className="modal fade"
@@ -35,7 +40,7 @@ const EditModal = (props) => {
                 <input
                   name="name"
                   onChange={onChange}
-                  value={value.name}
+                  value={name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -48,7 +53,7 @@ const EditModal = (props) => {
                 <textarea
                   name="description"
                   onChange={onChange}
-                  value={value.description}
+                  value={description}
                   className="form-control"
                   id="message-text"
                 />
@@ -62,7 +67,7 @@ const EditModal = (props) => {
                   type="text"
                   name="ingredient"
                   onChange={onChange}
-                  value={value.ingredient}
+                  value={ingredient}
                   className="form-control"
                 />
               </div>
@@ -96,6 +101,14 @@ const EditModal = (props) => {
       </div>
     </div>
   );
+};
+
+EditModal.propTypes = {
+  // value:
+  onChange: PropTypes.func.isRequired,
+  editRecipe: PropTypes.func.isRequired,
+  recipeId: PropTypes.number.isRequired,
+  saveImageToCloud: PropTypes.func.isRequired
 };
 
 export default EditModal;

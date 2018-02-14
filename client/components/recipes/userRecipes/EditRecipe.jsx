@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditRecipe = (props) => {
+const EditRecipe = () => {
   return (
     <div>
       <button

@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AddModal from '../../Include/AddModal';
 
 const AddRecipe = (props) => {
-  const { onChange, addRecipe, value, saveImageToCloud } = props;
+  const {
+    onChange,
+    addRecipe,
+    value,
+    saveImageToCloud
+  } = props;
   return (
     <div className="row header-nav ">
       <div className="col-sm-6 col-6">
@@ -26,6 +32,13 @@ const AddRecipe = (props) => {
       </div>
     </div>
   );
+};
+
+AddRecipe.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  addRecipe: PropTypes.func.isRequired,
+  // value: PropTypes.func.isRequired,
+  saveImageToCloud: PropTypes.func.isRequired,
 };
 
 export default AddRecipe;

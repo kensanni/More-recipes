@@ -1,6 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const AddModal = (props) => {
+  const {
+    onChange, value, saveImageToCloud, addRecipe
+  } = props;
+  const { name, description, ingredient } = value;
   return (
     <div
       className="modal fade"
@@ -36,8 +41,8 @@ const AddModal = (props) => {
                 </label>
                 <input
                   name="name"
-                  onChange={props.onChange}
-                  value={props.value.name}
+                  onChange={onChange}
+                  value={name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -49,8 +54,8 @@ const AddModal = (props) => {
                 </label>
                 <textarea
                   name="description"
-                  onChange={props.onChange}
-                  value={props.value.description}
+                  onChange={onChange}
+                  value={description}
                   className="form-control"
                   id="message-text"
                 />
@@ -63,8 +68,8 @@ const AddModal = (props) => {
                   id="ingredient"
                   type="text"
                   name="ingredient"
-                  onChange={props.onChange}
-                  value={props.value.ingredient}
+                  onChange={onChange}
+                  value={ingredient}
                   className="form-control"
                 />
               </div>
@@ -73,7 +78,7 @@ const AddModal = (props) => {
                   type="file"
                   name="image"
                   accept="image/*"
-                  onChange={props.saveImageToCloud}
+                  onChange={saveImageToCloud}
                 />
               </div>
             </form>
@@ -89,7 +94,7 @@ const AddModal = (props) => {
             <button
               type="button"
               className="btn btn-orange"
-              onClick={props.addRecipe}
+              onClick={addRecipe}
               data-dismiss="modal"
             >
               Add recipe
@@ -100,5 +105,13 @@ const AddModal = (props) => {
     </div>
   );
 };
+
+AddModal.propTypes = {
+  addRecipe: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  saveImageToCloud: PropTypes.func.isRequired,
+  // value
+};
+
 
 export default AddModal;

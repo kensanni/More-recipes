@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DeleteModal = (props) => {
   const { deleteRecipe, recipeId } = props;
@@ -50,6 +51,11 @@ const DeleteModal = (props) => {
       </div>
     </div>
   );
+};
+
+DeleteModal.propTypes = {
+  deleteRecipe: PropTypes.func.isRequired,
+  recipeId: PropTypes.number.isRequired
 };
 
 export default DeleteModal;

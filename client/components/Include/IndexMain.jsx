@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const IndexMain = () => {
   return (
@@ -21,7 +22,7 @@ const IndexMain = () => {
             </a>
             <p className="text-inline">
               Already on More-recipes?
-              <a href="./html/signin.html">Sign in</a>
+              <Link to="/signin">Sign in</Link>
             </p>
           </div>
         </div>

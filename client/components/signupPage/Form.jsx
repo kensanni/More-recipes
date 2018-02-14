@@ -115,8 +115,10 @@ const Form = (props) => {
   );
 };
 
-// Form.propTypes = {
-//   value: PropTypes.
-// }
+Form.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
+};
 
 export default Form;

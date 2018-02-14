@@ -1,10 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const IndexHeader = () => {
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-green">
-        <a className="navbar-link nav-text" id="navlink" href="./html/recipe.html">More recipe</a>
+        <Link to="/recipes"
+          className="navbar-link nav-text"
+          id="navlink"
+        >
+          More recipe
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

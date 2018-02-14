@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import EditRecipe from './EditRecipe';
 import DeleteRecipe from './DeleteRecipe';
 import EditModal from '../../Include/EditModal';
 import DeleteModal from '../../Include/DeleteModal';
 
 const UserRecipesCard = (props) => {
-  const { recipeData, deleteRecipe, editRecipe,  value, onChange, saveImageToCloud } = props,
+  const {
+      recipeData, deleteRecipe, editRecipe, value, onChange, saveImageToCloud
+    } = props,
     {
       id,
       name,
@@ -15,7 +18,7 @@ const UserRecipesCard = (props) => {
   return (
     <div className="col-sm-6 col-md-6 col-lg-4 pt-4">
       <div className="card">
-        <img className="card-img-top" src={image} alt="" />
+        <img className="card-img-top img-max" src={image} alt="" />
         <div className="card-body">
           <a href="">
             <h4 className="card-title">{name}</h4>
@@ -48,6 +51,15 @@ const UserRecipesCard = (props) => {
       </div>
     </div>
   );
+};
+
+UserRecipesCard.propTypes = {
+  recipeData: PropTypes.arrayOf.isRequired,
+  deleteRecipe: PropTypes.func.isRequired,
+  editRecipe: PropTypes.func.isRequired,
+  // value: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  saveImageToCloud: PropTypes.func.isRequired
 };
 
 export default UserRecipesCard;

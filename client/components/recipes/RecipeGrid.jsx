@@ -37,6 +37,7 @@ class RecipeGrid extends Component {
     if (this.props.recipes.isFetched === false) {
       this.props.getRecipe();
     }
+    document.body.style.backgroundImage = '';
   }
   /**
    * @description update the state of recipe
