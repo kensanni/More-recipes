@@ -16,7 +16,7 @@ import favoriteRecipeAction from '../../actionController/favoriteRecipe';
 class RecipeGrid extends Component {
   /**
    * @description create an instance of RecipeGrid
-   * @param {*} props
+   * @param {props} props
    */
   constructor(props) {
     super(props);
@@ -41,7 +41,7 @@ class RecipeGrid extends Component {
   }
   /**
    * @description update the state of recipe
-   * @param {*} nextProps
+   * @param {nextProps} nextProps
    * @return {*} updated recipe state
    */
   componentWillReceiveProps(nextProps) {
@@ -55,7 +55,7 @@ class RecipeGrid extends Component {
   }
   /**
    * @description upvote a recipe
-   * @param {*} id id of recipe to be upvoted
+   * @param {id} id id of recipe to be upvoted
    * @return {object} object
    */
   upvoteRecipe(id) {
@@ -64,7 +64,7 @@ class RecipeGrid extends Component {
 
   /**
    * @description downvote a recipe
-   * @param {*} id id of recipe to be updated
+   * @param {id} id id of recipe to be updated
    * @return {object} object
    */
   downvoteRecipe(id) {

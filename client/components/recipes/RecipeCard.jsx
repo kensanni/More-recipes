@@ -2,21 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RecipeCard = (props) => {
-  // console.log('Recipe details', props);
   const {
-      recipeData,
-      upvoteRecipe,
-      downvoteRecipe,
-      favoriteRecipe
-    } = props,
-    {
-      id,
-      name,
-      description,
-      upvotes,
-      image,
-      downvotes
-    } = recipeData;
+    recipeData, upvoteRecipe, downvoteRecipe, favoriteRecipe
+  } = props;
+  const {
+    id,
+    name,
+    description,
+    upvotes,
+    image,
+    downvotes
+  } = recipeData;
 
   return (
     <div className="col-sm-6 col-md-4 pt-4 mb-5">

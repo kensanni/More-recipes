@@ -4,10 +4,7 @@ import AddModal from '../../Include/AddModal';
 
 const AddRecipe = (props) => {
   const {
-    onChange,
-    addRecipe,
-    value,
-    saveImageToCloud
+    onChange, addRecipe, value, saveImageToCloud
   } = props;
   return (
     <div className="row header-nav ">

@@ -2,8 +2,8 @@ import React from 'react';
 
 const EditRecipe = (props) => {
   const {
- recipeId, showRecipeDetails, cardId, key 
-} = props;
+    recipeId, showRecipeDetails, cardId, key 
+  } = props;
   return (
     <div>
       <button

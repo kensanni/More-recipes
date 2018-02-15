@@ -27,7 +27,6 @@ class UserRecipes extends Component {
     this.state = {
       recipeData: [],
       isFetched: false,
-      recipe: [],
       name: '',
       isChanged: false
     };
@@ -117,16 +116,10 @@ class UserRecipes extends Component {
   addRecipe(event) {
     event.preventDefault();
     const {
-      name,
-      image,
-      description,
-      ingredient
+      name, image, description, ingredient
     } = this.state;
     const newRecipe = {
-      name,
-      image,
-      description,
-      ingredient
+      name, image, description, ingredient
     };
     this.props.addRecipeAction(newRecipe);
     this.setState({
