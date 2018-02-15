@@ -1,14 +1,18 @@
 import React from 'react';
 
-const EditRecipe = () => {
+const EditRecipe = (props) => {
+  const {
+ recipeId, showRecipeDetails, cardId, key 
+} = props;
   return (
     <div>
       <button
         type="button"
         className="btn"
         data-toggle="modal"
-        data-target="#exampleModal1"
+        data-target={`#${cardId}`}
         data-whatever="@getbootstrap"
+        onClick={() => showRecipeDetails(recipeId)}
       >
         <i className="fa fa-pencil-square-o" aria-hidden="true" />
       </button>

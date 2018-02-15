@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 import EditRecipe from './EditRecipe';
 import DeleteRecipe from './DeleteRecipe';
 import EditModal from '../../Include/EditModal';
@@ -7,7 +7,7 @@ import DeleteModal from '../../Include/DeleteModal';
 
 const UserRecipesCard = (props) => {
   const {
-      recipeData, deleteRecipe, editRecipe, value, onChange, saveImageToCloud
+      recipeData, showRecipeDetails, cardId, deleteRecipe, editRecipe, value, onChange, saveImageToCloud
     } = props,
     {
       id,
@@ -15,6 +15,8 @@ const UserRecipesCard = (props) => {
       description,
       image
     } = recipeData;
+
+    
   return (
     <div className="col-sm-6 col-md-6 col-lg-4 pt-4">
       <div className="card">
@@ -30,12 +32,18 @@ const UserRecipesCard = (props) => {
         <div className="card-footer card-tile">
           <div className="row">
             <div className="col-xs-6 ml-3">
-              <EditRecipe />
+              <EditRecipe 
+                recipeId={id}
+                cardId={cardId}
+                showRecipeDetails={showRecipeDetails}
+              />
               <EditModal
+                cardId={cardId}
                 editRecipe={editRecipe}
                 value={value}
                 onChange={onChange}
                 recipeId={id}
+                recipeData={recipeData}
                 saveImageToCloud={saveImageToCloud}
               />
             </div>
@@ -54,7 +62,7 @@ const UserRecipesCard = (props) => {
 };
 
 UserRecipesCard.propTypes = {
-  recipeData: PropTypes.arrayOf.isRequired,
+  recipeData: PropTypes.objectOf(any).isRequired,
   deleteRecipe: PropTypes.func.isRequired,
   editRecipe: PropTypes.func.isRequired,
   // value: PropTypes.func.isRequired,

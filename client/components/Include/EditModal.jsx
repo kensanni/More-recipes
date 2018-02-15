@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 
 const EditModal = (props) => {
   const {
-    value, onChange, editRecipe, recipeId, saveImageToCloud
+    recipeData, onChange, cardId, value, editRecipe, saveImageToCloud
   } = props;
-  const { name, description, ingredient } = value;
+  const { name, description, ingredient } = recipeData;
   return (
     <div
       className="modal fade"
-      id="exampleModal1"
+      id={cardId}
       tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -28,7 +28,10 @@ const EditModal = (props) => {
               data-dismiss="modal"
               aria-label="Close"
             >
-              <span aria-hidden="true">&times;</span>
+              <span
+                aria-hidden="true"
+              >&times;
+              </span>
             </button>
           </div>
           <div className="modal-body">
@@ -40,7 +43,7 @@ const EditModal = (props) => {
                 <input
                   name="name"
                   onChange={onChange}
-                  value={name}
+                  value={value.isChanged ? value.name : name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -107,7 +110,6 @@ EditModal.propTypes = {
   // value:
   onChange: PropTypes.func.isRequired,
   editRecipe: PropTypes.func.isRequired,
-  recipeId: PropTypes.number.isRequired,
   saveImageToCloud: PropTypes.func.isRequired
 };
 

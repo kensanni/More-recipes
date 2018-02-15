@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
+import { filter } from 'lodash';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
@@ -26,12 +27,16 @@ class UserRecipes extends Component {
     this.state = {
       recipeData: [],
       isFetched: false,
+      recipe: [],
+      name: '',
+      isChanged: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.editRecipe = this.editRecipe.bind(this);
+    this.handleShowRecipe = this.handleShowRecipe.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -92,8 +97,16 @@ class UserRecipes extends Component {
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({
-      [name]: value
+      [name]: value,
+      isChanged: true
     });
+  }
+
+  handleShowRecipe(recipeId) {
+    const recipe = filter(this.state.recipeData, recipe => recipe.id === recipeId)
+    this.setState({
+      recipe
+    })
   }
 
   /**
@@ -142,7 +155,9 @@ class UserRecipes extends Component {
       renderUserRecipes = this.state.recipeData.map((recipeData, key) => (
         <UserRecipesCard
           key={key}
+          cardId={key}
           recipeData={recipeData}
+          showRecipeDetails={this.handleShowRecipe}
           deleteRecipe={this.deleteRecipe}
           editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
