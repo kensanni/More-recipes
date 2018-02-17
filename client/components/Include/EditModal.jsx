@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const EditModal = (props) => {
   const {
-    recipeData, onChange, cardId, value, editRecipe, saveImageToCloud
+    recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud
   } = props;
   const { name, description, ingredient } = recipeData;
   return (
@@ -27,6 +27,7 @@ const EditModal = (props) => {
               className="close"
               data-dismiss="modal"
               aria-label="Close"
+              onClick={handleCloseModal}
             >
               <span
                 aria-hidden="true"
@@ -37,13 +38,13 @@ const EditModal = (props) => {
           <div className="modal-body">
             <form>
               <div className="form-group">
-                <label htmlFor="recipient-name" className="col-form-label">
+                <label htmlFor="recipient-name" id="recipient-name" className="col-form-label">
                   Name
                 </label>
                 <input
                   name="name"
                   onChange={onChange}
-                  value={value.isChanged ? value.name : name}
+                  value={value.isChanged ? value.name : name || ''}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -56,7 +57,7 @@ const EditModal = (props) => {
                 <textarea
                   name="description"
                   onChange={onChange}
-                  value={description}
+                  value={value.isChanged ? value.description : description || ''}
                   className="form-control"
                   id="message-text"
                 />
@@ -70,7 +71,7 @@ const EditModal = (props) => {
                   type="text"
                   name="ingredient"
                   onChange={onChange}
-                  value={ingredient}
+                  value={value.isChanged ? value.ingredient : ingredient || ''}
                   className="form-control"
                 />
               </div>
@@ -89,13 +90,14 @@ const EditModal = (props) => {
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
+              onClick={handleCloseModal}
             >
               Close
             </button>
             <button
               type="button"
               className="btn btn-orange"
-              onClick={() => editRecipe(recipeId, recipeData)}
+              onClick={editRecipe}
             >
               Update recipe
             </button>

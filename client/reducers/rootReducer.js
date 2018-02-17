@@ -7,6 +7,7 @@ import getUserRecipeReducer from './getUserRecipeReducer';
 import deleteRecipeReducer from './deleteRecipeReducer';
 import editRecipeReducer from './editRecipeReducer';
 import saveImageToCloud from './saveImageToCloudReducer';
+import getUserFavoriteRecipeReducer from './getUserFavoriteRecipeReducer';
 
 const rootReducer = combineReducers({
   signupReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   addRecipeReducer,
   deleteRecipeReducer,
   editRecipeReducer,
-  saveImageToCloud
+  saveImageToCloud,
+  getUserFavoriteRecipeReducer
 });
 
 export default rootReducer;

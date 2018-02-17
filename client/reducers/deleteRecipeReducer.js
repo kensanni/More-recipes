@@ -23,7 +23,7 @@ const deleteRecipeReducer = (state = initialState, action) => {
       return [{
         isDeleted: action.isDeleted,
         responseMessage: action.responseMessage,
-        recipeId: null,
+        recipeId: action.recipeId,
         errorMessage: '',
       },
       ...state,

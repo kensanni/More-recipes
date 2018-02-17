@@ -4,7 +4,7 @@ export const GET_USER_RECIPE_ERROR = 'GET_USER_RECIPE_ERROR';
 
 export const getUserRecipeRequest = () => ({
   type: GET_USER_RECIPE_REQUEST,
-  isFetched: false,
+  isFetched: false
 });
 export const getUserRecipeSuccessful = recipeData => ({
   type: GET_USER_RECIPE_SUCCESSFUL,

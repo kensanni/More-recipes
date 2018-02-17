@@ -7,6 +7,15 @@ import signUpAction from '../../../actionController/signup';
 import Form from '../../signupPage/Form';
 import backgroundImage from '../../../public/images/recipe-img-bg.jpeg';
 
+/**
+ * @class SignUp
+ * @description Create user account
+ */
+function increment(event) {
+  const { name, value } = event.target;
+  console.log('name:', value);
+  return { [name]: value };
+}
 
 /**
  * @class SignUp
@@ -59,10 +68,7 @@ class SignUp extends Component {
    * @memberof SignUp
    */
   handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    this.setState(increment(event));
   }
   /**
    *@description Sign up a user when form is submiied

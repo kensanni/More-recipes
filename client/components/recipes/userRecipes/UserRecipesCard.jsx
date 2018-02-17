@@ -14,7 +14,8 @@ const UserRecipesCard = (props) => {
     editRecipe,
     value,
     onChange,
-    saveImageToCloud
+    saveImageToCloud,
+    handleCloseModal
   } = props;
   const {
     id, name, description, image
@@ -46,6 +47,7 @@ const UserRecipesCard = (props) => {
                 onChange={onChange}
                 recipeId={id}
                 recipeData={recipeData}
+                handleCloseModal={handleCloseModal}
                 saveImageToCloud={saveImageToCloud}
               />
             </div>
