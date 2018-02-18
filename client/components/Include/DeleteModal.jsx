@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description functional component to render the delete recipe confirmation modal
+ *
+ * @param {props} props
+ *
+ * @returns {JSX} JSX
+ */
 const DeleteModal = (props) => {
   const { deleteRecipe, recipeId } = props;
   return (
     <div
       className="modal fade"
-      id="exampleModal10"
+      id={`deleteModal-${recipeId}`}
       tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"

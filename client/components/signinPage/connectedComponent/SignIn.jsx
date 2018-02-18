@@ -8,12 +8,14 @@ import signInAction from '../../../actionController/signin';
 
 /**
  * @class SignIn
+ *
  * @description Log in existing Users
  */
 class SignIn extends Component {
   /**
    * @description create an instance of Signin
-   * @param {*} props
+   *
+   * @param {props} props
    */
   constructor(props) {
     super(props);
@@ -25,17 +27,27 @@ class SignIn extends Component {
   }
   /**
    * @description mount - mount background image
-   * @return {image} returns an image
+   *
+   * @returns {undefined} mount an image in the background
    */
   componentWillMount() {
-    /* eslint-disable no-undef */
     document.body.style.backgroundImage = `url(${backgroundImage})`;
   }
 
   /**
-   * @description
-   * @param {*} nextProps
-   * @return {null} null
+   * @description remove background image before redirecting to a new page
+   */
+  componentWillUnmount() {
+    document.body.style.backgroundImage = '';
+  }
+  
+  component
+  /**
+   * @description update the state of error message and redirect to a new page
+   *
+   * @param {nextProps} nextProps
+   *
+   * @returns {object} object
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.signinResponse.isAuthenticated) {
@@ -51,8 +63,11 @@ class SignIn extends Component {
 
   /**
    * @description Handles the input value changes
-   * @param {*} event
-   * @return {*} null
+   *
+   * @param {event} event
+   *
+   * @returns {object} object
+   *
    * @memberof SignIn
    */
   handleChange(event) {
@@ -65,8 +80,12 @@ class SignIn extends Component {
 
   /**
    * @description log a user in when form is submitted
-   * @param {*} event
-   * @return {*} n
+   *
+   * @param {event} event
+   *
+   * @returns {undefined} calls signInAction
+   *;
+   * @memberof SignIn
    */
   handleFormSubmit(event) {
     event.preventDefault();
@@ -76,7 +95,8 @@ class SignIn extends Component {
 
   /**
    * @description render - renders the class component
-   * @return {object} returns an object
+   *
+   * @returns {JSX} returns JSX
    */
   render() {
     return (
@@ -95,6 +115,13 @@ SignIn.propTypes = {
   history: PropTypes.objectOf(any).isRequired,
 };
 
+/**
+ * @description make state available to sigIn class as props
+ *
+ * @param {state} state
+ *
+ * @returns {object} object
+ */
 const mapStateToProps = state => ({
   signinResponse: state.signinReducer[0],
 });

@@ -1,5 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
+
+/**
+ * @description recipe card
+ *
+ * @param {props} props
+ *
+ * @returns {JSX} return JSX
+ */
 
 const RecipeCard = (props) => {
   const {
@@ -58,7 +66,7 @@ const RecipeCard = (props) => {
 };
 
 RecipeCard.propTypes = {
-  // recipeData: PropTypes.arrayOf.isRequired,
+  recipeData: PropTypes.objectOf(any).isRequired,
   upvoteRecipe: PropTypes.func.isRequired,
   downvoteRecipe: PropTypes.func.isRequired,
   favoriteRecipe: PropTypes.func.isRequired

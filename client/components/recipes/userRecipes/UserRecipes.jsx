@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { filter } from 'lodash';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
@@ -12,15 +13,16 @@ import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 
-
 /**
  * @class UserRecipes
+ *
  * @description UserRecipes
  */
 class UserRecipes extends Component {
   /**
    * @description create an instance of UserRecipes
-   * @param {*} props
+   *
+   * @param {props} props
    */
   constructor(props) {
     super(props);
@@ -36,11 +38,14 @@ class UserRecipes extends Component {
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.editRecipe = this.editRecipe.bind(this);
     this.handleShowRecipe = this.handleShowRecipe.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
-   * @param {*} props
-   * @return {*} return all recipes
+   *
+   * @param {props} props
+   *
+   * @returns {undefined} return all recipes
    */
   componentDidMount() {
     if (this.props.recipes.isFetched === false) {
@@ -50,8 +55,10 @@ class UserRecipes extends Component {
 
   /**
    * @description update the state of user recipes
-   * @param {*} nextProps
-   * @return {*} updated user recipe
+   *
+   * @param {nextProps} nextProps
+   *
+   * @return {undefined} updated user recipe
    */
   componentWillReceiveProps(nextProps) {
     const { recipeImageUrl, recipes } = nextProps;
@@ -69,29 +76,36 @@ class UserRecipes extends Component {
     }
   }
   /**
-   * @description ui
-   * @param {recipeData id} recipeData id
-   * @return {null} l
+   * @description function to edit a recipe
+   *
+   * @param {id} id id of recipe to be edited
+   *
+   * @param {recipeData} recipeData recipe data to be sent to the database
+   *
+   * @returns {undefined} calls editRecipeAction
    */
   editRecipe(id, recipeData) {
-    console.log("@@@@@@@@@@@@@@", recipeData);
-    event.preventDefault();
+    console.log('I got here', id, recipeData);
     this.props.editRecipeAction(id, recipeData);
   }
 
   /**
-   * @description ui
-   * @param {id} id
-   * @return {null} l
+   * @description function to delete a recipe
+   *
+   * @param {id} id id of recipe to be deleted
+   *
+   * @returns {undefined} calls the delete recipe action
    */
   deleteRecipe(id) {
     this.props.deleteRecipeAction(id);
   }
 
   /**
-   * @description ui
+   * @description set the state of value inputs on form
+   *
    * @param {event} event
-   * @return {null} l
+   *
+   * @returns {undefined} set the state of value inputs on form
    */
   handleChange(event) {
     const { name, value } = event.target;
@@ -101,17 +115,26 @@ class UserRecipes extends Component {
     });
   }
 
+  /**
+   * @description get the state of recipe to be edited and display it on the edit form
+   *
+   * @param {recipeId} recipeId
+   *
+   * @returns {object} object
+   */
   handleShowRecipe(recipeId) {
-    const recipe = filter(this.state.recipeData, recipe => recipe.id === recipeId)
+    const recipe = filter(this.state.recipeData, filterRecipe => filterRecipe.id === recipeId);
     this.setState({
       recipe
-    })
+    });
   }
 
   /**
-   * @description ui
+   * @description function to add a recipe
+   *
    * @param {event} event
-   * @return {null} l
+   *
+   * @returns {undefined} calls add recipe action
    */
   addRecipe(event) {
     event.preventDefault();
@@ -128,9 +151,11 @@ class UserRecipes extends Component {
   }
 
   /**
-   * @description ui
+   * @description upload Image to cloud
+   *
    * @param {event} event
-   * @return {null} l
+   *
+   * @returns {undefined} call saveImageToCloudAction to save images
    */
   saveImageToCloud(event) {
     const image = event.target.files[0];
@@ -138,16 +163,28 @@ class UserRecipes extends Component {
       this.props.saveImageToCloudAction(image);
     }
   }
+
+  /**
+   * @description set the state of recipe data whwn form is closed
+   * @returns {undefined} set state of isChanged
+   */
+  handleCloseModal() {
+    this.setState({
+      isChanged: false
+    });
+  }
+
   /**
    * @description render user recipes
-   * @return {*} wfdgsfd
+   *
+   * @returns {JSX} JSX
    */
   render() {
     let renderUserRecipes = <h1>No recipes in your catalog</h1>;
     if (this.state.isFetched) {
       renderUserRecipes = this.state.recipeData.map((recipeData, key) => (
         <UserRecipesCard
-          key={key}
+          key={recipeData.id}
           cardId={key}
           recipeData={recipeData}
           showRecipeDetails={this.handleShowRecipe}
@@ -155,6 +192,7 @@ class UserRecipes extends Component {
           editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
           value={this.state}
+          handleCloseModal={this.handleCloseModal}
           onChange={this.handleChange}
           saveImageToCloud={this.saveImageToCloud}
         />
@@ -188,21 +226,30 @@ UserRecipes.propTypes = {
   deleteRecipeAction: PropTypes.func.isRequired,
   editRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
-  // recipeImageUrl: PropTypes.string.isRequired,
+  recipeImageUrl: PropTypes.string.isRequired,
   saveImageToCloudAction: PropTypes.func.isRequired,
-  // userId: PropTypes.objectOf(any).isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
+/**
+ * @description allow state to be available to UserRecipes class as props
+ * @param {state} state
+ * @returns {object} object
+ */
 const mapStateToProps = state => ({
   recipes: state.getUserRecipeReducer[0],
   userId: state.signinReducer[0].userData.id,
   recipeImageUrl: state.saveImageToCloud[0].image
 });
 
-export default connect(mapStateToProps, {
-  getUserRecipe,
-  addRecipeAction,
-  deleteRecipeAction,
-  editRecipeAction,
-  saveImageToCloudAction
-})(UserRecipes);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    getUserRecipe,
+    addRecipeAction,
+    deleteRecipeAction,
+    editRecipeAction,
+    saveImageToCloudAction
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);

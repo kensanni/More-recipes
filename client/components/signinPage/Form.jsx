@@ -1,18 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import PropTypes, { any } from 'prop-types';
 import avatar from '../../public/images/avatar.png';
 
+/**
+ * @description functional component for rendering signIn form
+ *
+ * @param {props} props
+ *
+ * @returns {JSX} return JSX
+ */
 const Form = (props) => {
-  const { onChange, handleSubmit } = props;
+  const { onChange, handleSubmit, value } = props;
+  const { username, password, responseMessage } = value;
   return (
-    <div className="pt-5 mt-5" style={{ textAlign: 'center' }}>
+    <div className="pt-5 mt-5 text-center">
       <form className="m-x-auto app-login-form card-login">
         <h1 className="signin-text"> More-recipe</h1>
         <section className="">
           <img className="img-fluid rounded-circle img-size" src={avatar} alt="" />
         </section>
         <div className="error-message">
-          { props.value.responseMessage && `*${props.value.responseMessage}*`}
+          { responseMessage }
         </div>
         <section className="pb-4 pt-3">
           <input
@@ -21,7 +30,7 @@ const Form = (props) => {
             placeholder="Username"
             onChange={onChange}
             type="name"
-            value={props.value.username}
+            value={username || ''}
           />
         </section>
         <section className="pb-4">
@@ -31,7 +40,7 @@ const Form = (props) => {
             placeholder="Password"
             onChange={onChange}
             type="password"
-            value={props.value.password}
+            value={password || ''}
           />
         </section>
         <div>
@@ -43,13 +52,13 @@ const Form = (props) => {
           </button>
         </div>
         <div className="pt-2 pb-4 text-align">
-          <a href="Forgotpassword" id="text-dec">Forgotten your password?</a>
+          <a href="Forgotpassword">Forgotten your password?</a>
         </div>
         <div>
           <hr />
         </div>
         <footer>
-          <a href="signup" id="text-dec">Create Account</a>
+          <Link to="/signup">Create Account</Link>
         </footer>
       </form>
     </div>
@@ -59,7 +68,7 @@ const Form = (props) => {
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  // value: PropTypes.objectOf.isRequired,
+  value: PropTypes.objectOf(any).isRequired,
 };
 
 export default Form;

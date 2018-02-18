@@ -1,6 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 
+/**
+ * @description functional component to render modal for adding recipes
+ *
+ * @param {props} props
+ *
+ * @returns {JSX} return JSX
+ */
 const AddModal = (props) => {
   const {
     onChange, value, saveImageToCloud, addRecipe
@@ -110,7 +117,7 @@ AddModal.propTypes = {
   addRecipe: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saveImageToCloud: PropTypes.func.isRequired,
-  // value
+  value: PropTypes.objectOf(any).isRequired
 };
 
 

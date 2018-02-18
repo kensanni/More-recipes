@@ -1,18 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import PropTypes, { any } from 'prop-types';
 
+/**
+ * @description functional component for rendering signUp form
+ *
+ * @param {props} props
+ *
+ * @returns {JSX} return JSX
+ */
 const Form = (props) => {
-  const { onChange, onFocus, handleSubmit } = props;
+  const {
+    onChange, handleSubmit, value
+  } = props;
+  const {
+    name, username, email, password, confirmPassword, responseMessage
+  } = value;
   return (
     <div className="container form-bg">
-      <div className="pt-5" style={{ textAlign: 'center' }}>
+      <div className="pt-5 text-center">
         <form className="m-x-auto app-login-form card-login">
           <h1 className="signin-text"> More-recipe</h1>
           <section className="signin-text">
             <h3>Create an account</h3>
           </section>
           <div className="error-message">
-            { props.value.responseMessage && `*${props.value.responseMessage}*`}
+            { responseMessage }
           </div>
           <section className="pb-4 pt-3">
             <input
@@ -20,8 +33,7 @@ const Form = (props) => {
               className="form-control"
               placeholder="Name"
               onChange={onChange}
-              onFocus={onFocus}
-              value={props.value.name}
+              value={name || ''}
               type="text"
               required
             />
@@ -32,8 +44,7 @@ const Form = (props) => {
               className="form-control"
               placeholder="Username"
               onChange={onChange}
-              onFocus={onFocus}
-              value={props.value.username}
+              value={username || ''}
               type="text"
               required
             />
@@ -45,8 +56,7 @@ const Form = (props) => {
               placeholder="Email"
               type="email"
               onChange={onChange}
-              onFocus={onFocus}
-              value={props.value.email}
+              value={email || ''}
               required
             />
           </section>
@@ -57,8 +67,7 @@ const Form = (props) => {
               placeholder="Password"
               type="password"
               onChange={onChange}
-              onFocus={onFocus}
-              value={props.value.password}
+              value={password || ''}
               required
             />
           </section>
@@ -69,8 +78,7 @@ const Form = (props) => {
               placeholder="Confirm password"
               type="password"
               onChange={onChange}
-              onFocus={onFocus}
-              value={props.value.confirmPassword}
+              value={confirmPassword || ''}
               required
             />
           </section>
@@ -86,7 +94,7 @@ const Form = (props) => {
                 > Policy
                 </a>
                 <span>  and  </span>
-                <a href="terms" id="text-dec">
+                <a href="terms">
                   Terms &amp; Conditions
                 </a>
               </small>
@@ -100,14 +108,14 @@ const Form = (props) => {
               Create Account
             </button>
           </div>
-          <div style={{ textAlign: 'left' }}>
+          <div className="text-left">
             <a href="f" id="text-dec">Forgotten your password?</a>
           </div>
           <div>
             <hr />
           </div>
           <footer>
-            <a href="signin">Sign In</a>
+            <Link to="/signin">Sign In</Link>
           </footer>
         </form>
       </div>
@@ -117,8 +125,8 @@ const Form = (props) => {
 
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
-  onFocus: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  value: PropTypes.objectOf(any).isRequired,
 };
 
 export default Form;

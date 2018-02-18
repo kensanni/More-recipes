@@ -1,8 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+/**
+ * @description function component to render edit recipe button
+ *
+ * @param {props} props
+ *
+ * @returns {JSX} return JSX
+ */
 const EditRecipe = (props) => {
   const {
-    recipeId, showRecipeDetails, cardId, key 
+    recipeId, showRecipeDetails, cardId,
   } = props;
   return (
     <div>
@@ -18,6 +26,12 @@ const EditRecipe = (props) => {
       </button>
     </div>
   );
+};
+
+EditRecipe.propTypes = {
+  recipeId: PropTypes.number.isRequired,
+  showRecipeDetails: PropTypes.func.isRequired,
+  cardId: PropTypes.number.isRequired
 };
 
 export default EditRecipe;

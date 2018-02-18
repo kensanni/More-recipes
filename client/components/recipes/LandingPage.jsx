@@ -1,18 +1,21 @@
 import React from 'react';
-import IndexHeader from '../common/IndexHeader';
+import Header from '../common/Header';
 import Carousel from '../Include/carousel';
 import IndexMain from '../Include/IndexMain';
 import IndexFooter from '../common/IndexFooter';
 
-const LandingPage = () => {
-  return (
-    <div>
-      <IndexHeader />
-      <Carousel />
-      <IndexMain />
-      <IndexFooter />
-    </div>
-  );
-};
+/**
+ * @description render landing page
+ *
+ * @returns {JSX} return JSX
+ */
+const LandingPage = () => ((
+  <div>
+    <Header />
+    <Carousel />
+    <IndexMain />
+    <IndexFooter />
+  </div>
+));
 
 export default LandingPage;

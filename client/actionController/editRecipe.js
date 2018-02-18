@@ -10,7 +10,7 @@ const URL = '/api/v1';
  */
 export default function editRecipe(recipeId, recipeData) {
   return (dispatch) => {
-    dispatch(editRecipeRequest(recipeId));
+    dispatch(editRecipeRequest(recipeId, recipeData));
     console.log("recipeId", recipeId, recipeData);
     axios.put(`${URL}/recipes/${recipeId}`, recipeData)
       .then((recipe) => {

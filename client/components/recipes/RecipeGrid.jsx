@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
+import { bindActionCreators } from 'redux';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import RecipeCard from '../recipes/RecipeCard';
-import getRecipe from '../../actionController/getRecipe';
+import getRecipeAction from '../../actionController/getRecipe';
 import upvoteRecipeAction from '../../actionController/upvoteRecipe';
 import downvoteRecipeAction from '../../actionController/downvoteRecipe';
 import favoriteRecipeAction from '../../actionController/favoriteRecipe';
 
 /**
  * @class RecipeGrid
- * @description Display all recipes on the app
+ *
+ * @description Display all recipeCard on the app
  */
 class RecipeGrid extends Component {
   /**
    * @description create an instance of RecipeGrid
+   *
    * @param {props} props
    */
   constructor(props) {
@@ -30,19 +33,23 @@ class RecipeGrid extends Component {
   }
   /**
    * @description check the state of isFetched and call the get recipe action
-   * @param {*} props
-   * @return {*} return all recipes
+   *
+   * @param {props} props
+   *
+   * @return {undefined} call getRecipe
    */
   componentDidMount() {
+    console.log(this.props.recipes.isFetched);
     if (this.props.recipes.isFetched === false) {
-      this.props.getRecipe();
+      this.props.getRecipeAction();
     }
-    document.body.style.backgroundImage = '';
   }
   /**
    * @description update the state of recipe
+   *
    * @param {nextProps} nextProps
-   * @return {*} updated recipe state
+   *
+   * @return {object} updated recipe state
    */
   componentWillReceiveProps(nextProps) {
     const { recipeData, isFetched } = nextProps.recipes;
@@ -55,8 +62,10 @@ class RecipeGrid extends Component {
   }
   /**
    * @description upvote a recipe
+   *
    * @param {id} id id of recipe to be upvoted
-   * @return {object} object
+   *
+   * @return {undefined} calls upvoteRecipeAction
    */
   upvoteRecipe(id) {
     this.props.upvoteRecipeAction(id);
@@ -64,8 +73,10 @@ class RecipeGrid extends Component {
 
   /**
    * @description downvote a recipe
+   *
    * @param {id} id id of recipe to be updated
-   * @return {object} object
+   *
+   * @return {undefined} calls downvoteRecipeAction
    */
   downvoteRecipe(id) {
     this.props.downvoteRecipeAction(id);
@@ -73,8 +84,10 @@ class RecipeGrid extends Component {
 
   /**
    * @description favorite a recipe
-   * @param {*} id - id of recipe to be favorited
-   * @return {object} object
+   *
+   * @param {id} id - id of recipe to be favorited
+   *
+   * @return {undefined} calls favoriteRecipeAction
    */
   favoriteRecipe(id) {
     this.props.favoriteRecipeAction(id);
@@ -82,14 +95,15 @@ class RecipeGrid extends Component {
 
   /**
    * @description render - display all the recipes
-   * @return {*} return an array
+   *
+   * @return {JSX} return JSX
    */
   render() {
     let renderRecipeGrid = <h1>No recipes</h1>;
     if (this.state.isFetched) {
-      renderRecipeGrid = this.state.recipeData.map((recipeData, key) => (
+      renderRecipeGrid = this.state.recipeData.map(recipeData => (
         <RecipeCard
-          key={key}
+          key={recipeData.id}
           recipeData={recipeData}
           upvoteRecipe={this.upvoteRecipe}
           downvoteRecipe={this.downvoteRecipe}
@@ -112,23 +126,38 @@ class RecipeGrid extends Component {
 }
 
 RecipeGrid.propTypes = {
-  getRecipe: PropTypes.func.isRequired,
+  getRecipeAction: PropTypes.func.isRequired,
   upvoteRecipeAction: PropTypes.func.isRequired,
   downvoteRecipeAction: PropTypes.func.isRequired,
   favoriteRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
 };
 
+/**
+ * @description make state available to recipeGrid as props
+ *
+ * @param {state} state
+ *
+ * @returns {object} object
+ */
 const mapStateToProps = state => ({
   recipes: state.recipeReducer[0]
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getRecipe,
+/**
+ * @description make actions available to recipeGrid as props
+ *
+ * @param {dispatch} dispatch
+ *
+ * @returns {undefined} call bindActionCreators function
+ */
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    getRecipeAction,
     upvoteRecipeAction,
     downvoteRecipeAction,
     favoriteRecipeAction
-  }
-)(RecipeGrid);
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeGrid);

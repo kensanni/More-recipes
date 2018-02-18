@@ -9,22 +9,14 @@ import backgroundImage from '../../../public/images/recipe-img-bg.jpeg';
 
 /**
  * @class SignUp
- * @description Create user account
- */
-function increment(event) {
-  const { name, value } = event.target;
-  console.log('name:', value);
-  return { [name]: value };
-}
-
-/**
- * @class SignUp
+ *
  * @description Create user account
  */
 class SignUp extends Component {
   /**
    * @description create an instance of Signup
-   * @param {*} props
+   *
+   * @param {props} props
    */
   constructor(props) {
     super(props);
@@ -38,17 +30,20 @@ class SignUp extends Component {
   }
 
   /**
-   * @description mount - mount background image
-   * @return {image} returns an image
+   * @description mount background image
+   *
+   * @returns {undefined} mount a background image
    */
   componentWillMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
   }
 
   /**
-   * @description jhj
-   * @param {*} nextProps
-   * @return {*} null
+   * @description redirect user to recipe page and set the state of error messages
+   *
+   * @param {nextProps} nextProps
+   *
+   * @returns {undefined} set the state of response message
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.signupResponse.isAuthenticated) {
@@ -63,17 +58,25 @@ class SignUp extends Component {
 
   /**
    * @description Handles the input value changes
-   * @param {*} event
-   * @return {*} null
+   *
+   * @param {event} event
+   *
+   * @returns {object} object
+   *
    * @memberof SignUp
    */
   handleChange(event) {
-    this.setState(increment(event));
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
   /**
-   *@description Sign up a user when form is submiied
-   * @param {*} event
-   * @return {*} v
+   * @description Sign up a user when form is submitted
+   *
+   * @param {event} event
+   *
+   * @returns {undefined} calls signUpAction
+   *
+   * @memberof SignUp
    */
   handleFormSubmit(event) {
     event.preventDefault();
@@ -87,13 +90,13 @@ class SignUp extends Component {
   }
   /**
    * @description render - renders the class component
-   * @return {object} returns an object
+   *
+   * @returns {JSX} returns jsx
    */
   render() {
     return (
       <Form
         value={this.state}
-        onFocus={this.onFocus}
         onChange={this.handleChange}
         handleSubmit={this.handleFormSubmit}
       />
@@ -106,6 +109,13 @@ SignUp.propTypes = {
   history: PropTypes.objectOf(any).isRequired,
 };
 
+/**
+ * @description make statee available to signUp class as props
+ *
+ * @param {state} state
+ *
+ * @returns {object} object
+ */
 const mapStateToProps = state => ({
   signupResponse: state.signupReducer[0]
 });

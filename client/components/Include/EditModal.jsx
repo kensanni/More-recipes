@@ -1,10 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 
-
+/**
+ * @description function component to render the edit recipe modal
+ *
+ * @param {props} props
+ *
+ * @returns {JSX} return JSX
+ */
 const EditModal = (props) => {
   const {
-    recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud
+    recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud, recipeId
   } = props;
   const { name, description, ingredient } = recipeData;
   return (
@@ -109,10 +115,13 @@ const EditModal = (props) => {
 };
 
 EditModal.propTypes = {
-  // value:
+  value: PropTypes.objectOf(any).isRequired,
   onChange: PropTypes.func.isRequired,
   editRecipe: PropTypes.func.isRequired,
-  saveImageToCloud: PropTypes.func.isRequired
+  saveImageToCloud: PropTypes.func.isRequired,
+  handleCloseModal: PropTypes.func.isRequired,
+  recipeData: PropTypes.objectOf(any).isRequired,
+  cardId: PropTypes.number.isRequired
 };
 
 export default EditModal;
