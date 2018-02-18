@@ -7,10 +7,11 @@ import { downvoteRecipeRequest, decrementDownvote, incrementDownvote, downvoteRe
 const URL = '/api/v1';
 
 /**
- * @description downvote recipe's action
+ * @description action creator for downvoting a recipe
  *
- * @param {*} recipeId
- * @return {*} Redux action to be dispatch to the store
+ * @param {recipeId} recipeId
+ *
+ * @return {undefined} Redux action to be dispatch to the store
  */
 export default function downvoteRecipe(recipeId) {
   const token = window.localStorage.getItem('token');

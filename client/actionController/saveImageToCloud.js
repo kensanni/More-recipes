@@ -2,9 +2,11 @@ import axios from 'axios';
 import { saveImageToCloudRequest, saveImageToCloudSuccessful, saveImageToCloudError } from '../actions/saveImageToCloud';
 
 /**
- * @description action controller for uploading recipe image to cloud
- * @param {*} image
- * @return {*} Redux action to be dispatch to the store
+ * @description action controller for uploading recipe image to cloudinary
+ *
+ * @param {image} image
+ *
+ * @return {undefined} Redux action to be dispatch to the store
  */
 export default function saveImageToCloud(image) {
   const cloudinaryUrl = process.env.REQUEST;
@@ -19,7 +21,6 @@ export default function saveImageToCloud(image) {
     dispatch(saveImageToCloudRequest(formData));
     axios.post(cloudinaryUrl, formData)
       .then((res) => {
-        console.log('image', res);
         const token = localStorage.getItem('token');
         axios.defaults.headers.common['x-access-token'] = token;
         const { secure_url } = res.data;

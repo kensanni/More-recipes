@@ -4,9 +4,11 @@ import { getUserRecipeRequest, getUserRecipeSuccessful, getUserRecipeError } fro
 const URL = '/api/v1';
 
 /**
- * @description get recipes belonging to a particular user
- * @param {*} userId
- * @returns {*} redux action to be dispatch to the store
+ * @description action creator for adding recipe
+ *
+ * @param {userId} userId
+ *
+ * @returns {undefined} redux action to be dispatch to the store
  */
 export default function getUserRecipe(userId) {
   return (dispatch) => {

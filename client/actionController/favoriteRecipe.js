@@ -6,8 +6,10 @@ const URL = '/api/v1';
 
 /**
  * @description action controller for favoriting a recipe
- * @param {*} recipeId
- * @return {*} Redux action to be dispatch to the store
+ *
+ * @param {recipeId} recipeId
+ *
+ * @returns {undefined} Redux action to be dispatch to the store
  */
 export default function favoriteRecipe(recipeId) {
   const token = window.localStorage.getItem('token');

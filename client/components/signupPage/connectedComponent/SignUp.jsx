@@ -39,6 +39,15 @@ class SignUp extends Component {
   }
 
   /**
+   * @description mount background image
+   *
+   * @returns {undefined} mount a background image
+   */
+  componentDidMount() {
+    document.body.style.backgroundImage = `url(${backgroundImage})`;
+  }
+
+  /**
    * @description redirect user to recipe page and set the state of error messages
    *
    * @param {nextProps} nextProps
@@ -54,6 +63,15 @@ class SignUp extends Component {
         responseMessage: nextProps.signupResponse.errorMessage
       });
     }
+  }
+
+  /**
+   * @description remove background image before redirecting to a new page
+   *
+   * @returns {undefined} remove background Image
+   */
+  componentWillUnmount() {
+    document.body.style.backgroundImage = '';
   }
 
   /**

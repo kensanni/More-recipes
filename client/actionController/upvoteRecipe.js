@@ -7,8 +7,10 @@ import { upvoteRecipeRequest, upvoteRecipeSuccess, upvoteRecipeError, incrementU
 const URL = '/api/v1';
 /**
  * @description action controller for upvoting recipes
- * @param {*} recipeId  recipe to be upvoted
- * @return {object} Redux action to be dispatched to the store
+ *
+ * @param {number} recipeId  recipe to be upvoted
+ *
+ * @return {undefined} Redux action to be dispatched to the store
  */
 export default function upvoteRecipe(recipeId) {
   const token = window.localStorage.getItem('token');

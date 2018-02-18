@@ -4,9 +4,11 @@ import { getRecipeRequest, getRecipeSuccess, getRecipeError } from '../actions/g
 const URL = '/api/v1';
 
 /**
- * @description get all recipe's action
- * @param {*} recipe
- * @return {*} Redux action to be dispatch to the store
+ * @description action creator for getting all recipes
+ *
+ * @param {recipe} recipe
+ *
+ * @return {undefined} Redux action to be dispatch to the store
  */
 export default function getRecipe() {
   return (dispatch) => {

@@ -6,9 +6,11 @@ import { signinError, signinRequest, signinSuccess } from '../actions/signinActi
 const URL = '/api/v1';
 
 /**
- * @description signin user's actiom
- * @param {*} userdata user login details
- * @return {object} Redux action to be dispatch to the store
+ * @description action creator for users to signin
+ *
+ * @param {userdata} userdata user login details
+ *
+ * @return {undefined} Redux action to be dispatch to the store
  */
 export default function signin(userdata) {
   return (dispatch) => {
@@ -28,13 +30,20 @@ export default function signin(userdata) {
   };
 }
 
-export const signInFromLocalStorage = () => {
-  return (dispatch) => {
+
+/**
+ * @description action controller to save the userId to store
+ *
+ * @returns {undefined} dispatch signinsuccess action
+ */
+export const signInFromLocalStorage = () => (
+  (dispatch) => {
     const token = localStorage.getItem('token');
     if (token) {
       const userinfo = jwt.decode(token);
       Helper.setAuthorizationToken(token);
       dispatch(signinSuccess('Sign in successful.', userinfo));
     }
-  };
-}
+  }
+);
+

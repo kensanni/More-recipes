@@ -7,9 +7,11 @@ const URL = '/api/v1';
 
 
 /**
-   * @description register user's action
+   * @description action controller to register a new user
+   *
    * @param {object} userdata user registration details
-   * @return {object} Redux action to be dispatched to the store
+   *
+   * @return {undefined} Redux action to be dispatched to the store
    */
 export default function signup(userdata) {
   return (dispatch) => {

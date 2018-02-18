@@ -34,6 +34,10 @@ class SignIn extends Component {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
   }
 
+  componentDidMount() {
+    document.body.style.backgroundImage = `url(${backgroundImage})`;
+  }
+
   /**
    * @description remove background image before redirecting to a new page
    */
@@ -41,7 +45,6 @@ class SignIn extends Component {
     document.body.style.backgroundImage = '';
   }
   
-  component
   /**
    * @description update the state of error message and redirect to a new page
    *

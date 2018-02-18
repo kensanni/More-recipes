@@ -5,12 +5,13 @@ import { addRecipeRequest, addRecipeError, addRecipeSuccess } from '../actions/a
 const URL = '/api/v1';
 
 /**
- * @description add recipe action
- * @param {*} recipeData
- * @return {*} redux action to be dispatch to the store
+ * @description action creator for adding recipe
+ *
+ * @param {recipeData} recipeData
+ *
+ * @returns {undefinded} redux action to be dispatch to the store
  */
 export default function addRecipe(recipeData) {
-  console.log(recipeData.image);
   return (dispatch) => {
     dispatch(addRecipeRequest(recipeData));
     axios.post(`${URL}/recipes`, recipeData)

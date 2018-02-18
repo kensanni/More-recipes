@@ -4,14 +4,17 @@ import { editRecipeRequest, editRecipeSuccesful, editRecipeError } from '../acti
 const URL = '/api/v1';
 
 /**
- * @description edit recipe's action
- * @param {*} recipeId
- * @return {*} Redux action to be dispatch to the store
+ * @description action creator for editing recipe
+ *
+ * @param {recipeId} recipeId
+ *
+ * @param {recipeData} recipeData
+ *
+ * @returns {undefined} Redux action to be dispatch to the store
  */
 export default function editRecipe(recipeId, recipeData) {
   return (dispatch) => {
     dispatch(editRecipeRequest(recipeId, recipeData));
-    console.log("recipeId", recipeId, recipeData);
     axios.put(`${URL}/recipes/${recipeId}`, recipeData)
       .then((recipe) => {
         const { message } = recipe.data;
