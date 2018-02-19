@@ -29,7 +29,6 @@ class Recipe {
     });
 
     return res.status(201).send({
-      success: true,
       message: 'Recipe successfully created',
       data: addRecipes
     });
@@ -54,7 +53,6 @@ class Recipe {
       image: image || findRecipe.image,
     });
     return res.status(200).send({
-      success: true,
       message: 'Recipe updated successfully',
       data: findRecipe
     });
@@ -79,15 +77,13 @@ class Recipe {
 
     if (getAllRecipes.length < 1) {
       return res.status(404).send({
-        success: false,
         message: 'No Recipe found'
       });
     }
 
     const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
     return res.status(200).send({
-      success: true,
-      data: updatedRecipes
+      recipesData: updatedRecipes
     });
   }
   /**
@@ -113,7 +109,6 @@ class Recipe {
 
     if (recipe.length < 1) {
       return res.status(404).send({
-        success: false,
         message: 'No Recipe found'
       });
     }
@@ -122,8 +117,45 @@ class Recipe {
     const updatedRecipe = await updateRecipeAttributes(recipe);
 
     return res.status(200).send({
-      success: true,
       data: updatedRecipe
+    });
+  }
+  /**
+   * @description get user recipes
+   * @param {*} req HTTP request object
+   * @param {*} res HTTP responds object
+   * @return {JSON} return a json object
+   */
+  static async getUserRecipes(req, res) {
+    const userId = req.decoded.id;
+    const id = parseInt(req.params.userId, 10);
+
+    if (userId !== id) {
+      return res.status(401).send({
+        message: 'Access denied',
+      });
+    }
+
+    const userRecipe = await Recipes.findAll({
+      where: { userId },
+      include: [{
+        model: model.Reviews,
+        attributes: ['review'],
+        include: [{
+          model: model.Users,
+          attributes: ['username', 'updatedAt'],
+        }]
+      }],
+    });
+
+    if (userRecipe.length < 1) {
+      return res.status(404).send({
+        message: 'No Recipe found'
+      });
+    }
+
+    return res.status(200).send({
+      recipesData: userRecipe
     });
   }
   /**
@@ -142,14 +174,12 @@ class Recipe {
 
     if (!findRecipe) {
       return res.status(403).send({
-        success: false,
         message: 'Access denied, you are not allowed to delete this recipe'
       });
     }
 
     await findRecipe.destroy();
     return res.status(200).send({
-      success: true,
       message: 'Recipe successfully deleted'
     });
   }

@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './recipes/LandingPage';
-import SignUp from './recipes/SignUp';
-import SignIn from './recipes/SignIn';
+import SignUp from '../components/signupPage/connectedComponent/SignUp';
 
 const App = () => {
   return (
@@ -11,7 +10,6 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/signin" component={SignIn} />
         </Switch>
       </div>
     </Router>
