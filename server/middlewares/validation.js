@@ -13,49 +13,6 @@ const {
  */
 class Validation {
   /**
-   * @description check user input
-   * @param {object} req - request
-   * @param  {object} res - response
-   * @param  {object} next - next
-   * @returns {JSON} Returns a JSON object
-   */
-  static checkUserInput(req, res, next) {
-    const {
-      firstname, lastname, username, email, password
-    } = req.body;
-    if (!firstname) {
-      return res.status(400).send({
-        success: false,
-        message: 'Firstname field cannot be empty'
-      });
-    }
-    if (!lastname) {
-      return res.status(400).send({
-        success: false,
-        message: 'Lastname field cannot be empty'
-      });
-    }
-    if (!username) {
-      return res.status(400).send({
-        success: false,
-        message: 'Username field cannot be empty'
-      });
-    }
-    if (!email) {
-      return res.status(400).send({
-        success: false,
-        message: 'Email field cannot be empty'
-      });
-    }
-    if (!password) {
-      return res.status(400).send({
-        success: false,
-        message: 'Password field cannot be empty'
-      });
-    }
-    next();
-  }
-  /**
    * @description ensure user input matches the correct pattern
    * @param  {object} req - request
    * @param  {object} res - response
@@ -64,11 +21,28 @@ class Validation {
    */
   static validateUserInput(req, res, next) {
     req.checkBody({
+      name: {
+        notEmpty: {
+          options: true,
+          errorMessage: 'name field cannot be empty'
+        },
+        isLength: {
+          options: [{ min: 3 }],
+          errorMessage: 'Name should be atleast 3 character'
+        },
+        matches: {
+          options: [(/^[A-Za-z][^ ]+( [^]+)*$/g)],
+          errorMessage: 'Invalid name, ensure you name contain only alphabets'
+        }
+      },
       username: {
-        notEmpty: true,
+        notEmpty: {
+          options: true,
+          errorMessage: 'Username field cannot be empty'
+        },
         isLength: {
           options: [{ min: 6 }],
-          errMessage: 'User should be atleast 6 characters'
+          errorMessage: 'Username should be atleast 6 characters'
         },
         matches: {
           options: [(/^[A-Za-z0-9]+$/g)],
@@ -76,20 +50,26 @@ class Validation {
         }
       },
       email: {
-        notEmpty: true,
+        notEmpty: {
+          options: true,
+          errorMessage: 'Email field cannot be empty'
+        },
         isEmail: {
           errorMessage: 'Please input a valid Email Adrress'
         }
       },
       password: {
-        notEmpty: true,
+        notEmpty: {
+          options: true,
+          errorMessage: 'Password field cannot be empty'
+        },
         isLength: {
           options: [{ min: 8 }],
           errorMessage: 'Please input a valid password with atleast 8 characters'
         },
         matches: {
           options: [(/^([^ ]+)*$/g)],
-          errorMessage: 'Invalid password,ensure your password contain only uppercase, lowercase and any special character'
+          errorMessage: 'Invalid password,ensure your password contain only uppercase, lowercase or any special character'
         }
       }
     });
@@ -98,11 +78,11 @@ class Validation {
       const allErrors = [];
       errors.forEach((error) => {
         allErrors.push({
-          success: false,
-          error: error.msg,
+          message: error.msg,
+          field: error.param
         });
       });
-      return res.status(400).send(allErrors);
+      return res.status(400).send({ errors: allErrors });
     }
     next();
   }
@@ -121,8 +101,9 @@ class Validation {
     });
     if (findUser) {
       return res.status(409).send({
-        success: false,
-        message: 'Username has already been chosen'
+        errors: [{
+          message: 'Username has already been chosen'
+        }]
       });
     }
     const findEmail = await Users.findOne({
@@ -132,8 +113,9 @@ class Validation {
     });
     if (findEmail) {
       return res.status(409).send({
-        success: false,
-        message: 'Email already exist'
+        errors: [{
+          message: 'Email already exist'
+        }]
       });
     }
     next();
@@ -149,13 +131,16 @@ class Validation {
     const { username, password } = req.body;
     if (!username) {
       return res.status(400).send({
-        success: false,
-        message: 'Username field cannot be empty'
+        errors: [{
+          message: 'Username field cannot be empty'
+        }]
       });
     }
     if (!password) {
       return res.status(400).send({
-        message: 'Password field cannot be empty'
+        errors: [{
+          message: 'Password field cannot be empty'
+        }]
       });
     }
     const findUser = await Users.findOne({
@@ -165,16 +150,18 @@ class Validation {
     });
     if (!findUser) {
       return res.status(400).send({
-        success: false,
-        message: 'Incorrect Login details',
+        errors: [{
+          message: 'Incorrect Login details'
+        }]
       });
     }
     if (bcrypt.compareSync(req.body.password, findUser.password)) {
       next();
     } else {
       res.status(400).send({
-        success: false,
-        message: 'Incorrect Login details',
+        errors: [{
+          message: 'Incorrect Login details'
+        }]
       });
     }
   }
@@ -190,51 +177,14 @@ class Validation {
     const findUserById = await Users.findById(id);
     if (Number.isNaN(parseInt(id, 10))) {
       return res.status(400).send({
-        success: false,
         message: 'UserId parameter should be a number'
       });
     }
     if (!findUserById) {
       return res.status(404).send({
-        success: false,
-        message: 'User doesn\'t exist'
-      });
-    }
-    next();
-  }
-  /**
-   * @description check if recipe input is empty
-   * @param  {object} req - request
-   * @param  {object} res - response
-   * @param  {object} next - next
-   * @returns {JSON} Returns a JSON object
-   */
-  static checkRecipeInput(req, res, next) {
-    const {
-      name, description, ingredient, image
-    } = req.body;
-    if (!name) {
-      return res.status(400).send({
-        success: false,
-        message: 'Name field cannot be empty'
-      });
-    }
-    if (!description) {
-      return res.status(400).send({
-        success: false,
-        message: 'Description field cannot be empty'
-      });
-    }
-    if (!ingredient) {
-      return res.status(400).send({
-        success: false,
-        message: 'ingredient field cannot be empty'
-      });
-    }
-    if (!image) {
-      return res.status(400).send({
-        success: false,
-        message: 'Please upload an image for your recipes'
+        errors: [{
+          message: 'User doesn\'t exist'
+        }]
       });
     }
     next();
@@ -249,24 +199,39 @@ class Validation {
   static validateRecipeInput(req, res, next) {
     req.checkBody({
       name: {
-        notEmpty: true,
+        notEmpty: {
+          options: true,
+          errorMessage: 'Name field cannot be empty'
+        },
         matches: {
           options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
           errorMessage: 'Invalid recipe name'
         }
       },
       description: {
-        notEmpty: true,
+        notEmpty: {
+          options: true,
+          errorMessage: 'Description field cannot be empty'
+        },
         matches: {
           options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
           errorMessage: 'Invalid description format'
         }
       },
       ingredient: {
-        notEmpty: true,
+        notEmpty: {
+          options: true,
+          errorMessage: 'ingredient field cannot be empty'
+        },
         matches: {
           options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
           errorMessage: 'Invalid ingredient format'
+        }
+      },
+      image: {
+        notEmpty: {
+          options: true,
+          errorMessage: 'Please upload an image for your recipes'
         }
       }
     });
@@ -275,11 +240,11 @@ class Validation {
       const allErrors = [];
       errors.forEach((error) => {
         allErrors.push({
-          success: false,
-          error: error.msg,
+          message: error.msg,
+          field: error.param
         });
       });
-      return res.status(400).send(allErrors);
+      return res.status(400).send({ errors: allErrors });
     }
     next();
   }
@@ -294,19 +259,20 @@ class Validation {
     const id = req.params.recipeId;
     if (Number.isNaN(parseInt(id, 10))) {
       return res.status(400).send({
-        success: false,
         message: 'RecipeId parameter should be a number'
       });
     }
     const findRecipeId = await Recipes.findById(id);
     if (!findRecipeId) {
       return res.status(404).send({
-        success: false,
-        message: 'Recipe does not exist in this catalog'
+        errors: [{
+          message: 'Recipe does not exist in this catalog'
+        }]
       });
     }
     next();
   }
+
   /**
    * @description check if reveiw input is valid
    * @param  {object} req - request
@@ -318,8 +284,9 @@ class Validation {
     const { review } = req.body;
     if (!review) {
       return res.status(400).send({
-        success: false,
-        message: 'Please input a review'
+        errors: [{
+          message: 'Please input a review'
+        }]
       });
     }
     next();
@@ -341,8 +308,9 @@ class Validation {
 
     if (recipeName) {
       return res.status(400).send({
-        success: false,
-        message: `you already have a recipe with the name ${req.body.name}`,
+        errors: [{
+          message: `you already have a recipe with the name ${req.body.name}`
+        }]
       });
     }
     next();

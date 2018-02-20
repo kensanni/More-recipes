@@ -25,8 +25,7 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikays',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -38,36 +37,21 @@ describe('Testing User endpoints', () => {
         done();
       });
   });
-  it('Should not create a new User without firstname', (done) => {
+  it('Should not create a new User without name', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: '',
-        lastname: 'sanni',
+        name: '',
         username: 'kennikay',
         email: 'kennikay@example.com',
         password: 'developer',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Firstname field cannot be empty');
-        expect(res).to.have.status(400);
-        done();
-      });
-  });
-  it('Should not create a new User without lastname', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send({
-        firstname: 'kehinde',
-        lastname: '',
-        username: 'kennikay',
-        email: 'kennikay@example.com',
-        password: 'developer',
-        profileImage: 'dummydata'
-      })
-      .end((err, res) => {
-        expect(res.body.message).equal('Lastname field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('name field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -76,15 +60,17 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: '',
         email: 'kennikay@example.com',
         password: 'developer',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Username field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Username field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -93,15 +79,17 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikay',
         email: '',
         password: 'developer',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Email field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Email field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -110,15 +98,17 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: '',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Password field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Password field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -127,8 +117,7 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sanni',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -143,8 +132,7 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikay',
         email: 'kennikay.com',
         password: 'developer',
@@ -159,8 +147,7 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: 'deve',
@@ -175,8 +162,7 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: '   sanni',
         email: 'kennikay@example.com',
         password: 'developer',
@@ -191,8 +177,7 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikay',
         email: 'kennikay@example.com',
         password: '  deve  loper',
@@ -207,15 +192,17 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikays',
         email: 'kennikay@example.com',
         password: 'developer',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Username has already been chosen');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Username has already been chosen');
+        }
         expect(res).to.have.status(409);
         done();
       });
@@ -224,15 +211,17 @@ describe('Testing User endpoints', () => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
-        firstname: 'kehinde',
-        lastname: 'sanni',
+        name: 'kehinde',
         username: 'sannikayz',
         email: 'kennikay@example.com',
         password: 'developer',
         profileImage: 'dummydata'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Email already exist');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Email already exist');
+        }
         expect(res).to.have.status(409);
         done();
       });
@@ -257,7 +246,10 @@ describe('Testing User endpoints', () => {
         password: 'developer'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Username field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Username field cannot be empty');
+        }
         done();
       });
   });
@@ -269,7 +261,10 @@ describe('Testing User endpoints', () => {
         password: ''
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Password field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Password field cannot be empty');
+        }
         done();
       });
   });
@@ -281,7 +276,10 @@ describe('Testing User endpoints', () => {
         password: 'developer'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Incorrect Login details');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Incorrect Login details');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -294,7 +292,10 @@ describe('Testing User endpoints', () => {
         password: 'develo'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Incorrect Login details');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Incorrect Login details');
+        }
         expect(res).to.have.status(400);
         done();
       });

@@ -17,13 +17,12 @@ class User {
    */
   static async signUp(req, res) {
     const {
-      firstname, lastname, username, email, profileImage
+      name, username, email, profileImage
     } = req.body;
     let { password } = req.body;
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     const createUser = await Users.create({
-      firstname,
-      lastname,
+      name,
       username,
       email,
       password,
@@ -35,7 +34,6 @@ class User {
         expiresIn: '3h',
       });
       res.status(201).send({
-        success: true,
         message: 'User created',
         token
       });
@@ -59,9 +57,8 @@ class User {
         expiresIn: '3h',
       });
       res.status(200).send({
-        success: true,
         message: 'Signin successful',
-        token,
+        token
       });
     }
   }

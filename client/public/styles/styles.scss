@@ -15,9 +15,14 @@ $white-color: #fff;
 .chat-image {
   width: 50px;
 }
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-.form-bg {
-  background-image: url(../images/blog-img-01.jpg)
+.error-message {
+  color: red;
+  font-size: 12px;
 }
 
 .img-size {
@@ -182,6 +187,7 @@ a:hover {
 }
 .btn-orange {
   background-color: $main-color;
+  color: $white-color;
 }
 .card-login {
   background-color: $white-color;
@@ -276,3 +282,6 @@ p {
   float: left !important;
 }
 
+.img-max {
+  max-height: 12.06rem;
+}
