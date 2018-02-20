@@ -4,12 +4,19 @@ import thunk from 'redux-thunk';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import rootReducer from '../reducers/rootReducer';
 
-const configureStore = (initialState) => {
-  return createStore(
+/**
+ * @description create redux store that holds the complete state tree of the application
+ *
+ * @param {object} initialState
+ *
+ * @returns {undefined} store that holds the complete state of the app
+ */
+const configureStore = initialState => ((
+  createStore(
     rootReducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunk, reduxImmutableStateInvariant()))
-  );
-};
+  )
+));
 
 export default configureStore;
