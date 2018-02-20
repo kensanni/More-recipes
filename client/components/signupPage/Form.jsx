@@ -5,7 +5,7 @@ import PropTypes, { any } from 'prop-types';
 /**
  * @description functional component for rendering signUp form
  *
- * @param {p} props
+ * @param {object} props
  *
  * @returns {JSX} return JSX
  */

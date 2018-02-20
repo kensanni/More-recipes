@@ -16,7 +16,7 @@ class SignUp extends Component {
   /**
    * @description create an instance of Signup
    *
-   * @param {props} props
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ class SignUp extends Component {
   /**
    * @description redirect user to recipe page and set the state of error messages
    *
-   * @param {nextProps} nextProps
+   * @param {object} nextProps
    *
    * @returns {undefined} set the state of response message
    */
@@ -77,21 +77,20 @@ class SignUp extends Component {
   /**
    * @description Handles the input value changes
    *
-   * @param {void} event
+   * @param {object} event
    *
-   * @returns {object} object
+   * @returns {undefined} call setState
    *
    * @memberof SignUp
    */
   handleChange(event) {
     const { name, value } = event.target;
-    console.log(name, value);
     this.setState({ [name]: value });
   }
   /**
    * @description Sign up a user when form is submitted
    *
-   * @param {void} event
+   * @param {object} event
    *
    * @returns {undefined} calls signUpAction
    *
@@ -131,9 +130,9 @@ SignUp.propTypes = {
 /**
  * @description make state available to signUp class as props
  *
- * @param {state} state
+ * @param {object} state
  *
- * @returns {object} object
+ * @returns {undefined} object
  */
 const mapStateToProps = state => ({
   signupResponse: state.signupReducer[0]
