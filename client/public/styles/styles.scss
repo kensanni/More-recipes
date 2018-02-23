@@ -1,7 +1,15 @@
 $main-color: #723f5f;
 $white-color: #fff;
+$main-font: 'Nunito', 'Dosis',sans-serif;
+$header-font: 'Cardo', 'Sirin Stencil', 'Dosis', serif;
 
 
+body{
+  font-family: $main-font;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: $header-font;
+}
 .m-x-auto {
   margin-right: auto!important;
   margin-left: auto!important;
@@ -195,13 +203,13 @@ a:hover {
 }
 
 .nav-text {
-  font-family: 'Dosis',sans-serif;
+  font-family: $main-font;
   font-size: 22px;
 }
 
 .title {
   color: $main-color;
-  font-family: 'Dosis',sans-serif;
+  font-family: $header-font;
   font-size: 29px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -209,7 +217,7 @@ a:hover {
 
 p {
   color: #515251;
-  font-family: 'Bitter',serif;
+  font-family: $main-font;
   font-size: 18px;
   font-weight: 200;
   line-height: 1.46;
@@ -284,4 +292,8 @@ p {
 
 .img-max {
   max-height: 12.06rem;
+}
+
+.carousel-caption {
+  top: 30%
 }

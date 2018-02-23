@@ -42,23 +42,21 @@ const Carousel = () => ((
             </h3>
           </div>
         </div>
-      </div>
-      <div className="carousel-item">
-        <img
-          className="d-block w-100 img-fluid"
-          src={photo2}
-          alt="Third slide"
-        />
-        <div className="carousel-caption d-none d-md-block">
-          <h3>
+        <div className="carousel-item">
+          <img
+            className="d-block w-100 img-fluid"
+            src={photo2}
+            alt="Third slide"
+          />
+          <div className="carousel-caption d-none d-md-block">
+            <h3>
             More-Recipes is a platform for users
             to share the awesome and exciting recipe ideas t
             hey have invented or learnt
-          </h3>
+            </h3>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
       <a
         className="carousel-control-prev"
         href="#carouselExampleIndicators"

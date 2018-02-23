@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import Helper from '../Helpers/helper';
 import { signupError, signupRequest, signupSuccess } from '../actions/signupAction';
 
@@ -21,7 +20,6 @@ export default function signup(userdata) {
         const { token, message } = res.data;
         localStorage.setItem('token', token);
         Helper.setAuthorizationToken(token);
-        toast.error('Passwords do not match');
         dispatch(signupSuccess(message));
       })
       .catch((error) => {
