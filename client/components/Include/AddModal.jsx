@@ -116,6 +116,7 @@ const AddModal = (props) => {
 AddModal.propTypes = {
   addRecipe: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  saveImageToCloud: PropTypes.func.isRequired,
   value: PropTypes.objectOf(any).isRequired
 };
 

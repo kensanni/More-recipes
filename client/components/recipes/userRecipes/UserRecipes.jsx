@@ -4,6 +4,7 @@ import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import addRecipeAction from '../../../actionController/addRecipe';
 import AddRecipe from './AddRecipe';
+import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
@@ -28,6 +29,7 @@ class UserRecipes extends Component {
       isChanged: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
   }
 
@@ -39,12 +41,17 @@ class UserRecipes extends Component {
    * @return {undefined} updated user recipe
    */
   componentWillReceiveProps(nextProps) {
-    const { recipes } = nextProps;
+    const { recipeImageUrl, recipes } = nextProps;
     const { recipeData, isFetched } = recipes;
     if (recipeData !== this.props.recipes.recipeData) {
       this.setState({
         recipeData,
         isFetched
+      });
+    }
+    if (recipeImageUrl !== this.props.recipeImageUrl) {
+      this.setState({
+        image: recipeImageUrl
       });
     }
   }
@@ -85,6 +92,19 @@ class UserRecipes extends Component {
     });
   }
   /**
+   * @description upload Image to cloud
+   *
+   * @param {event} event
+   *
+   * @returns {undefined} call saveImageToCloudAction to save images
+   */
+  saveImageToCloud(event) {
+    const image = event.target.files[0];
+    if (image) {
+      this.props.saveImageToCloudAction(image);
+    }
+  }
+  /**
    * @description render user recipes
    *
    * @returns {JSX} JSX
@@ -111,6 +131,7 @@ class UserRecipes extends Component {
               value={this.state}
               onChange={this.handleChange}
               addRecipe={this.addRecipe}
+              saveImageToCloud={this.saveImageToCloud}
             />
 
           </div>
@@ -125,6 +146,8 @@ class UserRecipes extends Component {
 }
 UserRecipes.propTypes = {
   addRecipeAction: PropTypes.func.isRequired,
+  recipeImageUrl: PropTypes.string.isRequired,
+  saveImageToCloudAction: PropTypes.func.isRequired,
 };
 
 /**
@@ -134,11 +157,13 @@ UserRecipes.propTypes = {
  */
 const mapStateToProps = state => ({
   userId: state.signinReducer[0].userData.id,
+  recipeImageUrl: state.saveImageToCloud[0].image
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    addRecipeAction
+    addRecipeAction,
+    saveImageToCloudAction
   }, dispatch)
 );
 
