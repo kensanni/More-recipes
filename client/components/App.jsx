@@ -4,6 +4,7 @@ import LandingPage from './recipes/LandingPage';
 import SignUp from '../components/signupPage/connectedComponent/SignUp';
 import SignIn from './signinPage/connectedComponent/SignIn';
 import UserRecipes from './recipes/userRecipes/UserRecipes';
+import RecipeGrid from './recipes/RecipeGrid';
 
 const App = () => ((
   <Router>
@@ -13,6 +14,7 @@ const App = () => ((
         <Route path="/signup" component={SignUp} />
         <Route path="/signin" component={SignIn} />
         <Route path="/profile" component={UserRecipes} />
+        <Route path="/recipes" component={RecipeGrid} />
       </Switch>
     </div>
   </Router>
