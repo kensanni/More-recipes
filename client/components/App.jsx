@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './recipes/LandingPage';
 import SignUp from '../components/signupPage/connectedComponent/SignUp';
 import SignIn from './signinPage/connectedComponent/SignIn';
-
+import RecipeGrid from './recipes/RecipeGrid';
 
 const App = () => ((
   <Router>
@@ -12,6 +12,7 @@ const App = () => ((
         <Route exact path="/" component={LandingPage} />
         <Route path="/signup" component={SignUp} />
         <Route path="/signin" component={SignIn} />
+        <Route path="/recipes" component={RecipeGrid} />
       </Switch>
     </div>
   </Router>
