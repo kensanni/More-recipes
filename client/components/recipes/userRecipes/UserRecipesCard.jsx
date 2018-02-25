@@ -16,6 +16,13 @@ import DeleteModal from '../../Include/DeleteModal';
 const UserRecipesCard = (props) => {
   const {
     recipeData,
+    showRecipeDetails,
+    cardId,
+    editRecipe,
+    value,
+    onChange,
+    saveImageToCloud,
+    handleCloseModal
   } = props;
   const {
     id, name, description, image
@@ -35,8 +42,21 @@ const UserRecipesCard = (props) => {
         <div className="card-footer card-tile">
           <div className="row">
             <div className="col-xs-6 ml-3">
-              <EditRecipe />
-              <EditModal />
+              <EditRecipe
+                recipeId={id}
+                cardId={cardId}
+                showRecipeDetails={showRecipeDetails}
+              />
+              <EditModal
+                cardId={cardId}
+                editRecipe={editRecipe}
+                value={value}
+                onChange={onChange}
+                recipeId={id}
+                recipeData={recipeData}
+                handleCloseModal={handleCloseModal}
+                saveImageToCloud={saveImageToCloud}
+              />
             </div>
             <div className="col-xs-6">
               <DeleteRecipe />
@@ -51,6 +71,13 @@ const UserRecipesCard = (props) => {
 
 UserRecipesCard.propTypes = {
   recipeData: PropTypes.objectOf(any).isRequired,
+  editRecipe: PropTypes.func.isRequired,
+  value: PropTypes.objectOf(any).isRequired,
+  onChange: PropTypes.func.isRequired,
+  saveImageToCloud: PropTypes.func.isRequired,
+  showRecipeDetails: PropTypes.func.isRequired,
+  cardId: PropTypes.number.isRequired,
+  handleCloseModal: PropTypes.func.isRequired
 };
 
 export default UserRecipesCard;
