@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
-import { filter } from 'lodash';
 import { bindActionCreators } from 'redux';
-import addRecipeAction from '../../../actionController/addRecipe';
+import { filter } from 'lodash';
 import getUserRecipe from '../../../actionController/getUserRecipe';
-import AddRecipe from './AddRecipe';
-import editRecipeAction from '../../../actionController/editRecipe';
-import deleteRecipeAction from '../../../actionController/deleteRecipe';
+import addRecipeAction from '../../../actionController/addRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
+import AddRecipe from './AddRecipe';
+import deleteRecipeAction from '../../../actionController/deleteRecipe';
+import editRecipeAction from '../../../actionController/editRecipe';
 import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
@@ -33,9 +33,9 @@ class UserRecipes extends Component {
       isChanged: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
+    this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.editRecipe = this.editRecipe.bind(this);
     this.handleShowRecipe = this.handleShowRecipe.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -76,16 +76,6 @@ class UserRecipes extends Component {
     }
   }
   /**
-   * @description function to delete a recipe
-   *
-   * @param {id} id id of recipe to be deleted
-   *
-   * @returns {undefined} calls the delete recipe action
-   */
-  deleteRecipe(id) {
-    this.props.deleteRecipeAction(id);
-  }
-  /**
    * @description function to edit a recipe
    *
    * @param {id} id id of recipe to be edited
@@ -97,6 +87,18 @@ class UserRecipes extends Component {
   editRecipe(id, recipeData) {
     this.props.editRecipeAction(id, recipeData);
   }
+
+  /**
+   * @description function to delete a recipe
+   *
+   * @param {id} id id of recipe to be deleted
+   *
+   * @returns {undefined} calls the delete recipe action
+   */
+  deleteRecipe(id) {
+    this.props.deleteRecipeAction(id);
+  }
+
   /**
    * @description set the state of value inputs on form
    *
@@ -109,6 +111,20 @@ class UserRecipes extends Component {
     this.setState({
       [name]: value,
       isChanged: true
+    });
+  }
+
+  /**
+   * @description get the state of recipe to be edited and display it on the edit form
+   *
+   * @param {recipeId} recipeId
+   *
+   * @returns {object} object
+   */
+  handleShowRecipe(recipeId) {
+    const recipe = filter(this.state.recipeData, filterRecipe => filterRecipe.id === recipeId);
+    this.setState({
+      recipe
     });
   }
 
@@ -132,6 +148,7 @@ class UserRecipes extends Component {
       name: '', image: '', description: '', ingredient: ''
     });
   }
+
   /**
    * @description upload Image to cloud
    *
@@ -145,19 +162,7 @@ class UserRecipes extends Component {
       this.props.saveImageToCloudAction(image);
     }
   }
-  /**
-   * @description get the state of recipe to be edited and display it on the edit form
-   *
-   * @param {recipeId} recipeId
-   *
-   * @returns {object} object
-   */
-  handleShowRecipe(recipeId) {
-    const recipe = filter(this.state.recipeData, filterRecipe => filterRecipe.id === recipeId);
-    this.setState({
-      recipe
-    });
-  }
+
   /**
    * @description set the state of recipe data whwn form is closed
    * @returns {undefined} set state of isChanged
@@ -167,6 +172,7 @@ class UserRecipes extends Component {
       isChanged: false
     });
   }
+
   /**
    * @description render user recipes
    *
@@ -179,13 +185,15 @@ class UserRecipes extends Component {
         <UserRecipesCard
           key={recipeData.id}
           cardId={key}
-          showRecipeDetails={this.handleShowRecipe}
-          handleCloseModal={this.handleCloseModal}
-          editRecipe={this.editRecipe}
-          deleteRecipe={this.deleteRecipe}
           recipeData={recipeData}
+          showRecipeDetails={this.handleShowRecipe}
+          deleteRecipe={this.deleteRecipe}
+          editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
           value={this.state}
+          handleCloseModal={this.handleCloseModal}
+          onChange={this.handleChange}
+          saveImageToCloud={this.saveImageToCloud}
         />
       ));
     }
@@ -214,10 +222,12 @@ class UserRecipes extends Component {
 UserRecipes.propTypes = {
   getUserRecipe: PropTypes.func.isRequired,
   addRecipeAction: PropTypes.func.isRequired,
-  editRecipeAction: PropTypes.func.isRequired,
   deleteRecipeAction: PropTypes.func.isRequired,
+  editRecipeAction: PropTypes.func.isRequired,
+  recipes: PropTypes.objectOf(any).isRequired,
   recipeImageUrl: PropTypes.string.isRequired,
   saveImageToCloudAction: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 /**
@@ -235,8 +245,8 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getUserRecipe,
     addRecipeAction,
-    editRecipeAction,
     deleteRecipeAction,
+    editRecipeAction,
     saveImageToCloudAction
   }, dispatch)
 );
