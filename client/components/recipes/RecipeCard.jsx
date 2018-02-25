@@ -11,12 +11,14 @@ import PropTypes, { any } from 'prop-types';
 
 const RecipeCard = (props) => {
   const {
-    recipeData
+    recipeData, upvoteRecipe
   } = props;
   const {
+    id,
     name,
     description,
     image,
+    upvotes
   } = recipeData;
 
   return (
@@ -40,8 +42,10 @@ const RecipeCard = (props) => {
             <i
               className="fa fa-thumbs-up fa-2x ml-5 favorite-btn"
               aria-hidden="true"
+              onClick={() => upvoteRecipe(id)}
             >
-              <span className="small pr-2" />
+              <span className="small pr-2">{upvotes}
+              </span>
             </i>
             <i
               className="fa fa-thumbs-down fa-2x favorite-btn"
@@ -58,6 +62,7 @@ const RecipeCard = (props) => {
 
 RecipeCard.propTypes = {
   recipeData: PropTypes.objectOf(any).isRequired,
+  upvoteRecipe: PropTypes.func.isRequired,
 };
 
 export default RecipeCard;

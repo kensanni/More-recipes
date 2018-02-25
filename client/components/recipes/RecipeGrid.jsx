@@ -6,6 +6,7 @@ import Header from '../common/Header';
 import Footer from '../common/Footer';
 import RecipeCard from '../recipes/RecipeCard';
 import getRecipeAction from '../../actionController/getRecipe';
+import upvoteRecipeAction from '../../actionController/upvoteRecipe';
 
 /**
  * @class RecipeGrid
@@ -24,6 +25,7 @@ class RecipeGrid extends Component {
       recipeData: [],
       isFetched: false
     };
+    this.upvoteRecipe = this.upvoteRecipe.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -53,7 +55,16 @@ class RecipeGrid extends Component {
       });
     }
   }
-
+  /**
+   * @description upvote a recipe
+   *
+   * @param {id} id id of recipe to be upvoted
+   *
+   * @return {undefined} calls upvoteRecipeAction
+   */
+  upvoteRecipe(id) {
+    this.props.upvoteRecipeAction(id);
+  }
   /**
    * @description render - display all the recipes
    *
@@ -65,7 +76,7 @@ class RecipeGrid extends Component {
       renderRecipeGrid = this.state.recipeData.map(recipeData => (
         <RecipeCard
           key={recipeData.id}
-          recipeData={recipeData}
+          upvoteRecipe={this.upvoteRecipe}
         />
       ));
     }
@@ -85,6 +96,7 @@ class RecipeGrid extends Component {
 
 RecipeGrid.propTypes = {
   getRecipeAction: PropTypes.func.isRequired,
+  upvoteRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
 };
 
@@ -108,7 +120,8 @@ const mapStateToProps = state => ({
  */
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    getRecipeAction
+    getRecipeAction,
+    upvoteRecipeAction
   }, dispatch)
 );
 
