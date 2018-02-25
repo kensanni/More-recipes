@@ -39,6 +39,7 @@ class RecipeGrid extends Component {
    * @return {undefined} call getRecipe
    */
   componentDidMount() {
+    console.log(this.props.recipes.isFetched);
     if (this.props.recipes.isFetched === false) {
       this.props.getRecipeAction();
     }
@@ -69,6 +70,7 @@ class RecipeGrid extends Component {
   upvoteRecipe(id) {
     this.props.upvoteRecipeAction(id);
   }
+
   /**
    * @description downvote a recipe
    *
@@ -79,6 +81,7 @@ class RecipeGrid extends Component {
   downvoteRecipe(id) {
     this.props.downvoteRecipeAction(id);
   }
+
   /**
    * @description favorite a recipe
    *
@@ -89,6 +92,7 @@ class RecipeGrid extends Component {
   favoriteRecipe(id) {
     this.props.favoriteRecipeAction(id);
   }
+
   /**
    * @description render - display all the recipes
    *
@@ -100,6 +104,7 @@ class RecipeGrid extends Component {
       renderRecipeGrid = this.state.recipeData.map(recipeData => (
         <RecipeCard
           key={recipeData.id}
+          recipeData={recipeData}
           upvoteRecipe={this.upvoteRecipe}
           downvoteRecipe={this.downvoteRecipe}
           favoriteRecipe={this.favoriteRecipe}

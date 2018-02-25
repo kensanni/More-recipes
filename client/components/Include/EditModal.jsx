@@ -10,8 +10,9 @@ import PropTypes, { any } from 'prop-types';
  */
 const EditModal = (props) => {
   const {
-    cardId
+    recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud,
   } = props;
+  const { name, description, ingredient } = recipeData;
   return (
     <div
       className="modal fade"
@@ -32,6 +33,7 @@ const EditModal = (props) => {
               className="close"
               data-dismiss="modal"
               aria-label="Close"
+              onClick={handleCloseModal}
             >
               <span
                 aria-hidden="true"
@@ -47,6 +49,8 @@ const EditModal = (props) => {
                 </label>
                 <input
                   name="name"
+                  onChange={onChange}
+                  value={value.isChanged ? value.name : name || ''}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -58,6 +62,8 @@ const EditModal = (props) => {
                 </label>
                 <textarea
                   name="description"
+                  onChange={onChange}
+                  value={value.isChanged ? value.description : description || ''}
                   className="form-control"
                   id="message-text"
                 />
@@ -70,6 +76,8 @@ const EditModal = (props) => {
                   id="ingredient"
                   type="text"
                   name="ingredient"
+                  onChange={onChange}
+                  value={value.isChanged ? value.ingredient : ingredient || ''}
                   className="form-control"
                 />
               </div>
@@ -78,6 +86,7 @@ const EditModal = (props) => {
                   type="file"
                   name="image"
                   accept="image/*"
+                  onChange={saveImageToCloud}
                 />
               </div>
             </form>
@@ -87,12 +96,14 @@ const EditModal = (props) => {
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
+              onClick={handleCloseModal}
             >
               Close
             </button>
             <button
               type="button"
               className="btn btn-orange"
+              onClick={editRecipe}
             >
               Update recipe
             </button>
@@ -104,6 +115,12 @@ const EditModal = (props) => {
 };
 
 EditModal.propTypes = {
+  value: PropTypes.objectOf(any).isRequired,
+  onChange: PropTypes.func.isRequired,
+  editRecipe: PropTypes.func.isRequired,
+  saveImageToCloud: PropTypes.func.isRequired,
+  handleCloseModal: PropTypes.func.isRequired,
+  recipeData: PropTypes.objectOf(any).isRequired,
   cardId: PropTypes.number.isRequired
 };
 

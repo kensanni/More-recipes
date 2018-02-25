@@ -17,8 +17,8 @@ const RecipeCard = (props) => {
     id,
     name,
     description,
-    image,
     upvotes,
+    image,
     downvotes
   } = recipeData;
 
