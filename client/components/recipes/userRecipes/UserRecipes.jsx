@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
+import { filter } from 'lodash';
 import { bindActionCreators } from 'redux';
 import addRecipeAction from '../../../actionController/addRecipe';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import AddRecipe from './AddRecipe';
+import editRecipeAction from '../../../actionController/editRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
@@ -32,6 +34,9 @@ class UserRecipes extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
+    this.editRecipe = this.editRecipe.bind(this);
+    this.handleShowRecipe = this.handleShowRecipe.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -68,7 +73,18 @@ class UserRecipes extends Component {
       });
     }
   }
-
+  /**
+   * @description function to edit a recipe
+   *
+   * @param {id} id id of recipe to be edited
+   *
+   * @param {recipeData} recipeData recipe data to be sent to the database
+   *
+   * @returns {undefined} calls editRecipeAction
+   */
+  editRecipe(id, recipeData) {
+    this.props.editRecipeAction(id, recipeData);
+  }
   /**
    * @description set the state of value inputs on form
    *
@@ -118,6 +134,28 @@ class UserRecipes extends Component {
     }
   }
   /**
+   * @description get the state of recipe to be edited and display it on the edit form
+   *
+   * @param {recipeId} recipeId
+   *
+   * @returns {object} object
+   */
+  handleShowRecipe(recipeId) {
+    const recipe = filter(this.state.recipeData, filterRecipe => filterRecipe.id === recipeId);
+    this.setState({
+      recipe
+    });
+  }
+  /**
+   * @description set the state of recipe data whwn form is closed
+   * @returns {undefined} set state of isChanged
+   */
+  handleCloseModal() {
+    this.setState({
+      isChanged: false
+    });
+  }
+  /**
    * @description render user recipes
    *
    * @returns {JSX} JSX
@@ -129,6 +167,9 @@ class UserRecipes extends Component {
         <UserRecipesCard
           key={recipeData.id}
           cardId={key}
+          showRecipeDetails={this.handleShowRecipe}
+          handleCloseModal={this.handleCloseModal}
+          editRecipe={this.editRecipe}
           recipeData={recipeData}
           addRecipe={this.addRecipe}
           value={this.state}
@@ -160,6 +201,7 @@ class UserRecipes extends Component {
 UserRecipes.propTypes = {
   getUserRecipe: PropTypes.func.isRequired,
   addRecipeAction: PropTypes.func.isRequired,
+  editRecipeAction: PropTypes.func.isRequired,
   recipeImageUrl: PropTypes.string.isRequired,
   saveImageToCloudAction: PropTypes.func.isRequired,
 };
@@ -179,6 +221,7 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getUserRecipe,
     addRecipeAction,
+    editRecipeAction,
     saveImageToCloudAction
   }, dispatch)
 );
