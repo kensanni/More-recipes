@@ -2,7 +2,7 @@ import axios from 'axios';
 import Helper from '../Helpers/helper';
 import { decrementUpvote } from '../actions/upvoteRecipeAction';
 
-import { downvoteRecipeRequest, decrementDownvote, incrementDownvote, downvoteRecipeSuccess, downvoteRecipeError } from '../actions/downVoteRecipeAction';
+import { downvoteRecipeRequest, decrementDownvote, incrementDownvote, downvoteRecipeSuccess, downvoteRecipeError } from '../actions/downvoteRecipeAction';
 
 const URL = '/api/v1';
 

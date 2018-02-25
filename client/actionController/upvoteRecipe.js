@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Helper from '../Helpers/helper';
-import { decrementDownvote } from './../actions/downVoteRecipeAction';
+import { decrementDownvote } from './../actions/downvoteRecipeAction';
 
 import { upvoteRecipeRequest, upvoteRecipeSuccess, upvoteRecipeError, incrementUpvote, decrementUpvote } from '../actions/upvoteRecipeAction';
 
