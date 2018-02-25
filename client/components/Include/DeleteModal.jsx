@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX} JSX
  */
 const DeleteModal = (props) => {
-  const { recipeId } = props;
+  const { deleteRecipe, recipeId } = props;
   return (
     <div
       className="modal fade"
@@ -47,6 +47,7 @@ const DeleteModal = (props) => {
             </button>
             <button
               type="button"
+              onClick={() => deleteRecipe(recipeId)}
               className="btn btn-danger"
               data-dismiss="modal"
             >
@@ -60,6 +61,7 @@ const DeleteModal = (props) => {
 };
 
 DeleteModal.propTypes = {
+  deleteRecipe: PropTypes.func.isRequired,
   recipeId: PropTypes.number.isRequired
 };
 

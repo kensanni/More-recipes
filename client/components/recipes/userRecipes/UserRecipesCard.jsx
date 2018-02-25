@@ -18,6 +18,7 @@ const UserRecipesCard = (props) => {
     recipeData,
     showRecipeDetails,
     cardId,
+    deleteRecipe,
     editRecipe,
     value,
     onChange,
@@ -59,8 +60,13 @@ const UserRecipesCard = (props) => {
               />
             </div>
             <div className="col-xs-6">
-              <DeleteRecipe />
-              <DeleteModal />
+              <DeleteRecipe
+                recipeId={id}
+              />
+              <DeleteModal
+                deleteRecipe={deleteRecipe}
+                recipeId={id}
+              />
             </div>
           </div>
         </div>
@@ -71,6 +77,7 @@ const UserRecipesCard = (props) => {
 
 UserRecipesCard.propTypes = {
   recipeData: PropTypes.objectOf(any).isRequired,
+  deleteRecipe: PropTypes.func.isRequired,
   editRecipe: PropTypes.func.isRequired,
   value: PropTypes.objectOf(any).isRequired,
   onChange: PropTypes.func.isRequired,
