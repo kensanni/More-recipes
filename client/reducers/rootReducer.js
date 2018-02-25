@@ -4,6 +4,7 @@ import signinReducer from './signinReducer';
 import addRecipeReducer from './addRecipeReducer';
 import saveImageToCloud from './saveImageToCloudReducer';
 import editRecipeReducer from './editRecipeReducer';
+import deleteRecipeReducer from './deleteRecipeReducer';
 import recipeReducer from './recipeReducer';
 import getUserRecipeReducer from './getUserRecipeReducer';
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   addRecipeReducer,
   saveImageToCloud,
   recipeReducer,
+  deleteRecipeReducer,
   editRecipeReducer,
   getUserRecipeReducer
 });

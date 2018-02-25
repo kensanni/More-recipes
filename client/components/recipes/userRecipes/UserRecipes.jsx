@@ -7,6 +7,7 @@ import addRecipeAction from '../../../actionController/addRecipe';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import AddRecipe from './AddRecipe';
 import editRecipeAction from '../../../actionController/editRecipe';
+import deleteRecipeAction from '../../../actionController/deleteRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
@@ -34,6 +35,7 @@ class UserRecipes extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
+    this.deleteRecipe = this.deleteRecipe.bind(this);
     this.editRecipe = this.editRecipe.bind(this);
     this.handleShowRecipe = this.handleShowRecipe.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -72,6 +74,16 @@ class UserRecipes extends Component {
         image: recipeImageUrl
       });
     }
+  }
+  /**
+   * @description function to delete a recipe
+   *
+   * @param {id} id id of recipe to be deleted
+   *
+   * @returns {undefined} calls the delete recipe action
+   */
+  deleteRecipe(id) {
+    this.props.deleteRecipeAction(id);
   }
   /**
    * @description function to edit a recipe
@@ -170,6 +182,7 @@ class UserRecipes extends Component {
           showRecipeDetails={this.handleShowRecipe}
           handleCloseModal={this.handleCloseModal}
           editRecipe={this.editRecipe}
+          deleteRecipe={this.deleteRecipe}
           recipeData={recipeData}
           addRecipe={this.addRecipe}
           value={this.state}
@@ -202,6 +215,7 @@ UserRecipes.propTypes = {
   getUserRecipe: PropTypes.func.isRequired,
   addRecipeAction: PropTypes.func.isRequired,
   editRecipeAction: PropTypes.func.isRequired,
+  deleteRecipeAction: PropTypes.func.isRequired,
   recipeImageUrl: PropTypes.string.isRequired,
   saveImageToCloudAction: PropTypes.func.isRequired,
 };
@@ -222,6 +236,7 @@ const mapDispatchToProps = dispatch => (
     getUserRecipe,
     addRecipeAction,
     editRecipeAction,
+    deleteRecipeAction,
     saveImageToCloudAction
   }, dispatch)
 );
