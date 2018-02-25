@@ -4,6 +4,9 @@ import signinReducer from './signinReducer';
 import addRecipeReducer from './addRecipeReducer';
 import saveImageToCloud from './saveImageToCloudReducer';
 import recipeReducer from './recipeReducer';
+import getUserRecipeReducer from './getUserRecipeReducer';
+
+
 /**
  * @description make all reducers into a single reducer function which are passed to createstore
  */
@@ -12,7 +15,8 @@ const rootReducer = combineReducers({
   signinReducer,
   addRecipeReducer,
   saveImageToCloud,
-  recipeReducer
+  recipeReducer,
+  getUserRecipeReducer
 });
 
 export default rootReducer;
