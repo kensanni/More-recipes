@@ -7,6 +7,7 @@ import Footer from '../common/Footer';
 import RecipeCard from '../recipes/RecipeCard';
 import getRecipeAction from '../../actionController/getRecipe';
 import upvoteRecipeAction from '../../actionController/upvoteRecipe';
+import downvoteRecipeAction from '../../actionController/downvoteRecipe';
 
 /**
  * @class RecipeGrid
@@ -26,6 +27,7 @@ class RecipeGrid extends Component {
       isFetched: false
     };
     this.upvoteRecipe = this.upvoteRecipe.bind(this);
+    this.downvoteRecipe = this.downvoteRecipe.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -66,6 +68,16 @@ class RecipeGrid extends Component {
     this.props.upvoteRecipeAction(id);
   }
   /**
+   * @description downvote a recipe
+   *
+   * @param {id} id id of recipe to be updated
+   *
+   * @return {undefined} calls downvoteRecipeAction
+   */
+  downvoteRecipe(id) {
+    this.props.downvoteRecipeAction(id);
+  }
+  /**
    * @description render - display all the recipes
    *
    * @return {JSX} return JSX
@@ -77,6 +89,7 @@ class RecipeGrid extends Component {
         <RecipeCard
           key={recipeData.id}
           upvoteRecipe={this.upvoteRecipe}
+          downvoteRecipe={this.downvoteRecipe}
         />
       ));
     }
@@ -97,6 +110,7 @@ class RecipeGrid extends Component {
 RecipeGrid.propTypes = {
   getRecipeAction: PropTypes.func.isRequired,
   upvoteRecipeAction: PropTypes.func.isRequired,
+  downvoteRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
 };
 
@@ -121,7 +135,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getRecipeAction,
-    upvoteRecipeAction
+    upvoteRecipeAction,
+    downvoteRecipeAction
   }, dispatch)
 );
 
