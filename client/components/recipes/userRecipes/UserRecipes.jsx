@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import addRecipeAction from '../../../actionController/addRecipe';
+import getUserRecipe from '../../../actionController/getUserRecipe';
 import AddRecipe from './AddRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import UserRecipesCard from './UserRecipesCard';
@@ -31,6 +32,18 @@ class UserRecipes extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
+  }
+  /**
+   * @description check the state of isFetched and call the get recipe action
+   *
+   * @param {props} props
+   *
+   * @returns {undefined} return all recipes
+   */
+  componentDidMount() {
+    if (this.props.recipes.isFetched === false) {
+      this.props.getUserRecipe(this.props.userId);
+    }
   }
 
   /**
@@ -145,6 +158,7 @@ class UserRecipes extends Component {
   }
 }
 UserRecipes.propTypes = {
+  getUserRecipe: PropTypes.func.isRequired,
   addRecipeAction: PropTypes.func.isRequired,
   recipeImageUrl: PropTypes.string.isRequired,
   saveImageToCloudAction: PropTypes.func.isRequired,
@@ -156,12 +170,14 @@ UserRecipes.propTypes = {
  * @returns {object} object
  */
 const mapStateToProps = state => ({
+  recipes: state.getUserRecipeReducer[0],
   userId: state.signinReducer[0].userData.id,
   recipeImageUrl: state.saveImageToCloud[0].image
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
+    getUserRecipe,
     addRecipeAction,
     saveImageToCloudAction
   }, dispatch)
