@@ -8,6 +8,7 @@ import RecipeCard from '../recipes/RecipeCard';
 import getRecipeAction from '../../actionController/getRecipe';
 import upvoteRecipeAction from '../../actionController/upvoteRecipe';
 import downvoteRecipeAction from '../../actionController/downvoteRecipe';
+import favoriteRecipeAction from '../../actionController/favoriteRecipe';
 
 /**
  * @class RecipeGrid
@@ -28,6 +29,7 @@ class RecipeGrid extends Component {
     };
     this.upvoteRecipe = this.upvoteRecipe.bind(this);
     this.downvoteRecipe = this.downvoteRecipe.bind(this);
+    this.favoriteRecipe = this.favoriteRecipe.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -78,6 +80,16 @@ class RecipeGrid extends Component {
     this.props.downvoteRecipeAction(id);
   }
   /**
+   * @description favorite a recipe
+   *
+   * @param {id} id - id of recipe to be favorited
+   *
+   * @return {undefined} calls favoriteRecipeAction
+   */
+  favoriteRecipe(id) {
+    this.props.favoriteRecipeAction(id);
+  }
+  /**
    * @description render - display all the recipes
    *
    * @return {JSX} return JSX
@@ -90,6 +102,7 @@ class RecipeGrid extends Component {
           key={recipeData.id}
           upvoteRecipe={this.upvoteRecipe}
           downvoteRecipe={this.downvoteRecipe}
+          favoriteRecipe={this.favoriteRecipe}
         />
       ));
     }
@@ -111,6 +124,7 @@ RecipeGrid.propTypes = {
   getRecipeAction: PropTypes.func.isRequired,
   upvoteRecipeAction: PropTypes.func.isRequired,
   downvoteRecipeAction: PropTypes.func.isRequired,
+  favoriteRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
 };
 
@@ -136,7 +150,8 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getRecipeAction,
     upvoteRecipeAction,
-    downvoteRecipeAction
+    downvoteRecipeAction,
+    favoriteRecipeAction
   }, dispatch)
 );
 
