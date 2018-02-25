@@ -1,4 +1,6 @@
 import { GET_RECIPE_REQUEST, GET_RECIPE_SUCCESSFUL, GET_RECIPE_ERROR } from '../actions/getRecipeAction';
+import { INCREMENT_UPVOTE, DECREMENT_UPVOTE } from '../actions/upvoteRecipeAction';
+
 
 const initialState = [{
   isFetched: false,
@@ -35,6 +37,38 @@ const recipeReducer = (state = initialState, action) => {
         isFetched,
         recipeData: {},
         errorMessage
+      },
+      ...state
+      ];
+    case INCREMENT_UPVOTE:
+      return [{
+        isFetched: state[0].isFetched,
+        errorMessage: state[0].errorMessage,
+        recipeData: state[0].recipeData.map((recipe) => {
+          if (recipe.id === action.recipeId) {
+            return {
+              ...recipe,
+              upvotes: recipe.upvotes + 1
+            };
+          }
+          return recipe;
+        })
+      },
+      ...state
+      ];
+    case DECREMENT_UPVOTE:
+      return [{
+        isFetched: state[0].isFetched,
+        errorMessage: state[0].errorMessage,
+        recipeData: state[0].recipeData.map((recipe) => {
+          if (recipe.id === action.recipeId) {
+            return {
+              ...recipe,
+              upvotes: recipe.upvotes - 1
+            };
+          }
+          return recipe;
+        })
       },
       ...state
       ];

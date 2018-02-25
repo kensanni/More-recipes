@@ -8,7 +8,8 @@
       "globals": {
           "document": true,
           "localStorage": true,
-          "FormData": true          
+          "FormData": true,
+          "window": true      
       },
       "rules": {
         "one-var": 0,
