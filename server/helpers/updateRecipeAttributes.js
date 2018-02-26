@@ -1,6 +1,6 @@
 import models from './../models';
 
-const { Upvotes, Downvotes } = models;
+const { Upvotes, Downvotes, Favorites } = models;
 
 const updateRecipeAttributes = async (sequelizeRecipe) => {
   const recipe = sequelizeRecipe.get();
@@ -17,8 +17,15 @@ const updateRecipeAttributes = async (sequelizeRecipe) => {
     }
   });
 
+  const favorites = await Favorites.findAll({
+    where: {
+      recipeId: sequelizeRecipe.id
+    }
+  });
+
   recipe.upvotes = upvotes.length;
   recipe.downvotes = downvotes.length;
+  recipe.favorites = favorites.length;
   return sequelizeRecipe;
 };
 

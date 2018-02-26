@@ -19,7 +19,8 @@ const RecipeCard = (props) => {
     description,
     upvotes,
     image,
-    downvotes
+    downvotes,
+    favorites
   } = recipeData;
 
   return (
@@ -40,7 +41,10 @@ const RecipeCard = (props) => {
               className="fa fa-heart fa-2x favorite-btn"
               aria-hidden="true"
               onClick={() => favoriteRecipe(id)}
-            />
+            >
+              <span className="small pr-2">{favorites}
+              </span>
+            </i>
             <i
               className="fa fa-thumbs-up fa-2x ml-5 favorite-btn"
               aria-hidden="true"
