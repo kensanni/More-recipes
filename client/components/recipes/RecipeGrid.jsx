@@ -102,25 +102,6 @@ class RecipeGrid extends Component {
     this.props.favoriteRecipeAction(id);
   }
 
-
-  // renderPopularRecipes(recipes) {
-  //   const rendersRecipes = recipes.map(recipeData => (
-  //     <RecipeCard
-  //       key={recipeData.id}
-  //       recipeData={recipeData}
-  //       upvoteRecipe={this.upvoteRecipe}
-  //       downvoteRecipe={this.downvoteRecipe}
-  //       favoriteRecipe={this.favoriteRecipe}
-  //     />
-  //   ));
-  //   return (
-  //     <section className="row">
-  //       <h2>Popular Recipes</h2>
-  //       {rendersRecipes}
-  //     </section>
-  //   );
-  // }
-
   /**
    * @description
    *

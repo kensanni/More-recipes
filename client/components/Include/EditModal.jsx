@@ -12,7 +12,7 @@ const EditModal = (props) => {
   const {
     recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud,
   } = props;
-  const { name, description, ingredient } = recipeData;
+  const { id, name, description, ingredient } = recipeData;
   return (
     <div
       className="modal fade"
@@ -50,7 +50,7 @@ const EditModal = (props) => {
                 <input
                   name="name"
                   onChange={onChange}
-                  value={value.isChanged ? value.name : name || ''}
+                  value={value.isChanged ? value.name : name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -63,7 +63,7 @@ const EditModal = (props) => {
                 <textarea
                   name="description"
                   onChange={onChange}
-                  value={value.isChanged ? value.description : description || ''}
+                  value={value.isChanged ? value.description : description}
                   className="form-control"
                   id="message-text"
                 />
@@ -77,7 +77,7 @@ const EditModal = (props) => {
                   type="text"
                   name="ingredient"
                   onChange={onChange}
-                  value={value.isChanged ? value.ingredient : ingredient || ''}
+                  value={value.isChanged ? value.ingredient : ingredient}
                   className="form-control"
                 />
               </div>
@@ -103,7 +103,7 @@ const EditModal = (props) => {
             <button
               type="button"
               className="btn btn-orange"
-              onClick={editRecipe}
+              onClick={() => editRecipe(id, recipeData)}
             >
               Update recipe
             </button>
