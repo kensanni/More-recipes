@@ -1,3 +1,4 @@
+import { orderBy } from 'lodash';
 import model from '../models';
 import updateRecipeAttributes from '../helpers/updateRecipeAttributes';
 import updateMultipleRecipeAttributes from '../helpers/updateMultipleRecipeAttributes';
@@ -181,6 +182,32 @@ class Recipe {
     await findRecipe.destroy();
     return res.status(200).send({
       message: 'Recipe successfully deleted'
+    });
+  }
+  /**
+   * @description
+   *
+   * @param {object} req
+   *
+   * @param {object} res
+   *
+   * @returns {object} oject
+   */
+  static async popularRecipes(req, res) {
+    const getRecipes = await Recipes.findAll({
+      include: [{
+        model: model.Reviews,
+        attributes: ['review'],
+        include: [{
+          model: model.Users,
+          attributes: ['username'],
+        }]
+      }],
+      limit: 3,
+    });
+    const updatedRecipes = await updateMultipleRecipeAttributes(getRecipes);
+    return res.status(200).send({
+      recipesData: updatedRecipes.sort((a, b) => a.dataValues.favorites + b.dataValues.favorites)
     });
   }
 }
