@@ -19,6 +19,11 @@ export default (app) => {
     User.signUp
   );
 
+  app.get(
+    '/api/v1/recipes/most-popular-recipe',
+    Recipe.popularRecipes
+  );
+
   app.post(
     '/api/v1/users/signin',
     Validation.validateUserSignin,

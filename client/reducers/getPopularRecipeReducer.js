@@ -1,11 +1,12 @@
-import { GET_RECIPE_REQUEST, GET_RECIPE_SUCCESSFUL, GET_RECIPE_ERROR } from '../actions/getRecipeAction';
+import { GET_POPULAR_RECIPE_REQUEST, GET_POPULAR_RECIPE_SUCCESSFUL, GET_POPULAR_RECIPE_ERROR } from '../actions/getPopularRecipeAction';
 import { INCREMENT_UPVOTE, DECREMENT_UPVOTE } from '../actions/upvoteRecipeAction';
 import { INCREMENT_DOWNVOTE, DECREMENT_DOWNVOTE } from '../actions/downvoteRecipeAction';
 import { FAVORITE_RECIPE_SUCCESSFUL } from '../actions/favoriteRecipeAction';
 
+
 const initialState = [{
   isFetched: false,
-  recipeData: [],
+  popularRecipesData: [],
   errorMessage: ''
 }];
 /**
@@ -14,29 +15,29 @@ const initialState = [{
  * @param {object} action - response from the api
  * @return {Object} - Object containg new state
  */
-const recipeReducer = (state = initialState, action) => {
-  const { isFetched, recipeData, errorMessage } = action;
+const getPopularRecipeReducer = (state = initialState, action) => {
+  const { isFetched, popularRecipesData, errorMessage } = action;
   switch (action.type) {
-    case GET_RECIPE_REQUEST:
+    case GET_POPULAR_RECIPE_REQUEST:
       return [{
         isFetched,
-        recipeData: [],
+        popularRecipesData: [],
         errorMessage: ''
       },
       ...state
       ];
-    case GET_RECIPE_SUCCESSFUL:
+    case GET_POPULAR_RECIPE_SUCCESSFUL:
       return [{
         isFetched,
-        recipeData,
+        popularRecipesData,
         errorMessage: ''
       },
       ...state
       ];
-    case GET_RECIPE_ERROR:
+    case GET_POPULAR_RECIPE_ERROR:
       return [{
         isFetched,
-        recipeData: [],
+        popularRecipesData: [],
         errorMessage
       },
       ...state
@@ -45,7 +46,7 @@ const recipeReducer = (state = initialState, action) => {
       return [{
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -61,7 +62,7 @@ const recipeReducer = (state = initialState, action) => {
       return [{
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -77,7 +78,7 @@ const recipeReducer = (state = initialState, action) => {
       return [{
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -93,7 +94,7 @@ const recipeReducer = (state = initialState, action) => {
       return [{
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -109,11 +110,11 @@ const recipeReducer = (state = initialState, action) => {
       return [{
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
-              favorites: recipe.favorites.length
+              favorites: recipe.favorites
             };
           }
           return recipe;
@@ -126,4 +127,4 @@ const recipeReducer = (state = initialState, action) => {
   }
 };
 
-export default recipeReducer;
+export default getPopularRecipeReducer;

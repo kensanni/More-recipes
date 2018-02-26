@@ -6,6 +6,7 @@ import Header from '../common/Header';
 import Footer from '../common/Footer';
 import RecipeCard from '../recipes/RecipeCard';
 import getRecipeAction from '../../actionController/getRecipe';
+import getPopularRecipeAction from '../../actionController/getPopularRecipe';
 import upvoteRecipeAction from '../../actionController/upvoteRecipe';
 import downvoteRecipeAction from '../../actionController/downvoteRecipe';
 import favoriteRecipeAction from '../../actionController/favoriteRecipe';
@@ -25,6 +26,7 @@ class RecipeGrid extends Component {
     super(props);
     this.state = {
       recipeData: [],
+      popularRecipesData: [],
       isFetched: false
     };
     this.upvoteRecipe = this.upvoteRecipe.bind(this);
@@ -39,8 +41,8 @@ class RecipeGrid extends Component {
    * @return {undefined} call getRecipe
    */
   componentDidMount() {
-    console.log(this.props.recipes.isFetched);
     if (this.props.recipes.isFetched === false) {
+      this.props.getPopularRecipeAction();
       this.props.getRecipeAction();
     }
   }
@@ -53,10 +55,17 @@ class RecipeGrid extends Component {
    */
   componentWillReceiveProps(nextProps) {
     const { recipeData, isFetched } = nextProps.recipes;
+    const { popularRecipesData } = nextProps.popularRecipes;
     if (recipeData !== this.props.recipes.recipeData) {
       this.setState({
         recipeData,
         isFetched
+      });
+    }
+    if (popularRecipesData !== this.props.popularRecipes.popularRecipesData) {
+      this.setState({
+        popularRecipesData,
+        isFetched,
       });
     }
   }
@@ -94,29 +103,71 @@ class RecipeGrid extends Component {
   }
 
   /**
+   * @description
+   *
+   * @param {*} recipes
+   * @param {*} index
+   *
+   * @returns {*} yfhdhd
+   */
+  renderRecipes(recipes, index) {
+    const recipe = recipes[index];
+    return (<RecipeCard
+      key={recipe.id}
+      recipeData={recipe}
+      upvoteRecipe={this.upvoteRecipe}
+      downvoteRecipe={this.downvoteRecipe}
+      favoriteRecipe={this.favoriteRecipe}
+    />);
+  }
+  /**
    * @description render - display all the recipes
    *
    * @return {JSX} return JSX
    */
   render() {
     let renderRecipeGrid = <h1>No recipes</h1>;
+    const { recipeData, popularRecipesData, isFetched } = this.state;
+    // if (this.state.isFetched) {
+    //   renderRecipeGrid = this.state.recipeData.map(recipeData => (
+    //     <RecipeCard
+    //       key={recipeData.id}
+    //       recipeData={recipeData}
+    //       upvoteRecipe={this.upvoteRecipe}
+    //       downvoteRecipe={this.downvoteRecipe}
+    //       favoriteRecipe={this.favoriteRecipe}
+    //     />
+    //   ));
+    // }
     if (this.state.isFetched) {
-      renderRecipeGrid = this.state.recipeData.map(recipeData => (
-        <RecipeCard
-          key={recipeData.id}
-          recipeData={recipeData}
-          upvoteRecipe={this.upvoteRecipe}
-          downvoteRecipe={this.downvoteRecipe}
-          favoriteRecipe={this.favoriteRecipe}
-        />
-      ));
+      renderRecipeGrid = recipeData.map((recipe, i) =>
+        this.renderRecipes(recipeData, i));
     }
     return (
       <div>
         <Header />
-        <div className="container">
+        <div className="container pt-4">
           <div className="row">
-            {this.state.isFetched && renderRecipeGrid }
+            <section className="col-md-12">
+              <h2 className="title">Popular Recipes</h2>
+              <div>
+                <hr />
+              </div>
+            </section>
+            { isFetched && popularRecipesData
+                .map((recipe, i) => this.renderRecipes(popularRecipesData, i))
+            }
+          </div>
+          <div className="row">
+            <section className="col-md-12">
+              <h2 className="title">All Recipes</h2>
+              <div>
+                <hr />
+              </div>
+            </section>
+          </div>
+          <div className="row">
+            {isFetched && renderRecipeGrid }
           </div>
         </div>
         <Footer />
@@ -130,6 +181,7 @@ RecipeGrid.propTypes = {
   upvoteRecipeAction: PropTypes.func.isRequired,
   downvoteRecipeAction: PropTypes.func.isRequired,
   favoriteRecipeAction: PropTypes.func.isRequired,
+  getPopularRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
 };
 
@@ -141,7 +193,8 @@ RecipeGrid.propTypes = {
  * @returns {object} object
  */
 const mapStateToProps = state => ({
-  recipes: state.recipeReducer[0]
+  recipes: state.recipeReducer[0],
+  popularRecipes: state.getPopularRecipeReducer[0]
 });
 
 /**
@@ -156,7 +209,8 @@ const mapDispatchToProps = dispatch => (
     getRecipeAction,
     upvoteRecipeAction,
     downvoteRecipeAction,
-    favoriteRecipeAction
+    favoriteRecipeAction,
+    getPopularRecipeAction
   }, dispatch)
 );
 
