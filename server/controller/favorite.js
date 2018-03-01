@@ -42,7 +42,7 @@ class Favorite {
    * @returns  {JSON} Returns a JSON object
    */
   static async getFavorite(req, res) {
-    const getFavoriteRecipes = await Favorites.find({
+    const getFavoriteRecipes = await Favorites.findAll({
       where: {
         userId: req.decoded.id
       }

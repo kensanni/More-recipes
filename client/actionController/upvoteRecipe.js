@@ -1,10 +1,8 @@
-import axios from 'axios';
-import Helper from '../Helpers/helper';
+import instance from '../Helpers/helper';
 import { decrementDownvote } from './../actions/downvoteRecipeAction';
 
 import { upvoteRecipeRequest, upvoteRecipeSuccess, upvoteRecipeError, incrementUpvote, decrementUpvote } from '../actions/upvoteRecipeAction';
 
-const URL = '/api/v1';
 /**
  * @description action controller for upvoting recipes
  *
@@ -13,11 +11,9 @@ const URL = '/api/v1';
  * @return {undefined} Redux action to be dispatched to the store
  */
 export default function upvoteRecipe(recipeId) {
-  const token = window.localStorage.getItem('token');
   return (dispatch) => {
-    Helper.setAuthorizationToken(token);
     dispatch(upvoteRecipeRequest(recipeId));
-    axios.post(`${URL}/recipes/${recipeId}/upvote`)
+    instance.post(`/recipes/${recipeId}/upvote`)
       .then((recipe) => {
         const { message, downvoteStatus } = recipe.data;
         if (downvoteStatus === 'downvoted') {

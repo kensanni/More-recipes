@@ -9,9 +9,9 @@ import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import AddRecipe from './AddRecipe';
 import deleteRecipeAction from '../../../actionController/deleteRecipe';
 import editRecipeAction from '../../../actionController/editRecipe';
-import UserRecipesCard from './UserRecipesCard';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
+import RecipeGrid from '../RecipeGrid';
 
 /**
  * @class UserRecipes
@@ -30,7 +30,7 @@ class UserRecipes extends Component {
       recipeData: [],
       isFetched: false,
       name: '',
-      isChanged: false
+      isChanged: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
@@ -180,23 +180,6 @@ class UserRecipes extends Component {
    */
   render() {
     let renderUserRecipes = <h1>No recipes in your catalog</h1>;
-    if (this.state.isFetched) {
-      renderUserRecipes = this.state.recipeData.map((recipeData, key) => (
-        <UserRecipesCard
-          key={recipeData.id}
-          cardId={key}
-          recipeData={recipeData}
-          showRecipeDetails={this.handleShowRecipe}
-          deleteRecipe={this.deleteRecipe}
-          editRecipe={this.editRecipe}
-          addRecipe={this.addRecipe}
-          value={this.state}
-          handleCloseModal={this.handleCloseModal}
-          onChange={this.handleChange}
-          saveImageToCloud={this.saveImageToCloud}
-        />
-      ));
-    }
     return (
       <div>
         <Header />
@@ -211,7 +194,19 @@ class UserRecipes extends Component {
 
           </div>
           <div className="row">
-            {this.state.isFetched && renderUserRecipes}
+            {/* {this.state.isFetched && renderUserRecipes} */}
+            <RecipeGrid
+              showActionButton
+              recipeData={this.state.recipeData}
+              showRecipeDetails={this.handleShowRecipe}
+              deleteRecipe={this.deleteRecipe}
+              editRecipe={this.editRecipe}
+              addRecipe={this.addRecipe}
+              value={this.state}
+              handleCloseModal={this.handleCloseModal}
+              onChange={this.handleChange}
+              saveImageToCloud={this.saveImageToCloud}
+            />
           </div>
           <Footer />
         </div>

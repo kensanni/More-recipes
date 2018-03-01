@@ -32,6 +32,10 @@ class SignIn extends Component {
    */
   componentWillMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
+    if (this.props.signinResponse.isAuthenticated) {
+      console.log(this.props.signinResponse.isAuthenticated);
+      this.props.history.push('/recipes');
+    }
   }
 
   /**

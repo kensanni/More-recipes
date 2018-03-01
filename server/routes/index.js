@@ -50,7 +50,7 @@ export default (app) => {
     Recipe.getARecipe
   );
   app.get(
-    '/api/v1/recipes/users/:userId',
+    '/api/v1/users/:userId/recipes',
     Validation.checkUserId,
     authentication.verifyUser,
     Recipe.getUserRecipes
@@ -60,7 +60,6 @@ export default (app) => {
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
     Validation.checkRecipeId,
-    Validation.validateRecipeInput,
     Validation.checkRecipeName,
     Recipe.modifyRecipe
   );
@@ -88,7 +87,7 @@ export default (app) => {
   );
 
   app.get(
-    '/api/v1/users/:userId/recipes',
+    '/api/v1/users/:userId/favorites',
     authentication.verifyUser,
     Validation.checkUserId,
     Favorite.getFavorite

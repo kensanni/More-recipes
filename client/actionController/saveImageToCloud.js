@@ -15,14 +15,11 @@ export default function saveImageToCloud(image) {
   const formData = new FormData();
   formData.append('file', image);
   formData.append('upload_preset', cloudinaryPreset);
-  delete axios.defaults.headers.common['x-access-token'];
 
   return (dispatch) => {
     dispatch(saveImageToCloudRequest(formData));
     axios.post(cloudinaryUrl, formData)
       .then((res) => {
-        const token = localStorage.getItem('token');
-        axios.defaults.headers.common['x-access-token'] = token;
         const { secure_url } = res.data;
         dispatch(saveImageToCloudSuccessful(secure_url));
       })

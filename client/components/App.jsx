@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import LandingPage from './recipes/LandingPage';
-import RecipeGrid from './recipes/RecipeGrid';
+import AllRecipes from './recipes/AllRecipes';
 import UserRecipes from './recipes/userRecipes/UserRecipes';
 import SignUp from './signupPage/connectedComponent/SignUp';
 import SignIn from './signinPage/connectedComponent/SignIn';
@@ -37,7 +37,7 @@ class App extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
-            <Route path="/recipes" component={RecipeGrid} />
+            <Route path="/recipes" component={AllRecipes} />
             <Route path="/profile" component={UserRecipes} />
           </Switch>
         </div>

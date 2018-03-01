@@ -24,17 +24,8 @@ const Header = () => ((
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-           <Link
-             to="/recipes"
-             className="navbar-link nav-text"
-             id="navlink"
-            >
-              Recipe
-            </Link>
-          </li>
           <li className="nav-item dropdown">
-            <Link 
+            <Link
               to=""
               className="nav-link dropdown-toggle nav-text"
               id="navlink"
@@ -43,7 +34,7 @@ const Header = () => ((
               aria-haspopup="true"
               aria-expanded="false"
             >
-              User profile
+              Account
             </Link>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link
@@ -69,16 +60,16 @@ const Header = () => ((
               Signout
             </Link>
           </li>
+          <form className="form-inline my-2 my-lg-0">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button className="btn search-btn my-2 my-sm-0" type="submit">Search</button>
+          </form>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button className="btn search-btn my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </nav>
   </header>

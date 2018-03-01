@@ -12,7 +12,9 @@ const EditModal = (props) => {
   const {
     recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud,
   } = props;
-  const { id, name, description, ingredient } = recipeData;
+  const {
+    id, name, description, ingredient
+  } = recipeData;
   return (
     <div
       className="modal fade"

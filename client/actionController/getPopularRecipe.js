@@ -1,7 +1,5 @@
-import axios from 'axios';
+import instance from '../Helpers/helper';
 import { getPopularRecipeRequest, getPopularRecipeSuccess, getPopularRecipeError } from '../actions/getPopularRecipeAction';
-
-const URL = '/api/v1';
 
 /**
  * @description action creator for getting all recipes
@@ -13,7 +11,7 @@ const URL = '/api/v1';
 export default function getPopularRecipe() {
   return (dispatch) => {
     dispatch(getPopularRecipeRequest());
-    axios.get(`${URL}/recipes/most-popular-recipe`)
+    instance.get('/recipes/most-popular-recipe')
       .then((recipes) => {
         const { recipesData } = recipes.data;
         dispatch(getPopularRecipeSuccess(recipesData));

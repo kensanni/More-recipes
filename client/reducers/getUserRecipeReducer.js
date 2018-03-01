@@ -33,7 +33,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
     case GET_USER_RECIPE_REQUEST:
       return [{
         isFetched,
-        recipeData: {},
+        recipeData: [],
         errorMessage: ''
       },
       ...state
@@ -49,7 +49,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
     case GET_USER_RECIPE_ERROR:
       return [{
         isFetched,
-        recipeData: {},
+        recipeData: [],
         errorMessage
       },
       ...state

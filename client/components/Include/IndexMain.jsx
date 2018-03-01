@@ -19,14 +19,14 @@ const IndexMain = () => ((
           and learn new recipes from different part of the world.
         </h6>
         <div className="quick-access">
-          <a href="./html/signnup.html">
+          <Link to="/signup">
             <button className="btn btn-create">
               Create an account
             </button>
-          </a>
+          </Link>
           <p className="text-inline">
             Already on More-recipes?
-            <Link to="/signin">Sign in</Link>
+            <Link to="/signin">  Sign in</Link>
           </p>
         </div>
       </div>
