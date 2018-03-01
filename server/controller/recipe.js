@@ -1,4 +1,3 @@
-import { orderBy } from 'lodash';
 import model from '../models';
 import updateRecipeAttributes from '../helpers/updateRecipeAttributes';
 import updateMultipleRecipeAttributes from '../helpers/updateMultipleRecipeAttributes';

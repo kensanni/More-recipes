@@ -278,7 +278,7 @@ describe('Testing User endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
-          expect(errors[0].message).equal('Incorrect Login details');
+          expect(errors[0].message).equal('Incorrect login details');
         }
         expect(res).to.have.status(400);
         done();
@@ -294,7 +294,7 @@ describe('Testing User endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
-          expect(errors[0].message).equal('Incorrect Login details');
+          expect(errors[0].message).equal('Incorrect login details');
         }
         expect(res).to.have.status(400);
         done();

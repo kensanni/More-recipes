@@ -66,7 +66,10 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Name field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Name field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -82,7 +85,10 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Description field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Description field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -98,7 +104,10 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('ingredient field cannot be empty');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('ingredient field cannot be empty');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -114,7 +123,10 @@ describe('Testing recipe endpoints', () => {
         image: ''
       })
       .end((err, res) => {
-        expect(res.body.message).equal('Please upload an image for your recipes');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Please upload an image for your recipes');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -130,7 +142,10 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy'
       })
       .end((err, res) => {
-        expect(res.body.message).equal('you already have a recipe with the name Rice');
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('you already have a recipe with the name Rice');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -194,7 +209,7 @@ describe('Testing recipe endpoints', () => {
       .put('/api/v1/recipes/1')
       .set('x-access-token', value)
       .send({
-        name: 'Rice',
+        name: 'Yam',
         description: 'Boil for three mins',
         ingredient: 'Rice, water, pepper',
         image: 'dummy'
@@ -220,8 +235,11 @@ describe('Testing recipe endpoints', () => {
       .put('/api/v1/recipes/10')
       .set('x-access-token', value)
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Recipe does not exist in this catalog');
+        }
         expect(res).to.have.status(404);
-        expect(res.body.message).equal('Recipe does not exist in this catalog');
         done();
       });
   });
@@ -275,8 +293,11 @@ describe('Testing recipe endpoints', () => {
       .delete('/api/v1/recipes/10')
       .set('x-access-token', value)
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Recipe does not exist in this catalog');
+        }
         expect(res).to.have.status(404);
-        expect(res.body.message).equal('Recipe does not exist in this catalog');
         done();
       });
   });

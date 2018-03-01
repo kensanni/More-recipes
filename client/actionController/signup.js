@@ -1,8 +1,5 @@
-import axios from 'axios';
-import Helper from '../Helpers/helper';
+import instance from '../Helpers/helper';
 import { signupError, signupRequest, signupSuccess } from '../actions/signupAction';
-
-const URL = '/api/v1';
 
 
 /**
@@ -15,11 +12,10 @@ const URL = '/api/v1';
 export default function signup(userdata) {
   return (dispatch) => {
     dispatch(signupRequest(userdata));
-    axios.post(`${URL}/users/signup`, userdata)
+    instance.post('/users/signup', userdata)
       .then((res) => {
         const { token, message } = res.data;
         localStorage.setItem('token', token);
-        Helper.setAuthorizationToken(token);
         dispatch(signupSuccess(message));
       })
       .catch((error) => {

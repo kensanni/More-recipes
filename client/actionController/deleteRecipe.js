@@ -1,8 +1,6 @@
-import axios from 'axios';
 import miniToastr from 'mini-toastr';
+import instance from '../Helpers/helper';
 import { deleteRecipeRequest, deleteRecipeSuccessful, deleteRecipeError } from '../actions/deleteRecipeAction';
-
-const URL = '/api/v1';
 
 /**
  * @description action creator for deleting recipe
@@ -14,7 +12,7 @@ const URL = '/api/v1';
 export default function deleteRelete(recipeId) {
   return (dispatch) => {
     dispatch(deleteRecipeRequest(recipeId));
-    axios.delete(`${URL}/recipes/${recipeId}`)
+    instance.delete(`/recipes/${recipeId}`)
       .then((recipe) => {
         const { message } = recipe.data;
         dispatch(deleteRecipeSuccessful(message, recipeId));

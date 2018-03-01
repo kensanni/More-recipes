@@ -1,7 +1,5 @@
-import axios from 'axios';
+import instance from '../Helpers/helper';
 import { getUserRecipeRequest, getUserRecipeSuccessful, getUserRecipeError } from '../actions/getUserRecipeAction';
-
-const URL = '/api/v1';
 
 /**
  * @description action creator for adding recipe
@@ -11,9 +9,10 @@ const URL = '/api/v1';
  * @returns {undefined} redux action to be dispatch to the store
  */
 export default function getUserRecipe(userId) {
+  console.log("user id =====>",userId);
   return (dispatch) => {
     dispatch(getUserRecipeRequest());
-    axios.get(`${URL}/recipes/users/${userId}`)
+    instance.get(`/users/${userId}/recipes`)
       .then((userRecipe) => {
         const { recipesData } = userRecipe.data;
         dispatch(getUserRecipeSuccessful(recipesData));

@@ -1,7 +1,5 @@
-import axios from 'axios';
+import instance from '../Helpers/helper';
 import { getRecipeRequest, getRecipeSuccess, getRecipeError } from '../actions/getRecipeAction';
-
-const URL = '/api/v1';
 
 /**
  * @description action creator for getting all recipes
@@ -13,7 +11,7 @@ const URL = '/api/v1';
 export default function getRecipe() {
   return (dispatch) => {
     dispatch(getRecipeRequest());
-    axios.get(`${URL}/recipes`)
+    instance.get('/recipes')
       .then((recipes) => {
         const { recipesData } = recipes.data;
         dispatch(getRecipeSuccess(recipesData));
