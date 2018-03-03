@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const IndexHeader = () => (
+/* eslint-disable jsx-a11y/anchor-is-valid */
+const GuestHeader = () => (
   <header>
     <nav className="navbar navbar-expand-lg navbar-light bg-green">
-      <Link to="#" className="navbar-link nav-text" id="navlink">More-recipe</Link>
+      <Link to="/" className="navbar-link nav-text" id="navlink">More-recipe</Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -17,23 +18,17 @@ const IndexHeader = () => (
         <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
+        <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <Link to="/recipes" className="navbar-link nav-text" id="navlink">Recipes</Link>
+            <Link className="navbar-link nav-text" id="navlink" to="/signup">Signup</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="navbar-link nav-text" id="navlink" to="/signin">Login</Link>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button className="btn search-btn my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </nav>
   </header>
 );
 
-export default IndexHeader;
+export default GuestHeader;

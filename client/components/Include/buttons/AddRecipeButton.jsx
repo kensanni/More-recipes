@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes, { any } from 'prop-types';
-import AddModal from '../../Include/AddModal';
+import AddModal from '../../Include/modals/AddModal';
 
 /**
  * @description functional component to render the add recipe button
@@ -9,7 +9,7 @@ import AddModal from '../../Include/AddModal';
  *
  * @returns {JSX} return JSX
  */
-const AddRecipe = (props) => {
+const AddRecipeButton = (props) => {
   const {
     onChange, addRecipe, value, saveImageToCloud
   } = props;
@@ -31,17 +31,17 @@ const AddRecipe = (props) => {
           onChange={onChange}
           addRecipe={addRecipe}
           value={value}
-          saveImageToCloud={saveImageToCloud}          
+          saveImageToCloud={saveImageToCloud}   
         />
       </div>
     </div>
   );
 };
 
-AddRecipe.propTypes = {
+AddRecipeButton.propTypes = {
   onChange: PropTypes.func.isRequired,
   addRecipe: PropTypes.func.isRequired,
   value: PropTypes.objectOf(any).isRequired,
 };
 
-export default AddRecipe;
+export default AddRecipeButton;

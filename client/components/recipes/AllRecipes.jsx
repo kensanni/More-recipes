@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
+import ReactPaginate from 'react-paginate';
+import miniToastr from 'mini-toastr';
 import RecipeGrid from '../recipes/RecipeGrid';
 import Header from '../common/Header';
+import GuestHeader from '../common/GuestHeader';
 import Footer from '../common/Footer';
-import RecipeCard from '../common/RecipeCard';
+import RecipeCard from '../Include/cards/RecipeCard';
 import getRecipeAction from '../../actionController/getRecipe';
 import getPopularRecipeAction from '../../actionController/getPopularRecipe';
 import upvoteRecipeAction from '../../actionController/upvoteRecipe';
@@ -33,19 +36,18 @@ class AllRecipes extends Component {
     this.upvoteRecipe = this.upvoteRecipe.bind(this);
     this.downvoteRecipe = this.downvoteRecipe.bind(this);
     this.favoriteRecipe = this.favoriteRecipe.bind(this);
+    this.handlePaginationChange = this.handlePaginationChange.bind(this);
   }
   /**
-   * @description check the state of isFetched and call the get recipe action
+   * @description call the action to display all recipes
    *
    * @param {props} props
    *
    * @return {undefined} call getRecipe
    */
   componentDidMount() {
-    if (this.props.recipes.isFetched === false) {
-      this.props.getPopularRecipeAction();
-      this.props.getRecipeAction();
-    }
+    this.props.getPopularRecipeAction();
+    this.props.getRecipeAction(this.props.recipes.page);
   }
   /**
    * @description update the state of recipe
@@ -75,7 +77,7 @@ class AllRecipes extends Component {
    *
    * @param {id} id id of recipe to be upvoted
    *
-   * @return {undefined} calls upvoteRecipeAction
+   * @return {void} calls upvoteRecipeAction
    */
   upvoteRecipe(id) {
     this.props.upvoteRecipeAction(id);
@@ -89,7 +91,11 @@ class AllRecipes extends Component {
    * @return {undefined} calls downvoteRecipeAction
    */
   downvoteRecipe(id) {
-    this.props.downvoteRecipeAction(id);
+    if (this.props.authenticated) {
+      return this.props.downvoteRecipeAction(id);
+    }
+    miniToastr.init();
+    return miniToastr.error('Login to continue');
   }
 
   /**
@@ -101,6 +107,10 @@ class AllRecipes extends Component {
    */
   favoriteRecipe(id) {
     this.props.favoriteRecipeAction(id);
+  }
+
+  handlePaginationChange(recipes) {
+    this.props.getRecipeAction(recipes.selected);
   }
 
   /**
@@ -127,15 +137,12 @@ class AllRecipes extends Component {
    * @return {JSX} return JSX
    */
   render() {
-    let renderRecipeGrid = <h1>No recipes</h1>;
     const { recipeData, popularRecipesData, isFetched } = this.state;
-    if (this.state.isFetched) {
-      renderRecipeGrid = recipeData.map((recipe, i) =>
-        this.renderRecipes(recipeData, i));
-    }
     return (
       <div>
-        <Header />
+        {
+          this.props.authenticated ? <Header /> : <GuestHeader />
+        }
         <div className="container pt-4">
           <div className="row">
             <section className="col-md-12">
@@ -171,6 +178,24 @@ class AllRecipes extends Component {
             />
           </div>
         </div>
+        <ReactPaginate
+          previousLabel="Previous"
+          nextLabel="Next"
+          breakLabel={<a href="">...</a>}
+          breakClassName="page-link"
+          onPageChange={this.handlePaginationChange}
+          pageCount={this.props.recipes.page}
+          containerClassName="pagination justify-content-center"
+          pageLinkClassName="page-link"
+          nextLinkClassName="page-link"
+          previousLinkClassName="page-link"
+          disabledClassName="disabled"
+          pageClassName="page-item"
+          previousClassName="page-item"
+          nextClassName="page-item"
+          activeClassName="active"
+          subContainerClassName="pages pagination"
+        />
         <Footer />
       </div>
     );
@@ -194,12 +219,13 @@ AllRecipes.propTypes = {
  * @returns {object} object
  */
 const mapStateToProps = state => ({
-  recipes: state.recipeReducer[0],
+  authenticated: state.authReducer.isAuthenticated,
+  recipes: state.recipeReducer,
   popularRecipes: state.getPopularRecipeReducer[0]
 });
 
 /**
- * @description make actions available to recipeGrid as props
+ * @description make actions available to AllRecipes as props
  *
  * @param {dispatch} dispatch
  *

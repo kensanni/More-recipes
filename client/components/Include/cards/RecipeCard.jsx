@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes, { any } from 'prop-types';
-import RecipeCardFooter from '../Include/RecipeCardFooter';
+import RecipeCardFooter from './RecipeCardFooter';
 
 /**
  * @description recipe card
@@ -11,20 +11,20 @@ import RecipeCardFooter from '../Include/RecipeCardFooter';
  */
 
 const RecipeCard = (props) => {
-  const { recipeData } = props;
-  const {
-    name, description, image
-  } = recipeData;
+  const { recipeData, favRecipeData } = props;
+  // const {
+  //   name, description, image
+  // } = recipeData || favRecipeData;
   return (
     <div className="col-sm-6 col-md-4 pt-4 mb-5">
       <div className="card">
-        <img className="card-img-top img-max" src={image} alt="" />
+        <img className="card-img-top img-max" src={recipeData.image || favRecipeData.image} alt="" />
         <div className="card-body">
           <a href="recipeDetail.html">
-            <h4 className="card-title">{name}</h4>
+            <h4 className="card-title">{recipeData.name || favRecipeData.name}</h4>
           </a>
           <p className="card-text pt-2">
-            {description}
+            {recipeData.description || favRecipeData.description}
           </p>
         </div>
         <RecipeCardFooter

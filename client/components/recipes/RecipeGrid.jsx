@@ -1,10 +1,11 @@
 import React from 'react';
-import RecipeCard from '../common/RecipeCard';
+import RecipeCard from '../Include/cards/RecipeCard';
 
 const RecipeGrid = props => (
   props.recipeData.map(recipe => (
     <RecipeCard
       key={recipe.id}
+      favRecipeData={recipe.Recipe}
       recipeData={recipe}
       upvoteRecipe={props.upvoteRecipe}
       downvoteRecipe={props.downvoteRecipe}

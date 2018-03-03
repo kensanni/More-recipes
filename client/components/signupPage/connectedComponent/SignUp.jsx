@@ -135,7 +135,7 @@ SignUp.propTypes = {
  * @returns {undefined} object
  */
 const mapStateToProps = state => ({
-  signupResponse: state.signupReducer[0]
+  signupResponse: state.authReducer
 });
 
 

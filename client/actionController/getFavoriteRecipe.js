@@ -9,11 +9,13 @@ import { getFavoriteRecipeRequest, getFavoriteRecipeSuccessful, getFavoriteRecip
  * @returns {undefined} redux action to be dispatch to the store
  */
 export default function getFavoriteRecipe(userId) {
+  console.log('favoriteRecipe', userId);  
   return (dispatch) => {
     dispatch(getFavoriteRecipeRequest());
-    instance.get(`/api/v1/users/${userId}/favorites`)
+    instance.get(`/users/${userId}/favorites`)
       .then((favoriteRecipe) => {
         const { data } = favoriteRecipe;
+        console.log('favoriteRecipe', data);
         dispatch(getFavoriteRecipeSuccessful(data));
       })
       .catch((errors) => {

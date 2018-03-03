@@ -23,7 +23,16 @@ const Header = () => ((
         <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
+        <form className="form-inline my-2 my-lg-0 ml-auto">
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button className="btn search-btn my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul className="navbar-nav ml-auto">
           <li className="nav-item dropdown">
             <Link
               to=""
@@ -60,15 +69,6 @@ const Header = () => ((
               Signout
             </Link>
           </li>
-          <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn search-btn my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </ul>
       </div>
     </nav>

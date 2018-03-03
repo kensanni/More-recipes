@@ -6,7 +6,7 @@ import { filter } from 'lodash';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
-import AddRecipe from './AddRecipe';
+import AddRecipeButton from '../../Include/buttons/AddRecipeButton';
 import deleteRecipeAction from '../../../actionController/deleteRecipe';
 import editRecipeAction from '../../../actionController/editRecipe';
 import Header from '../../common/Header';
@@ -48,9 +48,7 @@ class UserRecipes extends Component {
    * @returns {undefined} return all recipes
    */
   componentDidMount() {
-    if (this.props.recipes.isFetched === false) {
-      this.props.getUserRecipe(this.props.userId);
-    }
+    this.props.getUserRecipe(this.props.userId);
   }
 
   /**
@@ -179,13 +177,13 @@ class UserRecipes extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    let renderUserRecipes = <h1>No recipes in your catalog</h1>;
+    const renderUserRecipes = <h1>No recipes in your catalog</h1>;
     return (
       <div>
         <Header />
         <div className="container">
           <div className="top-nav-bar">
-            <AddRecipe
+            <AddRecipeButton
               value={this.state}
               onChange={this.handleChange}
               addRecipe={this.addRecipe}
@@ -232,7 +230,7 @@ UserRecipes.propTypes = {
  */
 const mapStateToProps = state => ({
   recipes: state.getUserRecipeReducer[0],
-  userId: state.signinReducer[0].userData.id,
+  userId: state.authReducer.userData.id,
   recipeImageUrl: state.saveImageToCloud[0].image
 });
 

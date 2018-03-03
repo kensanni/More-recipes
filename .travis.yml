@@ -13,4 +13,4 @@ before_script:
   - createdb more-recipe --username=postgres
   - sequelize db:migrate 
 after_success:
-  - npm run coveralls
+  - travis_wait npm run coveralls

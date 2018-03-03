@@ -14,7 +14,7 @@ const getFavoriteRecipeReducer = (state = initialState, action) => {
     case GET_FAVORITE_RECIPE_REQUEST:
       return [{
         isFetched,
-        recipeData: {},
+        recipeData: [],
         errorMessage: ''
       },
       ...state
@@ -30,7 +30,7 @@ const getFavoriteRecipeReducer = (state = initialState, action) => {
     case GET_FAVORITE_RECIPE_ERROR:
       return [{
         isFetched,
-        recipeData: {},
+        recipeData: [],
         errorMessage,
       },
       ...state

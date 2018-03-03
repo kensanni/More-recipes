@@ -9,6 +9,7 @@ import { getUserRecipeRequest, getUserRecipeSuccessful, getUserRecipeError } fro
  * @returns {undefined} redux action to be dispatch to the store
  */
 export default function getUserRecipe(userId) {
+  console.log("user id =====>",userId);
   return (dispatch) => {
     dispatch(getUserRecipeRequest());
     instance.get(`/users/${userId}/recipes`)

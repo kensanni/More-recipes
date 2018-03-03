@@ -137,7 +137,7 @@ SignIn.propTypes = {
  * @returns {undefined}
  */
 const mapStateToProps = state => ({
-  signinResponse: state.signinReducer[0],
+  signinResponse: state.authReducer,
 });
 
 export default connect(mapStateToProps, { signInAction })(SignIn);

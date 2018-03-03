@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Favorites } = model;
+const { Favorites, Recipes  } = model;
 /**
  * @class Favorite
 */
@@ -45,7 +45,12 @@ class Favorite {
     const getFavoriteRecipes = await Favorites.findAll({
       where: {
         userId: req.decoded.id
-      }
+      },
+      include: [
+        {
+          model: Recipes,
+        }
+      ]
     });
 
     return res.status(200).send({

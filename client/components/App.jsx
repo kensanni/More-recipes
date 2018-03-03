@@ -8,6 +8,7 @@ import AllRecipes from './recipes/AllRecipes';
 import UserRecipes from './recipes/userRecipes/UserRecipes';
 import SignUp from './signupPage/connectedComponent/SignUp';
 import SignIn from './signinPage/connectedComponent/SignIn';
+import UserProfileContainer from '../components/recipes/userProfile/UserProfileContainer';
 import { signInFromLocalStorage } from '../actionController/signin';
 
 const history = createBrowserHistory();
@@ -35,10 +36,11 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/recipes" component={AllRecipes} />
-            <Route path="/profile" component={UserRecipes} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/recipes" component={AllRecipes} />
+            <Route exact path="/account/recipes" component={UserProfileContainer} />
+            <Route exact path="/profile" component={UserRecipes} />
           </Switch>
         </div>
       </Router>
