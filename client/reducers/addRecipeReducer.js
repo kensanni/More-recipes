@@ -1,42 +1,39 @@
 import { ADD_RECIPE_REQUEST, ADD_RECIPE_SUCCESSFUL, ADD_RECIPE_ERROR } from '../actions/addRecipeAction';
 
-const initialState = [{
+const initialState = {
   isAdded: false,
-  recipeData: {},
+  recipeData: [],
   responseMessage: '',
   errorMessage: ''
-}];
+};
 
 
 const addRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_RECIPE_REQUEST:
-      return [{
+      return {
+        ...state,
         isAdded: action.isAdded,
-        recipeData: {},
+        recipeData: [],
         responseMessage: '',
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case ADD_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isAdded: action.isAdded,
-        recipeData: {},
+        recipeData: [],
         responseMessage: action.responseMessage,
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case ADD_RECIPE_ERROR:
-      return [{
+      return {
+        ...state,
         isAdded: action.isAdded,
-        recipeData: {},
+        recipeData: [],
         responseMessage: '',
         errorMessage: action.errorMessage,
-      },
-      ...state
-      ];
+      };
     default:
       return state;
   }

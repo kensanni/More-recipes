@@ -3,11 +3,11 @@ import { GET_USER_RECIPE_REQUEST, GET_USER_RECIPE_SUCCESSFUL, GET_USER_RECIPE_ER
 import { DELETE_RECIPE_SUCCESSFUL } from '../actions/deleteRecipeAction';
 import { ADD_RECIPE_SUCCESSFUL } from '../actions/addRecipeAction';
 
-const initialState = [{
+const initialState = {
   isFetched: false,
   recipeData: [],
   errorMessage: ''
-}];
+};
 
 /**
  * @description get user recipes reducer
@@ -24,52 +24,47 @@ const getUserRecipeReducer = (state = initialState, action) => {
   } = action;
   const newRecipe = [];
   if (newRecipeData) {
-    state[0].recipeData.map((recipe) => {
+    state.recipeData.map((recipe) => {
       newRecipe.push(recipe);
     });
     newRecipe.push(newRecipeData);
   }
   switch (action.type) {
     case GET_USER_RECIPE_REQUEST:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData: [],
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case GET_USER_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData,
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case GET_USER_RECIPE_ERROR:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData: [],
         errorMessage
-      },
-      ...state
-      ];
+      };
     case DELETE_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isFetched: true,
-        recipeData: filter(state[0].recipeData, recipe => recipe.id !== action.recipeId),
+        recipeData: filter(state.recipeData, recipe => recipe.id !== action.recipeId),
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case ADD_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isFetched: true,
         recipeData: newRecipe,
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     default:
       return state;
   }

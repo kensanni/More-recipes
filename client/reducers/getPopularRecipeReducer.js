@@ -4,11 +4,11 @@ import { INCREMENT_DOWNVOTE, DECREMENT_DOWNVOTE } from '../actions/downvoteRecip
 import { FAVORITE_RECIPE_SUCCESSFUL } from '../actions/favoriteRecipeAction';
 
 
-const initialState = [{
+const initialState = {
   isFetched: false,
   popularRecipesData: [],
   errorMessage: ''
-}];
+};
 /**
  * @description recipe reducer
  * @param {object} state - default application state
@@ -19,34 +19,30 @@ const getPopularRecipeReducer = (state = initialState, action) => {
   const { isFetched, popularRecipesData, errorMessage } = action;
   switch (action.type) {
     case GET_POPULAR_RECIPE_REQUEST:
-      return [{
+      return {
+        ...state,
         isFetched,
         popularRecipesData: [],
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case GET_POPULAR_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isFetched,
         popularRecipesData,
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case GET_POPULAR_RECIPE_ERROR:
-      return [{
+      return {
         isFetched,
         popularRecipesData: [],
         errorMessage
-      },
-      ...state
-      ];
+      };
     case INCREMENT_UPVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
+      return {
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        popularRecipesData: state.popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -55,14 +51,13 @@ const getPopularRecipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case DECREMENT_UPVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
+      return {
+        ...state,
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        popularRecipesData: state.popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -71,14 +66,13 @@ const getPopularRecipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case INCREMENT_DOWNVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
+      return {
+        ...state,
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        popularRecipesData: state.popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -87,14 +81,13 @@ const getPopularRecipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case DECREMENT_DOWNVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
+      return {
+        ...state,
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        popularRecipesData: state.popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -103,11 +96,10 @@ const getPopularRecipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case FAVORITE_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isFetched: state[0].isFetched,
         errorMessage: state[0].errorMessage,
         popularRecipesData: state[0].popularRecipesData.map((recipe) => {
@@ -119,9 +111,7 @@ const getPopularRecipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     default:
       return state;
   }

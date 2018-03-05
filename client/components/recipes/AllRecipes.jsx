@@ -221,7 +221,7 @@ AllRecipes.propTypes = {
 const mapStateToProps = state => ({
   authenticated: state.authReducer.isAuthenticated,
   recipes: state.recipeReducer,
-  popularRecipes: state.getPopularRecipeReducer[0]
+  popularRecipes: state.getPopularRecipeReducer
 });
 
 /**

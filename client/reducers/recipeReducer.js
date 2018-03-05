@@ -3,7 +3,6 @@ import { INCREMENT_UPVOTE, DECREMENT_UPVOTE } from '../actions/upvoteRecipeActio
 import { INCREMENT_DOWNVOTE, DECREMENT_DOWNVOTE } from '../actions/downvoteRecipeAction';
 import { FAVORITE_RECIPE_SUCCESSFUL } from '../actions/favoriteRecipeAction';
 
-/* eslint-disable no-case-declarations */
 const initialState = {
   isFetched: false,
   recipeData: [],

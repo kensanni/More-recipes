@@ -18,6 +18,7 @@ export default function saveImageToCloud(image) {
 
   return (dispatch) => {
     dispatch(saveImageToCloudRequest(formData));
+    console.log('formData', formData);
     axios.post(cloudinaryUrl, formData)
       .then((res) => {
         const { secure_url } = res.data;

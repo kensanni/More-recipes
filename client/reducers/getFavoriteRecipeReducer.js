@@ -1,10 +1,10 @@
 import { GET_FAVORITE_RECIPE_REQUEST, GET_FAVORITE_RECIPE_SUCCESSFUL, GET_FAVORITE_RECIPE_ERROR } from '../actions/getFavoriteRecipeAction';
 
-const initialState = [{
+const initialState = {
   isFetched: false,
   recipeData: [],
   errorMessage: ''
-}];
+};
 
 const getFavoriteRecipeReducer = (state = initialState, action) => {
   const {
@@ -12,29 +12,26 @@ const getFavoriteRecipeReducer = (state = initialState, action) => {
   } = action;
   switch (action.type) {
     case GET_FAVORITE_RECIPE_REQUEST:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData: [],
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case GET_FAVORITE_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData,
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case GET_FAVORITE_RECIPE_ERROR:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData: [],
         errorMessage,
-      },
-      ...state
-      ];
+      };
     default:
       return state;
   }

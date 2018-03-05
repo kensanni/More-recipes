@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import getFavoriteRecipeAction from '../../../actionController/getFavoriteRecipe';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
+import FavoriteRecipeTitle from '../../../components/Include/FavoriteRecipeTitle';
+import UserProfile from './UserProfile';
 import RecipeGrid from '../../recipes/RecipeGrid';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
 import downvoteRecipeAction from '../../../actionController/downvoteRecipe';
@@ -26,7 +28,6 @@ class UserProfileContainer extends Component {
    */
   componentDidMount() {
     const { userId } = this.props;
-    console.log(userId);
     this.props.getFavoriteRecipeAction(userId);
   }
   /**
@@ -65,39 +66,49 @@ class UserProfileContainer extends Component {
   favoriteRecipe(id) {
     this.props.favoriteRecipeAction(id);
   }
+
   /**
    * @description render - display component
    *
    * @return {JSX} return JSX
    */
   render() {
-    console.log('***', this.props.favoriteRecipes.recipeData.data);
     return (
       <div>
         <Header />
-        {
-          this.props.favoriteRecipes.isFetched ?
-            <RecipeGrid
-              recipeData={this.props.favoriteRecipes.recipeData.data}
-              upvoteRecipe={this.upvoteRecipe}
-              downvoteRecipe={this.downvoteRecipe}
-              favoriteRecipe={this.favoriteRecipe}
-            />
-          :
-            <h1 style={{marginTop: '150px'}}>I am Loading</h1>
+        <div className="container">
+          <UserProfile
+            userData={this.props.userData}
+          />
+          <FavoriteRecipeTitle />
+          <section className="row">
+            {
+             this.props.favoriteRecipes.isFetched ?
+               <RecipeGrid
+                 recipeData={this.props.favoriteRecipes.recipeData.data}
+                 upvoteRecipe={this.upvoteRecipe}
+                 downvoteRecipe={this.downvoteRecipe}
+                 favoriteRecipe={this.favoriteRecipe}
+               />
+            :
+               <h1 style={{ marginTop: '150px' }}>I am Loading</h1>
         }
+          </section>
+        </div>
         <Footer />
       </div>
     );
   }
 }
+
 const mapStateToProps = state => (
-  console.log('auth', state.getFavoriteRecipeReducer[0]),
+  console.log('state', state.authReducer.userData),
   {
     authenticated: state.authReducer.isAuthenticated,
     recipes: state.recipeReducer,
     userId: state.authReducer.userData.id,
-    favoriteRecipes: state.getFavoriteRecipeReducer[0]
+    userData: state.authReducer.userData,
+    favoriteRecipes: state.getFavoriteRecipeReducer
   });
 /**
  * @description make actions available to AllRecipes as props

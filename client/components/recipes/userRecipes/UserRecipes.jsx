@@ -156,6 +156,7 @@ class UserRecipes extends Component {
    */
   saveImageToCloud(event) {
     const image = event.target.files[0];
+    console.log('action', image);
     if (image) {
       this.props.saveImageToCloudAction(image);
     }
@@ -229,9 +230,9 @@ UserRecipes.propTypes = {
  * @returns {object} object
  */
 const mapStateToProps = state => ({
-  recipes: state.getUserRecipeReducer[0],
+  recipes: state.getUserRecipeReducer,
   userId: state.authReducer.userData.id,
-  recipeImageUrl: state.saveImageToCloud[0].image
+  recipeImageUrl: state.saveImageToCloud.image
 });
 
 const mapDispatchToProps = dispatch => (

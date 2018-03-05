@@ -36,6 +36,7 @@ export default function signin(userdata) {
 export const signInFromLocalStorage = () => (
   (dispatch) => {
     const token = localStorage.getItem('token');
+    console.log('token', token);
     if (token) {
       const userinfo = jwt.decode(token);
       instance(token);
