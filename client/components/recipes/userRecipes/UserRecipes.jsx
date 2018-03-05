@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { filter } from 'lodash';
+import { filter, isEmpty } from 'lodash';
+import ReactPaginate from 'react-paginate';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
@@ -31,6 +32,7 @@ class UserRecipes extends Component {
       isFetched: false,
       name: '',
       isChanged: false,
+      responseMessage: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
@@ -39,16 +41,18 @@ class UserRecipes extends Component {
     this.editRecipe = this.editRecipe.bind(this);
     this.handleShowRecipe = this.handleShowRecipe.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handlePaginationChange = this.handlePaginationChange.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
    *
    * @param {props} props
    *
-   * @returns {undefined} return all recipes
+   * @returns {void} return all recipes
    */
   componentDidMount() {
-    this.props.getUserRecipe(this.props.userId);
+    const { userId, page } = this.props;
+    this.props.getUserRecipe(userId, page);
   }
 
   /**
@@ -59,8 +63,13 @@ class UserRecipes extends Component {
    * @return {undefined} updated user recipe
    */
   componentWillReceiveProps(nextProps) {
-    const { recipeImageUrl, recipes } = nextProps;
+    const { recipeImageUrl, recipes, addRecipeResponse } = nextProps;
     const { recipeData, isFetched } = recipes;
+    if (!isEmpty(addRecipeResponse)) {
+      this.setState({
+        responseMessage: nextProps.addRecipeResponse
+      });
+    }
     if (recipeData !== this.props.recipes.recipeData) {
       this.setState({
         recipeData,
@@ -142,9 +151,9 @@ class UserRecipes extends Component {
       name, image, description, ingredient
     };
     this.props.addRecipeAction(newRecipe);
-    this.setState({
-      name: '', image: '', description: '', ingredient: ''
-    });
+    // this.setState({
+    //   name: '', image: '', description: '', ingredient: ''
+    // });
   }
 
   /**
@@ -163,13 +172,19 @@ class UserRecipes extends Component {
   }
 
   /**
-   * @description set the state of recipe data whwn form is closed
+   * @description set the state of recipe data when form is closed
+   *
    * @returns {undefined} set state of isChanged
    */
   handleCloseModal() {
     this.setState({
       isChanged: false
     });
+  }
+
+  handlePaginationChange(recipes) {
+    const { userId } = this.props;
+    this.props.getUserRecipe(userId, recipes.selected);
   }
 
   /**
@@ -207,6 +222,26 @@ class UserRecipes extends Component {
               saveImageToCloud={this.saveImageToCloud}
             />
           </div>
+          <div className="pt-3 pb-5">
+            <ReactPaginate
+              previousLabel="Previous"
+              nextLabel="Next"
+              breakLabel={<a href="">...</a>}
+              breakClassName="page-link"
+              onPageChange={this.handlePaginationChange}
+              pageCount={this.props.page}
+              containerClassName="pagination justify-content-center"
+              pageLinkClassName="page-link"
+              nextLinkClassName="page-link"
+              previousLinkClassName="page-link"
+              disabledClassName="disabled"
+              pageClassName="page-item"
+              previousClassName="page-item"
+              nextClassName="page-item"
+              activeClassName="active"
+              subContainerClassName="pages pagination"
+            />
+          </div>
           <Footer />
         </div>
       </div>
@@ -229,11 +264,15 @@ UserRecipes.propTypes = {
  * @param {state} state
  * @returns {object} object
  */
-const mapStateToProps = state => ({
-  recipes: state.getUserRecipeReducer,
-  userId: state.authReducer.userData.id,
-  recipeImageUrl: state.saveImageToCloud.image
-});
+const mapStateToProps = state => (
+  console.log('recipes', state.getUserRecipeReducer.page),
+  {
+    recipes: state.getUserRecipeReducer,
+    userId: state.authReducer.userData.id,
+    page: state.getUserRecipeReducer.page,
+    recipeImageUrl: state.saveImageToCloud.image,
+    addRecipeResponse: state.addRecipeReducer.errorMessage
+  });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({

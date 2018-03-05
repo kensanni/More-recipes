@@ -3,12 +3,13 @@ import { GET_FAVORITE_RECIPE_REQUEST, GET_FAVORITE_RECIPE_SUCCESSFUL, GET_FAVORI
 const initialState = {
   isFetched: false,
   recipeData: [],
-  errorMessage: ''
+  errorMessage: '',
+  page: 0
 };
 
 const getFavoriteRecipeReducer = (state = initialState, action) => {
   const {
-    isFetched, recipeData, errorMessage
+    isFetched, recipeData, errorMessage, page
   } = action;
   switch (action.type) {
     case GET_FAVORITE_RECIPE_REQUEST:
@@ -19,11 +20,13 @@ const getFavoriteRecipeReducer = (state = initialState, action) => {
         errorMessage: ''
       };
     case GET_FAVORITE_RECIPE_SUCCESSFUL:
+      console.log(action.page);
       return {
         ...state,
         isFetched,
         recipeData,
-        errorMessage: ''
+        errorMessage: '',
+        page,
       };
     case GET_FAVORITE_RECIPE_ERROR:
       return {

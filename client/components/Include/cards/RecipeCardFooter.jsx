@@ -5,6 +5,7 @@ import DeleteRecipeButton from '../../Include/buttons/DeleteRecipeButton';
 import DeleteModal from '../../Include/modals/DeleteModal';
 
 const RecipeCardFooter = (props) => {
+  console.log('favRecipeData', props);
   const {
     recipeData,
     showRecipeDetails,
@@ -18,7 +19,8 @@ const RecipeCardFooter = (props) => {
     downvoteRecipe,
     favoriteRecipe,
     showActionButton,
-    startEdit
+    startEdit,
+    favRecipeData
   } = props.data;
   const {
     id, upvotes, downvotes, favorites
@@ -74,7 +76,7 @@ const RecipeCardFooter = (props) => {
           aria-hidden="true"
           onClick={() => upvoteRecipe(id)}
         >
-          <span className="small pr-2">{upvotes}
+          <span className="small pr-2">{upvotes || favRecipeData.upvotes}
           </span>
         </i>
         <i
@@ -83,7 +85,7 @@ const RecipeCardFooter = (props) => {
           onClick={() => downvoteRecipe(id)}
         >
           <span className="small pr-2">
-            {downvotes}
+            {downvotes || favRecipeData.downvotes}
           </span>
         </i>
       </li>

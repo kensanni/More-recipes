@@ -6,10 +6,11 @@ export const getFavoriteRecipeRequest = () => ({
   type: GET_FAVORITE_RECIPE_REQUEST,
   isFetched: false
 });
-export const getFavoriteRecipeSuccessful = recipeData => ({
+export const getFavoriteRecipeSuccessful = (recipeData, page) => ({
   type: GET_FAVORITE_RECIPE_SUCCESSFUL,
   isFetched: true,
-  recipeData
+  recipeData,
+  page
 });
 export const getFavoriteRecipeError = errorMessage => ({
   type: GET_FAVORITE_RECIPE_ERROR,

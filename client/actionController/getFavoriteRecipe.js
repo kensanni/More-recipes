@@ -6,17 +6,18 @@ import { getFavoriteRecipeRequest, getFavoriteRecipeSuccessful, getFavoriteRecip
  *
  * @param {userId} userId
  *
+ * @param {page} page
+ *
  * @returns {undefined} redux action to be dispatch to the store
  */
-export default function getFavoriteRecipe(userId) {
-  console.log('favoriteRecipe', userId);  
+export default function getFavoriteRecipe(userId, page) {
   return (dispatch) => {
     dispatch(getFavoriteRecipeRequest());
-    instance.get(`/users/${userId}/favorites`)
+    instance.get(`/users/${userId}/favorites?page=${page}`)
       .then((favoriteRecipe) => {
         const { data } = favoriteRecipe;
-        console.log('favoriteRecipe', data);
-        dispatch(getFavoriteRecipeSuccessful(data));
+        const { pages } = favoriteRecipe.data;
+        dispatch(getFavoriteRecipeSuccessful(data, pages));
       })
       .catch((errors) => {
         dispatch(getFavoriteRecipeError(errors[0].message));

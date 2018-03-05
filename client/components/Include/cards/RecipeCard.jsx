@@ -12,13 +12,14 @@ import RecipeCardFooter from './RecipeCardFooter';
 
 const RecipeCard = (props) => {
   const { recipeData, favRecipeData } = props;
-  // const {
-  //   name, description, image
-  // } = recipeData || favRecipeData;
   return (
     <div className="col-sm-6 col-md-4 pt-4 mb-5">
       <div className="card">
-        <img className="card-img-top img-max" src={recipeData.image || favRecipeData.image} alt="" />
+        <img
+          className="card-img-top img-max"
+          src={recipeData.image || favRecipeData.image}
+          alt=""
+        />
         <div className="card-body">
           <a href="recipeDetail.html">
             <h4 className="card-title">{recipeData.name || favRecipeData.name}</h4>

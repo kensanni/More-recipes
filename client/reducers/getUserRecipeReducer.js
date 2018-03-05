@@ -6,7 +6,8 @@ import { ADD_RECIPE_SUCCESSFUL } from '../actions/addRecipeAction';
 const initialState = {
   isFetched: false,
   recipeData: [],
-  errorMessage: ''
+  errorMessage: '',
+  page: 0
 };
 
 /**
@@ -20,8 +21,9 @@ const initialState = {
  */
 const getUserRecipeReducer = (state = initialState, action) => {
   const {
-    isFetched, recipeData, errorMessage, newRecipeData
+    isFetched, recipeData, errorMessage, newRecipeData, page
   } = action;
+
   const newRecipe = [];
   if (newRecipeData) {
     state.recipeData.map((recipe) => {
@@ -29,6 +31,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
     });
     newRecipe.push(newRecipeData);
   }
+
   switch (action.type) {
     case GET_USER_RECIPE_REQUEST:
       return {
@@ -42,7 +45,8 @@ const getUserRecipeReducer = (state = initialState, action) => {
         ...state,
         isFetched,
         recipeData,
-        errorMessage: ''
+        errorMessage: '',
+        page
       };
     case GET_USER_RECIPE_ERROR:
       return {

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import miniToastr from 'mini-toastr';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes, { any } from 'prop-types';
+import ReactPaginate from 'react-paginate';
 import getFavoriteRecipeAction from '../../../actionController/getFavoriteRecipe';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
@@ -20,6 +22,18 @@ import favoriteRecipeAction from '../../../actionController/favoriteRecipe';
  */
 class UserProfileContainer extends Component {
   /**
+   * @description create an instance of UserProfileContainer
+   *
+   * @param {props} props
+   */
+  constructor(props) {
+    super(props);
+    this.upvoteRecipe = this.upvoteRecipe.bind(this);
+    this.downvoteRecipe = this.downvoteRecipe.bind(this);
+    this.favoriteRecipe = this.favoriteRecipe.bind(this);
+    this.handlePaginationChange = this.handlePaginationChange.bind(this);
+  }
+  /**
    * @description call the action to display user favorite recipe
    *
    * @param {props} props
@@ -27,8 +41,9 @@ class UserProfileContainer extends Component {
    * @return {undefined} call getRecipe
    */
   componentDidMount() {
-    const { userId } = this.props;
-    this.props.getFavoriteRecipeAction(userId);
+    const { userId, page } = this.props;
+    this.props.getFavoriteRecipeAction(userId, page);
+    console.log('userId', this.props.page);
   }
   /**
    * @description upvote a recipe
@@ -67,6 +82,12 @@ class UserProfileContainer extends Component {
     this.props.favoriteRecipeAction(id);
   }
 
+  handlePaginationChange(favoriteRecipes) {
+    const { userId } = this.props;
+    this.props.getFavoriteRecipeAction(userId, favoriteRecipes.selected);
+  }
+
+
   /**
    * @description render - display component
    *
@@ -95,21 +116,50 @@ class UserProfileContainer extends Component {
         }
           </section>
         </div>
+        <ReactPaginate
+          previousLabel="Previous"
+          nextLabel="Next"
+          breakLabel={<a href="">...</a>}
+          breakClassName="page-link"
+          onPageChange={this.handlePaginationChange}
+          pageCount={this.props.page}
+          containerClassName="pagination justify-content-center"
+          pageLinkClassName="page-link"
+          nextLinkClassName="page-link"
+          previousLinkClassName="page-link"
+          disabledClassName="disabled"
+          pageClassName="page-item"
+          previousClassName="page-item"
+          nextClassName="page-item"
+          activeClassName="active"
+          subContainerClassName="pages pagination"
+        />
         <Footer />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => (
-  console.log('state', state.authReducer.userData),
-  {
-    authenticated: state.authReducer.isAuthenticated,
-    recipes: state.recipeReducer,
-    userId: state.authReducer.userData.id,
-    userData: state.authReducer.userData,
-    favoriteRecipes: state.getFavoriteRecipeReducer
-  });
+UserProfileContainer.propTypes = {
+  upvoteRecipeAction: PropTypes.func.isRequired,
+  downvoteRecipeAction: PropTypes.func.isRequired,
+  favoriteRecipeAction: PropTypes.func.isRequired,
+  getFavoriteRecipeAction: PropTypes.func.isRequired,
+  favoriteRecipes: PropTypes.objectOf(any).isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  userData: PropTypes.objectOf(any).isRequired,
+  userId: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired
+};
+
+const mapStateToProps = state => ({
+  authenticated: state.authReducer.isAuthenticated,
+  recipes: state.recipeReducer,
+  userId: state.authReducer.userData.id,
+  page: state.getFavoriteRecipeReducer.page,
+  userData: state.authReducer.userData,
+  favoriteRecipes: state.getFavoriteRecipeReducer
+});
 /**
  * @description make actions available to AllRecipes as props
  *

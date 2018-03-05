@@ -31,7 +31,7 @@ const AddRecipeButton = (props) => {
           onChange={onChange}
           addRecipe={addRecipe}
           value={value}
-          saveImageToCloud={saveImageToCloud}   
+          saveImageToCloud={saveImageToCloud}
         />
       </div>
     </div>

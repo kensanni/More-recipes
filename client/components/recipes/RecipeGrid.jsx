@@ -5,7 +5,7 @@ const RecipeGrid = props => (
   props.recipeData.map(recipe => (
     <RecipeCard
       key={recipe.id}
-      favRecipeData={recipe.Recipe}
+      favRecipeData={recipe}
       recipeData={recipe}
       upvoteRecipe={props.upvoteRecipe}
       downvoteRecipe={props.downvoteRecipe}

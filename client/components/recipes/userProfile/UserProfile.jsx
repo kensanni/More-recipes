@@ -2,7 +2,6 @@ import React from 'react';
 import avatar from '../../../public/images/avatar.png';
 
 const UserProfile = (props) => {
-  console.log('userData', props);
   const { email, username } = props.userData;
   return (
     <div className="row mt-5 pb-3">

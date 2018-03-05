@@ -138,6 +138,10 @@ class Recipe {
    * @return {JSON} return a json object
    */
   static async getUserRecipes(req, res) {
+    let offset;
+    let pages;
+    let singlePage;
+    const limit = 6;
     const userId = req.decoded.id;
     const id = parseInt(req.params.userId, 10);
 
@@ -147,16 +151,19 @@ class Recipe {
       });
     }
 
+    const findAndCountUserRecipes = await Recipes.findAndCountAll();
+
+    if (findAndCountUserRecipes) {
+      pages = Math.ceil(findAndCountUserRecipes.count / limit);
+      singlePage = parseInt(req.query.page, 10);
+      offset = singlePage * limit;
+    }
+
     const userRecipe = await Recipes.findAll({
       where: { userId },
-      include: [{
-        model: model.Reviews,
-        attributes: ['review'],
-        include: [{
-          model: model.Users,
-          attributes: ['username', 'updatedAt'],
-        }]
-      }],
+      limit,
+      offset,
+      pages
     });
 
     if (userRecipe.length < 1) {
@@ -166,7 +173,8 @@ class Recipe {
     }
 
     return res.status(200).send({
-      recipesData: userRecipe
+      recipesData: userRecipe,
+      pages
     });
   }
   /**

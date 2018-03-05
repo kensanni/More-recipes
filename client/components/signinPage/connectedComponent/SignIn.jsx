@@ -33,7 +33,6 @@ class SignIn extends Component {
   componentWillMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
     if (this.props.signinResponse.isAuthenticated) {
-      console.log(this.props.signinResponse.isAuthenticated);
       this.props.history.push('/recipes');
     }
   }
@@ -48,7 +47,7 @@ class SignIn extends Component {
   }
 
   /**
-   * @description update the state of error message and redirect to a new page
+   * @description update the state of error message and also redirect to a new page
    *
    * @param {nextProps} nextProps
    *

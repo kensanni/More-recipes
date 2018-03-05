@@ -12,7 +12,9 @@ const AddModal = (props) => {
   const {
     onChange, value, saveImageToCloud, addRecipe
   } = props;
-  const { name, description, ingredient } = value;
+  const {
+    name, description, ingredient, responseMessage
+  } = value;
   return (
     <div
       className="modal fade"
@@ -40,6 +42,9 @@ const AddModal = (props) => {
           <div className="modal-body">
             <form>
               <div className="form-group">
+                <div className="error-message">
+                  { responseMessage }
+                </div>
                 <label
                   htmlFor="recipient-name"
                   className="col-form-label black"
@@ -102,7 +107,6 @@ const AddModal = (props) => {
               type="button"
               className="btn btn-orange"
               onClick={addRecipe}
-              data-dismiss="modal"
             >
               Add recipe
             </button>
