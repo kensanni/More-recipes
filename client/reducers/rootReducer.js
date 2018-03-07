@@ -6,6 +6,8 @@ import editRecipeReducer from './editRecipeReducer';
 import deleteRecipeReducer from './deleteRecipeReducer';
 import recipeReducer from './recipeReducer';
 import getUserRecipeReducer from './getUserRecipeReducer';
+import getRecipeDetailsReducer from './getRecipeDetailsReducer';
+import addReviewsReducer from './addReviewsReducer';
 import getPopularRecipeReducer from './getPopularRecipeReducer';
 import getFavoriteRecipeReducer from './getFavoriteRecipeReducer';
 
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
   getFavoriteRecipeReducer,
   deleteRecipeReducer,
   editRecipeReducer,
+  addReviewsReducer,
+  getRecipeDetailsReducer,
   getUserRecipeReducer,
   getPopularRecipeReducer
 });

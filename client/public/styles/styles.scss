@@ -94,16 +94,24 @@ a {
   background-color: $main-color;
   color: $white-color;
   text-align: center;
+  border-radius: 3px;
+  font-size: 20px;
+}
+
+.img-width {
+  width: 100%;
 }
 
 .header-nav {
   background-color: $main-color;
   color: $white-color;
 }
+
 #header-link {
   text-decoration: none;
   color: #212529;
 }
+
 .navbar-link {
   padding-right: 0;
   padding-left: 0;
@@ -296,4 +304,7 @@ p {
 
 .carousel-caption {
   top: 30%
+}
+.inline-button {
+  display: inline-flex;
 }

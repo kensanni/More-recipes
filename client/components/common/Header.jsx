@@ -53,7 +53,7 @@ const Header = () => ((
                 Profile
               </Link>
               <Link
-                to="/myRecipe"
+                to="/my-recipes"
                 className="dropdown-item nav-text"
               >
                 My recipe

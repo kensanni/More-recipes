@@ -7,7 +7,7 @@ import { addRecipeRequest, addRecipeError, addRecipeSuccess } from '../actions/a
  *
  * @param {recipeData} recipeData
  *
- * @returns {undefinded} redux action to be dispatch to the store
+ * @returns {void} redux action to be dispatch to the store
  */
 export default function addRecipe(recipeData) {
   return (dispatch) => {

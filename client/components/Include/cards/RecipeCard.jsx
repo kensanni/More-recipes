@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes, { any } from 'prop-types';
+import { Link } from 'react-router-dom';
 import RecipeCardFooter from './RecipeCardFooter';
 
 /**
@@ -21,9 +22,9 @@ const RecipeCard = (props) => {
           alt=""
         />
         <div className="card-body">
-          <a href="recipeDetail.html">
+          <Link to={`/recipes/${recipeData.id || favRecipeData.id}`}>
             <h4 className="card-title">{recipeData.name || favRecipeData.name}</h4>
-          </a>
+          </Link>
           <p className="card-text pt-2">
             {recipeData.description || favRecipeData.description}
           </p>

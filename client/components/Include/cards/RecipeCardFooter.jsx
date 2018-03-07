@@ -5,7 +5,6 @@ import DeleteRecipeButton from '../../Include/buttons/DeleteRecipeButton';
 import DeleteModal from '../../Include/modals/DeleteModal';
 
 const RecipeCardFooter = (props) => {
-  console.log('favRecipeData', props);
   const {
     recipeData,
     showRecipeDetails,

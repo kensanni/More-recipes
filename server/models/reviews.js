@@ -9,6 +9,10 @@ export default (sequelize, DataTypes) => {
         as: 'userId',
       }
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     recipeId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
@@ -29,7 +33,7 @@ export default (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     });
     Reviews.belongsTo(models.Users, {
-      foreignKey: 'recipeId',
+      foreignKey: 'userId',
       onDelete: 'CASCADE'
     });
   };

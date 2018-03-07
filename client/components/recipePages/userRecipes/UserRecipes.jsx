@@ -30,7 +30,6 @@ class UserRecipes extends Component {
     this.state = {
       recipeData: [],
       isFetched: false,
-      name: '',
       isChanged: false,
       responseMessage: '',
     };
@@ -111,7 +110,7 @@ class UserRecipes extends Component {
    *
    * @param {event} event
    *
-   * @returns {undefined} set the state of value inputs on form
+   * @returns {void} set the state of value inputs on form
    */
   handleChange(event) {
     const { name, value } = event.target;

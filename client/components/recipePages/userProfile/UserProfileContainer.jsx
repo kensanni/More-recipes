@@ -9,7 +9,7 @@ import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import FavoriteRecipeTitle from '../../../components/Include/FavoriteRecipeTitle';
 import UserProfile from './UserProfile';
-import RecipeGrid from '../../recipes/RecipeGrid';
+import RecipeGrid from '../../recipePages/RecipeGrid';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
 import downvoteRecipeAction from '../../../actionController/downvoteRecipe';
 import favoriteRecipeAction from '../../../actionController/favoriteRecipe';
@@ -18,7 +18,7 @@ import favoriteRecipeAction from '../../../actionController/favoriteRecipe';
 /**
  * @class UserProfileContainer
  *
- * @description container display user profile and favorited recipe of a user
+ * @description container displaying user profile and favorited recipe of a user
  */
 class UserProfileContainer extends Component {
   /**
@@ -43,7 +43,6 @@ class UserProfileContainer extends Component {
   componentDidMount() {
     const { userId, page } = this.props;
     this.props.getFavoriteRecipeAction(userId, page);
-    console.log('userId', this.props.page);
   }
   /**
    * @description upvote a recipe

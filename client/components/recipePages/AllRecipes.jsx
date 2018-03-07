@@ -4,7 +4,7 @@ import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import ReactPaginate from 'react-paginate';
 import miniToastr from 'mini-toastr';
-import RecipeGrid from '../recipes/RecipeGrid';
+import RecipeGrid from '../recipePages/RecipeGrid';
 import Header from '../common/Header';
 import GuestHeader from '../common/GuestHeader';
 import Footer from '../common/Footer';

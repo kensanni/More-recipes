@@ -17,6 +17,7 @@ export default class Review {
     const findRecipe = await Recipes.findById(req.params.recipeId);
     const addReview = await Reviews.create({
       recipeId: req.params.recipeId,
+      username: req.decoded.username,
       review,
       userId: req.decoded.id,
     });

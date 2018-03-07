@@ -110,11 +110,7 @@ class Recipe {
       where: { id },
       include: [{
         model: model.Reviews,
-        attributes: ['review'],
-        include: [{
-          model: model.Users,
-          attributes: ['username', 'updatedAt'],
-        }]
+        attributes: ['review']
       }],
     });
 
@@ -128,7 +124,7 @@ class Recipe {
     const updatedRecipe = await updateRecipeAttributes(recipe);
 
     return res.status(200).send({
-      data: updatedRecipe
+      recipeData: updatedRecipe,
     });
   }
   /**
