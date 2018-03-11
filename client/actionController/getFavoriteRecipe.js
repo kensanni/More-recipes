@@ -4,11 +4,11 @@ import { getFavoriteRecipeRequest, getFavoriteRecipeSuccessful, getFavoriteRecip
 /**
  * @description action creator for adding recipe
  *
- * @param {userId} userId
+ * @param {number} userId
  *
- * @param {page} page
+ * @param {number} page
  *
- * @returns {undefined} redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function getFavoriteRecipe(userId, page) {
   return (dispatch) => {

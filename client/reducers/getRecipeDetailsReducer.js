@@ -11,6 +11,15 @@ const initialState = {
   errorMessage: ''
 };
 
+/**
+ * @description get recipe details reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const getRecipeDetailsReducer = (state = initialState, action) => {
   const {
     isFetched, recipeDetails, errorMessage, review

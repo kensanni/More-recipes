@@ -12,9 +12,12 @@ const { Recipes } = model;
 class Recipe {
   /**
    * @description Adds a recipe
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res   HTTP response object
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @returns {object} return a json object
    */
   static async addRecipes(req, res) {
     const {
@@ -36,9 +39,12 @@ class Recipe {
   }
   /**
    * @description modify a recipe
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res  HTTP response object
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @returns {object} return a json object
    */
   static async modifyRecipe(req, res) {
     const {
@@ -60,9 +66,12 @@ class Recipe {
   }
   /**
    * @description get all recipe
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res  HTTP response object
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @returns {object} return a json object
    */
   static async getRecipes(req, res) {
     const limit = req.query.limit || 6;
@@ -100,9 +109,12 @@ class Recipe {
   }
   /**
      * @description get one recipe
+     *
      * @param {object} req HTTP request object
+     *
      * @param {object} res  HTTP response object
-     * @returns  {JSON} Returns a JSON object
+     *
+     * @returns {object} Returns a JSON object
      */
   static async getARecipe(req, res) {
     const id = req.params.recipeId;
@@ -130,9 +142,12 @@ class Recipe {
   }
   /**
    * @description get user recipes
-   * @param {*} req HTTP request object
-   * @param {*} res HTTP responds object
-   * @return {JSON} return a json object
+   *
+   * @param {object} req HTTP request object
+   *
+   * @param {object} res HTTP responds object
+   *
+   * @return {object} return a json object
    */
   static async getUserRecipes(req, res) {
     let offset;
@@ -183,9 +198,12 @@ class Recipe {
   }
   /**
    * @description delete a recipe
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res  HTTP response object
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @returns  {object} Returns a JSON object
    */
   static async deleteRecipes(req, res) {
     const findRecipe = await Recipes.find({
@@ -209,11 +227,11 @@ class Recipe {
   /**
    * @description
    *
-   * @param {object} req
+   * @param {object} req HTTP request object
    *
-   * @param {object} res
+   * @param {object} res HTTP response object
    *
-   * @returns {object} oject
+   * @returns {object} return a json object
    */
   static async popularRecipes(req, res) {
     const getRecipes = await Recipes.findAll({
@@ -236,11 +254,11 @@ class Recipe {
   /**
    * @description
    *
-   * @param {object} req
+   * @param {object} req HTTP request object
    *
-   * @param {object} res
+   * @param {object} res HTTP response object
    *
-   * @returns {object} oject
+   * @returns {object} return a json object
    */
   static async recipeSearch(req, res) {
     const { Op } = Sequelize;

@@ -352,3 +352,30 @@ p {
 .img-text {
   color: black;
 }
+.not-found-container {
+  margin: 0 auto !important;
+}
+
+.page-item.active .page-link {
+  z-index: 2;
+  color: #fff;
+  background-color: #723f5f;
+  border-color: #723f5f;
+}
+
+.page-link {
+  color: black;
+}
+
+.signout {
+  cursor: pointer
+}
+
+.page-link:hover { cursor: pointer}
+
+.image-tag {
+  background-color: red;
+  border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+}

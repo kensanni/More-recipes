@@ -11,7 +11,7 @@ import SignIn from './signinPage/connectedComponent/SignIn';
 import RecipeDetailPageContainer from '../components/recipePages/userRecipes/RecipeDetailPageContainer';
 import UserProfileContainer from '../components/recipePages/userProfile/UserProfileContainer';
 import { signInFromLocalStorage } from '../actionController/signin';
-import PageNotFound from '../components/pageNotFound/PageNotFound';
+import PageNotFound from '../components/Error/PageNotFound';
 
 const history = createBrowserHistory();
 

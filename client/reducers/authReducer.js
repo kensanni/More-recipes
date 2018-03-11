@@ -10,6 +10,15 @@ const initialState = {
   errorMessage: ''
 };
 
+/**
+ * @description authentication reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGNUP_REQUEST:

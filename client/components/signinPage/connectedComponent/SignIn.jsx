@@ -28,7 +28,7 @@ class SignIn extends Component {
   /**
    * @description mount - mount background image
    *
-   * @returns {undefined} mount an image in the background
+   * @returns {void} mount an image in the background
    */
   componentWillMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
@@ -40,7 +40,7 @@ class SignIn extends Component {
   /**
    * @description mount - mount background image
    *
-   * @returns {undefined} mount an image in the background
+   * @returns {object} mount an image in the background
    */
   componentDidMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
@@ -49,9 +49,9 @@ class SignIn extends Component {
   /**
    * @description update the state of error message and also redirect to a new page
    *
-   * @param {nextProps} nextProps
+   * @param {object} nextProps
    *
-   * @returns {undefined}
+   * @returns {void}
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.signinResponse.isAuthenticated) {
@@ -67,7 +67,7 @@ class SignIn extends Component {
   /**
    * @description remove background image before redirecting to a new page
    *
-   * @returns {undefined}
+   * @returns {void}
    */
   componentWillUnmount() {
     document.body.style.backgroundImage = '';
@@ -79,7 +79,7 @@ class SignIn extends Component {
    *
    * @param {object} event
    *
-   * @returns {undefined} object
+   * @returns {void} update state
    *
    * @memberof SignIn
    */
@@ -96,7 +96,7 @@ class SignIn extends Component {
    *
    * @param {object} event
    *
-   * @returns {undefined} calls signInAction
+   * @returns {void} calls signInAction
    *;
    * @memberof SignIn
    */
@@ -133,7 +133,7 @@ SignIn.propTypes = {
  *
  * @param {object} state
  *
- * @returns {undefined}
+ * @returns {void}
  */
 const mapStateToProps = state => ({
   signinResponse: state.authReducer,

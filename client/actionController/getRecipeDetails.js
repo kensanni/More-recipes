@@ -4,9 +4,9 @@ import { getRecipeDetailsRequest, getRecipeDetailsError, getRecipeDetailsSuccess
 /**
  * @description action creator for getting recipe details
  *
- * @param {recipeId} recipeId
+ * @param {number} recipeId
  *
- * @returns {void} redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function getRecipeDetails(recipeId) {
   return (dispatch) => {

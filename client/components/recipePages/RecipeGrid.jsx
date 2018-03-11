@@ -1,6 +1,13 @@
 import React from 'react';
 import RecipeCard from '../Include/cards/RecipeCard';
 
+/**
+ * @description functional component to render carousel
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} return JSX
+ */
 const RecipeGrid = props => (
   props.recipeData.map(recipe => (
     <RecipeCard

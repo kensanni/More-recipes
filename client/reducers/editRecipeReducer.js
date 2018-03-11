@@ -7,6 +7,15 @@ const initialState = [{
   errorMessage: ''
 }];
 
+/**
+ * @description edit recipes reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const editRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_RECIPE_REQUEST:

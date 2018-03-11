@@ -4,7 +4,7 @@ import PropTypes, { any } from 'prop-types';
 /**
  * @description function component to render the edit recipe modal
  *
- * @param {props} props
+ * @param {object} props
  *
  * @returns {JSX} return JSX
  */

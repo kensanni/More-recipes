@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * @description function component to render edit recipe button
  *
- * @param {props} props
+ * @param {object} props
  *
  * @returns {JSX} return JSX
  */

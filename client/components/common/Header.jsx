@@ -174,9 +174,10 @@ class Header extends Component {
               </li>
               <li className="nav-item">
                 <a
-                  className="navbar-link nav-text"
+                  className="navbar-link nav-text signout"
                   id="navlink"
                   onClick={this.signOut}
+                  role="button"
                 >
                 Signout
                 </a>

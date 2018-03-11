@@ -4,11 +4,11 @@ import { getUserRecipeRequest, getUserRecipeSuccessful, getUserRecipeError } fro
 /**
  * @description action creator for adding recipe
  *
- * @param {userId} userId
+ * @param {number} userId
  *
  * @param {number} page
  *
- * @returns {undefined} redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function getUserRecipe(userId, page) {
   return (dispatch) => {
@@ -18,8 +18,9 @@ export default function getUserRecipe(userId, page) {
         const { recipesData, pages, count } = userRecipe.data;
         dispatch(getUserRecipeSuccessful(recipesData, pages, count));
       })
-      .catch((errors) => {
-        dispatch(getUserRecipeError(errors[0].message));
+      .catch((error) => {
+        const { message } = error.response.data;
+        dispatch(getUserRecipeError(message));
       });
   };
 }

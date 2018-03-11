@@ -7,7 +7,7 @@ import { signupError, signupRequest, signupSuccess } from '../actions/signupActi
    *
    * @param {object} userdata user registration details
    *
-   * @returns {undefined} Redux action to be dispatched to the store
+   * @returns {void} action to be dispatched to the store
    */
 export default function signup(userdata) {
   return (dispatch) => {

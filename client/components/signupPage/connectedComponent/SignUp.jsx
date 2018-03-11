@@ -41,7 +41,7 @@ class SignUp extends Component {
   /**
    * @description mount background image
    *
-   * @returns {undefined} mount a background image
+   * @returns {void} mount a background image
    */
   componentDidMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
@@ -52,7 +52,7 @@ class SignUp extends Component {
    *
    * @param {object} nextProps
    *
-   * @returns {undefined} set the state of response message
+   * @returns {void} set the state of response message
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.signupResponse.isAuthenticated) {
@@ -68,7 +68,7 @@ class SignUp extends Component {
   /**
    * @description remove background image before redirecting to a new page
    *
-   * @returns {undefined} remove background Image
+   * @returns {void} remove background Image
    */
   componentWillUnmount() {
     document.body.style.backgroundImage = '';
@@ -79,7 +79,7 @@ class SignUp extends Component {
    *
    * @param {object} event
    *
-   * @returns {undefined} call setState
+   * @returns {void} call setState
    *
    * @memberof SignUp
    */
@@ -92,7 +92,7 @@ class SignUp extends Component {
    *
    * @param {object} event
    *
-   * @returns {undefined} calls signUpAction
+   * @returns {void} calls signUpAction
    *
    * @memberof SignUp
    */

@@ -5,21 +5,31 @@ import webpack from 'webpack';
 import path from 'path';
 import validator from 'express-validator';
 import config from '../webpack.config';
+import prodConfig from '../webpack.config.prod';
 import routes from '../server/routes';
 
 require('babel-core/register');
 require('babel-polyfill');
 require('dotenv').config();
 
+const HMR = require('webpack-hot-middleware');
+
+let compiler;
+
+
 const app = express();
-const compiler = webpack(config);
+
+if (process.env.NODE_ENV === 'production') {
+  compiler = webpack(prodConfig);
+} else {
+  compiler = webpack(config);
+  app.use(HMR(compiler));
+}
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
-
-app.use(require('webpack-hot-middleware')(compiler));
 
 app.use(logger('dev'));
 

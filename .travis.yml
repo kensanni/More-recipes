@@ -10,7 +10,7 @@ cache:
 env: 
   - NODE_ENV=test
 before_script:
-  - createdb more-recipe --username=postgres
+  - createdb more-recipes-test --username=postgres
   - sequelize db:migrate 
 after_success:
   - travis_wait npm run coveralls

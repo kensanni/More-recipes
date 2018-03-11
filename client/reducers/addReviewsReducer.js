@@ -7,6 +7,15 @@ const initialState = {
   errorMessage: ''
 };
 
+/**
+ * @description add reviews reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const addReviewsReducer = (state = initialState, action) => {
   const {
     isAdded, responseMessage, review, errorMessage,

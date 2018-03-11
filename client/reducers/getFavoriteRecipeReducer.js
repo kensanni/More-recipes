@@ -7,6 +7,15 @@ const initialState = {
   page: 0
 };
 
+/**
+ * @description get favorite recipes reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const getFavoriteRecipeReducer = (state = initialState, action) => {
   const {
     isFetched, recipeData, errorMessage, page, count

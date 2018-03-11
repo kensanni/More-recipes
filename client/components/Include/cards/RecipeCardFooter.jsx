@@ -14,9 +14,6 @@ const RecipeCardFooter = (props) => {
     onChange,
     saveImageToCloud,
     handleCloseModal,
-    upvoteRecipe,
-    downvoteRecipe,
-    favoriteRecipe,
     showActionButton,
     startEdit,
     favRecipeData

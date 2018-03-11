@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * @description functional component to render the delete recipe confirmation modal
  *
- * @param {props} props
+ * @param {object} props
  *
  * @returns {JSX} JSX
  */

@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { filter, isEmpty } from 'lodash';
 import { Lines } from 'react-preloading-component';
 import ReactPaginate from 'react-paginate';
+import RecipeNotFound from '../../Error/RecipeNotFound';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
@@ -45,6 +46,7 @@ class UserRecipes extends Component {
     this.handleShowRecipe = this.handleShowRecipe.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
+    this.renderRecipeGrid = this.renderRecipeGrid.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -61,9 +63,9 @@ class UserRecipes extends Component {
   /**
    * @description update the state of user recipes
    *
-   * @param {nextProps} nextProps
+   * @param {object} nextProps
    *
-   * @return {undefined} updated user recipe
+   * @return {void} updated user recipe
    */
   componentWillReceiveProps(nextProps) {
     const { recipeImageUrl, recipes, addRecipeResponse } = nextProps;
@@ -88,11 +90,11 @@ class UserRecipes extends Component {
   /**
    * @description function to edit a recipe
    *
-   * @param {id} id id of recipe to be edited
+   * @param {number} id id of recipe to be edited
    *
-   * @param {recipeData} recipeData recipe data to be sent to the database
+   * @param {object} recipeData recipe data to be sent to the database
    *
-   * @returns {undefined} calls editRecipeAction
+   * @returns {void} calls editRecipeAction
    */
   editRecipe(id, recipeData) {
     this.props.editRecipeAction(id, recipeData);
@@ -101,9 +103,9 @@ class UserRecipes extends Component {
   /**
    * @description function to delete a recipe
    *
-   * @param {id} id id of recipe to be deleted
+   * @param {number} id id of recipe to be deleted
    *
-   * @returns {undefined} calls the delete recipe action
+   * @returns {void} calls the delete recipe action
    */
   deleteRecipe(id) {
     this.props.deleteRecipeAction(id);
@@ -112,12 +114,13 @@ class UserRecipes extends Component {
   /**
    * @description set the state of value inputs on form
    *
-   * @param {event} event
+   * @param {object} event
    *
    * @returns {void} set the state of value inputs on form
    */
   handleChange(event) {
     const { name, value } = event.target;
+    console.log('############', event.target);
     this.setState({
       [name]: value,
       isChanged: true
@@ -125,9 +128,9 @@ class UserRecipes extends Component {
   }
 
   /**
-   * @description get the state of recipe to be edited and display it on the edit form
+   * @description get the current state of recipe to be edited and display it on the edit form
    *
-   * @param {recipeId} recipeId
+   * @param {number} recipeId
    *
    * @returns {object} object
    */
@@ -141,9 +144,9 @@ class UserRecipes extends Component {
   /**
    * @description function to add a recipe
    *
-   * @param {event} event
+   * @param {object} event
    *
-   * @returns {undefined} calls add recipe action
+   * @returns {void} calls add recipe action
    */
   addRecipe(event) {
     event.preventDefault();
@@ -154,17 +157,17 @@ class UserRecipes extends Component {
       name, image, description, ingredient
     };
     this.props.addRecipeAction(newRecipe);
-    // this.setState({
-    //   name: '', image: '', description: '', ingredient: ''
-    // });
+    this.setState({
+      name: '', image: '', description: '', ingredient: ''
+    });
   }
 
   /**
    * @description upload Image to cloud
    *
-   * @param {event} event
+   * @param {object} event
    *
-   * @returns {undefined} call saveImageToCloudAction to save images
+   * @returns {void} call saveImageToCloudAction to save images
    */
   saveImageToCloud(event) {
     const image = event.target.files[0];
@@ -176,7 +179,7 @@ class UserRecipes extends Component {
   /**
    * @description set the state of recipe data when form is closed
    *
-   * @returns {undefined} set state of isChanged
+   * @returns {void} set state of isChanged
    */
   handleCloseModal() {
     this.setState({
@@ -184,18 +187,52 @@ class UserRecipes extends Component {
     });
   }
 
+  /**
+   * @description get user recipes to be displayed on the new page
+   *
+   * @param {object} recipes
+   *
+   * @return {void} calls getUserRecipe action
+   */
   handlePaginationChange(recipes) {
     const { userId } = this.props;
     this.props.getUserRecipe(userId, recipes.selected);
   }
 
   /**
+   * @description get user recipes to be displayed on the new page
+   *
+   * @param {object} recipes
+   *
+   * @return {void} calls getUserRecipe action
+   */
+  renderRecipeGrid() {
+    return (
+      <div className="row">
+        { this.state.recipeData.length === 0 ? <RecipeNotFound /> :
+        <RecipeGrid
+          showActionButton
+          recipeData={this.state.recipeData}
+          showRecipeDetails={this.handleShowRecipe}
+          deleteRecipe={this.deleteRecipe}
+          editRecipe={this.editRecipe}
+          addRecipe={this.addRecipe}
+          value={this.state}
+          handleCloseModal={this.handleCloseModal}
+          onChange={this.handleChange}
+          saveImageToCloud={this.saveImageToCloud}
+          {...this.state}
+        />
+      }
+      </div>
+    );
+  }
+  /**
    * @description render user recipes
    *
    * @returns {JSX} JSX
    */
   render() {
-    const renderUserRecipes = <h1>No recipes in your catalog</h1>;
     return (
       <div>
         <Header />
@@ -210,22 +247,11 @@ class UserRecipes extends Component {
             />
 
           </div>
-          <div className="row">
-            {/* {this.state.isFetched && renderUserRecipes} */}
+          <div>
             {
-              !this.props.recipes.isFetched ? <Lines /> :
-              <RecipeGrid
-                showActionButton
-                recipeData={this.state.recipeData}
-                showRecipeDetails={this.handleShowRecipe}
-                deleteRecipe={this.deleteRecipe}
-                editRecipe={this.editRecipe}
-                addRecipe={this.addRecipe}
-                value={this.state}
-                handleCloseModal={this.handleCloseModal}
-                onChange={this.handleChange}
-                saveImageToCloud={this.saveImageToCloud}
-              />
+              this.props.recipes.isFetching ? <Lines /> :
+              this.renderRecipeGrid()
+
             }
           </div>
           <div className="pt-3 pb-5">
@@ -263,6 +289,8 @@ UserRecipes.propTypes = {
   recipeImageUrl: PropTypes.string.isRequired,
   saveImageToCloudAction: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
+  addRecipeResponse: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired
 };
 
 /**

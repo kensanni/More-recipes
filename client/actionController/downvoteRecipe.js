@@ -5,9 +5,9 @@ import { downvoteRecipeRequest, decrementDownvote, incrementDownvote, downvoteRe
 /**
  * @description action creator for downvoting a recipe
  *
- * @param {recipeId} recipeId
+ * @param {number} recipeId
  *
- * @return {undefined} Redux action to be dispatch to the store
+ * @return {void} action to be dispatch to the store
  */
 export default function downvoteRecipe(recipeId) {
   return (dispatch) => {

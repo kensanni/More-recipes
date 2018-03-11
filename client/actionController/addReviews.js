@@ -8,7 +8,7 @@ import { addReviewsRequest, addReviewsSuccessful, addReveiwsError } from '../act
  *
  * @param {object} review
  *
- * @returns {void} redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function addReviews(recipeId, review) {
   return (dispatch) => {

@@ -8,7 +8,7 @@ import { upvoteRecipeRequest, upvoteRecipeSuccess, upvoteRecipeError, incrementU
  *
  * @param {number} recipeId  recipe to be upvoted
  *
- * @return {undefined} Redux action to be dispatched to the store
+ * @return {void} action to be dispatched to the store
  */
 export default function upvoteRecipe(recipeId) {
   return (dispatch) => {

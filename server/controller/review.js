@@ -8,9 +8,12 @@ const { Reviews, Recipes } = model;
 export default class Review {
   /**
    * @description Add  a review for recipes
-   * @param {object} req
-   * @param {object} res
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @param {object} req HTTP request object
+   *
+   * @param {object} res HTTP response object
+   *
+   * @returns  {object} object
    */
   static async addReview(req, res) {
     const { review } = req.body;

@@ -6,7 +6,15 @@ const initialState = {
   responseMessage: '',
   errorMessage: ''
 };
-
+/**
+ * @description favorite recipes reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const favoriteRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
     case FAVORITE_RECIPE_REQUEST:

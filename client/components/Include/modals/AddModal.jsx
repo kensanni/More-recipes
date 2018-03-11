@@ -4,17 +4,18 @@ import PropTypes, { any } from 'prop-types';
 /**
  * @description functional component to render modal for adding recipes
  *
- * @param {props} props
+ * @param {object} props
  *
  * @returns {JSX} return JSX
  */
 const AddModal = (props) => {
   const {
-    onChange, value, saveImageToCloud, addRecipe, recipeImage
+    onChange, value, saveImageToCloud, addRecipe, recipeImage,
   } = props;
   const {
     name, description, ingredient, responseMessage
   } = value;
+  console.log('@@@@@@@@@@@@@@@', props);
   return (
     <div
       className="modal fade"
@@ -62,7 +63,7 @@ const AddModal = (props) => {
               </div>
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label black">
-                  Description &#58;
+                  Directions &#58;
                 </label>
                 <textarea
                   name="description"
@@ -123,7 +124,8 @@ AddModal.propTypes = {
   addRecipe: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saveImageToCloud: PropTypes.func.isRequired,
-  value: PropTypes.objectOf(any).isRequired
+  value: PropTypes.objectOf(any).isRequired,
+  recipeImage: PropTypes.string.isRequired
 };
 
 

@@ -26,7 +26,7 @@ class UserProfileContainer extends Component {
   /**
    * @description create an instance of UserProfileContainer
    *
-   * @param {props} props
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -38,19 +38,19 @@ class UserProfileContainer extends Component {
   /**
    * @description call the action to display user favorite recipe
    *
-   * @param {props} props
+   * @param {object} props
    *
-   * @return {undefined} call getRecipe
+   * @return {void} call action creator
    */
   componentDidMount() {
     const { userId, page } = this.props;
-    this.props.getUserRecipeAction(userId, page);    
+    this.props.getUserRecipeAction(userId, page);
     this.props.getFavoriteRecipeAction(userId, page);
   }
   /**
    * @description upvote a recipe
    *
-   * @param {id} id id of recipe to be upvoted
+   * @param {number} id id of recipe to be upvoted
    *
    * @return {void} calls upvoteRecipeAction
    */
@@ -61,9 +61,9 @@ class UserProfileContainer extends Component {
   /**
    * @description downvote a recipe
    *
-   * @param {id} id id of recipe to be updated
+   * @param {number} id id of recipe to be updated
    *
-   * @return {undefined} calls downvoteRecipeAction
+   * @return {void} calls downvoteRecipeAction
    */
   downvoteRecipe(id) {
     if (this.props.authenticated) {
@@ -76,14 +76,21 @@ class UserProfileContainer extends Component {
   /**
    * @description favorite a recipe
    *
-   * @param {id} id - id of recipe to be favorited
+   * @param {number} id - id of recipe to be favorited
    *
-   * @return {undefined} calls favoriteRecipeAction
+   * @return {void} calls favoriteRecipeAction
    */
   favoriteRecipe(id) {
     this.props.favoriteRecipeAction(id);
   }
 
+  /**
+   * @description get favorite recipes to be displayed on the new page
+   *
+   * @param {object} favoriteRecipes
+   *
+   * @return {void} calls favoriteRecipeAction
+   */
   handlePaginationChange(favoriteRecipes) {
     const { userId } = this.props;
     this.props.getFavoriteRecipeAction(userId, favoriteRecipes.selected);
@@ -144,6 +151,11 @@ class UserProfileContainer extends Component {
   }
 }
 
+UserProfileContainer.defaultProps = {
+  recipeCount: undefined,
+  favoriteCount: undefined
+};
+
 UserProfileContainer.propTypes = {
   upvoteRecipeAction: PropTypes.func.isRequired,
   downvoteRecipeAction: PropTypes.func.isRequired,
@@ -153,7 +165,10 @@ UserProfileContainer.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   userData: PropTypes.objectOf(any).isRequired,
   userId: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired
+  page: PropTypes.number.isRequired,
+  getUserRecipeAction: PropTypes.func.isRequired,
+  favoriteCount: PropTypes.number,
+  recipeCount: PropTypes.number
 };
 
 const mapStateToProps = state => ({

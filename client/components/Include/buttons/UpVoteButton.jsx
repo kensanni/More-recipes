@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description functional component to render upvote button
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} return JSX
+ */
 const UpVoteButton = (props) => {
   const { upvoteRecipe, recipeId, upvotes } = props;
   return (

@@ -4,6 +4,12 @@ import DownVoteButton from '../buttons/DownVoteButton';
 import UpVoteButton from '../buttons/UpVoteButton';
 import FavoriteButton from '../buttons/FavoriteButton';
 
+/**
+ * @description functional component to render recipe details page
+ * @param {object} props
+ *
+ * @returns {JSX} return JSX
+ */
 const RecipeDetailsCard = (props) => {
   const {
     recipeData,
@@ -86,11 +92,12 @@ const RecipeDetailsCard = (props) => {
             <div className="col-sm-12 mt-3">
               <h2 className="header-bg">Reviews</h2>
               {
-                props.reviews && !props.reviews.length &&
+                reviews && !reviews.length &&
                 <h6 style={{ textAlign: 'center' }}>This recipe have not been reviewed</h6>
               }
               {
-                props.reviews && <ul style={{ maxHeight: '300px', overflowY: 'scroll' }}>
+                reviews &&
+                <ul style={{ maxHeight: '300px', overflowY: 'scroll' }}>
                   {
                   props.reviews.map((review, i) => (
                     <li key={i} className="review-list">
@@ -108,7 +115,7 @@ const RecipeDetailsCard = (props) => {
                     </li>
                   ))
                 }
-                                 </ul>
+                </ul>
               }
             </div>
           </div>
@@ -142,6 +149,10 @@ RecipeDetailsCard.propTypes = {
   upvoteRecipe: PropTypes.func.isRequired,
   downvoteRecipe: PropTypes.func.isRequired,
   favoriteRecipe: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  reviews: PropTypes.arrayOf(any).isRequired,
+  value: PropTypes.objectOf(any).isRequired,
+  addReview: PropTypes.func.isRequired
 };
 
 export default RecipeDetailsCard;

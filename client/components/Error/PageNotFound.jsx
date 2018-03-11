@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @description functional component to render 404 pages
+ *
+ * @returns {JSX} return JSX
+ */
 const PageNotFound = () => ((
   <div className="bg-color">
     <div className="container bg-color">
