@@ -1,7 +1,5 @@
-import axios from 'axios';
+import instance from '../Helpers/helper';
 import { editRecipeRequest, editRecipeSuccesful, editRecipeError } from '../actions/editRecipeAction';
-
-const URL = '/api/v1';
 
 /**
  * @description action creator for editing recipe
@@ -15,7 +13,7 @@ const URL = '/api/v1';
 export default function editRecipe(recipeId, recipeData) {
   return (dispatch) => {
     dispatch(editRecipeRequest(recipeId, recipeData));
-    axios.put(`${URL}/recipes/${recipeId}`, recipeData)
+    instance.put(`/recipes/${recipeId}`, recipeData)
       .then((recipe) => {
         const { message } = recipe.data;
         dispatch(editRecipeSuccesful(message));

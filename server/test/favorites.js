@@ -64,8 +64,11 @@ describe('Testing API endpoints associated with favorites', () => {
       .post('/api/v1/recipes/20/favorites')
       .set('x-access-token', value)
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Recipe does not exist in this catalog');
+        }
         expect(res).to.have.status(404);
-        expect(res.body.message).equal('Recipe does not exist in this catalog');
         done();
       });
   });
@@ -85,7 +88,7 @@ describe('Testing API endpoints associated with favorites', () => {
   });
   it('Should not get a recipe from favorite list without authentication', (done) => {
     chai.request(app)
-      .get('/api/v1/users/:userId/recipes')
+      .get('/api/v1/users/1/favorites?page=0')
       .end((err, res) => {
         expect(res).to.have.status(403);
         expect(res.body.message).equal('Not Authorized');
@@ -94,7 +97,7 @@ describe('Testing API endpoints associated with favorites', () => {
   });
   it('Should get recipe from favorite list', (done) => {
     chai.request(app)
-      .get('/api/v1/users/1/recipes')
+      .get('/api/v1/users/1/favorites?page=0')
       .set('x-access-token', value)
       .end((err, res) => {
         expect(res).to.have.status(200);

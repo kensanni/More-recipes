@@ -3,11 +3,12 @@ import { INCREMENT_UPVOTE, DECREMENT_UPVOTE } from '../actions/upvoteRecipeActio
 import { INCREMENT_DOWNVOTE, DECREMENT_DOWNVOTE } from '../actions/downvoteRecipeAction';
 import { FAVORITE_RECIPE_SUCCESSFUL } from '../actions/favoriteRecipeAction';
 
-const initialState = [{
+const initialState = {
   isFetched: false,
   recipeData: [],
-  errorMessage: ''
-}];
+  errorMessage: '',
+  page: 0
+};
 /**
  * @description recipe reducer
  * @param {object} state - default application state
@@ -15,37 +16,39 @@ const initialState = [{
  * @return {Object} - Object containg new state
  */
 const recipeReducer = (state = initialState, action) => {
-  const { isFetched, recipeData, errorMessage } = action;
+  const {
+    isFetched, recipeData, errorMessage, page
+  } = action;
   switch (action.type) {
     case GET_RECIPE_REQUEST:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData: [],
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case GET_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData,
-        errorMessage: ''
-      },
-      ...state
-      ];
+        errorMessage: '',
+        page,
+      };
     case GET_RECIPE_ERROR:
-      return [{
+      return {
+        ...state,
         isFetched,
         recipeData: [],
         errorMessage
-      },
-      ...state
-      ];
+      };
     case INCREMENT_UPVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+      return {
+        ...state,
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        page: state.page,
+        recipeData: state.recipeData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -54,14 +57,13 @@ const recipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case DECREMENT_UPVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+      return {
+        ...state,
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        recipeData: state.recipeData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -70,14 +72,13 @@ const recipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case INCREMENT_DOWNVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+      return {
+        ...state,
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        recipeData: state.recipeData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -86,14 +87,13 @@ const recipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case DECREMENT_DOWNVOTE:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+      return {
+        ...state,
+        isFetched: state.isFetched,
+        errorMessage: state.errorMessage,
+        recipeData: state.recipeData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
@@ -102,25 +102,24 @@ const recipeReducer = (state = initialState, action) => {
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     case FAVORITE_RECIPE_SUCCESSFUL:
-      return [{
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        recipeData: state[0].recipeData.map((recipe) => {
+      return {
+        ...state,
+        recipeData: state.recipeData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
-              favorites: recipe.favorites.length
+              favorites: (
+                action.favoriteType === 1
+                  ? recipe.favorites + 1
+                  : recipe.favorites - 1
+              )
             };
           }
           return recipe;
         })
-      },
-      ...state
-      ];
+      };
     default:
       return state;
   }

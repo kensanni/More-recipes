@@ -2,21 +2,23 @@ import React from 'react';
 import PropTypes, { any } from 'prop-types';
 
 /**
- * @description functional component to render modal for adding recipes
+ * @description function component to render the edit recipe modal
  *
  * @param {props} props
  *
  * @returns {JSX} return JSX
  */
-const AddModal = (props) => {
+const EditModal = (props) => {
   const {
-    onChange, value, saveImageToCloud, addRecipe
+    recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud,
   } = props;
-  const { name, description, ingredient } = value;
+  const {
+    id, name, description, ingredient
+  } = recipeData;
   return (
     <div
       className="modal fade"
-      id="exampleModal"
+      id={cardId}
       tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -24,45 +26,46 @@ const AddModal = (props) => {
     >
       <div className="modal-dialog" role="document">
         <div className="modal-content">
-          <div className="modal-header black">
-            <h5 className="modal-title black" id="exampleModalLabel">
-              Add new recipe
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">
+              Update recipe
             </h5>
             <button
               type="button"
               className="close"
               data-dismiss="modal"
               aria-label="Close"
+              onClick={handleCloseModal}
             >
-              <span aria-hidden="true">&times;</span>
+              <span
+                aria-hidden="true"
+              >&times;
+              </span>
             </button>
           </div>
           <div className="modal-body">
             <form>
               <div className="form-group">
-                <label
-                  htmlFor="recipient-name"
-                  className="col-form-label black"
-                >
-                  Name &#58;
+                <label htmlFor="recipient-name" id="recipient-name" className="col-form-label">
+                  Name
                 </label>
                 <input
                   name="name"
                   onChange={onChange}
-                  value={name}
+                  value={value.isChanged ? value.name : name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="message-text" className="col-form-label black">
-                  Description &#58;
+                <label htmlFor="message-text" className="col-form-label">
+                  description
                 </label>
                 <textarea
                   name="description"
                   onChange={onChange}
-                  value={description}
+                  value={value.isChanged ? value.description : description}
                   className="form-control"
                   id="message-text"
                 />
@@ -76,7 +79,7 @@ const AddModal = (props) => {
                   type="text"
                   name="ingredient"
                   onChange={onChange}
-                  value={ingredient}
+                  value={value.isChanged ? value.ingredient : ingredient}
                   className="form-control"
                 />
               </div>
@@ -95,16 +98,16 @@ const AddModal = (props) => {
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
+              onClick={handleCloseModal}
             >
               Close
             </button>
             <button
               type="button"
               className="btn btn-orange"
-              onClick={addRecipe}
-              data-dismiss="modal"
+              onClick={() => editRecipe(id, recipeData)}
             >
-              Add recipe
+              Update recipe
             </button>
           </div>
         </div>
@@ -113,12 +116,14 @@ const AddModal = (props) => {
   );
 };
 
-AddModal.propTypes = {
-  addRecipe: PropTypes.func.isRequired,
+EditModal.propTypes = {
+  value: PropTypes.objectOf(any).isRequired,
   onChange: PropTypes.func.isRequired,
+  editRecipe: PropTypes.func.isRequired,
   saveImageToCloud: PropTypes.func.isRequired,
-  value: PropTypes.objectOf(any).isRequired
+  handleCloseModal: PropTypes.func.isRequired,
+  recipeData: PropTypes.objectOf(any).isRequired,
+  cardId: PropTypes.number.isRequired
 };
 
-
-export default AddModal;
+export default EditModal;

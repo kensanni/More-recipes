@@ -1,41 +1,37 @@
 import { DOWNVOTE_RECIPE_REQUEST, DOWNVOTE_RECIPE_SUCCESSFUL, DOWNVOTE_RECIPE_ERROR } from '../actions/downvoteRecipeAction';
 
-const initialState = [{
+const initialState = {
   isUpvoted: false,
   recipeId: null,
   responseMessage: '',
   errorMessage: ''
-}];
+};
 
 const downvoteRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
     case DOWNVOTE_RECIPE_REQUEST:
-      return [{
+      return {
+        ...state,
         recipeId: action.recipeId,
         isDownvoted: action.isDownvoted,
         responseMessage: '',
         errorMessage: '',
-      },
-      ...state
-      ];
+      };
     case DOWNVOTE_RECIPE_SUCCESSFUL:
-      return [{
+      return {
         recipeId: action.recipeId,
         isDownvoted: action.isDownvoted,
         responseMessage: action.responseMessage,
         errorMessage: '',
-      },
-      ...state
-      ];
+      };
     case DOWNVOTE_RECIPE_ERROR:
-      return [{
+      return {
+        ...state,
         recipeId: action.recipeId,
         isDownvoted: action.isDownvoted,
         responseMessage: '',
         errorMessage: action.errorMessage,
-      },
-      ...state
-      ];
+      };
     default:
       return state;
   }

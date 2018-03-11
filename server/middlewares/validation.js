@@ -151,7 +151,7 @@ class Validation {
     if (!findUser) {
       return res.status(400).send({
         errors: [{
-          message: 'Incorrect Login details'
+          message: 'Incorrect login details'
         }]
       });
     }
@@ -160,7 +160,7 @@ class Validation {
     } else {
       res.status(400).send({
         errors: [{
-          message: 'Incorrect Login details'
+          message: 'Incorrect login details'
         }]
       });
     }
@@ -174,12 +174,12 @@ class Validation {
    */
   static async checkUserId(req, res, next) {
     const id = req.params.userId;
-    const findUserById = await Users.findById(id);
     if (Number.isNaN(parseInt(id, 10))) {
       return res.status(400).send({
         message: 'UserId parameter should be a number'
       });
     }
+    const findUserById = await Users.findById(id);
     if (!findUserById) {
       return res.status(404).send({
         errors: [{
@@ -301,11 +301,12 @@ class Validation {
   static async checkRecipeName(req, res, next) {
     const recipeName = await Recipes.find({
       where: {
-        name: req.body.name,
+        name: {
+          $ilike: req.body.name,
+        },
         userId: req.decoded.id
       }
     });
-
     if (recipeName) {
       return res.status(400).send({
         errors: [{

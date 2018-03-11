@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  *
  * @returns {JSX} return JSX
  */
-const DeleteRecipe = (props) => {
+const DeleteRecipeButton = (props) => {
   const { recipeId } = props;
   return (
     <div>
@@ -25,8 +25,8 @@ const DeleteRecipe = (props) => {
   );
 };
 
-DeleteRecipe.propTypes = {
+DeleteRecipeButton.propTypes = {
   recipeId: PropTypes.number.isRequired
 };
 
-export default DeleteRecipe;
+export default DeleteRecipeButton;

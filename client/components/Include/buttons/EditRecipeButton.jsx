@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  *
  * @returns {JSX} return JSX
  */
-const EditRecipe = (props) => {
+const EditRecipeButton = (props) => {
   const {
     cardId,
   } = props;
@@ -27,8 +27,8 @@ const EditRecipe = (props) => {
   );
 };
 
-EditRecipe.propTypes = {
+EditRecipeButton.propTypes = {
   cardId: PropTypes.number.isRequired
 };
 
-export default EditRecipe;
+export default EditRecipeButton;

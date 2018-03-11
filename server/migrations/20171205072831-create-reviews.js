@@ -25,6 +25,9 @@ module.exports = {
           as: 'recipeId',
         },
       },
+      username: {
+        type: Sequelize.STRING
+      },
       review: {
         type: Sequelize.STRING
       },

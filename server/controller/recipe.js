@@ -1,4 +1,4 @@
-import { orderBy } from 'lodash';
+import Sequelize from 'sequelize';
 import model from '../models';
 import updateRecipeAttributes from '../helpers/updateRecipeAttributes';
 import updateMultipleRecipeAttributes from '../helpers/updateMultipleRecipeAttributes';
@@ -65,15 +65,23 @@ class Recipe {
    * @returns  {JSON} Returns a JSON object
    */
   static async getRecipes(req, res) {
+    const limit = req.query.limit || 6;
+    let offset;
+    let pages;
+    let pageNo;
+
+    const findAndCount = await Recipes.findAndCountAll();
+
+    if (findAndCount) {
+      pages = Math.ceil(findAndCount.count / limit);
+      pageNo = parseInt(req.query.page, 10);
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      offset = pageNo * limit;
+    }
+
     const getAllRecipes = await Recipes.findAll({
-      include: [{
-        model: model.Reviews,
-        attributes: ['review'],
-        include: [{
-          model: model.Users,
-          attributes: ['username'],
-        }]
-      }]
+      limit,
+      offset
     });
 
     if (getAllRecipes.length < 1) {
@@ -82,10 +90,13 @@ class Recipe {
       });
     }
 
-    const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
-    return res.status(200).send({
-      recipesData: updatedRecipes
-    });
+    if (getAllRecipes) {
+      const updatedRecipes = await updateMultipleRecipeAttributes(getAllRecipes);
+      return res.status(200).send({
+        recipesData: updatedRecipes,
+        pages
+      });
+    }
   }
   /**
      * @description get one recipe
@@ -100,11 +111,7 @@ class Recipe {
       where: { id },
       include: [{
         model: model.Reviews,
-        attributes: ['review'],
-        include: [{
-          model: model.Users,
-          attributes: ['username', 'updatedAt'],
-        }]
+        attributes: ['review', 'username']
       }],
     });
 
@@ -118,7 +125,7 @@ class Recipe {
     const updatedRecipe = await updateRecipeAttributes(recipe);
 
     return res.status(200).send({
-      data: updatedRecipe
+      recipeData: updatedRecipe,
     });
   }
   /**
@@ -128,6 +135,10 @@ class Recipe {
    * @return {JSON} return a json object
    */
   static async getUserRecipes(req, res) {
+    let offset;
+    let pages;
+    let pageNo;
+    const limit = req.query.limit || 6;
     const userId = req.decoded.id;
     const id = parseInt(req.params.userId, 10);
 
@@ -137,16 +148,25 @@ class Recipe {
       });
     }
 
+    const findAndCountUserRecipes = await Recipes.findAndCountAll({
+      where: {
+        userId: req.decoded.id
+      }
+    });
+
+    const { count } = findAndCountUserRecipes;
+
+    if (findAndCountUserRecipes) {
+      pages = Math.ceil(findAndCountUserRecipes.count / limit);
+      pageNo = parseInt(req.query.page, 10);
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      offset = pageNo * limit;
+    }
+
     const userRecipe = await Recipes.findAll({
       where: { userId },
-      include: [{
-        model: model.Reviews,
-        attributes: ['review'],
-        include: [{
-          model: model.Users,
-          attributes: ['username', 'updatedAt'],
-        }]
-      }],
+      limit,
+      offset,
     });
 
     if (userRecipe.length < 1) {
@@ -156,7 +176,9 @@ class Recipe {
     }
 
     return res.status(200).send({
-      recipesData: userRecipe
+      recipesData: userRecipe,
+      pages,
+      count
     });
   }
   /**
@@ -203,11 +225,47 @@ class Recipe {
           attributes: ['username'],
         }]
       }],
-      limit: 3,
+      limit: req.query.limit || 3,
     });
     const updatedRecipes = await updateMultipleRecipeAttributes(getRecipes);
     return res.status(200).send({
       recipesData: updatedRecipes.sort((a, b) => a.dataValues.favorites + b.dataValues.favorites)
+    });
+  }
+
+  /**
+   * @description
+   *
+   * @param {object} req
+   *
+   * @param {object} res
+   *
+   * @returns {object} oject
+   */
+  static async recipeSearch(req, res) {
+    const { Op } = Sequelize;
+
+    const findRecipes = await Recipes.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: { [Op.iLike]: `%${req.query.recipe}%` }
+          },
+          {
+            ingredient: { [Op.iLike]: `%${req.query.recipe}%` }
+          }
+        ]
+      }
+    });
+
+    if (findRecipes.length === 0) {
+      return res.status(404).send({
+        message: 'recipe not found'
+      });
+    }
+
+    return res.status(200).send({
+      searchResult: findRecipes
     });
   }
 }

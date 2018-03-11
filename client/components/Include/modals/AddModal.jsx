@@ -2,21 +2,23 @@ import React from 'react';
 import PropTypes, { any } from 'prop-types';
 
 /**
- * @description function component to render the edit recipe modal
+ * @description functional component to render modal for adding recipes
  *
  * @param {props} props
  *
  * @returns {JSX} return JSX
  */
-const EditModal = (props) => {
+const AddModal = (props) => {
   const {
-    recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud,
+    onChange, value, saveImageToCloud, addRecipe, recipeImage
   } = props;
-  const { id, name, description, ingredient } = recipeData;
+  const {
+    name, description, ingredient, responseMessage
+  } = value;
   return (
     <div
       className="modal fade"
-      id={cardId}
+      id="exampleModal"
       tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -24,46 +26,48 @@ const EditModal = (props) => {
     >
       <div className="modal-dialog" role="document">
         <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
-              Update recipe
+          <div className="modal-header black">
+            <h5 className="modal-title black" id="exampleModalLabel">
+              Add new recipe
             </h5>
             <button
               type="button"
               className="close"
               data-dismiss="modal"
               aria-label="Close"
-              onClick={handleCloseModal}
             >
-              <span
-                aria-hidden="true"
-              >&times;
-              </span>
+              <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div className="modal-body">
             <form>
               <div className="form-group">
-                <label htmlFor="recipient-name" id="recipient-name" className="col-form-label">
-                  Name
+                <div className="error-message">
+                  { responseMessage }
+                </div>
+                <label
+                  htmlFor="recipient-name"
+                  className="col-form-label black"
+                >
+                  Name &#58;
                 </label>
                 <input
                   name="name"
                   onChange={onChange}
-                  value={value.isChanged ? value.name : name}
+                  value={name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="message-text" className="col-form-label">
-                  description
+                <label htmlFor="message-text" className="col-form-label black">
+                  Description &#58;
                 </label>
                 <textarea
                   name="description"
                   onChange={onChange}
-                  value={value.isChanged ? value.description : description}
+                  value={description}
                   className="form-control"
                   id="message-text"
                 />
@@ -74,14 +78,15 @@ const EditModal = (props) => {
                 </label>
                 <input
                   id="ingredient"
+                  placeholder="separate each ingredient with a comma"
                   type="text"
                   name="ingredient"
                   onChange={onChange}
-                  value={value.isChanged ? value.ingredient : ingredient}
+                  value={ingredient}
                   className="form-control"
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group img-text">
                 <input
                   type="file"
                   name="image"
@@ -96,16 +101,16 @@ const EditModal = (props) => {
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
-              onClick={handleCloseModal}
             >
               Close
             </button>
             <button
               type="button"
+              disabled={!recipeImage ? 'disabled' : null}
               className="btn btn-orange"
-              onClick={() => editRecipe(id, recipeData)}
+              onClick={addRecipe}
             >
-              Update recipe
+              Add recipe
             </button>
           </div>
         </div>
@@ -114,14 +119,12 @@ const EditModal = (props) => {
   );
 };
 
-EditModal.propTypes = {
-  value: PropTypes.objectOf(any).isRequired,
+AddModal.propTypes = {
+  addRecipe: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  editRecipe: PropTypes.func.isRequired,
   saveImageToCloud: PropTypes.func.isRequired,
-  handleCloseModal: PropTypes.func.isRequired,
-  recipeData: PropTypes.objectOf(any).isRequired,
-  cardId: PropTypes.number.isRequired
+  value: PropTypes.objectOf(any).isRequired
 };
 
-export default EditModal;
+
+export default AddModal;
