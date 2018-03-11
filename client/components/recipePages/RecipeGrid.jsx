@@ -7,9 +7,6 @@ const RecipeGrid = props => (
       key={recipe.id}
       favRecipeData={recipe}
       recipeData={recipe}
-      upvoteRecipe={props.upvoteRecipe}
-      downvoteRecipe={props.downvoteRecipe}
-      favoriteRecipe={props.favoriteRecipe}
       showActionButton={props.showActionButton}
       showRecipeDetails={props.handleShowRecipe}
       deleteRecipe={props.deleteRecipe}

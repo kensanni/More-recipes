@@ -9,7 +9,7 @@ const initialState = {
 
 const getFavoriteRecipeReducer = (state = initialState, action) => {
   const {
-    isFetched, recipeData, errorMessage, page
+    isFetched, recipeData, errorMessage, page, count
   } = action;
   switch (action.type) {
     case GET_FAVORITE_RECIPE_REQUEST:
@@ -20,13 +20,13 @@ const getFavoriteRecipeReducer = (state = initialState, action) => {
         errorMessage: ''
       };
     case GET_FAVORITE_RECIPE_SUCCESSFUL:
-      console.log(action.page);
       return {
         ...state,
         isFetched,
         recipeData,
         errorMessage: '',
         page,
+        count
       };
     case GET_FAVORITE_RECIPE_ERROR:
       return {

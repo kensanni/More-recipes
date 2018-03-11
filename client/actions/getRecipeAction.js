@@ -6,12 +6,14 @@ export const getRecipeRequest = () => ({
   type: GET_RECIPE_REQUEST,
   isFetched: false
 });
+
 export const getRecipeSuccess = (recipeData, page) => ({
   type: GET_RECIPE_SUCCESSFUL,
   isFetched: true,
   recipeData,
   page
 });
+
 export const getRecipeError = errorMessage => ({
   type: GET_RECIPE_ERROR,
   isFetched: false,

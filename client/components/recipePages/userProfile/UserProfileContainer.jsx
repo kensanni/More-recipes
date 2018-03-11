@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import ReactPaginate from 'react-paginate';
+import { Lines } from 'react-preloading-component';
 import getFavoriteRecipeAction from '../../../actionController/getFavoriteRecipe';
+import getUserRecipeAction from '../../../actionController/getUserRecipe';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import FavoriteRecipeTitle from '../../../components/Include/FavoriteRecipeTitle';
@@ -42,6 +44,7 @@ class UserProfileContainer extends Component {
    */
   componentDidMount() {
     const { userId, page } = this.props;
+    this.props.getUserRecipeAction(userId, page);    
     this.props.getFavoriteRecipeAction(userId, page);
   }
   /**
@@ -99,6 +102,8 @@ class UserProfileContainer extends Component {
         <div className="container">
           <UserProfile
             userData={this.props.userData}
+            favoriteCount={this.props.favoriteCount}
+            recipeCount={this.props.recipeCount}
           />
           <FavoriteRecipeTitle />
           <section className="row">
@@ -111,7 +116,7 @@ class UserProfileContainer extends Component {
                  favoriteRecipe={this.favoriteRecipe}
                />
             :
-               <h1 style={{ marginTop: '150px' }}>I am Loading</h1>
+               <Lines />
         }
           </section>
         </div>
@@ -157,7 +162,9 @@ const mapStateToProps = state => ({
   userId: state.authReducer.userData.id,
   page: state.getFavoriteRecipeReducer.page,
   userData: state.authReducer.userData,
-  favoriteRecipes: state.getFavoriteRecipeReducer
+  favoriteRecipes: state.getFavoriteRecipeReducer,
+  favoriteCount: state.getFavoriteRecipeReducer.count,
+  recipeCount: state.getUserRecipeReducer.count
 });
 /**
  * @description make actions available to AllRecipes as props
@@ -171,7 +178,8 @@ const mapDispatchToProps = dispatch => (
     upvoteRecipeAction,
     downvoteRecipeAction,
     favoriteRecipeAction,
-    getFavoriteRecipeAction
+    getFavoriteRecipeAction,
+    getUserRecipeAction
   }, dispatch)
 );
 

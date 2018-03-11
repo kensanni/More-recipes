@@ -7,35 +7,41 @@ import { ADD_REVIEWS_SUCCESSFUL } from '../actions/addReviewsAction';
 const initialState = {
   isFetched: false,
   recipeDetails: {},
+  recipeDetailStatus: null,
   errorMessage: ''
 };
 
 const getRecipeDetailsReducer = (state = initialState, action) => {
-  const { isFetched, recipeDetails, errorMessage, review } = action;
-  const reviewied = {
-    review
-  };
+  const {
+    isFetched, recipeDetails, errorMessage, review
+  } = action;
+
+  const reviewied = { review };
   const newReview = [];
-  console.log(review, 'rev');
+
   if (review) {
     state.recipeDetails.Reviews.map((reviews) => {
       newReview.push(reviews);
     });
     newReview.push(reviewied);
   }
+
   switch (action.type) {
     case GET_RECIPE_DETAILS_REQUEST:
       return {
         ...state,
         isFetched,
         recipeDetails: {},
-        errorMessage: ''
+        recipeDetailStatus: 'fetching',
+        errorMessage: '',
+
       };
     case GET_RECIPE_DETAILS_SUCCESSFUL:
       return {
         ...state,
         isFetched,
         recipeDetails,
+        recipeDetailStatus: 'fetched',
         errorMessage: ''
       };
     case GET_RECIPE_DETAILS_ERROR:
@@ -43,6 +49,7 @@ const getRecipeDetailsReducer = (state = initialState, action) => {
         ...state,
         isFetched,
         recipeDetails: {},
+        recipeDetailStatus: 'error',
         errorMessage
       };
     case INCREMENT_UPVOTE:
@@ -92,15 +99,16 @@ const getRecipeDetailsReducer = (state = initialState, action) => {
     case FAVORITE_RECIPE_SUCCESSFUL:
       return {
         ...state,
-        isFetched: state.isFetched,
-        errorMessage: state.errorMessage,
-        page: state.page,
         recipeDetails: {
-          ...state.recipeDetails.favorites
+          ...state.recipeDetails,
+          favorites: (
+            action.favoriteType === 1
+              ? state.recipeDetails.favorites + 1
+              : state.recipeDetails.favorites - 1
+          )
         }
       };
     case ADD_REVIEWS_SUCCESSFUL:
-      console.log('########??????????________', newReview);
       return {
         ...state,
         isFetched: state.isFetched,
@@ -108,7 +116,7 @@ const getRecipeDetailsReducer = (state = initialState, action) => {
         page: state.page,
         recipeDetails: {
           ...state.recipeDetails,
-          Reviews: newReview
+          Reviews: newReview.reverse()
         }
       };
     default:

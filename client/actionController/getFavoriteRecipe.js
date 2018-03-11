@@ -16,8 +16,8 @@ export default function getFavoriteRecipe(userId, page) {
     instance.get(`/users/${userId}/favorites?page=${page}`)
       .then((favoriteRecipe) => {
         const { data } = favoriteRecipe;
-        const { pages } = favoriteRecipe.data;
-        dispatch(getFavoriteRecipeSuccessful(data, pages));
+        const { pages, count } = favoriteRecipe.data;
+        dispatch(getFavoriteRecipeSuccessful(data, pages, count));
       })
       .catch((errors) => {
         dispatch(getFavoriteRecipeError(errors[0].message));

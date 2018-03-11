@@ -301,7 +301,9 @@ class Validation {
   static async checkRecipeName(req, res, next) {
     const recipeName = await Recipes.find({
       where: {
-        name: req.body.name,
+        name: {
+          $ilike: req.body.name,
+        },
         userId: req.decoded.id
       }
     });

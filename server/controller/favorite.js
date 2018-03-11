@@ -23,7 +23,8 @@ class Favorite {
       findFavRecipe.destroy();
       return res.status(200).send({
         success: true,
-        message: 'Recipe successfully unfavorited'
+        message: 'Recipe successfully unfavorited',
+        type: 0
       });
     }
     const addFavorite = await Favorites.create({
@@ -33,6 +34,7 @@ class Favorite {
     return res.status(201).send({
       success: true,
       message: 'recipe sucessfully added to favorite',
+      type: 1,
       data: addFavorite
     });
   }
@@ -43,17 +45,22 @@ class Favorite {
    * @returns  {JSON} Returns a JSON object
    */
   static async getFavorite(req, res) {
-    const limit = 6;
+    const limit = req.query.limit || 6;
     let offset;
     let pages;
-    let singlePage;
+    let pageNo;
 
-    const findAndCountFavorites = await Favorites.findAndCountAll();
+    const findAndCountFavorites = await Favorites.findAndCountAll({
+      where: {
+        userId: req.decoded.id
+      }
+    });
 
     if (findAndCountFavorites) {
       pages = Math.ceil(findAndCountFavorites.count / limit);
-      singlePage = parseInt(req.query.page, 10);
-      offset = singlePage * limit;
+      pageNo = parseInt(req.query.page, 10);
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      offset = pageNo * limit;
     }
     const getFavoritesRecipes = await Favorites.findAll({
       where: {
@@ -61,8 +68,9 @@ class Favorite {
       },
       limit,
       offset,
-      pages
     });
+
+    const { count } = findAndCountFavorites;
 
     const recipeIds = getFavoritesRecipes.map(favorite => favorite.recipeId);
     const recipes = await Recipes.findAll({
@@ -76,7 +84,8 @@ class Favorite {
     return res.status(200).send({
       success: true,
       data: await updateMultipleRecipeAttributes(recipes),
-      pages
+      pages,
+      count
     });
   }
 }

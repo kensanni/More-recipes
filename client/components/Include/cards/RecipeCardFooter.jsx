@@ -63,25 +63,22 @@ const RecipeCardFooter = (props) => {
     <ul className="list-group list-group-flush">
       <li className="list-group-item card-tile">
         <i
-          className="fa fa-heart fa-2x favorite-btn"
+          className="fa fa-heart fa-2x btn-white"
           aria-hidden="true"
-          onClick={() => favoriteRecipe(id)}
         >
           <span className="small pr-2">{favorites}
           </span>
         </i>
         <i
-          className="fa fa-thumbs-up fa-2x ml-5 favorite-btn"
+          className="fa fa-thumbs-up fa-2x ml-5 btn-white"
           aria-hidden="true"
-          onClick={() => upvoteRecipe(id)}
         >
           <span className="small pr-2">{upvotes || favRecipeData.upvotes}
           </span>
         </i>
         <i
-          className="fa fa-thumbs-down fa-2x favorite-btn"
+          className="fa fa-thumbs-down fa-2x btn-white"
           aria-hidden="true"
-          onClick={() => downvoteRecipe(id)}
         >
           <span className="small pr-2">
             {downvotes || favRecipeData.downvotes}

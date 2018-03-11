@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes, { any } from 'prop-types';
 import miniToastr from 'mini-toastr';
+import { Lines } from 'react-preloading-component';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
@@ -32,6 +33,10 @@ class RecipeDetailPageContainer extends Component {
     this.favoriteRecipe = this.favoriteRecipe.bind(this);
     this.handleReviewChange = this.handleReviewChange.bind(this);
     this.addReview = this.addReview.bind(this);
+    this.mainJsx = this.mainJsx.bind(this);
+    this.errorJsx = this.errorJsx.bind(this);
+    this.fetchingJsx = this.fetchingJsx.bind(this);
+    this.renderJsx = this.renderJsx.bind(this);
   }
 
   /**
@@ -43,7 +48,16 @@ class RecipeDetailPageContainer extends Component {
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
-    this.props.getRecipeDetailsAction(recipeId);
+    if (!Number.isInteger(parseInt(recipeId, 10))) {
+      this.props.history.push('/recipes');
+    }
+
+    if (this.props.authenticated) {
+      return this.props.getRecipeDetailsAction(recipeId);
+    }
+    this.props.history.push('/recipes');
+    miniToastr.init();
+    return miniToastr.error('Login to continue');
   }
 
   /**
@@ -100,6 +114,51 @@ class RecipeDetailPageContainer extends Component {
     });
   }
 
+  mainJsx() {
+    return (
+      <div className="container">
+        <RecipeDetailsCard
+          recipeData={this.props.recipeDetails}
+          upvoteRecipe={this.upvoteRecipe}
+          downvoteRecipe={this.downvoteRecipe}
+          favoriteRecipe={this.favoriteRecipe}
+          addReview={this.addReview}
+          value={this.state}
+          reviews={this.props.reviews}
+          onChange={this.handleReviewChange}
+        />
+        <div className="pb-5" />
+      </div>
+    );
+  }
+
+  fetchingJsx() {
+    return (
+      <div>
+        <Lines />;
+      </div>
+    );
+  }
+
+  errorJsx() {
+    return (
+      <div className="text-center error-margin">
+        <div>
+          <i className="fa fa-exclamation-circle fa-5x" />
+        </div>
+        <h1>{this.props.errorMessage}</h1>
+      </div>
+    );
+  }
+
+  renderJsx() {
+    const { recipeDetailStatus } = this.props;
+    if (recipeDetailStatus === 'fetched') return this.mainJsx();
+    if (recipeDetailStatus === 'fetching') return this.fetchingJsx();
+    if (recipeDetailStatus === 'error') return this.errorJsx();
+    return null;
+  }
+
   /**
    * @description add a review
    *
@@ -121,19 +180,7 @@ class RecipeDetailPageContainer extends Component {
     return (
       <div>
         <Header />
-        <div className="container">
-          <RecipeDetailsCard
-            recipeData={this.props.recipeDetails}
-            upvoteRecipe={this.upvoteRecipe}
-            downvoteRecipe={this.downvoteRecipe}
-            favoriteRecipe={this.favoriteRecipe}
-            addReview={this.addReview}
-            value={this.state}
-            reviews={this.props.reviews}
-            onChange={this.handleReviewChange}
-          />
-          <div className="pb-5" />
-        </div>
+        { this.renderJsx() }
         <Footer />
       </div>
     );
@@ -149,15 +196,14 @@ RecipeDetailPageContainer.propTypes = {
   match: PropTypes.objectOf(any).isRequired,
   authenticated: PropTypes.bool.isRequired,
   addReviewsAction: PropTypes.func.isRequired,
-  // reviews: PropTypes.arrayOf(any).isRequired
 };
 
-const mapStateToProps = state => (
-  console.log('reviewsghbj', state.getRecipeDetailsReducer.recipeDetails.Reviews),
-  {
-    recipeDetails: state.getRecipeDetailsReducer,
-    authenticated: state.authReducer.isAuthenticated,
-    reviews: state.getRecipeDetailsReducer.recipeDetails.Reviews
+const mapStateToProps = state => ({
+  recipeDetails: state.getRecipeDetailsReducer,
+  errorMessage: state.getRecipeDetailsReducer.errorMessage,
+  recipeDetailStatus: state.getRecipeDetailsReducer.recipeDetailStatus,
+  authenticated: state.authReducer.isAuthenticated,
+  reviews: state.getRecipeDetailsReducer.recipeDetails.Reviews
 });
 
 const mapDispatchToProps = dispatch => (

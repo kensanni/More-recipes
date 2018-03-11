@@ -100,13 +100,15 @@ const getPopularRecipeReducer = (state = initialState, action) => {
     case FAVORITE_RECIPE_SUCCESSFUL:
       return {
         ...state,
-        isFetched: state[0].isFetched,
-        errorMessage: state[0].errorMessage,
-        popularRecipesData: state[0].popularRecipesData.map((recipe) => {
+        popularRecipesData: state.popularRecipesData.map((recipe) => {
           if (recipe.id === action.recipeId) {
             return {
               ...recipe,
-              favorites: recipe.favorites
+              favorites: (
+                action.favoriteType === 1
+                  ? recipe.favorites + 1
+                  : recipe.favorites - 1
+              )
             };
           }
           return recipe;

@@ -11,9 +11,7 @@ import { addReviewsRequest, addReviewsSuccessful, addReveiwsError } from '../act
  * @returns {void} redux action to be dispatch to the store
  */
 export default function addReviews(recipeId, review) {
-  console.log('@@@@@@@@@@@@@@@@@@', recipeId, review);
   return (dispatch) => {
-    console.log('#################', recipeId, review);
     dispatch(addReviewsRequest(recipeId, review));
     instance.post(`/recipes/${recipeId}/reviews`, { review })
       .then((res) => {

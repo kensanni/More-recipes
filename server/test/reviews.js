@@ -114,6 +114,7 @@ describe('Testing API endpoints associated with review', () => {
       .send({
         userId: 1,
         recipeId: 1,
+        username: 'sannikays',
         review: 'awesome recipe',
       })
       .end((err, res) => {

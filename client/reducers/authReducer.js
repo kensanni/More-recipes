@@ -1,5 +1,6 @@
 import { SIGNUP_ERROR, SIGNUP_REQUEST, SIGNUP_SUCCESSFUL } from '../actions/signupAction';
 import { SIGNIN_ERROR, SIGNIN_REQUEST, SIGNIN_SUCCESSFUL } from '../actions/signinAction';
+import { SIGNOUT_USER } from '../actions/signOutAction';
 
 
 const initialState = {
@@ -58,6 +59,12 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: action.isAuthenticated,
         responseMessage: '',
         errorMessage: action.errorMessage,
+      };
+    case SIGNOUT_USER:
+      return {
+        ...state,
+        userData: action.userData,
+        isAuthenticated: action.isAuthenticated
       };
     default:
       return state;

@@ -88,7 +88,7 @@ describe('Testing API endpoints associated with favorites', () => {
   });
   it('Should not get a recipe from favorite list without authentication', (done) => {
     chai.request(app)
-      .get('/api/v1/users/1/favorites')
+      .get('/api/v1/users/1/favorites?page=0')
       .end((err, res) => {
         expect(res).to.have.status(403);
         expect(res.body.message).equal('Not Authorized');
@@ -97,7 +97,7 @@ describe('Testing API endpoints associated with favorites', () => {
   });
   it('Should get recipe from favorite list', (done) => {
     chai.request(app)
-      .get('/api/v1/users/1/favorites')
+      .get('/api/v1/users/1/favorites?page=0')
       .set('x-access-token', value)
       .end((err, res) => {
         expect(res).to.have.status(200);

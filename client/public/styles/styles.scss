@@ -308,3 +308,47 @@ p {
 .inline-button {
   display: inline-flex;
 }
+
+.error-margin {
+  margin-top: 11rem;
+}
+
+.section-margin {
+  padding-top: 5rem;
+}
+
+.text-font {
+  font-size: 56px;
+  color: #fff;
+}
+
+.button-lg {
+  background-color: #fecf42;
+  border-radius: 4px;
+  padding: 10px 40px;
+  color: #fff;
+  border: 2px solid;
+}
+
+.button-lg:hover {
+  background-color: #723f5f;
+}
+
+.bg-color {
+  background-color: #723f5f;
+  height: 100%;
+}
+
+.text-desc {
+  color: #fff;
+  font-size: 30px;
+}
+
+.image-position {
+  display: block;
+  margin: 0 auto;
+}
+
+.img-text {
+  color: black;
+}

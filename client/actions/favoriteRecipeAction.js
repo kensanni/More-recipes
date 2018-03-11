@@ -7,9 +7,11 @@ export const favoriteRecipeRequest = recipeId => ({
   recipeId,
   isFavorited: false
 });
-export const favoriteRecipeSuccess = recipeId => ({
+export const favoriteRecipeSuccess = (recipeId, message, favoriteType) => ({
   type: FAVORITE_RECIPE_SUCCESSFUL,
   recipeId,
+  favoriteType,
+  message,
   isFavorited: true
 });
 export const favoriteRecipeError = errorMessage => ({

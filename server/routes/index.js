@@ -106,4 +106,9 @@ export default (app) => {
     Validation.checkRecipeId,
     Downvote.downvoteRecipe
   );
+
+  app.get(
+    '/api/v1/search',
+    Recipe.recipeSearch
+  );
 };

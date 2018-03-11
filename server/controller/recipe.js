@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import model from '../models';
 import updateRecipeAttributes from '../helpers/updateRecipeAttributes';
 import updateMultipleRecipeAttributes from '../helpers/updateMultipleRecipeAttributes';
@@ -64,23 +65,23 @@ class Recipe {
    * @returns  {JSON} Returns a JSON object
    */
   static async getRecipes(req, res) {
-    const limit = 6;
+    const limit = req.query.limit || 6;
     let offset;
     let pages;
-    let singlePage;
+    let pageNo;
 
     const findAndCount = await Recipes.findAndCountAll();
 
     if (findAndCount) {
       pages = Math.ceil(findAndCount.count / limit);
-      singlePage = parseInt(req.query.page, 10);
-      offset = singlePage * limit;
+      pageNo = parseInt(req.query.page, 10);
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      offset = pageNo * limit;
     }
 
     const getAllRecipes = await Recipes.findAll({
       limit,
-      offset,
-      pages
+      offset
     });
 
     if (getAllRecipes.length < 1) {
@@ -110,7 +111,7 @@ class Recipe {
       where: { id },
       include: [{
         model: model.Reviews,
-        attributes: ['review']
+        attributes: ['review', 'username']
       }],
     });
 
@@ -136,8 +137,8 @@ class Recipe {
   static async getUserRecipes(req, res) {
     let offset;
     let pages;
-    let singlePage;
-    const limit = 6;
+    let pageNo;
+    const limit = req.query.limit || 6;
     const userId = req.decoded.id;
     const id = parseInt(req.params.userId, 10);
 
@@ -147,19 +148,25 @@ class Recipe {
       });
     }
 
-    const findAndCountUserRecipes = await Recipes.findAndCountAll();
+    const findAndCountUserRecipes = await Recipes.findAndCountAll({
+      where: {
+        userId: req.decoded.id
+      }
+    });
+
+    const { count } = findAndCountUserRecipes;
 
     if (findAndCountUserRecipes) {
       pages = Math.ceil(findAndCountUserRecipes.count / limit);
-      singlePage = parseInt(req.query.page, 10);
-      offset = singlePage * limit;
+      pageNo = parseInt(req.query.page, 10);
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      offset = pageNo * limit;
     }
 
     const userRecipe = await Recipes.findAll({
       where: { userId },
       limit,
       offset,
-      pages
     });
 
     if (userRecipe.length < 1) {
@@ -170,7 +177,8 @@ class Recipe {
 
     return res.status(200).send({
       recipesData: userRecipe,
-      pages
+      pages,
+      count
     });
   }
   /**
@@ -217,11 +225,47 @@ class Recipe {
           attributes: ['username'],
         }]
       }],
-      limit: 3,
+      limit: req.query.limit || 3,
     });
     const updatedRecipes = await updateMultipleRecipeAttributes(getRecipes);
     return res.status(200).send({
       recipesData: updatedRecipes.sort((a, b) => a.dataValues.favorites + b.dataValues.favorites)
+    });
+  }
+
+  /**
+   * @description
+   *
+   * @param {object} req
+   *
+   * @param {object} res
+   *
+   * @returns {object} oject
+   */
+  static async recipeSearch(req, res) {
+    const { Op } = Sequelize;
+
+    const findRecipes = await Recipes.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: { [Op.iLike]: `%${req.query.recipe}%` }
+          },
+          {
+            ingredient: { [Op.iLike]: `%${req.query.recipe}%` }
+          }
+        ]
+      }
+    });
+
+    if (findRecipes.length === 0) {
+      return res.status(404).send({
+        message: 'recipe not found'
+      });
+    }
+
+    return res.status(200).send({
+      searchResult: findRecipes
     });
   }
 }

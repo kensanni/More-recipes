@@ -3,17 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import ReactPaginate from 'react-paginate';
-import miniToastr from 'mini-toastr';
+import { Lines } from 'react-preloading-component';
 import RecipeGrid from '../recipePages/RecipeGrid';
 import Header from '../common/Header';
 import GuestHeader from '../common/GuestHeader';
 import Footer from '../common/Footer';
-import RecipeCard from '../Include/cards/RecipeCard';
 import getRecipeAction from '../../actionController/getRecipe';
 import getPopularRecipeAction from '../../actionController/getPopularRecipe';
-import upvoteRecipeAction from '../../actionController/upvoteRecipe';
-import downvoteRecipeAction from '../../actionController/downvoteRecipe';
-import favoriteRecipeAction from '../../actionController/favoriteRecipe';
 
 /**
  * @class RecipeGrid
@@ -33,9 +29,6 @@ class AllRecipes extends Component {
       popularRecipesData: [],
       isFetched: false
     };
-    this.upvoteRecipe = this.upvoteRecipe.bind(this);
-    this.downvoteRecipe = this.downvoteRecipe.bind(this);
-    this.favoriteRecipe = this.favoriteRecipe.bind(this);
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
   }
   /**
@@ -72,72 +65,18 @@ class AllRecipes extends Component {
       });
     }
   }
-  /**
-   * @description upvote a recipe
-   *
-   * @param {id} id id of recipe to be upvoted
-   *
-   * @return {void} calls upvoteRecipeAction
-   */
-  upvoteRecipe(id) {
-    this.props.upvoteRecipeAction(id);
-  }
-
-  /**
-   * @description downvote a recipe
-   *
-   * @param {id} id id of recipe to be updated
-   *
-   * @return {undefined} calls downvoteRecipeAction
-   */
-  downvoteRecipe(id) {
-    if (this.props.authenticated) {
-      return this.props.downvoteRecipeAction(id);
-    }
-    miniToastr.init();
-    return miniToastr.error('Login to continue');
-  }
-
-  /**
-   * @description favorite a recipe
-   *
-   * @param {id} id - id of recipe to be favorited
-   *
-   * @return {undefined} calls favoriteRecipeAction
-   */
-  favoriteRecipe(id) {
-    this.props.favoriteRecipeAction(id);
-  }
 
   handlePaginationChange(recipes) {
     this.props.getRecipeAction(recipes.selected);
   }
 
   /**
-   * @description
-   *
-   * @param {*} recipes
-   * @param {*} index
-   *
-   * @returns {*} yfhdhd
-   */
-  renderRecipes(recipes, index) {
-    const recipe = recipes[index];
-    return (<RecipeCard
-      key={recipe.id}
-      recipeData={recipe}
-      upvoteRecipe={this.upvoteRecipe}
-      downvoteRecipe={this.downvoteRecipe}
-      favoriteRecipe={this.favoriteRecipe}
-    />);
-  }
-  /**
    * @description render - display all the recipes
    *
    * @return {JSX} return JSX
    */
   render() {
-    const { recipeData, popularRecipesData, isFetched } = this.state;
+    const { recipeData, popularRecipesData } = this.state;
     return (
       <div>
         {
@@ -151,12 +90,11 @@ class AllRecipes extends Component {
                 <hr />
               </div>
             </section>
-            <RecipeGrid
-              recipeData={popularRecipesData}
-              upvoteRecipe={this.upvoteRecipe}
-              downvoteRecipe={this.downvoteRecipe}
-              favoriteRecipe={this.favoriteRecipe}
-            />
+            {
+              !this.props.popularRecipes.isFetched ? <Lines /> : <RecipeGrid
+                recipeData={popularRecipesData}
+              />
+            }
             {/* { isFetched && popularRecipesData
                 .map((recipe, i) => this.renderRecipes(popularRecipesData, i))
             } */}
@@ -170,12 +108,11 @@ class AllRecipes extends Component {
             </section>
           </div>
           <div className="row">
-            <RecipeGrid
-              recipeData={recipeData}
-              upvoteRecipe={this.upvoteRecipe}
-              downvoteRecipe={this.downvoteRecipe}
-              favoriteRecipe={this.favoriteRecipe}
-            />
+            {
+              !this.props.recipes.isFetched ? <Lines /> : <RecipeGrid
+                recipeData={recipeData}
+              />
+            }
           </div>
         </div>
         <ReactPaginate
@@ -204,9 +141,6 @@ class AllRecipes extends Component {
 
 AllRecipes.propTypes = {
   getRecipeAction: PropTypes.func.isRequired,
-  upvoteRecipeAction: PropTypes.func.isRequired,
-  downvoteRecipeAction: PropTypes.func.isRequired,
-  favoriteRecipeAction: PropTypes.func.isRequired,
   getPopularRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
 };
@@ -234,9 +168,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getRecipeAction,
-    upvoteRecipeAction,
-    downvoteRecipeAction,
-    favoriteRecipeAction,
     getPopularRecipeAction
   }, dispatch)
 );

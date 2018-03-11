@@ -21,7 +21,7 @@ const initialState = {
  */
 const getUserRecipeReducer = (state = initialState, action) => {
   const {
-    isFetched, recipeData, errorMessage, newRecipeData, page
+    isFetched, recipeData, errorMessage, newRecipeData, page, count
   } = action;
 
   const newRecipe = [];
@@ -46,7 +46,8 @@ const getUserRecipeReducer = (state = initialState, action) => {
         isFetched,
         recipeData,
         errorMessage: '',
-        page
+        page,
+        count
       };
     case GET_USER_RECIPE_ERROR:
       return {

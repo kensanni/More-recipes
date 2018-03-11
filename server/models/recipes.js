@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
       }
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: {
         args: false,
         msg: 'Please Input a description for your recipes'

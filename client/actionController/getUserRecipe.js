@@ -11,13 +11,12 @@ import { getUserRecipeRequest, getUserRecipeSuccessful, getUserRecipeError } fro
  * @returns {undefined} redux action to be dispatch to the store
  */
 export default function getUserRecipe(userId, page) {
-  console.log("user id =====>",userId, page);
   return (dispatch) => {
     dispatch(getUserRecipeRequest());
     instance.get(`/users/${userId}/recipes?page=${page}`)
       .then((userRecipe) => {
-        const { recipesData, pages } = userRecipe.data;
-        dispatch(getUserRecipeSuccessful(recipesData, pages));
+        const { recipesData, pages, count } = userRecipe.data;
+        dispatch(getUserRecipeSuccessful(recipesData, pages, count));
       })
       .catch((errors) => {
         dispatch(getUserRecipeError(errors[0].message));

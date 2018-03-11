@@ -17,5 +17,5 @@ export const getRecipeDetailsSuccessful = recipeDetails => ({
 export const getRecipeDetailsError = errorMessage => ({
   type: GET_RECIPE_DETAILS_ERROR,
   errorMessage,
-  isFetched: true
+  isFetched: false
 });

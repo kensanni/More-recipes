@@ -11,7 +11,7 @@ import AddModal from '../../Include/modals/AddModal';
  */
 const AddRecipeButton = (props) => {
   const {
-    onChange, addRecipe, value, saveImageToCloud
+    onChange, addRecipe, value, saveImageToCloud, recipeImage
   } = props;
   return (
     <div className="row header-nav ">
@@ -32,6 +32,7 @@ const AddRecipeButton = (props) => {
           addRecipe={addRecipe}
           value={value}
           saveImageToCloud={saveImageToCloud}
+          recipeImage={recipeImage}
         />
       </div>
     </div>

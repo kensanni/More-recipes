@@ -10,7 +10,7 @@ import PropTypes, { any } from 'prop-types';
  */
 const AddModal = (props) => {
   const {
-    onChange, value, saveImageToCloud, addRecipe
+    onChange, value, saveImageToCloud, addRecipe, recipeImage
   } = props;
   const {
     name, description, ingredient, responseMessage
@@ -78,6 +78,7 @@ const AddModal = (props) => {
                 </label>
                 <input
                   id="ingredient"
+                  placeholder="separate each ingredient with a comma"
                   type="text"
                   name="ingredient"
                   onChange={onChange}
@@ -85,7 +86,7 @@ const AddModal = (props) => {
                   className="form-control"
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group img-text">
                 <input
                   type="file"
                   name="image"
@@ -105,6 +106,7 @@ const AddModal = (props) => {
             </button>
             <button
               type="button"
+              disabled={!recipeImage ? 'disabled' : null}
               className="btn btn-orange"
               onClick={addRecipe}
             >

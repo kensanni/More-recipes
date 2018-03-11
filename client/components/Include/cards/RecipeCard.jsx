@@ -23,11 +23,8 @@ const RecipeCard = (props) => {
         />
         <div className="card-body">
           <Link to={`/recipes/${recipeData.id || favRecipeData.id}`}>
-            <h4 className="card-title">{recipeData.name || favRecipeData.name}</h4>
+            <h4 className="card-title text-center">{recipeData.name || favRecipeData.name}</h4>
           </Link>
-          <p className="card-text pt-2">
-            {recipeData.description || favRecipeData.description}
-          </p>
         </div>
         <RecipeCardFooter
           data={props}

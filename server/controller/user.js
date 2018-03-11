@@ -52,8 +52,9 @@ class User {
       }
     });
     if (findUserdetails) {
-      const payload = { id: findUserdetails.id, username: findUserdetails.username, email: findUserdetails.email };
-      console.log('payload', payload);
+      const payload = {
+        id: findUserdetails.id, username: findUserdetails.username, email: findUserdetails.email
+      };
       const token = jwt.sign(payload, secret, {
         expiresIn: '3h',
       });

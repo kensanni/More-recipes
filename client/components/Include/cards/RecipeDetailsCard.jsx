@@ -5,7 +5,6 @@ import UpVoteButton from '../buttons/UpVoteButton';
 import FavoriteButton from '../buttons/FavoriteButton';
 
 const RecipeDetailsCard = (props) => {
-  // console.log('props', props.reviews.length);
   const {
     recipeData,
     upvoteRecipe,
@@ -17,7 +16,7 @@ const RecipeDetailsCard = (props) => {
     addReview
   } = props;
   const {
-    id, name, description, image, downvotes, upvotes, favorites
+    id, name, description, ingredient, image, downvotes, upvotes, favorites
   } = recipeData.recipeDetails;
   return (
     <div>
@@ -28,8 +27,30 @@ const RecipeDetailsCard = (props) => {
               <div>
                 <img className="img img-fluid img-thumbnail img-width" src={image} alt="" />
                 <h1 className="text-center">{name}</h1>
-                <p>{description}</p>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            {ingredient.split(',').map((ingredients, i) => (
+              <li
+                className="col-sm-6"
+                key={i}
+              >
+                {ingredients}
+              </li>
+                ))}
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
+              <ol>
+                {
+                  description.split('\n').map((descriptions, i) => (
+                    <li key={i}>
+                      {description}
+                    </li>
+                  ))
+                }
+              </ol>
             </div>
           </div>
           <div className="row">
@@ -87,7 +108,7 @@ const RecipeDetailsCard = (props) => {
                     </li>
                   ))
                 }
-                </ul>
+                                 </ul>
               }
             </div>
           </div>

@@ -243,9 +243,9 @@ describe('Testing recipe endpoints', () => {
         done();
       });
   });
-  it('should get all recipes from catalog with authorization', (done) => {
+  it('should get all paginated recipes from catalog with authorization', (done) => {
     chai.request(app)
-      .get('/api/v1/recipes')
+      .get('/api/v1/recipes?page=0')
       .set('x-access-token', value)
       .end((err, res) => {
         expect(res).to.have.status(200);

@@ -13,8 +13,8 @@ export default function favoriteRecipe(recipeId) {
     dispatch(favoriteRecipeRequest(recipeId));
     instance.post(`/recipes/${recipeId}/favorites`)
       .then((recipe) => {
-        const { message } = recipe.data;
-        dispatch(favoriteRecipeSuccess(message));
+        const { message, type: favoriteType } = recipe.data;
+        dispatch(favoriteRecipeSuccess(recipeId, message, favoriteType));
       })
       .catch((error) => {
         const { errors } = error.response.data;

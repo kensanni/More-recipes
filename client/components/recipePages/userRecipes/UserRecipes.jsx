@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { filter, isEmpty } from 'lodash';
+import { Lines } from 'react-preloading-component';
 import ReactPaginate from 'react-paginate';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
@@ -28,6 +29,9 @@ class UserRecipes extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
+      description: '',
+      ingredient: '',
       recipeData: [],
       isFetched: false,
       isChanged: false,
@@ -164,7 +168,6 @@ class UserRecipes extends Component {
    */
   saveImageToCloud(event) {
     const image = event.target.files[0];
-    console.log('action', image);
     if (image) {
       this.props.saveImageToCloudAction(image);
     }
@@ -203,23 +206,27 @@ class UserRecipes extends Component {
               onChange={this.handleChange}
               addRecipe={this.addRecipe}
               saveImageToCloud={this.saveImageToCloud}
+              recipeImage={this.props.recipeImageUrl}
             />
 
           </div>
           <div className="row">
             {/* {this.state.isFetched && renderUserRecipes} */}
-            <RecipeGrid
-              showActionButton
-              recipeData={this.state.recipeData}
-              showRecipeDetails={this.handleShowRecipe}
-              deleteRecipe={this.deleteRecipe}
-              editRecipe={this.editRecipe}
-              addRecipe={this.addRecipe}
-              value={this.state}
-              handleCloseModal={this.handleCloseModal}
-              onChange={this.handleChange}
-              saveImageToCloud={this.saveImageToCloud}
-            />
+            {
+              !this.props.recipes.isFetched ? <Lines /> :
+              <RecipeGrid
+                showActionButton
+                recipeData={this.state.recipeData}
+                showRecipeDetails={this.handleShowRecipe}
+                deleteRecipe={this.deleteRecipe}
+                editRecipe={this.editRecipe}
+                addRecipe={this.addRecipe}
+                value={this.state}
+                handleCloseModal={this.handleCloseModal}
+                onChange={this.handleChange}
+                saveImageToCloud={this.saveImageToCloud}
+              />
+            }
           </div>
           <div className="pt-3 pb-5">
             <ReactPaginate
@@ -263,15 +270,13 @@ UserRecipes.propTypes = {
  * @param {state} state
  * @returns {object} object
  */
-const mapStateToProps = state => (
-  console.log('recipes', state.getUserRecipeReducer.page),
-  {
-    recipes: state.getUserRecipeReducer,
-    userId: state.authReducer.userData.id,
-    page: state.getUserRecipeReducer.page,
-    recipeImageUrl: state.saveImageToCloud.image,
-    addRecipeResponse: state.addRecipeReducer.errorMessage
-  });
+const mapStateToProps = state => ({
+  recipes: state.getUserRecipeReducer,
+  userId: state.authReducer.userData.id,
+  page: state.getUserRecipeReducer.page,
+  recipeImageUrl: state.saveImageToCloud.image,
+  addRecipeResponse: state.addRecipeReducer.errorMessage
+});
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
