@@ -1,68 +1,77 @@
 # More-Recipes
 ![Build Status](https://travis-ci.org/kensanni/More-recipes.svg?branch=develop) [![Coverage Status](https://coveralls.io/repos/github/kensanni/More-recipes/badge.svg?branch=develop)](https://coveralls.io/github/kensanni/More-recipes?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/61935e09f001a06fb347/maintainability)](https://codeclimate.com/github/kensanni/More-recipes/maintainability)
 
-More-Recipes provides a platform for users to share the awesome and exciting  recipe ideas they have invented or learnt.  Suppose a user comes up with a food recipe,  he/she can post it on More-Recipes and  get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.
+
+## About
+More-Recipes provides a platform for users to share the awesome and exciting  recipe ideas they have invented or learnt.  
+
+### Features
+- Add recipes to catalog
+- Modify a recipe
+- Delete a recipe
+- See all recipes on the catalog
+- Upvote or downvote a recipe
+- Favorite a recipe
+- Review a recipe
+- See most popular recipes on the application
+
+  Live demo: [more-recipe-007.herokuapp.com](http://more-recipe-007.herokuapp.com/)
+	
+## Technologies Used
+
+#### Client side:
+     - The client side of this application is built with REACT(Front-end Library) and REDUX(state management)
+#### Server side:
+     - The server side is built on NODE using EXPRESS(web framework) as the server,
+	  SEQUELIZE as the ORM(object Relation Mapper) for communicating with POSTGRESQL DB
+	
+     - Written in ES6 and transpiled down to ES5 with BABEL
+
+#### Style checking and best pratice
+    - ESLINT, which is configured to Airbnb-base rule
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-#### Dependencies
->- Node
-
-#### Installation
+#### Installation and Dependencies
 
 You can get the app running locally in the following way:
->- Install NodeJs on your machine
->- Clone the repository $ git clone [https://github.com/kensanni/More-recipes.git]( https://github.com/kensanni/More-recipes.git)
->- Change into the directory $ cd /More-recipes
->- Use $ npm install to install all required dependencies.
->- Start app with $ npm run start:dev
+1.  Install NodeJs [`node`](https://nodejs.org/en/download/), version 5 or greater on your machine
 
-The app will be running at http://localhost:8000
+2. Install [`postgres`](https://www.postgresql.org/download/) to your local machine
 
-### Features
-* Add recipe   to catalog.
-* View all recipe in catalog.
-* Post a review for recipe.
-* Get all recipes based on most voted.
+3. Clone the repository and cd into it
+   
+	  ```
+    git clone https://github.com/kensanni/More-recipes.git
+    cd More-recipes
+    ```
+		
+ 4. Install dependenices 
+    
+		 npm install
+		 
+ 5. Create a database in progresql
+    
+		 In the application root directory, check the config.js file in
+		 `server/config/config.js` to setup your database
+		 
+ 6. Run database migrations
+    
+		 sequelize db: migrate
 
-## API
-The routes currently specified in the application are as follows:
+ 7.  start the application
+ 
+		 - npm run start:dev
+		 - Application would be up and running on localhost 8000
+		 
+#### Testing
 
--**'api/v1.users/signup'**
-   - **POST** - API route for user to create an account
+This app uses `Mocha/Chai` and `Chai-Http` for backend testing
 
--**'api/v1.users/signin'**
-   - **POST** - API route for user to sign in
-
-- **'api/v1/recipes'**
-    - **POST** -   API route that allows authenticated user to add a recipe
-
-- **'api/v1/recipes/:recipeId'**
-    - **PUT** - API routw that allow an authenticated user to modify a recipe
-
-- **'api/v1/recipes'**
-    - **GET** - Allows an autheticated user to get all recipes
-
-- **'api/v1/recipes/:recipeId/reviews'**
-    - **POST** - Allows an authenticated user to post a review for recipe  
-
-- **'api/v1/recipes/:recipeId'**
-    - **DETELE** - Allows an authenticated users to delete recipe
-
-- **'/api/v1/recipes/:recipeId/favorites'**
-    - **POST** - Allow an authenticated user to add a recipe to favorite
-
-- **'api/v1/recipes'**
-    - **GET** - Allow an authenticated user to get all favorite recipes
-
-#### Technologies and Services
-
-Written in Javascript es6 syntax and nodejs, with the following:
->- Mocha
->- Chai
->- Express
+ > - `npm run start:test`  - migrate the test database
+ > - `npm run test` - run unit test for backend
 
 ## Contributing
 
@@ -73,7 +82,7 @@ To contribute:
 >- Install dependencies
 >- Create a new branch for included feature(s)
 >- Raise a pull request.
-
+ 
 
 ## Author
 
