@@ -1,5 +1,13 @@
 import models from './../models';
 
+/**
+ * @description count the length of favorite upvotes and downvotes and append it to a single recipe
+ *
+ * @param {object} sequelizeRecipe
+ *
+ * @returns {object} object
+ */
+
 const { Upvotes, Downvotes, Favorites } = models;
 
 const updateRecipeAttributes = async (sequelizeRecipe) => {

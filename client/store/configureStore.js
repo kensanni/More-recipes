@@ -9,7 +9,7 @@ import rootReducer from '../reducers/rootReducer';
  *
  * @param {object} initialState
  *
- * @returns {undefined} store that holds the complete state of the app
+ * @returns {void} store which holds the complete state of the app
  */
 const configureStore = initialState => ((
   createStore(

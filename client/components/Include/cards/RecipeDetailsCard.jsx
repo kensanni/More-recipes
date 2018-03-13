@@ -4,6 +4,12 @@ import DownVoteButton from '../buttons/DownVoteButton';
 import UpVoteButton from '../buttons/UpVoteButton';
 import FavoriteButton from '../buttons/FavoriteButton';
 
+/**
+ * @description functional component to render recipe details page
+ * @param {object} props
+ *
+ * @returns {JSX} return JSX
+ */
 const RecipeDetailsCard = (props) => {
   const {
     recipeData,
@@ -26,8 +32,13 @@ const RecipeDetailsCard = (props) => {
             <div className="col-sm-12">
               <div>
                 <img className="img img-fluid img-thumbnail img-width" src={image} alt="" />
-                <h1 className="text-center">{name}</h1>
+                <h1 className="text-center pt-3">{name}</h1>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
+              <p>Ingredient</p>
             </div>
           </div>
           <div className="row">
@@ -42,11 +53,16 @@ const RecipeDetailsCard = (props) => {
           </div>
           <div className="row">
             <div className="col-sm-12">
+              <p className="pt-3">Directions</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
               <ol>
                 {
                   description.split('\n').map((descriptions, i) => (
                     <li key={i}>
-                      {description}
+                      {descriptions}
                     </li>
                   ))
                 }
@@ -86,17 +102,20 @@ const RecipeDetailsCard = (props) => {
             <div className="col-sm-12 mt-3">
               <h2 className="header-bg">Reviews</h2>
               {
-                props.reviews && !props.reviews.length &&
+                reviews && !reviews.length &&
                 <h6 style={{ textAlign: 'center' }}>This recipe have not been reviewed</h6>
               }
               {
-                props.reviews && <ul style={{ maxHeight: '300px', overflowY: 'scroll' }}>
+                reviews &&
+                <ul style={{ maxHeight: '300px', overflowY: 'scroll' }}>
+                {console.log(props.reviews, ' rdcard')}
                   {
                   props.reviews.map((review, i) => (
                     <li key={i} className="review-list">
                       <div>
                         <div >
                           <div className="header">
+                            {console.log(review)}
                             <strong className="primary-font">{review.username}</strong>
                           </div>
                           <p>
@@ -108,7 +127,7 @@ const RecipeDetailsCard = (props) => {
                     </li>
                   ))
                 }
-                                 </ul>
+                </ul>
               }
             </div>
           </div>
@@ -142,6 +161,10 @@ RecipeDetailsCard.propTypes = {
   upvoteRecipe: PropTypes.func.isRequired,
   downvoteRecipe: PropTypes.func.isRequired,
   favoriteRecipe: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  reviews: PropTypes.arrayOf(any).isRequired,
+  value: PropTypes.objectOf(any).isRequired,
+  addReview: PropTypes.func.isRequired
 };
 
 export default RecipeDetailsCard;

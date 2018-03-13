@@ -9,7 +9,8 @@
           "document": true,
           "localStorage": true,
           "FormData": true,
-          "window": true      
+          "window": true,
+          "$": true   
       },
       "rules": {
         "one-var": 0,

@@ -10,9 +10,12 @@ const initialState = {
   page: 0
 };
 /**
- * @description recipe reducer
+ * @description get all recipes reducer
+ *
  * @param {object} state - default application state
+ *
  * @param {object} action - response from the api
+ *
  * @return {Object} - Object containg new state
  */
 const recipeReducer = (state = initialState, action) => {

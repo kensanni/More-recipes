@@ -7,9 +7,18 @@ const initialState = {
   errorMessage: ''
 };
 
+/**
+ * @description add reviews reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const addReviewsReducer = (state = initialState, action) => {
   const {
-    isAdded, responseMessage, review, errorMessage,
+    isAdded, responseMessage, review, errorMessage, username
   } = action;
   switch (action.type) {
     case ADD_REVIEWS_REQUEST:
@@ -26,6 +35,7 @@ const addReviewsReducer = (state = initialState, action) => {
         isAdded,
         responseMessage,
         review,
+        username,
         errorMessage: ''
       };
     case ADD_REVIEWS_ERROR:

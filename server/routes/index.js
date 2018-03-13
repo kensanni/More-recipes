@@ -12,6 +12,9 @@ export default (app) => {
     message: 'welcome to the world of great recipes',
   }));
 
+  /**
+   * @description user signup route
+   */
   app.post(
     '/api/v1/users/signup',
     Validation.validateUserInput,
@@ -19,17 +22,26 @@ export default (app) => {
     User.signUp
   );
 
+  /**
+   * @description get user most popular recipes
+   */
   app.get(
     '/api/v1/recipes/most-popular-recipe',
     Recipe.popularRecipes
   );
 
+  /**
+   * @description user signin route
+   */
   app.post(
     '/api/v1/users/signin',
     Validation.validateUserSignin,
     User.signIn
   );
 
+  /**
+   * @description add recipe route
+   */
   app.post(
     '/api/v1/recipes',
     authentication.verifyUser,
@@ -38,17 +50,27 @@ export default (app) => {
     Recipe.addRecipes
   );
 
+  /**
+   * @description route to get all recipes
+   */
   app.get(
     '/api/v1/recipes',
     Recipe.getRecipes
   );
 
+  /**
+   * @description  route to get a single recipe
+   */
   app.get(
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
     Validation.checkRecipeId,
     Recipe.getARecipe
   );
+
+  /**
+   * @description route to get a specific user recipes
+   */
   app.get(
     '/api/v1/users/:userId/recipes',
     Validation.checkUserId,
@@ -56,6 +78,9 @@ export default (app) => {
     Recipe.getUserRecipes
   );
 
+  /**
+   * @description route to update a recipe
+   */
   app.put(
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
@@ -64,6 +89,9 @@ export default (app) => {
     Recipe.modifyRecipe
   );
 
+  /**
+   * @description route to add a review
+   */
   app.post(
     '/api/v1/recipes/:recipeId/reviews',
     authentication.verifyUser,
@@ -72,6 +100,9 @@ export default (app) => {
     Review.addReview
   );
 
+  /**
+   * @description route to delete a recipe
+   */
   app.delete(
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
@@ -79,6 +110,9 @@ export default (app) => {
     Recipe.deleteRecipes
   );
 
+  /**
+   * @description route to favorite and unfavorite a recipe
+   */
   app.post(
     '/api/v1/recipes/:recipeId/favorites',
     authentication.verifyUser,
@@ -86,6 +120,9 @@ export default (app) => {
     Favorite.addFavorite
   );
 
+  /**
+   * @description route to get user favorited recipe
+   */
   app.get(
     '/api/v1/users/:userId/favorites',
     authentication.verifyUser,
@@ -93,6 +130,9 @@ export default (app) => {
     Favorite.getFavorite
   );
 
+  /**
+   * @description route to upvote and remove upvote from a recipe
+   */
   app.post(
     '/api/v1/recipes/:recipeId/upvote',
     authentication.verifyUser,
@@ -100,6 +140,9 @@ export default (app) => {
     Upvote.upvoteRecipe
   );
 
+  /**
+   * @description route to downvote and remove downvote from a recipe
+   */
   app.post(
     '/api/v1/recipes/:recipeId/downvote',
     authentication.verifyUser,
@@ -107,6 +150,9 @@ export default (app) => {
     Downvote.downvoteRecipe
   );
 
+  /**
+   * @description route to search for recipes on the application
+   */
   app.get(
     '/api/v1/search',
     Recipe.recipeSearch

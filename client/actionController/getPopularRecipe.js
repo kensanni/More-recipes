@@ -4,9 +4,7 @@ import { getPopularRecipeRequest, getPopularRecipeSuccess, getPopularRecipeError
 /**
  * @description action creator for getting all recipes
  *
- * @param {recipe} recipe
- *
- * @return {undefined} Redux action to be dispatch to the store
+ * @return {void} action to be dispatch to the store
  */
 export default function getPopularRecipe() {
   return (dispatch) => {

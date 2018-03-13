@@ -1,3 +1,4 @@
+// Action Types
 export const SIGNOUT_USER = 'SIGNOUT_USER';
 
 /**

@@ -5,9 +5,9 @@ import { deleteRecipeRequest, deleteRecipeSuccessful, deleteRecipeError } from '
 /**
  * @description action creator for deleting recipe
  *
- * @param {recipeId} recipeId
+ * @param {number} recipeId
  *
- * @returns {undefined} Redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function deleteRelete(recipeId) {
   return (dispatch) => {

@@ -5,9 +5,9 @@ import { addRecipeRequest, addRecipeError, addRecipeSuccess } from '../actions/a
 /**
  * @description action creator for adding recipe
  *
- * @param {recipeData} recipeData
+ * @param {object} recipeData
  *
- * @returns {void} redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function addRecipe(recipeData) {
   return (dispatch) => {
@@ -16,6 +16,7 @@ export default function addRecipe(recipeData) {
       .then((res) => {
         const { message, data } = res.data;
         dispatch(addRecipeSuccess(message, data));
+        $('#exampleModal').modal('toggle');
         miniToastr.init();
         miniToastr.success(message);
       })

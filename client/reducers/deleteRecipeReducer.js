@@ -7,6 +7,15 @@ const initialState = {
   responseMessage: ''
 };
 
+/**
+ * @description delete recipe reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const deleteRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_RECIPE_REQUEST:

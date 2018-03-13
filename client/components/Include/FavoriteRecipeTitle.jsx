@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * @description functional component to render section for displaying favorite recipe title
+ *
+ * @returns {JSX} return JSX
+ */
 const FavoriteRecipeTitle = () => ((
   <div className="row">
     <section className="col-md-12">

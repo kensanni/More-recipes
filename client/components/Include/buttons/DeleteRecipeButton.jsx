@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * @description functional component to render delete button for recipe
  *
- * @param {props} props
+ * @param {object} props
  *
  * @returns {JSX} return JSX
  */

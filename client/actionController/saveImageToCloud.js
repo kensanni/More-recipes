@@ -4,9 +4,9 @@ import { saveImageToCloudRequest, saveImageToCloudSuccessful, saveImageToCloudEr
 /**
  * @description action controller for uploading recipe image to cloudinary
  *
- * @param {image} image
+ * @param {string} image
  *
- * @return {undefined} Redux action to be dispatch to the store
+ * @return {void} action to be dispatch to the store
  */
 export default function saveImageToCloud(image) {
   const cloudinaryUrl = process.env.REQUEST;

@@ -8,7 +8,7 @@ import { addReviewsRequest, addReviewsSuccessful, addReveiwsError } from '../act
  *
  * @param {object} review
  *
- * @returns {void} redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function addReviews(recipeId, review) {
   return (dispatch) => {
@@ -16,7 +16,7 @@ export default function addReviews(recipeId, review) {
     instance.post(`/recipes/${recipeId}/reviews`, { review })
       .then((res) => {
         const { message, data } = res.data;
-        dispatch(addReviewsSuccessful(message, data.review));
+        dispatch(addReviewsSuccessful(message, data.review, data.username));
       })
       .catch((error) => {
         const { errors } = error.response.data;

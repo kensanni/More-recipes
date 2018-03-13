@@ -9,10 +9,14 @@ const authenticaton = {
 
   /**
    * @description verify user identity
+   *
    * @param {object} req - request
+   *
    * @param {object} res - response
-   * @param {object} next - process to next function
-   * @returns {object} return
+   *
+   * @param {function} next - proceed to next function
+   *
+   * @returns {object} return an object
    */
 
   verifyUser: (req, res, next) => {

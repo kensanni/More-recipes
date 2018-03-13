@@ -7,6 +7,15 @@ const initialState = {
   errorMessage: ''
 };
 
+/**
+ * @description downvote recipe reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const downvoteRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
     case DOWNVOTE_RECIPE_REQUEST:

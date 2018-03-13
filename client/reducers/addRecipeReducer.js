@@ -7,6 +7,15 @@ const initialState = {
   errorMessage: ''
 };
 
+/**
+ * @description add recipe reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 
 const addRecipeReducer = (state = initialState, action) => {
   switch (action.type) {

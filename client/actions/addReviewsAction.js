@@ -1,7 +1,9 @@
+// Action Types
 export const ADD_REVIEWS_REQUEST = 'ADD_REVIEWS_REQUEST';
 export const ADD_REVIEWS_SUCCESSFUL = 'ADD_REVIEWS_SUCCESSFUL';
 export const ADD_REVIEWS_ERROR = 'ADD_REVIEWS_ERROR';
 
+// Actions
 export const addReviewsRequest = (recipeId, review) => ({
   type: ADD_REVIEWS_REQUEST,
   isAdded: false,
@@ -9,11 +11,12 @@ export const addReviewsRequest = (recipeId, review) => ({
   recipeId
 });
 
-export const addReviewsSuccessful = (responseMessage, review) => ({
+export const addReviewsSuccessful = (responseMessage, review, username) => ({
   type: ADD_REVIEWS_SUCCESSFUL,
   isAdded: true,
   responseMessage,
-  review
+  review,
+  username
 });
 
 export const addReveiwsError = errorMessage => ({

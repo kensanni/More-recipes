@@ -6,7 +6,7 @@ import { getRecipeRequest, getRecipeSuccess, getRecipeError } from '../actions/g
  *
  * @param {number} page
  *
- * @return {undefined} Redux action to be dispatch to the store
+ * @return {void} action to be dispatch to the store
  */
 export default function getRecipe(page) {
   return (dispatch) => {

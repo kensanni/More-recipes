@@ -3,6 +3,11 @@ import photo1 from '../../public/images/banner-img-1.jpg';
 import photo2 from '../../public/images/banner-img-2.jpg';
 import photo13 from '../../public/images/banner-img-4.jpg';
 
+/**
+ * @description functional component to render carousel
+ *
+ * @returns {JSX} return JSX
+ */
 const Carousel = () => ((
   <div>
     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">

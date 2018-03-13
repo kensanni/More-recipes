@@ -5,13 +5,13 @@ import AddModal from '../../Include/modals/AddModal';
 /**
  * @description functional component to render the add recipe button
  *
- * @param {props} props
+ * @param {object} props
  *
  * @returns {JSX} return JSX
  */
 const AddRecipeButton = (props) => {
   const {
-    onChange, addRecipe, value, saveImageToCloud, recipeImage
+    onChange, addRecipe, value, saveImageToCloud, recipeImage,
   } = props;
   return (
     <div className="row header-nav ">
@@ -43,6 +43,8 @@ AddRecipeButton.propTypes = {
   onChange: PropTypes.func.isRequired,
   addRecipe: PropTypes.func.isRequired,
   value: PropTypes.objectOf(any).isRequired,
+  saveImageToCloud: PropTypes.func.isRequired,
+  recipeImage: PropTypes.string.isRequired
 };
 
 export default AddRecipeButton;

@@ -8,8 +8,11 @@ const initialState = {
 };
 /**
  * @description upvote recipe reducer
+ *
  * @param {object} state - default application state
+ *
  * @param {object} action - response from the api
+ *
  * @return {Object} - Object containg new state
  */
 const upvoteRecipeReducer = (state = initialState, action) => {

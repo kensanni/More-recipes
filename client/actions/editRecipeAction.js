@@ -1,7 +1,9 @@
+// Action Types
 export const EDIT_RECIPE_REQUEST = 'EDIT_RECIPE_REQUEST';
 export const EDIT_RECIPE_SUCCESSFUL = 'EDIT_RECIPE_SUCCESSFUL';
 export const EDIT_RECIPE_ERROR = 'EDIT_RECIPE_ERROR';
 
+// Action Type
 export const editRecipeRequest = (recipeId, recipeData) => ({
   type: EDIT_RECIPE_REQUEST,
   recipeId,

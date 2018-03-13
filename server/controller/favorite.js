@@ -8,9 +8,12 @@ const { Favorites, Recipes } = model;
 class Favorite {
   /**
    * @description Adds a recipe into favorite
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res   HTTP response object
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @returns  {object} return a json object
    */
   static async addFavorite(req, res) {
     const findFavRecipe = await Favorites.find({
@@ -40,9 +43,12 @@ class Favorite {
   }
   /**
    * @description get favorite recipe from database
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res   HTTP response object
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @returns {object} return a json object
    */
   static async getFavorite(req, res) {
     const limit = req.query.limit || 6;

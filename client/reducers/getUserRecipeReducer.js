@@ -7,7 +7,8 @@ const initialState = {
   isFetched: false,
   recipeData: [],
   errorMessage: '',
-  page: 0
+  page: 0,
+  isFetching: true,
 };
 
 /**
@@ -15,13 +16,13 @@ const initialState = {
  *
  * @param {object} state - default application state
  *
- * @param {object} action - response from the api
+ * @param {object} action - action dispatched
  *
  * @return {Object} - Object containg new state
  */
 const getUserRecipeReducer = (state = initialState, action) => {
   const {
-    isFetched, recipeData, errorMessage, newRecipeData, page, count
+    isFetched, recipeData, errorMessage, newRecipeData, page, count, isFetching
   } = action;
 
   const newRecipe = [];
@@ -37,6 +38,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetched,
+        isFetching,
         recipeData: [],
         errorMessage: ''
       };
@@ -44,6 +46,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetched,
+        isFetching,
         recipeData,
         errorMessage: '',
         page,
@@ -54,7 +57,8 @@ const getUserRecipeReducer = (state = initialState, action) => {
         ...state,
         isFetched,
         recipeData: [],
-        errorMessage
+        errorMessage,
+        isFetching
       };
     case DELETE_RECIPE_SUCCESSFUL:
       return {

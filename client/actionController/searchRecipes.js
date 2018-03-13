@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
  *
  * @param {string} recipe
  *
- * @returns {Object} return an object containing search result
+ * @returns {object} return an object containing search result
  */
 export default function searchRecipe(recipe) {
   return fetch(`/api/v1/search?recipe=${recipe}`)

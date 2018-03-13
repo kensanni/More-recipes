@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes, { any } from 'prop-types';
 import miniToastr from 'mini-toastr';
 import { Lines } from 'react-preloading-component';
+import { validateToken } from '../../../Helpers/helper';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
@@ -52,7 +53,7 @@ class RecipeDetailPageContainer extends Component {
       this.props.history.push('/recipes');
     }
 
-    if (this.props.authenticated) {
+    if (this.props.authenticated && validateToken() !== 'Session expired') {
       return this.props.getRecipeDetailsAction(recipeId);
     }
     this.props.history.push('/recipes');
@@ -60,10 +61,14 @@ class RecipeDetailPageContainer extends Component {
     return miniToastr.error('Login to continue');
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.recipeDetails, 'nextProps');
+  }
+
   /**
    * @description upvote a recipe
    *
-   * @param {id} id id of recipe to be upvoted
+   * @param {number} id id of recipe to be upvoted
    *
    * @return {void} calls upvoteRecipeAction
    */
@@ -78,9 +83,9 @@ class RecipeDetailPageContainer extends Component {
   /**
    * @description downvote a recipe
    *
-   * @param {id} id id of recipe to be updated
+   * @param {number} id id of recipe to be updated
    *
-   * @return {undefined} calls downvoteRecipeAction
+   * @return {void} calls downvoteRecipeAction
    */
   downvoteRecipe(id) {
     if (this.props.authenticated) {
@@ -93,9 +98,9 @@ class RecipeDetailPageContainer extends Component {
   /**
    * @description favorite a recipe
    *
-   * @param {id} id - id of recipe to be favorited
+   * @param {number} id - id of recipe to be favorited
    *
-   * @return {undefined} calls favoriteRecipeAction
+   * @return {void} calls favoriteRecipeAction
    */
   favoriteRecipe(id) {
     this.props.favoriteRecipeAction(id);
@@ -103,7 +108,7 @@ class RecipeDetailPageContainer extends Component {
   /**
    * @description set the state of value inputs on form
    *
-   * @param {event} event
+   * @param {object} event
    *
    * @returns {void} set the state of value inputs on form
    */
@@ -114,6 +119,11 @@ class RecipeDetailPageContainer extends Component {
     });
   }
 
+  /**
+   * @description component to display recipe details
+   *
+   * @returns {JSX} return JSX
+   */
   mainJsx() {
     return (
       <div className="container">
@@ -132,6 +142,11 @@ class RecipeDetailPageContainer extends Component {
     );
   }
 
+  /**
+   * @description set the state of value inputs on form
+   *
+   * @returns {JSX} return JSX
+   */
   fetchingJsx() {
     return (
       <div>
@@ -140,6 +155,11 @@ class RecipeDetailPageContainer extends Component {
     );
   }
 
+  /**
+   * @description component to be rendered when there is an error fetching recipe detail
+   *
+   * @returns {JSX} return JSX
+   */
   errorJsx() {
     return (
       <div className="text-center error-margin">
@@ -151,24 +171,29 @@ class RecipeDetailPageContainer extends Component {
     );
   }
 
-  renderJsx() {
-    const { recipeDetailStatus } = this.props;
-    if (recipeDetailStatus === 'fetched') return this.mainJsx();
-    if (recipeDetailStatus === 'fetching') return this.fetchingJsx();
-    if (recipeDetailStatus === 'error') return this.errorJsx();
-    return null;
-  }
-
   /**
    * @description add a review
    *
-   * @param {id} id - id of recipe to review
+   * @param {number} id - id of recipe to review
    *
    * @return {void} calls addReviews action
    */
   addReview(id) {
     const { review } = this.state;
     this.props.addReviewsAction(id, review);
+  }
+
+  /**
+   * @description render recipe detail page based on input
+   *
+   * @returns {JSX} render JSX
+   */
+  renderJsx() {
+    const { recipeDetailStatus } = this.props;
+    if (recipeDetailStatus === 'fetched') return this.mainJsx();
+    if (recipeDetailStatus === 'fetching') return this.fetchingJsx();
+    if (recipeDetailStatus === 'error') return this.errorJsx();
+    return null;
   }
 
   /**
@@ -187,6 +212,11 @@ class RecipeDetailPageContainer extends Component {
   }
 }
 
+RecipeDetailPageContainer.defaultProps = {
+  recipeDetailStatus: null,
+  reviews: undefined
+};
+
 RecipeDetailPageContainer.propTypes = {
   getRecipeDetailsAction: PropTypes.func.isRequired,
   upvoteRecipeAction: PropTypes.func.isRequired,
@@ -196,15 +226,21 @@ RecipeDetailPageContainer.propTypes = {
   match: PropTypes.objectOf(any).isRequired,
   authenticated: PropTypes.bool.isRequired,
   addReviewsAction: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  recipeDetailStatus: PropTypes.string,
+  history: PropTypes.objectOf(any).isRequired,
+  reviews: PropTypes.arrayOf(any)
 };
 
-const mapStateToProps = state => ({
-  recipeDetails: state.getRecipeDetailsReducer,
-  errorMessage: state.getRecipeDetailsReducer.errorMessage,
-  recipeDetailStatus: state.getRecipeDetailsReducer.recipeDetailStatus,
-  authenticated: state.authReducer.isAuthenticated,
-  reviews: state.getRecipeDetailsReducer.recipeDetails.Reviews
-});
+const mapStateToProps = state => (
+  console.log('mapStatetoprops', state.getRecipeDetailsReducer),
+  {
+    recipeDetails: state.getRecipeDetailsReducer,
+    errorMessage: state.getRecipeDetailsReducer.errorMessage,
+    recipeDetailStatus: state.getRecipeDetailsReducer.recipeDetailStatus,
+    authenticated: state.authReducer.isAuthenticated,
+    reviews: state.getRecipeDetailsReducer.recipeDetails.Reviews
+  });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({

@@ -2,11 +2,11 @@ import instance from '../Helpers/helper';
 import { favoriteRecipeRequest, favoriteRecipeSuccess, favoriteRecipeError } from '../actions/favoriteRecipeAction';
 
 /**
- * @description action controller for favoriting a recipe
+ * @description action creator for favoriting a recipe
  *
- * @param {recipeId} recipeId
+ * @param {number} recipeId
  *
- * @returns {undefined} Redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function favoriteRecipe(recipeId) {
   return (dispatch) => {

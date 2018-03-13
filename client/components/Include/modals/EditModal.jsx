@@ -4,21 +4,21 @@ import PropTypes, { any } from 'prop-types';
 /**
  * @description function component to render the edit recipe modal
  *
- * @param {props} props
+ * @param {object} props
  *
  * @returns {JSX} return JSX
  */
 const EditModal = (props) => {
-  const {
-    recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud,
-  } = props;
-  const {
-    id, name, description, ingredient
-  } = recipeData;
+  // const {
+  //   recipeData, handleCloseModal, onChange, cardId, value, editRecipe, saveImageToCloud,
+  // } = props;
+  // const {
+  //   id, name, description, ingredient
+  // } = recipeData;
   return (
     <div
       className="modal fade"
-      id={cardId}
+      id="editModal"
       tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -35,7 +35,7 @@ const EditModal = (props) => {
               className="close"
               data-dismiss="modal"
               aria-label="Close"
-              onClick={handleCloseModal}
+              // onClick={handleCloseModal}
             >
               <span
                 aria-hidden="true"
@@ -51,8 +51,8 @@ const EditModal = (props) => {
                 </label>
                 <input
                   name="name"
-                  onChange={onChange}
-                  value={value.isChanged ? value.name : name}
+                  // onChange={onChange}
+                  // value={value.isChanged ? value.name : name}
                   type="text"
                   className="form-control"
                   id="recipient-name"
@@ -64,8 +64,8 @@ const EditModal = (props) => {
                 </label>
                 <textarea
                   name="description"
-                  onChange={onChange}
-                  value={value.isChanged ? value.description : description}
+                  // onChange={onChange}
+                  // value={value.isChanged ? value.description : description}
                   className="form-control"
                   id="message-text"
                 />
@@ -78,8 +78,8 @@ const EditModal = (props) => {
                   id="ingredient"
                   type="text"
                   name="ingredient"
-                  onChange={onChange}
-                  value={value.isChanged ? value.ingredient : ingredient}
+                  // onChange={onChange}
+                  // value={value.isChanged ? value.ingredient : ingredient}
                   className="form-control"
                 />
               </div>
@@ -88,7 +88,7 @@ const EditModal = (props) => {
                   type="file"
                   name="image"
                   accept="image/*"
-                  onChange={saveImageToCloud}
+                  // onChange={saveImageToCloud}
                 />
               </div>
             </form>
@@ -98,14 +98,14 @@ const EditModal = (props) => {
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
-              onClick={handleCloseModal}
+              // onClick={handleCloseModal}
             >
               Close
             </button>
             <button
               type="button"
               className="btn btn-orange"
-              onClick={() => editRecipe(id, recipeData)}
+              // onClick={() => editRecipe(id)}
             >
               Update recipe
             </button>

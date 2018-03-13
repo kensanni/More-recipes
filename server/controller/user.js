@@ -11,9 +11,12 @@ const { Users } = model;
 class User {
   /**
    * @description User signup method
-   * @param {object} req
-   * @param {object} res
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @param {object} req HTTP request object
+   *
+   * @param {object} res HTTP response object
+   *
+   * @returns {object} object
    */
   static async signUp(req, res) {
     const {
@@ -41,9 +44,12 @@ class User {
   }
   /**
    * @description User signin method
-   * @param {object} req
-   * @param {object} res
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @param {object} req HTTP request object
+   *
+   * @param {object} res HTTP response object
+   *
+   * @returns  {object} object
    */
   static async signIn(req, res) {
     const findUserdetails = await Users.findOne({

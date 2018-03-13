@@ -6,6 +6,15 @@ const initialState = {
   errorMessage: ''
 };
 
+/**
+ * @description save image to cloudinary reducer
+ *
+ * @param {object} state - default application state
+ *
+ * @param {object} action - action dispatched
+ *
+ * @return {Object} - Object containg new state
+ */
 const saveImageToCloudReducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_IMAGE_TO_CLOUD_REQUEST:

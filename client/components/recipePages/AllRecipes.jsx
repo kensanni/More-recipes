@@ -20,23 +20,22 @@ class AllRecipes extends Component {
   /**
    * @description create an instance of RecipeGrid
    *
-   * @param {props} props
+   * @param {object} props
    */
   constructor(props) {
     super(props);
     this.state = {
       recipeData: [],
       popularRecipesData: [],
-      isFetched: false
     };
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
   }
   /**
    * @description call the action to display all recipes
    *
-   * @param {props} props
+   * @param {object} props
    *
-   * @return {undefined} call getRecipe
+   * @return {void} call getRecipe
    */
   componentDidMount() {
     this.props.getPopularRecipeAction();
@@ -45,27 +44,32 @@ class AllRecipes extends Component {
   /**
    * @description update the state of recipe
    *
-   * @param {nextProps} nextProps
+   * @param {object} nextProps
    *
    * @return {object} updated recipe state
    */
   componentWillReceiveProps(nextProps) {
-    const { recipeData, isFetched } = nextProps.recipes;
+    const { recipeData } = nextProps.recipes;
     const { popularRecipesData } = nextProps.popularRecipes;
     if (recipeData !== this.props.recipes.recipeData) {
       this.setState({
         recipeData,
-        isFetched
       });
     }
     if (popularRecipesData !== this.props.popularRecipes.popularRecipesData) {
       this.setState({
         popularRecipesData,
-        isFetched,
       });
     }
   }
 
+  /**
+   * @description get new recipes to be displayed on the new page
+   *
+   * @param {object} recipes
+   *
+   * @return {void} calls getRecipeAction
+   */
   handlePaginationChange(recipes) {
     this.props.getRecipeAction(recipes.selected);
   }
@@ -92,12 +96,9 @@ class AllRecipes extends Component {
             </section>
             {
               !this.props.popularRecipes.isFetched ? <Lines /> : <RecipeGrid
-                recipeData={popularRecipesData}
+                recipes={popularRecipesData}
               />
             }
-            {/* { isFetched && popularRecipesData
-                .map((recipe, i) => this.renderRecipes(popularRecipesData, i))
-            } */}
           </div>
           <div className="row">
             <section className="col-md-12">
@@ -110,7 +111,7 @@ class AllRecipes extends Component {
           <div className="row">
             {
               !this.props.recipes.isFetched ? <Lines /> : <RecipeGrid
-                recipeData={recipeData}
+                recipes={recipeData}
               />
             }
           </div>
@@ -143,27 +144,32 @@ AllRecipes.propTypes = {
   getRecipeAction: PropTypes.func.isRequired,
   getPopularRecipeAction: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(any).isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  popularRecipes: PropTypes.objectOf(any).isRequired
+
 };
 
 /**
  * @description make state available to recipeGrid as props
  *
- * @param {state} state
+ * @param {object} state
  *
  * @returns {object} object
  */
-const mapStateToProps = state => ({
-  authenticated: state.authReducer.isAuthenticated,
-  recipes: state.recipeReducer,
-  popularRecipes: state.getPopularRecipeReducer
-});
+const mapStateToProps = state => (
+  console.log('@42244443', state.getPopularRecipeReducer),
+  {
+    authenticated: state.authReducer.isAuthenticated,
+    recipes: state.recipeReducer,
+    popularRecipes: state.getPopularRecipeReducer
+  });
 
 /**
  * @description make actions available to AllRecipes as props
  *
- * @param {dispatch} dispatch
+ * @param {function} dispatch
  *
- * @returns {undefined} call bindActionCreators function
+ * @returns {void} call bindActionCreators function
  */
 const mapDispatchToProps = dispatch => (
   bindActionCreators({

@@ -7,7 +7,7 @@ import { signinError, signinRequest, signinSuccess } from '../actions/signinActi
  *
  * @param {object} userdata user login details
  *
- * @returns {undefined} Redux action to be dispatch to the store
+ * @returns {void} action to be dispatch to the store
  */
 export default function signin(userdata) {
   return (dispatch) => {

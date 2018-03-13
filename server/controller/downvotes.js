@@ -7,9 +7,12 @@ const { Downvotes, Upvotes } = model;
 class Downvote {
   /**
    * @description Downvote a recipe
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res   HTTP response object
-   * @returns  {JSON} Returns a JSON object
+   *
+   * @returns  {object} returns a JSON object
    */
   static async downvoteRecipe(req, res) {
     const id = req.params.recipeId;

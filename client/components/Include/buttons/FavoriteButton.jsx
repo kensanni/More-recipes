@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description functional component to render favorite button
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} return JSX
+ */
 const FavoriteButton = (props) => {
   const { favoriteRecipe, recipeId, favorites } = props;
   return (
