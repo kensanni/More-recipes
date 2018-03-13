@@ -32,8 +32,13 @@ const RecipeDetailsCard = (props) => {
             <div className="col-sm-12">
               <div>
                 <img className="img img-fluid img-thumbnail img-width" src={image} alt="" />
-                <h1 className="text-center">{name}</h1>
+                <h1 className="text-center pt-3">{name}</h1>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
+              <p>Ingredient</p>
             </div>
           </div>
           <div className="row">
@@ -48,11 +53,16 @@ const RecipeDetailsCard = (props) => {
           </div>
           <div className="row">
             <div className="col-sm-12">
+              <p className="pt-3">Directions</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
               <ol>
                 {
                   description.split('\n').map((descriptions, i) => (
                     <li key={i}>
-                      {description}
+                      {descriptions}
                     </li>
                   ))
                 }
@@ -98,12 +108,14 @@ const RecipeDetailsCard = (props) => {
               {
                 reviews &&
                 <ul style={{ maxHeight: '300px', overflowY: 'scroll' }}>
+                {console.log(props.reviews, ' rdcard')}
                   {
                   props.reviews.map((review, i) => (
                     <li key={i} className="review-list">
                       <div>
                         <div >
                           <div className="header">
+                            {console.log(review)}
                             <strong className="primary-font">{review.username}</strong>
                           </div>
                           <p>

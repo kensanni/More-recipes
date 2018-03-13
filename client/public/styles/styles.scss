@@ -300,6 +300,7 @@ p {
 
 .img-max {
   max-height: 12.06rem;
+  min-height: 12.06rem;
 }
 
 .carousel-caption {
@@ -378,4 +379,19 @@ p {
   border-radius: 100%;
   width: 3rem;
   height: 3rem;
+}
+
+.card-height {
+  min-height: 21rem;
+  max-height: 21rem;
+}
+
+.word-warp {
+  max-height: 6rem;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  height: 5rem;
+  line-height: 2rem;
+  display: block
 }

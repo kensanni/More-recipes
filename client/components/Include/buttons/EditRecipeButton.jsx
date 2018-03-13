@@ -8,27 +8,18 @@ import PropTypes from 'prop-types';
  *
  * @returns {JSX} return JSX
  */
-const EditRecipeButton = (props) => {
-  const {
-    cardId,
-  } = props;
-  return (
-    <div>
-      <button
-        type="button"
-        className="btn"
-        data-toggle="modal"
-        data-target={`#${cardId}`}
-        data-whatever="@getbootstrap"
-      >
-        <i className="fa fa-pencil-square-o" aria-hidden="true" />
-      </button>
-    </div>
-  );
-};
-
-EditRecipeButton.propTypes = {
-  cardId: PropTypes.number.isRequired
-};
+const EditRecipeButton = () => ((
+  <div>
+    <button
+      type="button"
+      className="btn"
+      data-toggle="modal"
+      data-target="#editModal"
+      data-whatever="@getbootstrap"
+    >
+      <i className="fa fa-pencil-square-o" aria-hidden="true" />
+    </button>
+  </div>
+));
 
 export default EditRecipeButton;

@@ -96,7 +96,7 @@ class AllRecipes extends Component {
             </section>
             {
               !this.props.popularRecipes.isFetched ? <Lines /> : <RecipeGrid
-                recipeData={popularRecipesData}
+                recipes={popularRecipesData}
               />
             }
           </div>
@@ -111,7 +111,7 @@ class AllRecipes extends Component {
           <div className="row">
             {
               !this.props.recipes.isFetched ? <Lines /> : <RecipeGrid
-                recipeData={recipeData}
+                recipes={recipeData}
               />
             }
           </div>
@@ -156,11 +156,13 @@ AllRecipes.propTypes = {
  *
  * @returns {object} object
  */
-const mapStateToProps = state => ({
-  authenticated: state.authReducer.isAuthenticated,
-  recipes: state.recipeReducer,
-  popularRecipes: state.getPopularRecipeReducer
-});
+const mapStateToProps = state => (
+  console.log('@42244443', state.getPopularRecipeReducer),
+  {
+    authenticated: state.authReducer.isAuthenticated,
+    recipes: state.recipeReducer,
+    popularRecipes: state.getPopularRecipeReducer
+  });
 
 /**
  * @description make actions available to AllRecipes as props

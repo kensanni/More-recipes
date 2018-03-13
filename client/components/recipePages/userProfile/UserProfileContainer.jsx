@@ -117,7 +117,7 @@ class UserProfileContainer extends Component {
             {
              this.props.favoriteRecipes.isFetched ?
                <RecipeGrid
-                 recipeData={this.props.favoriteRecipes.recipeData.data}
+                 recipes={this.props.favoriteRecipes.recipeData.data}
                  upvoteRecipe={this.upvoteRecipe}
                  downvoteRecipe={this.downvoteRecipe}
                  favoriteRecipe={this.favoriteRecipe}

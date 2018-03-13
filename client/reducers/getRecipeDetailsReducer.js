@@ -22,18 +22,10 @@ const initialState = {
  */
 const getRecipeDetailsReducer = (state = initialState, action) => {
   const {
-    isFetched, recipeDetails, errorMessage, review
+    isFetched, recipeDetails, errorMessage, review, username
   } = action;
 
-  const reviewied = { review };
-  const newReview = [];
-
-  if (review) {
-    state.recipeDetails.Reviews.map((reviews) => {
-      newReview.push(reviews);
-    });
-    newReview.push(reviewied);
-  }
+  const reviewied = { review, username };
 
   switch (action.type) {
     case GET_RECIPE_DETAILS_REQUEST:
@@ -125,7 +117,7 @@ const getRecipeDetailsReducer = (state = initialState, action) => {
         page: state.page,
         recipeDetails: {
           ...state.recipeDetails,
-          Reviews: newReview.reverse()
+          Reviews: [...state.recipeDetails.Reviews, reviewied]
         }
       };
     default:

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes, { any } from 'prop-types';
 import miniToastr from 'mini-toastr';
 import { Lines } from 'react-preloading-component';
+import { validateToken } from '../../../Helpers/helper';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
@@ -52,12 +53,16 @@ class RecipeDetailPageContainer extends Component {
       this.props.history.push('/recipes');
     }
 
-    if (this.props.authenticated) {
+    if (this.props.authenticated && validateToken() !== 'Session expired') {
       return this.props.getRecipeDetailsAction(recipeId);
     }
     this.props.history.push('/recipes');
     miniToastr.init();
     return miniToastr.error('Login to continue');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.recipeDetails, 'nextProps');
   }
 
   /**
@@ -227,13 +232,15 @@ RecipeDetailPageContainer.propTypes = {
   reviews: PropTypes.arrayOf(any)
 };
 
-const mapStateToProps = state => ({
-  recipeDetails: state.getRecipeDetailsReducer,
-  errorMessage: state.getRecipeDetailsReducer.errorMessage,
-  recipeDetailStatus: state.getRecipeDetailsReducer.recipeDetailStatus,
-  authenticated: state.authReducer.isAuthenticated,
-  reviews: state.getRecipeDetailsReducer.recipeDetails.Reviews
-});
+const mapStateToProps = state => (
+  console.log('mapStatetoprops', state.getRecipeDetailsReducer),
+  {
+    recipeDetails: state.getRecipeDetailsReducer,
+    errorMessage: state.getRecipeDetailsReducer.errorMessage,
+    recipeDetailStatus: state.getRecipeDetailsReducer.recipeDetailStatus,
+    authenticated: state.authReducer.isAuthenticated,
+    reviews: state.getRecipeDetailsReducer.recipeDetails.Reviews
+  });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({

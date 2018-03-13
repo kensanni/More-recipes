@@ -5,23 +5,23 @@ import DeleteRecipeButton from '../../Include/buttons/DeleteRecipeButton';
 import DeleteModal from '../../Include/modals/DeleteModal';
 
 const RecipeCardFooter = (props) => {
-  const {
-    recipeData,
-    showRecipeDetails,
-    deleteRecipe,
-    editRecipe,
-    value,
-    onChange,
-    saveImageToCloud,
-    handleCloseModal,
-    showActionButton,
-    startEdit,
-    favRecipeData
-  } = props.data;
+  // const {
+  //   recipeData,
+  //   showRecipeDetails,
+  //   deleteRecipe,
+  //   editRecipe,
+  //   value,
+  //   onChange,
+  //   saveImageToCloud,
+  //   handleCloseModal,
+  //   showActionButton,
+  //   startEdit,
+  //   favRecipeData
+  // } = props.data;
   const {
     id, upvotes, downvotes, favorites
-  } = recipeData;
-
+  } = props.recipe;
+  const { showActionButton } = props.data;
   let component;
 
   component = showActionButton ? (
@@ -29,29 +29,29 @@ const RecipeCardFooter = (props) => {
       <div className="row">
         <div className="col-xs-6 ml-3">
           <EditRecipeButton
-            recipeId={id}
-            handleClick={startEdit}
-            cardId={id}
-            showRecipeDetails={showRecipeDetails}
+            // recipeId={id}
+            // handleClick={startEdit}
+            // cardId={id}
+            // showRecipeDetails={showRecipeDetails}
           />
           <EditModal
-            cardId={id}
-            editRecipe={editRecipe}
-            value={value}
-            onChange={onChange}
-            recipeId={id}
-            recipeData={recipeData}
-            handleCloseModal={handleCloseModal}
-            saveImageToCloud={saveImageToCloud}
+            // cardId={id}
+            // editRecipe={editRecipe}
+            // value={value}
+            // onChange={onChange}
+            // recipeId={id}
+            // recipeData={recipeData}
+            // handleCloseModal={handleCloseModal}
+            // saveImageToCloud={saveImageToCloud}
           />
         </div>
         <div className="col-xs-6">
           <DeleteRecipeButton
-            recipeId={id}
+            // recipeId={id}
           />
           <DeleteModal
-            deleteRecipe={deleteRecipe}
-            recipeId={id}
+            // deleteRecipe={deleteRecipe}
+            // recipeId={id}
           />
         </div>
       </div>
@@ -70,7 +70,7 @@ const RecipeCardFooter = (props) => {
           className="fa fa-thumbs-up fa-2x ml-5 btn-white"
           aria-hidden="true"
         >
-          <span className="small pr-2">{upvotes || favRecipeData.upvotes}
+          <span className="small pr-2">{upvotes}
           </span>
         </i>
         <i
@@ -78,7 +78,7 @@ const RecipeCardFooter = (props) => {
           aria-hidden="true"
         >
           <span className="small pr-2">
-            {downvotes || favRecipeData.downvotes}
+            {downvotes}
           </span>
         </i>
       </li>

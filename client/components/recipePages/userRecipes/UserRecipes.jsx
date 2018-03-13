@@ -67,37 +67,37 @@ class UserRecipes extends Component {
    *
    * @return {void} updated user recipe
    */
-  componentWillReceiveProps(nextProps) {
-    const { recipeImageUrl, recipes, addRecipeResponse } = nextProps;
-    const { recipeData, isFetched } = recipes;
-    if (!isEmpty(addRecipeResponse)) {
-      this.setState({
-        responseMessage: nextProps.addRecipeResponse
-      });
-    }
-    if (recipeData !== this.props.recipes.recipeData) {
-      this.setState({
-        recipeData,
-        isFetched
-      });
-    }
-    if (recipeImageUrl !== this.props.recipeImageUrl) {
-      this.setState({
-        image: recipeImageUrl
-      });
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const { recipeImageUrl, recipes, addRecipeResponse } = nextProps;
+  //   const { recipeData, isFetched } = recipes;
+  //   if (!isEmpty(addRecipeResponse)) {
+  //     this.setState({
+  //       responseMessage: nextProps.addRecipeResponse
+  //     });
+  //   }
+  //   if (recipeData !== this.props.recipes.recipeData) {
+  //     this.setState({
+  //       recipeData,
+  //       isFetched
+  //     });
+  //   }
+
+  //   if (recipeImageUrl !== this.props.recipeImageUrl) {
+  //     this.setState({
+  //       image: recipeImageUrl
+  //     });
+  //   }
+  // }
   /**
    * @description function to edit a recipe
    *
    * @param {number} id id of recipe to be edited
    *
-   * @param {object} recipeData recipe data to be sent to the database
-   *
    * @returns {void} calls editRecipeAction
    */
-  editRecipe(id, recipeData) {
-    this.props.editRecipeAction(id, recipeData);
+  editRecipe(id) {
+    const { name, description, ingredient } = this.state;
+    this.props.editRecipeAction(id, { name, description, ingredient });
   }
 
   /**
@@ -120,7 +120,6 @@ class UserRecipes extends Component {
    */
   handleChange(event) {
     const { name, value } = event.target;
-    console.log('############', event.target);
     this.setState({
       [name]: value,
       isChanged: true
@@ -209,8 +208,10 @@ class UserRecipes extends Component {
   renderRecipeGrid() {
     return (
       <div className="row">
-        { this.state.recipeData.length === 0 ? <RecipeNotFound /> :
+        { this.props.recipes.length === 0 ? <RecipeNotFound /> :
         <RecipeGrid
+          recipes={this.props.recipes}
+
           showActionButton
           recipeData={this.state.recipeData}
           showRecipeDetails={this.handleShowRecipe}
@@ -285,7 +286,7 @@ UserRecipes.propTypes = {
   addRecipeAction: PropTypes.func.isRequired,
   deleteRecipeAction: PropTypes.func.isRequired,
   editRecipeAction: PropTypes.func.isRequired,
-  recipes: PropTypes.objectOf(any).isRequired,
+  recipes: PropTypes.arrayOf(any).isRequired,
   recipeImageUrl: PropTypes.string.isRequired,
   saveImageToCloudAction: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
@@ -298,13 +299,15 @@ UserRecipes.propTypes = {
  * @param {state} state
  * @returns {object} object
  */
-const mapStateToProps = state => ({
-  recipes: state.getUserRecipeReducer,
-  userId: state.authReducer.userData.id,
-  page: state.getUserRecipeReducer.page,
-  recipeImageUrl: state.saveImageToCloud.image,
-  addRecipeResponse: state.addRecipeReducer.errorMessage
-});
+const mapStateToProps = state => (
+  console.log('^&^&', state.getUserRecipeReducer),
+  {
+    recipes: state.getUserRecipeReducer.recipeData,
+    userId: state.authReducer.userData.id,
+    page: state.getUserRecipeReducer.page,
+    recipeImageUrl: state.saveImageToCloud.image,
+    addRecipeResponse: state.addRecipeReducer.errorMessage
+  });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
