@@ -1,11 +1,15 @@
-import { EDIT_RECIPE_REQUEST, EDIT_RECIPE_SUCCESSFUL, EDIT_RECIPE_ERROR } from '../actions/editRecipeAction';
+import { EDIT_RECIPE_REQUEST, EDIT_RECIPE_SUCCESSFUL, EDIT_RECIPE_ERROR, EDIT_RECIPE_STATUS } from '../actions/editRecipeAction';
 
-const initialState = [{
+const initialState = {
   isEdited: false,
   recipeData: {},
+  editRecipeStatus: {
+    status: null,
+    message: null
+  },
   responseMessage: '',
   errorMessage: ''
-}];
+};
 
 /**
  * @description edit recipes reducer
@@ -18,33 +22,35 @@ const initialState = [{
  */
 const editRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
+    case EDIT_RECIPE_STATUS:
+      return {
+        ...state,
+        editRecipeStatus: {
+          status: action.status,
+          message: action.message,
+        },
+      };
     case EDIT_RECIPE_REQUEST:
-      return [{
+      return {
+        ...initialState,
         isEdited: action.isEdited,
-        recipeData: {},
-        responseMessage: '',
-        errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case EDIT_RECIPE_SUCCESSFUL:
-      return [{
+      return {
+        ...state,
         isEdited: action.isEdited,
         responseMessage: action.responseMessage,
         recipeData: {},
         errorMessage: ''
-      },
-      ...state
-      ];
+      };
     case EDIT_RECIPE_ERROR:
-      return [{
+      return {
+        ...state,
         isEdited: action.isEdited,
         responseMessage: '',
         recipeData: {},
         errorMessage: action.errorMessage
-      },
-      ...state
-      ];
+      };
     default:
       return state;
   }

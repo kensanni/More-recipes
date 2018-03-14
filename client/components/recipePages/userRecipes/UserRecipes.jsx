@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { filter, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import { Lines } from 'react-preloading-component';
 import ReactPaginate from 'react-paginate';
 import RecipeNotFound from '../../Error/RecipeNotFound';
@@ -11,7 +11,7 @@ import addRecipeAction from '../../../actionController/addRecipe';
 import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import AddRecipeButton from '../../Include/buttons/AddRecipeButton';
 import deleteRecipeAction from '../../../actionController/deleteRecipe';
-import editRecipeAction from '../../../actionController/editRecipe';
+import editRecipeAction, { setEditRecipeIdAction } from '../../../actionController/editRecipe';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import RecipeGrid from '../RecipeGrid';
@@ -43,10 +43,9 @@ class UserRecipes extends Component {
     this.deleteRecipe = this.deleteRecipe.bind(this);
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
     this.editRecipe = this.editRecipe.bind(this);
-    this.handleShowRecipe = this.handleShowRecipe.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
     this.renderRecipeGrid = this.renderRecipeGrid.bind(this);
+    this.setEditRecipeId = this.setEditRecipeId.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -56,7 +55,8 @@ class UserRecipes extends Component {
    * @returns {void} return all recipes
    */
   componentDidMount() {
-    const { userId, page } = this.props;
+    const { userId } = this.props;
+    const page = 0;
     this.props.getUserRecipe(userId, page);
   }
 
@@ -67,27 +67,40 @@ class UserRecipes extends Component {
    *
    * @return {void} updated user recipe
    */
-  // componentWillReceiveProps(nextProps) {
-  //   const { recipeImageUrl, recipes, addRecipeResponse } = nextProps;
-  //   const { recipeData, isFetched } = recipes;
-  //   if (!isEmpty(addRecipeResponse)) {
-  //     this.setState({
-  //       responseMessage: nextProps.addRecipeResponse
-  //     });
-  //   }
-  //   if (recipeData !== this.props.recipes.recipeData) {
-  //     this.setState({
-  //       recipeData,
-  //       isFetched
-  //     });
-  //   }
+  componentWillReceiveProps(nextProps) {
+    const { recipeImageUrl, recipes, addRecipeResponse } = nextProps;
+    const { recipeData, isFetched } = recipes;
+    if (!isEmpty(addRecipeResponse)) {
+      this.setState({
+        responseMessage: nextProps.addRecipeResponse
+      });
+    }
+    if (recipeData !== this.props.recipes.recipeData) {
+      this.setState({
+        recipeData,
+        isFetched
+      });
+    }
 
-  //   if (recipeImageUrl !== this.props.recipeImageUrl) {
-  //     this.setState({
-  //       image: recipeImageUrl
-  //     });
-  //   }
-  // }
+    if (recipeImageUrl !== this.props.recipeImageUrl) {
+      this.setState({
+        image: recipeImageUrl
+      });
+    }
+  }
+
+  /**
+   * @description get the id of recipe to be edited
+   *
+   * @param {number} recipeId
+   *
+   * @returns {void} call setEditRecipeId action
+   *
+   */
+  setEditRecipeId(recipeId) {
+    this.props.setEditRecipeIdAction(recipeId);
+  }
+
   /**
    * @description function to edit a recipe
    *
@@ -127,20 +140,6 @@ class UserRecipes extends Component {
   }
 
   /**
-   * @description get the current state of recipe to be edited and display it on the edit form
-   *
-   * @param {number} recipeId
-   *
-   * @returns {object} object
-   */
-  handleShowRecipe(recipeId) {
-    const recipe = filter(this.state.recipeData, filterRecipe => filterRecipe.id === recipeId);
-    this.setState({
-      recipe
-    });
-  }
-
-  /**
    * @description function to add a recipe
    *
    * @param {object} event
@@ -175,16 +174,6 @@ class UserRecipes extends Component {
     }
   }
 
-  /**
-   * @description set the state of recipe data when form is closed
-   *
-   * @returns {void} set state of isChanged
-   */
-  handleCloseModal() {
-    this.setState({
-      isChanged: false
-    });
-  }
 
   /**
    * @description get user recipes to be displayed on the new page
@@ -211,10 +200,9 @@ class UserRecipes extends Component {
         { this.props.recipes.length === 0 ? <RecipeNotFound /> :
         <RecipeGrid
           recipes={this.props.recipes}
-
+          setEditRecipeId={this.setEditRecipeId}
           showActionButton
           recipeData={this.state.recipeData}
-          showRecipeDetails={this.handleShowRecipe}
           deleteRecipe={this.deleteRecipe}
           editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
@@ -291,23 +279,24 @@ UserRecipes.propTypes = {
   saveImageToCloudAction: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
   addRecipeResponse: PropTypes.string.isRequired,
+  setEditRecipeIdAction: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired
 };
 
 /**
  * @description allow state to be available to UserRecipes class as props
+ *
  * @param {state} state
+ *
  * @returns {object} object
  */
-const mapStateToProps = state => (
-  console.log('^&^&', state.getUserRecipeReducer),
-  {
-    recipes: state.getUserRecipeReducer.recipeData,
-    userId: state.authReducer.userData.id,
-    page: state.getUserRecipeReducer.page,
-    recipeImageUrl: state.saveImageToCloud.image,
-    addRecipeResponse: state.addRecipeReducer.errorMessage
-  });
+const mapStateToProps = state => ({
+  recipes: state.getUserRecipeReducer.recipeData,
+  userId: state.authReducer.userData.id,
+  page: state.getUserRecipeReducer.page,
+  recipeImageUrl: state.saveImageToCloud.image,
+  addRecipeResponse: state.addRecipeReducer.errorMessage
+});
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
@@ -315,7 +304,8 @@ const mapDispatchToProps = dispatch => (
     addRecipeAction,
     deleteRecipeAction,
     editRecipeAction,
-    saveImageToCloudAction
+    saveImageToCloudAction,
+    setEditRecipeIdAction
   }, dispatch)
 );
 

@@ -38,8 +38,9 @@ class AllRecipes extends Component {
    * @return {void} call getRecipe
    */
   componentDidMount() {
+    const page = 0;
     this.props.getPopularRecipeAction();
-    this.props.getRecipeAction(this.props.recipes.page);
+    this.props.getRecipeAction(page);
   }
   /**
    * @description update the state of recipe
@@ -156,13 +157,11 @@ AllRecipes.propTypes = {
  *
  * @returns {object} object
  */
-const mapStateToProps = state => (
-  console.log('@42244443', state.getPopularRecipeReducer),
-  {
-    authenticated: state.authReducer.isAuthenticated,
-    recipes: state.recipeReducer,
-    popularRecipes: state.getPopularRecipeReducer
-  });
+const mapStateToProps = state => ({
+  authenticated: state.authReducer.isAuthenticated,
+  recipes: state.recipeReducer,
+  popularRecipes: state.getPopularRecipeReducer
+});
 
 /**
  * @description make actions available to AllRecipes as props

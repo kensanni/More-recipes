@@ -1,5 +1,13 @@
+import miniToastr from 'mini-toastr';
 import instance from '../Helpers/helper';
-import { editRecipeRequest, editRecipeSuccesful, editRecipeError } from '../actions/editRecipeAction';
+import { editRecipeRequest, editRecipeSuccess, editRecipeError, editRecipeStatus } from '../actions/editRecipeAction';
+
+export const SET_EDIT_RECIPE_ID = 'SET_EDIT_RECIPE_ID';
+
+export const setEditRecipeIdAction = recipeId => dispatch => dispatch({
+  type: SET_EDIT_RECIPE_ID,
+  recipeId
+});
 
 /**
  * @description action creator for editing recipe
@@ -14,13 +22,17 @@ export default function editRecipe(recipeId, recipeData) {
   return (dispatch) => {
     dispatch(editRecipeRequest(recipeId, recipeData));
     instance.put(`/recipes/${recipeId}`, recipeData)
-      .then((recipe) => {
-        const { message } = recipe.data;
-        dispatch(editRecipeSuccesful(message));
+      .then(() => {
+        dispatch(editRecipeSuccess(recipeId, recipeData));
+        dispatch(editRecipeStatus(true, null));
+        $('#editModal').modal('toggle');
+        miniToastr.init();
+        miniToastr.success('Recipe successfully edited');
       })
       .catch((error) => {
         const { errors } = error.response.data;
         dispatch(editRecipeError(errors[0].message));
+        dispatch(editRecipeStatus(false, errors[0].message));
       });
   };
 }

@@ -15,7 +15,6 @@ const AddModal = (props) => {
   const {
     name, description, ingredient, responseMessage
   } = value;
-  console.log('@@@@@@@@@@@@@@@', props);
   return (
     <div
       className="modal fade"
@@ -67,6 +66,7 @@ const AddModal = (props) => {
                 </label>
                 <textarea
                   name="description"
+                  placeholder="seperate each directions with a newline"
                   onChange={onChange}
                   value={description}
                   className="form-control"

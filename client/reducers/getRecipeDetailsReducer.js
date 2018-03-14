@@ -22,10 +22,10 @@ const initialState = {
  */
 const getRecipeDetailsReducer = (state = initialState, action) => {
   const {
-    isFetched, recipeDetails, errorMessage, review, username
+    isFetched, recipeDetails, errorMessage, review, username, createdAt
   } = action;
 
-  const reviewied = { review, username };
+  const reviewied = { review, username, createdAt };
 
   switch (action.type) {
     case GET_RECIPE_DETAILS_REQUEST:

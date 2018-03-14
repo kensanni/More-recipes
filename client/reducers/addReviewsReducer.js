@@ -18,7 +18,7 @@ const initialState = {
  */
 const addReviewsReducer = (state = initialState, action) => {
   const {
-    isAdded, responseMessage, review, errorMessage, username
+    isAdded, responseMessage, review, errorMessage, username, createdAt
   } = action;
   switch (action.type) {
     case ADD_REVIEWS_REQUEST:
@@ -36,6 +36,7 @@ const addReviewsReducer = (state = initialState, action) => {
         responseMessage,
         review,
         username,
+        createdAt,
         errorMessage: ''
       };
     case ADD_REVIEWS_ERROR:

@@ -84,7 +84,7 @@ class Recipe {
     if (findAndCount) {
       pages = Math.ceil(findAndCount.count / limit);
       pageNo = parseInt(req.query.page, 10);
-      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo : 0;
       offset = pageNo * limit;
     }
 
@@ -123,7 +123,7 @@ class Recipe {
       where: { id },
       include: [{
         model: model.Reviews,
-        attributes: ['review', 'username']
+        attributes: ['review', 'username', 'createdAt']
       }],
     });
 
@@ -174,7 +174,7 @@ class Recipe {
     if (findAndCountUserRecipes) {
       pages = Math.ceil(findAndCountUserRecipes.count / limit);
       pageNo = parseInt(req.query.page, 10);
-      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo : 0;
       offset = pageNo * limit;
     }
 
@@ -234,20 +234,11 @@ class Recipe {
    * @returns {object} return a json object
    */
   static async popularRecipes(req, res) {
-    const getRecipes = await Recipes.findAll({
-      include: [{
-        model: model.Reviews,
-        attributes: ['review'],
-        include: [{
-          model: model.Users,
-          attributes: ['username'],
-        }]
-      }],
-      limit: req.query.limit || 3,
-    });
+    const getRecipes = await Recipes.findAll();
     const updatedRecipes = await updateMultipleRecipeAttributes(getRecipes);
+    const recipes = updatedRecipes.sort((a, b) => b.dataValues.favorites - a.dataValues.favorites);
     return res.status(200).send({
-      recipesData: updatedRecipes.sort((a, b) => a.dataValues.favorites + b.dataValues.favorites)
+      recipesData: recipes.splice(0, 3)
     });
   }
 
