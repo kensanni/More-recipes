@@ -202,14 +202,11 @@ class UserRecipes extends Component {
           recipes={this.props.recipes}
           setEditRecipeId={this.setEditRecipeId}
           showActionButton
-          recipeData={this.state.recipeData}
           deleteRecipe={this.deleteRecipe}
           editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
           value={this.state}
-          handleCloseModal={this.handleCloseModal}
           onChange={this.handleChange}
-          saveImageToCloud={this.saveImageToCloud}
           {...this.state}
         />
       }

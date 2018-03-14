@@ -1,6 +1,9 @@
 import webpack from 'webpack';
 import path from 'path';
+import dotenv from 'dotenv';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+
+dotenv.config();
 
 export default {
   devtool: 'inline-source-map',
@@ -20,6 +23,9 @@ export default {
         NODE_ENV: JSON.stringify('production')
       }
     }),
+    new webpack.EnvironmentPlugin([
+      'REQUEST', 'CLOUD_PRESET'
+    ])
   ],
   resolve: {
     extensions: ['.jsx', '.js']

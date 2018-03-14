@@ -52,7 +52,7 @@ class RecipeDetailPageContainer extends Component {
       this.props.history.push('/recipes');
     }
 
-    if (this.props.authenticated && validateToken() !== 'Session expired') {
+    if (this.props.authenticated) {
       return this.props.getRecipeDetailsAction(recipeId);
     }
     this.props.history.push('/recipes');
