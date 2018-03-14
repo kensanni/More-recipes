@@ -19,11 +19,12 @@ const RecipeDetailsCard = (props) => {
     onChange,
     reviews,
     value,
-    addReview
+    addReview,
   } = props;
   const {
-    id, name, description, ingredient, image, downvotes, upvotes, favorites
+    id, name, description, ingredient, image, downvotes, upvotes, favorites,
   } = recipeData.recipeDetails;
+  const time = timeCreated => new Date(timeCreated).toLocaleString();
   return (
     <div>
       <div className="card mt-5">
@@ -108,23 +109,22 @@ const RecipeDetailsCard = (props) => {
               {
                 reviews &&
                 <ul style={{ maxHeight: '300px', overflowY: 'scroll' }}>
-                {console.log(props.reviews, ' rdcard')}
                   {
                   props.reviews.map((review, i) => (
-                    <li key={i} className="review-list">
+                    <div key={i} className="review-list">
                       <div>
                         <div >
                           <div className="header">
-                            {console.log(review)}
                             <strong className="primary-font">{review.username}</strong>
                           </div>
                           <p>
                             { review.review }
                           </p>
+                          <small className="small">{time(review.createdAt)}</small>
                           <hr />
                         </div>
                       </div>
-                    </li>
+                    </div>
                   ))
                 }
                 </ul>

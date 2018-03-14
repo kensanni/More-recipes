@@ -16,7 +16,7 @@ export default function addReviews(recipeId, review) {
     instance.post(`/recipes/${recipeId}/reviews`, { review })
       .then((res) => {
         const { message, data } = res.data;
-        dispatch(addReviewsSuccessful(message, data.review, data.username));
+        dispatch(addReviewsSuccessful(message, data.review, data.username, data.createdAt));
       })
       .catch((error) => {
         const { errors } = error.response.data;

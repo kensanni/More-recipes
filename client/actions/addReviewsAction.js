@@ -11,12 +11,13 @@ export const addReviewsRequest = (recipeId, review) => ({
   recipeId
 });
 
-export const addReviewsSuccessful = (responseMessage, review, username) => ({
+export const addReviewsSuccessful = (responseMessage, review, username, createdAt) => ({
   type: ADD_REVIEWS_SUCCESSFUL,
   isAdded: true,
   responseMessage,
   review,
-  username
+  username,
+  createdAt
 });
 
 export const addReveiwsError = errorMessage => ({

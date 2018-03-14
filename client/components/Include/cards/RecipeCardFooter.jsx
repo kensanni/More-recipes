@@ -4,24 +4,18 @@ import EditModal from '../../Include/modals/EditModal';
 import DeleteRecipeButton from '../../Include/buttons/DeleteRecipeButton';
 import DeleteModal from '../../Include/modals/DeleteModal';
 
+/**
+ * @description functional component to display recipe card footer based on input received
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} return JSX
+ */
 const RecipeCardFooter = (props) => {
-  // const {
-  //   recipeData,
-  //   showRecipeDetails,
-  //   deleteRecipe,
-  //   editRecipe,
-  //   value,
-  //   onChange,
-  //   saveImageToCloud,
-  //   handleCloseModal,
-  //   showActionButton,
-  //   startEdit,
-  //   favRecipeData
-  // } = props.data;
   const {
     id, upvotes, downvotes, favorites
   } = props.recipe;
-  const { showActionButton } = props.data;
+  const { showActionButton, setEditRecipeId, deleteRecipe } = props;
   let component;
 
   component = showActionButton ? (
@@ -29,29 +23,17 @@ const RecipeCardFooter = (props) => {
       <div className="row">
         <div className="col-xs-6 ml-3">
           <EditRecipeButton
-            // recipeId={id}
-            // handleClick={startEdit}
-            // cardId={id}
-            // showRecipeDetails={showRecipeDetails}
+            setEditRecipeId={() => setEditRecipeId(id)}
           />
-          <EditModal
-            // cardId={id}
-            // editRecipe={editRecipe}
-            // value={value}
-            // onChange={onChange}
-            // recipeId={id}
-            // recipeData={recipeData}
-            // handleCloseModal={handleCloseModal}
-            // saveImageToCloud={saveImageToCloud}
-          />
+          <EditModal />
         </div>
         <div className="col-xs-6">
           <DeleteRecipeButton
-            // recipeId={id}
+            recipeId={id}
           />
           <DeleteModal
-            // deleteRecipe={deleteRecipe}
-            // recipeId={id}
+            deleteRecipe={deleteRecipe}
+            recipeId={id}
           />
         </div>
       </div>

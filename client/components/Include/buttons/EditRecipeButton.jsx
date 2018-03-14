@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  *
  * @returns {JSX} return JSX
  */
-const EditRecipeButton = () => ((
+const EditRecipeButton = props => ((
   <div>
     <button
       type="button"
@@ -16,10 +16,15 @@ const EditRecipeButton = () => ((
       data-toggle="modal"
       data-target="#editModal"
       data-whatever="@getbootstrap"
+      onClick={props.setEditRecipeId}
     >
       <i className="fa fa-pencil-square-o" aria-hidden="true" />
     </button>
   </div>
 ));
+
+EditRecipeButton.propTypes = {
+  setEditRecipeId: PropTypes.func.isRequired
+};
 
 export default EditRecipeButton;

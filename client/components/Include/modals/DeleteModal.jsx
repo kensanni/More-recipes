@@ -60,8 +60,12 @@ const DeleteModal = (props) => {
   );
 };
 
+DeleteModal.defaultProps = {
+  deleteRecipe: undefined
+};
+
 DeleteModal.propTypes = {
-  deleteRecipe: PropTypes.func.isRequired,
+  deleteRecipe: PropTypes.func,
   recipeId: PropTypes.number.isRequired
 };
 

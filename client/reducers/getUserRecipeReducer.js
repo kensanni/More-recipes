@@ -2,10 +2,13 @@ import { filter } from 'lodash';
 import { GET_USER_RECIPE_REQUEST, GET_USER_RECIPE_SUCCESSFUL, GET_USER_RECIPE_ERROR } from '../actions/getUserRecipeAction';
 import { DELETE_RECIPE_SUCCESSFUL } from '../actions/deleteRecipeAction';
 import { ADD_RECIPE_SUCCESSFUL } from '../actions/addRecipeAction';
+import { EDIT_RECIPE_SUCCESSFUL, } from '../actions/editRecipeAction';
+import { SET_EDIT_RECIPE_ID } from '../actionController/editRecipe';
 
 const initialState = {
   isFetched: false,
   recipeData: [],
+  editRecipeId: null,
   errorMessage: '',
   page: 0,
   isFetching: true,
@@ -27,9 +30,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
 
   const newRecipe = [];
   if (newRecipeData) {
-    state.recipeData.map((recipe) => {
-      newRecipe.push(recipe);
-    });
+    state.recipeData.map(recipe => newRecipe.push(recipe));
     newRecipe.push(newRecipeData);
   }
 
@@ -73,6 +74,24 @@ const getUserRecipeReducer = (state = initialState, action) => {
         isFetched: true,
         recipeData: newRecipe,
         errorMessage: ''
+      };
+    case EDIT_RECIPE_SUCCESSFUL:
+      return {
+        ...state,
+        recipeData: state.recipeData.map((recipe) => {
+          if (recipe.id === action.recipeId) {
+            return {
+              ...recipe,
+              ...action.recipeData,
+            };
+          }
+          return recipe;
+        }),
+      };
+    case SET_EDIT_RECIPE_ID:
+      return {
+        ...state,
+        editRecipeId: action.recipeId
       };
     default:
       return state;

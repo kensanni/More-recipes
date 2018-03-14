@@ -12,14 +12,16 @@ import RecipeCardFooter from './RecipeCardFooter';
  */
 
 const RecipeCard = (props) => {
-  const { recipe, showActionButton } = props;
+  const {
+    recipe, showActionButton, setEditRecipeId, deleteRecipe
+  } = props;
   return (
     <div className="col-sm-6 col-md-4 pt-4 mb-5">
       <div className="card card-height">
         <img
           className="card-img-top img-max"
           src={recipe.image}
-          alt=""
+          alt="img"
         />
         <div className="card-body word-warp">
           <Link to={`/recipes/${recipe.id}`}>
@@ -28,15 +30,26 @@ const RecipeCard = (props) => {
         </div>
         <RecipeCardFooter
           recipe={recipe}
-          data={props}
+          showActionButton={showActionButton}
+          setEditRecipeId={setEditRecipeId}
+          deleteRecipe={deleteRecipe}
         />
       </div>
     </div>
   );
 };
 
+RecipeCard.defaultProps = {
+  showActionButton: undefined,
+  setEditRecipeId: undefined,
+  deleteRecipe: undefined
+};
+
 RecipeCard.propTypes = {
   recipe: PropTypes.objectOf(any).isRequired,
+  showActionButton: PropTypes.bool,
+  setEditRecipeId: PropTypes.func,
+  deleteRecipe: PropTypes.func
 };
 
 export default RecipeCard;
