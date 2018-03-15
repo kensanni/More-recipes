@@ -43,4 +43,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
+app.all('*', (req, res) => {
+  res.status(404).send({
+    message: 'Page not found'
+  });
+});
+
 export default app;

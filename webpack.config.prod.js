@@ -6,7 +6,7 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 dotenv.config();
 
 export default {
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   entry: path.resolve(__dirname, 'client/index'),
   output: {
     path: path.join(__dirname, '../client/dist/'),
@@ -17,7 +17,9 @@ export default {
     contentBase: './client/dist'
   },
   plugins: [
-    new UglifyJsPlugin(),
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
