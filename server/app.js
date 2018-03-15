@@ -4,9 +4,11 @@ import bodyParser from 'body-parser';
 import webpack from 'webpack';
 import path from 'path';
 import validator from 'express-validator';
+import swaggerUi from 'swagger-ui-express';
 import config from '../webpack.config';
 import prodConfig from '../webpack.config.prod';
 import routes from '../server/routes';
+import apiDocs from './api-docs.json';
 
 require('babel-core/register');
 require('babel-polyfill');
@@ -25,6 +27,9 @@ if (process.env.NODE_ENV === 'production') {
   compiler = webpack(config);
   app.use(HMR(compiler));
 }
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
+
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,

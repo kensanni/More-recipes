@@ -66,11 +66,7 @@ class UserProfileContainer extends Component {
    * @return {void} calls downvoteRecipeAction
    */
   downvoteRecipe(id) {
-    if (this.props.authenticated) {
-      return this.props.downvoteRecipeAction(id);
-    }
-    miniToastr.init();
-    return miniToastr.error('Login to continue');
+    this.props.downvoteRecipeAction(id);
   }
 
   /**

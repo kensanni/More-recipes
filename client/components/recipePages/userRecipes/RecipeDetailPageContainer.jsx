@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes, { any } from 'prop-types';
 import miniToastr from 'mini-toastr';
 import { Lines } from 'react-preloading-component';
+import { validateToken } from '../../../Helpers/helper';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
@@ -51,7 +52,7 @@ class RecipeDetailPageContainer extends Component {
       this.props.history.push('/recipes');
     }
 
-    if (this.props.authenticated) {
+    if (this.props.authenticated && validateToken() !== 'Session expired') {
       return this.props.getRecipeDetailsAction(recipeId);
     }
     this.props.history.push('/recipes');
