@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "NODE_ENV=development nodemon --exec babel-node -- ./server/bin/www",
     "start:test": "NODE_ENV=test sequelize db:migrate",
+    "test:client": "jest",
     "test": "NODE_ENV=test mocha server/test/testPath/test.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",

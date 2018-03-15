@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component matches snapshot 1`] = `
+<div
+  className="mt-5"
+>
+  <footer
+    className="footer text-center"
+  >
+    <strong
+      className="copyright"
+    >
+      More-Recipes © 2017, All Rights Reserved, Design & Developed By: Sanni Kehinde
+    </strong>
+  </footer>
+</div>
+`;
