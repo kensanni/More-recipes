@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes, { any } from 'prop-types';
 import miniToastr from 'mini-toastr';
 import { Lines } from 'react-preloading-component';
-import { validateToken } from '../../../Helpers/helper';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
@@ -163,6 +162,9 @@ class RecipeDetailPageContainer extends Component {
   addReview(id) {
     const { review } = this.state;
     this.props.addReviewsAction(id, review);
+    this.setState({
+      review: ''
+    });
   }
 
   /**
