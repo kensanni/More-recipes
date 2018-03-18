@@ -16,9 +16,7 @@ class Validation {
    * @description ensure user input matches the correct pattern
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
    * @returns {object} Returns a JSON object
@@ -73,7 +71,7 @@ class Validation {
         },
         matches: {
           options: [(/^([^ ]+)*$/g)],
-          errorMessage: 'Invalid password,ensure your password contain only uppercase, lowercase or any special character'
+          errorMessage: 'Invalid password, ensure your password contain only uppercase, lowercase or any special character'
         }
       }
     });
@@ -94,9 +92,7 @@ class Validation {
    * @description check if username and email exist
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
    * @returns {object} returns a JSON object
@@ -132,9 +128,7 @@ class Validation {
    * @description validate user login
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
    * @returns {object} Returns a JSON object
@@ -181,9 +175,7 @@ class Validation {
    * @description check if userId in params is valid
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
    * @returns {object} Returns a JSON object
@@ -209,9 +201,7 @@ class Validation {
    * @description check if recipe input is invalid
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
    * @returns {object} Returns a JSON object
@@ -272,12 +262,10 @@ class Validation {
    * @description check if recipeId exist and is valid
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
-   * @returns {JSON} Returns a JSON object
+   * @returns {object} Returns a JSON object
    */
   static async checkRecipeId(req, res, next) {
     const id = req.params.recipeId;
@@ -301,9 +289,7 @@ class Validation {
    * @description check if reveiw input is valid
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
    * @returns {object} Returns a JSON object
@@ -323,9 +309,7 @@ class Validation {
    * @description check if user already have recipe with the same name
    *
    * @param  {object} req - request
-   *
    * @param  {object} res - response
-   *
    * @param  {function} next - next
    *
    * @returns {object} Returns a JSON object

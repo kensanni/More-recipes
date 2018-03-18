@@ -11,7 +11,6 @@ const initialState = {
  * @description get favorite recipes reducer
  *
  * @param {object} state - default application state
- *
  * @param {object} action - action dispatched
  *
  * @return {Object} - Object containg new state

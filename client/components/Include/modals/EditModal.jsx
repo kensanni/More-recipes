@@ -36,6 +36,7 @@ class EditModal extends Component {
     const { editRecipeId } = this.props;
     if (this.state.recipe !== null) {
       this.props.editRecipeAction(editRecipeId, this.state.recipe);
+      this.setState({ recipe: null });
     }
   }
 
@@ -89,7 +90,6 @@ class EditModal extends Component {
   render() {
     const { editRecipeId, recipes, editRecipeStatus } = this.props;
     const { recipe: stateRecipe } = this.state;
-
     const editRecipeArray = (
       editRecipeId !== null
     ) ? recipes.filter(recipe => recipe.id === editRecipeId) : [];
@@ -102,7 +102,6 @@ class EditModal extends Component {
         ingredient: '',
         image: '',
       };
-
     this.recipeEdited = {
       name: editRecipe.name,
       description: editRecipe.description,
@@ -141,7 +140,7 @@ class EditModal extends Component {
               <form>
                 <div className="form-group">
                   <div className="error-message">
-                    { !editRecipeStatus.status ? editRecipeStatus.message : '' }
+                    {!editRecipeStatus.status ? editRecipeStatus.message : ''}
                   </div>
                   <label htmlFor="recipient-name" id="recipient-name" className="col-form-label">
                     Name

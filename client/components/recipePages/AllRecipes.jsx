@@ -50,6 +50,7 @@ class AllRecipes extends Component {
    * @return {object} updated recipe state
    */
   componentWillReceiveProps(nextProps) {
+    console.log("nexprops auth", nextProps);
     const { recipeData } = nextProps.recipes;
     const { popularRecipesData } = nextProps.popularRecipes;
     if (recipeData !== this.props.recipes.recipeData) {
@@ -82,6 +83,7 @@ class AllRecipes extends Component {
    */
   render() {
     const { recipeData, popularRecipesData } = this.state;
+    console.log("kjhsvczdxseatdfgwhejas", this.props.authenticated);
     return (
       <div>
         {

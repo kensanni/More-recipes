@@ -9,9 +9,10 @@ export const signupRequest = userData => ({
   userData,
   isAuthenticated: false,
 });
-export const signupSuccess = responseMessage => ({
+export const signupSuccess = (responseMessage, userData) => ({
   type: SIGNUP_SUCCESSFUL,
   responseMessage,
+  userData,
   isAuthenticated: true,
 });
 export const signupError = errorMessage => ({

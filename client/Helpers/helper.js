@@ -20,6 +20,7 @@ export const validateToken = () => {
   jwt.verify(token, secret, (error) => {
     if (error) {
       message = 'Session expired';
+      localStorage.clear();
     }
   });
   return message;

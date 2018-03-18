@@ -34,6 +34,10 @@ describe('Testing User endpoints', () => {
       .end((err, res) => {
         expect(res.body.message).equal('User created');
         expect(res).to.have.status(201);
+        expect(res).to.be.an('object');
+        expect((res.body)).to.have.property('message').that.is.a('string');
+        expect((res.body)).to.have.property('token').that.is.a('string');
+        expect(res.body.message).to.be.a('string');
         done();
       });
   });
@@ -51,6 +55,10 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('name field cannot be empty');
+          expect(errors[0].message).to.be.a('string');
+          expect((errors[0])).to.be.an('object');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect(errors).to.be.an('array');
         }
         expect(res).to.have.status(400);
         done();
@@ -70,6 +78,10 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Username field cannot be empty');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect((errors[0])).to.be.an('object');
         }
         expect(res).to.have.status(400);
         done();
@@ -89,6 +101,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Email field cannot be empty');
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.be.an('object');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
         }
         expect(res).to.have.status(400);
         done();
@@ -108,6 +123,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Password field cannot be empty');
+          expect((errors[0])).to.be.an('object');
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
         }
         expect(res).to.have.status(400);
         done();
@@ -124,6 +142,13 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Username should be atleast 6 characters');
+          expect((errors[0])).to.be.an('object');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect(errors).to.be.an('array');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -139,6 +164,13 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors[0].message).equal('Please input a valid Email Adrress');
+          expect((errors[0])).to.be.an('object');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect(errors).to.be.an('array');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -154,6 +186,13 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.be.an('object');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect(errors[0].message).equal('Please input a valid password with atleast 8 characters');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -169,6 +208,13 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect((errors[0])).to.be.an('object');
+          expect(errors[0].message).equal('Invalid Username, kindly ensure your username is alphanumeric');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -184,6 +230,13 @@ describe('Testing User endpoints', () => {
         profileImage: 'dummydata'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect((errors[0])).to.be.an('object');
+          expect(errors[0].message).equal('Invalid password, ensure your password contain only uppercase, lowercase or any special character');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -202,6 +255,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Username has already been chosen');
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect((errors[0])).to.be.an('object');
         }
         expect(res).to.have.status(409);
         done();
@@ -221,6 +277,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Email already exist');
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect((errors[0])).to.be.an('object');
         }
         expect(res).to.have.status(409);
         done();
@@ -235,6 +294,8 @@ describe('Testing User endpoints', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Signin successful');
+        expect(res.body).to.have.property('message').that.is.a('string');
+        expect(res.body).to.be.an('object');
         done();
       });
   });
@@ -249,6 +310,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Username field cannot be empty');
+          expect((errors[0])).to.be.an('object');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect(errors).to.be.an('array');
         }
         done();
       });
@@ -264,6 +328,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Password field cannot be empty');
+          expect((errors[0])).to.be.an('object');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect(errors).to.be.an('array');
         }
         done();
       });
@@ -279,6 +346,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Incorrect login details');
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
+          expect((errors[0])).to.be.an('object');
         }
         expect(res).to.have.status(400);
         done();
@@ -295,6 +365,9 @@ describe('Testing User endpoints', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Incorrect login details');
+          expect((errors[0])).to.be.an('object');
+          expect(errors).to.be.an('array');
+          expect((errors[0])).to.have.property('message').that.is.a('string');
         }
         expect(res).to.have.status(400);
         done();

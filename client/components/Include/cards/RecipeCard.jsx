@@ -16,12 +16,12 @@ const RecipeCard = (props) => {
     recipe, showActionButton, setEditRecipeId, deleteRecipe
   } = props;
   return (
-    <div className="col-sm-6 col-md-4 pt-4 mb-5">
+    <div className="col-sm-6 col-md-6 col-lg-4 pt-4 mb-5">
       <div className="card card-height">
         <img
           className="card-img-top img-max"
           src={recipe.image}
-          alt="img"
+          alt={recipe.name}
         />
         <div className="card-body word-warp">
           <Link to={`/recipes/${recipe.id}`}>

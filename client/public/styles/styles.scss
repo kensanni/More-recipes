@@ -405,3 +405,16 @@ p {
   margin-top: -26rem;
   margin-bottom: -24rem;
 }
+
+.hide {
+  display: none !important;
+}
+
+.review-box {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.favorited {
+  color: rgb(194, 196, 81);
+}

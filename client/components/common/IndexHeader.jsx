@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @description functional component to render the landing page Header
+ *
+ * @returns {JSX} return JSX
+ */
 const IndexHeader = () => (
   <header>
     <nav className="navbar navbar-expand-lg navbar-light bg-green">

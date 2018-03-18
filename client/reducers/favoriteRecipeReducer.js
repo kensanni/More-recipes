@@ -10,7 +10,6 @@ const initialState = {
  * @description favorite recipes reducer
  *
  * @param {object} state - default application state
- *
  * @param {object} action - action dispatched
  *
  * @return {Object} - Object containg new state
@@ -29,6 +28,7 @@ const favoriteRecipeReducer = (state = initialState, action) => {
       return {
         ...state,
         recipeId: action.recipeId,
+        favoriteType: action.favoriteType,
         isFavorited: true,
         responseMessage: action.responseMessage,
         errorMessage: ''

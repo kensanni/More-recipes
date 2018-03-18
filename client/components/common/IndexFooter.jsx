@@ -1,5 +1,11 @@
 import React from 'react';
 
+
+/**
+ * @description functional component to render the landing page footer
+ *
+ * @returns {JSX} return JSX
+ */
 const IndexFooter = () => (
   <footer className="container page-footer">
     <div className="row">

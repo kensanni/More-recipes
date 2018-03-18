@@ -13,7 +13,6 @@ const initialState = {
  * @description get all recipes reducer
  *
  * @param {object} state - default application state
- *
  * @param {object} action - response from the api
  *
  * @return {Object} - Object containg new state

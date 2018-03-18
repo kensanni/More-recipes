@@ -8,6 +8,7 @@ import { validateToken } from '../../../Helpers/helper';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
+import signOutAction from '../../../actions/signOutAction';
 import downvoteRecipeAction from '../../../actionController/downvoteRecipe';
 import favoriteRecipeAction from '../../../actionController/favoriteRecipe';
 import getRecipeDetailsAction from '../../../actionController/getRecipeDetails';
@@ -55,7 +56,9 @@ class RecipeDetailPageContainer extends Component {
     if (this.props.authenticated && validateToken() !== 'Session expired') {
       return this.props.getRecipeDetailsAction(recipeId);
     }
+
     this.props.history.push('/recipes');
+    this.props.signOutAction();
     miniToastr.init();
     return miniToastr.error('Login to continue');
   }
@@ -195,7 +198,7 @@ class RecipeDetailPageContainer extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header details="true" />
         { this.renderJsx() }
         <Footer />
       </div>
@@ -219,6 +222,7 @@ RecipeDetailPageContainer.propTypes = {
   addReviewsAction: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
   recipeDetailStatus: PropTypes.string,
+  signOutAction: PropTypes.func.isRequired,
   history: PropTypes.objectOf(any).isRequired,
   reviews: PropTypes.arrayOf(any)
 };
@@ -237,7 +241,8 @@ const mapDispatchToProps = dispatch => (
     upvoteRecipeAction,
     downvoteRecipeAction,
     favoriteRecipeAction,
-    addReviewsAction
+    addReviewsAction,
+    signOutAction
   }, dispatch)
 );
 

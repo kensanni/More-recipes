@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/**
+ * @description functional component to render the header for unauthenticated user
+ *
+ * @returns {JSX} return JSX
+ */
 const GuestHeader = () => (
   <header>
     <nav className="navbar navbar-expand-lg navbar-light bg-green">
