@@ -31,7 +31,7 @@ export default function signin(userdata) {
 /**
  * @description action controller to save the userId to store
  *
- * @returns {undefined} dispatch signinsuccess action
+ * @returns {void} dispatch signinsuccess action
  */
 export const signInFromLocalStorage = () => (
   (dispatch) => {

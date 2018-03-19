@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import instance from '../Helpers/helper';
 import { signupError, signupRequest, signupSuccess } from '../actions/signupAction';
 
@@ -15,8 +16,9 @@ export default function signup(userdata) {
     instance.post('/users/signup', userdata)
       .then((res) => {
         const { token, message } = res.data;
+        const userData = jwt.decode(token);
         localStorage.setItem('token', token);
-        dispatch(signupSuccess(message));
+        dispatch(signupSuccess(message, userData));
       })
       .catch((error) => {
         const { errors } = error.response.data;

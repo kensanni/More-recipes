@@ -3,6 +3,7 @@ import PropTypes, { any } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import editRecipeAction from '../../../actionController/editRecipe';
+import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 
 /**
  * @description component to render the edit recipe modal
@@ -28,6 +29,25 @@ class EditModal extends Component {
   }
 
   /**
+ * @description component to render the edit recipe modal
+ *
+ * @param {object} nextProps
+ *
+ * @returns {void}  update the state of image
+ */
+  componentWillReceiveProps(nextProps) {
+    const { image } = this.props;
+    if (image !== nextProps.image) {
+      this.setState({
+        recipe: {
+          ...this.state.recipe,
+          image: nextProps.image
+        }
+      });
+    }
+  }
+
+  /**
    * @description function to submit recipe to edit
    *
    * @returns {void} call edit recipe action creator
@@ -36,6 +56,7 @@ class EditModal extends Component {
     const { editRecipeId } = this.props;
     if (this.state.recipe !== null) {
       this.props.editRecipeAction(editRecipeId, this.state.recipe);
+      this.setState({ recipe: null });
     }
   }
 
@@ -89,7 +110,6 @@ class EditModal extends Component {
   render() {
     const { editRecipeId, recipes, editRecipeStatus } = this.props;
     const { recipe: stateRecipe } = this.state;
-
     const editRecipeArray = (
       editRecipeId !== null
     ) ? recipes.filter(recipe => recipe.id === editRecipeId) : [];
@@ -102,7 +122,6 @@ class EditModal extends Component {
         ingredient: '',
         image: '',
       };
-
     this.recipeEdited = {
       name: editRecipe.name,
       description: editRecipe.description,
@@ -141,7 +160,7 @@ class EditModal extends Component {
               <form>
                 <div className="form-group">
                   <div className="error-message">
-                    { !editRecipeStatus.status ? editRecipeStatus.message : '' }
+                    {!editRecipeStatus.status ? editRecipeStatus.message : ''}
                   </div>
                   <label htmlFor="recipient-name" id="recipient-name" className="col-form-label">
                     Name
@@ -223,7 +242,8 @@ EditModal.propTypes = {
   editRecipeId: PropTypes.number,
   editRecipeAction: PropTypes.func.isRequired,
   editRecipeStatus: PropTypes.objectOf(any).isRequired,
-  recipes: PropTypes.arrayOf(any).isRequired
+  recipes: PropTypes.arrayOf(any).isRequired,
+  image: PropTypes.string.isRequired
 };
 
 /**
@@ -236,12 +256,14 @@ EditModal.propTypes = {
 const mapStateToProps = state => ({
   editRecipeId: state.getUserRecipeReducer.editRecipeId,
   recipes: state.getUserRecipeReducer.recipeData,
-  editRecipeStatus: state.editRecipeReducer.editRecipeStatus
+  editRecipeStatus: state.editRecipeReducer.editRecipeStatus,
+  image: state.saveImageToCloud.image
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    editRecipeAction
+    editRecipeAction,
+    saveImageToCloudAction
   }, dispatch)
 );
 

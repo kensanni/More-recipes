@@ -14,7 +14,6 @@ class Recipe {
    * @description Adds a recipe
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res   HTTP response object
    *
    * @returns {object} return a json object
@@ -41,7 +40,6 @@ class Recipe {
    * @description modify a recipe
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res  HTTP response object
    *
    * @returns {object} return a json object
@@ -68,7 +66,6 @@ class Recipe {
    * @description get all recipe
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res  HTTP response object
    *
    * @returns {object} return a json object
@@ -111,7 +108,6 @@ class Recipe {
      * @description get one recipe
      *
      * @param {object} req HTTP request object
-     *
      * @param {object} res  HTTP response object
      *
      * @returns {object} Returns a JSON object
@@ -144,7 +140,6 @@ class Recipe {
    * @description get user recipes
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res HTTP responds object
    *
    * @return {object} return a json object
@@ -200,7 +195,6 @@ class Recipe {
    * @description delete a recipe
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res  HTTP response object
    *
    * @returns  {object} Returns a JSON object
@@ -228,7 +222,6 @@ class Recipe {
    * @description
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res HTTP response object
    *
    * @returns {object} return a json object
@@ -246,7 +239,6 @@ class Recipe {
    * @description
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res HTTP response object
    *
    * @returns {object} return a json object

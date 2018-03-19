@@ -32,7 +32,7 @@ const RecipeDetailsCard = (props) => {
           <div className="row">
             <div className="col-sm-12">
               <div>
-                <img className="img img-fluid img-thumbnail img-width" src={image} alt="" />
+                <img className="img img-fluid img-thumbnail img-width" src={image} alt={name} />
                 <h1 className="text-center pt-3">{name}</h1>
               </div>
             </div>
@@ -104,11 +104,11 @@ const RecipeDetailsCard = (props) => {
               <h2 className="header-bg">Reviews</h2>
               {
                 reviews && !reviews.length &&
-                <h6 style={{ textAlign: 'center' }}>This recipe have not been reviewed</h6>
+                <h6 className="text-center">This recipe have not been reviewed</h6>
               }
               {
                 reviews &&
-                <ul style={{ maxHeight: '300px', overflowY: 'scroll' }}>
+                <ul className="review-box">
                   {
                   props.reviews.map((review, i) => (
                     <div key={i} className="review-list">
@@ -118,7 +118,7 @@ const RecipeDetailsCard = (props) => {
                             <strong className="primary-font">{review.username}</strong>
                           </div>
                           <p>
-                            { review.review }
+                            { review.review.trim() }
                           </p>
                           <small className="small">{time(review.createdAt)}</small>
                           <hr />

@@ -13,6 +13,7 @@ const RecipeGrid = props => (
     <RecipeCard
       recipe={recipe}
       key={recipe.id}
+      clearImageState={props.clearImageState}
       showActionButton={props.showActionButton}
       setEditRecipeId={props.setEditRecipeId}
       deleteRecipe={props.deleteRecipe}

@@ -13,7 +13,6 @@ export const setEditRecipeIdAction = recipeId => dispatch => dispatch({
  * @description action creator for editing recipe
  *
  * @param {number} recipeId
- *
  * @param {object} recipeData
  *
  * @returns {void} action to be dispatch to the store

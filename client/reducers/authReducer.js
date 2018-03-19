@@ -1,5 +1,5 @@
 import { SIGNUP_ERROR, SIGNUP_REQUEST, SIGNUP_SUCCESSFUL } from '../actions/signupAction';
-import { SIGNIN_ERROR, SIGNIN_REQUEST, SIGNIN_SUCCESSFUL } from '../actions/signinAction';
+import { SIGNIN_ERROR, SIGNIN_REQUEST, SIGNIN_SUCCESSFUL, SIGNIN_STATUS } from '../actions/signinAction';
 import { SIGNOUT_USER } from '../actions/signOutAction';
 
 
@@ -14,7 +14,6 @@ const initialState = {
  * @description authentication reducer
  *
  * @param {object} state - default application state
- *
  * @param {object} action - action dispatched
  *
  * @return {Object} - Object containg new state
@@ -32,7 +31,7 @@ const authReducer = (state = initialState, action) => {
     case SIGNUP_SUCCESSFUL:
       return {
         ...state,
-        userData: {},
+        userData: action.userData,
         isAuthenticated: action.isAuthenticated,
         responseMessage: action.responseMessage,
         errorMessage: '',
@@ -73,6 +72,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: action.userData,
+        isAuthenticated: action.isAuthenticated
+      };
+    case SIGNIN_STATUS:
+      return {
+        ...state,
         isAuthenticated: action.isAuthenticated
       };
     default:

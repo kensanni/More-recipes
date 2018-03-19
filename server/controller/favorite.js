@@ -10,10 +10,9 @@ class Favorite {
    * @description Adds a recipe into favorite
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res   HTTP response object
    *
-   * @returns  {object} return a json object
+   * @returns {object} return a json object
    */
   static async addFavorite(req, res) {
     const findFavRecipe = await Favorites.find({
@@ -45,7 +44,6 @@ class Favorite {
    * @description get favorite recipe from database
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res   HTTP response object
    *
    * @returns {object} return a json object
@@ -65,7 +63,7 @@ class Favorite {
     if (findAndCountFavorites) {
       pages = Math.ceil(findAndCountFavorites.count / limit);
       pageNo = parseInt(req.query.page, 10);
-      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo - 1 : 0;
+      pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo : 0;
       offset = pageNo * limit;
     }
     const getFavoritesRecipes = await Favorites.findAll({

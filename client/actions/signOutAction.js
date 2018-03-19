@@ -15,6 +15,10 @@ export const signOut = () => ({
 export default function signOutUser() {
   return (dispatch) => {
     localStorage.removeItem('token');
-    dispatch(signOut());
+    dispatch({
+      type: SIGNOUT_USER,
+      userData: {},
+      isAuthenticated: false
+    });
   };
 }

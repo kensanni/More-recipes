@@ -27,6 +27,10 @@ describe('Testing API endpoints associated with review', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Signin successful');
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.have.property('message').that.is.a('string');
+        expect(res.body).to.have.all.keys('message', 'token');
         value = res.body.token;
         done();
       });
@@ -43,6 +47,9 @@ describe('Testing API endpoints associated with review', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Recipe successfully created');
+        expect(res.body.data).to.be.an('object');
+        expect(res.body).to.have.all.keys('message', 'data');
+        expect(res.body).to.have.property('data').that.is.an('object');
         expect(res).to.have.status(201);
         done();
       });
@@ -61,6 +68,10 @@ describe('Testing API endpoints associated with review', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Please input a review');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
         }
         done();
       });
@@ -75,6 +86,9 @@ describe('Testing API endpoints associated with review', () => {
       .end((err, res) => {
         expect(res).to.have.status(400);
         expect(res.body.message).equal('RecipeId parameter should be a number');
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.have.property('message').that.is.a('string');
         done();
       });
   });
@@ -89,6 +103,10 @@ describe('Testing API endpoints associated with review', () => {
         const { errors } = res.body;
         if (errors.length >= 1) {
           expect(errors[0].message).equal('Recipe does not exist in this catalog');
+          expect(errors[0]).to.be.an('object');
+          expect(errors).to.be.an('array');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
         }
         expect(res).to.have.status(404);
         done();
@@ -104,6 +122,9 @@ describe('Testing API endpoints associated with review', () => {
       .end((err, res) => {
         expect(res).to.have.status(403);
         expect(res.body.message).equal('Not Authorized');
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.have.property('message').that.is.a('string');
         done();
       });
   });
@@ -120,6 +141,9 @@ describe('Testing API endpoints associated with review', () => {
       .end((err, res) => {
         expect(res).to.have.status(201);
         expect(res.body.message).equal('Review posted succesfully');
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.have.property('message').that.is.a('string');
         done();
       });
   });

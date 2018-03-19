@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import { bindActionCreators } from 'redux';
+import miniToastr from 'mini-toastr';
 import { isEmpty } from 'lodash';
 import { Lines } from 'react-preloading-component';
 import ReactPaginate from 'react-paginate';
+import { validateToken } from '../../../Helpers/helper';
 import RecipeNotFound from '../../Error/RecipeNotFound';
 import getUserRecipe from '../../../actionController/getUserRecipe';
 import addRecipeAction from '../../../actionController/addRecipe';
@@ -12,6 +14,7 @@ import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import AddRecipeButton from '../../Include/buttons/AddRecipeButton';
 import deleteRecipeAction from '../../../actionController/deleteRecipe';
 import editRecipeAction, { setEditRecipeIdAction } from '../../../actionController/editRecipe';
+import clearImageAction from '../../../actions/clearImageAction';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import RecipeGrid from '../RecipeGrid';
@@ -46,6 +49,7 @@ class UserRecipes extends Component {
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
     this.renderRecipeGrid = this.renderRecipeGrid.bind(this);
     this.setEditRecipeId = this.setEditRecipeId.bind(this);
+    this.clearImageState = this.clearImageState.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -57,7 +61,12 @@ class UserRecipes extends Component {
   componentDidMount() {
     const { userId } = this.props;
     const page = 0;
-    this.props.getUserRecipe(userId, page);
+    if (this.props.authenticated && validateToken() !== 'Session expired') {
+      return this.props.getUserRecipe(userId, page);
+    }
+    this.props.history.push('/recipes');
+    miniToastr.init();
+    return miniToastr.error('Login to continue');
   }
 
   /**
@@ -174,6 +183,15 @@ class UserRecipes extends Component {
     }
   }
 
+  /**
+   * @description clear the state of edit recipe image after editing an image
+   *
+   * @returns {void} call clearImageAction
+   */
+  clearImageState() {
+    this.props.clearImageAction();
+  }
+
 
   /**
    * @description get user recipes to be displayed on the new page
@@ -197,7 +215,7 @@ class UserRecipes extends Component {
   renderRecipeGrid() {
     return (
       <div className="row">
-        { this.props.recipes.length === 0 ? <RecipeNotFound /> :
+        { this.props.recipes && this.props.recipes.length === 0 ? <RecipeNotFound /> :
         <RecipeGrid
           recipes={this.props.recipes}
           setEditRecipeId={this.setEditRecipeId}
@@ -205,6 +223,7 @@ class UserRecipes extends Component {
           deleteRecipe={this.deleteRecipe}
           editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
+          clearImageState={this.clearImageState}
           value={this.state}
           onChange={this.handleChange}
           {...this.state}
@@ -235,12 +254,12 @@ class UserRecipes extends Component {
           </div>
           <div>
             {
-              this.props.recipes.isFetching ? <Lines /> :
+              this.props.fetching ? <Lines /> :
               this.renderRecipeGrid()
 
             }
           </div>
-          <div className="pt-3 pb-5">
+          {
             <ReactPaginate
               previousLabel="Previous"
               nextLabel="Next"
@@ -248,7 +267,7 @@ class UserRecipes extends Component {
               breakClassName="page-link"
               onPageChange={this.handlePaginationChange}
               pageCount={this.props.page}
-              containerClassName="pagination justify-content-center"
+              containerClassName={this.props.recipes && this.props.recipes.length === 0 ? 'hide' : 'pagination justify-content-center'}
               pageLinkClassName="page-link"
               nextLinkClassName="page-link"
               previousLinkClassName="page-link"
@@ -259,7 +278,7 @@ class UserRecipes extends Component {
               activeClassName="active"
               subContainerClassName="pages pagination"
             />
-          </div>
+            }
           <Footer />
         </div>
       </div>
@@ -277,7 +296,11 @@ UserRecipes.propTypes = {
   userId: PropTypes.number.isRequired,
   addRecipeResponse: PropTypes.string.isRequired,
   setEditRecipeIdAction: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired
+  page: PropTypes.number.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  history: PropTypes.objectOf(any).isRequired,
+  fetching: PropTypes.bool.isRequired,
+  clearImageAction: PropTypes.func.isRequired
 };
 
 /**
@@ -289,10 +312,12 @@ UserRecipes.propTypes = {
  */
 const mapStateToProps = state => ({
   recipes: state.getUserRecipeReducer.recipeData,
+  fetching: state.getUserRecipeReducer.isFetching,
   userId: state.authReducer.userData.id,
   page: state.getUserRecipeReducer.page,
   recipeImageUrl: state.saveImageToCloud.image,
-  addRecipeResponse: state.addRecipeReducer.errorMessage
+  addRecipeResponse: state.addRecipeReducer.errorMessage,
+  authenticated: state.authReducer.isAuthenticated,
 });
 
 const mapDispatchToProps = dispatch => (
@@ -302,7 +327,8 @@ const mapDispatchToProps = dispatch => (
     deleteRecipeAction,
     editRecipeAction,
     saveImageToCloudAction,
-    setEditRecipeIdAction
+    setEditRecipeIdAction,
+    clearImageAction
   }, dispatch)
 );
 
