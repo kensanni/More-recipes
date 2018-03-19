@@ -1,4 +1,5 @@
 import { SAVE_IMAGE_TO_CLOUD_REQUEST, SAVE_IMAGE_TO_CLOUD_SUCCESSFUL, SAVE_IMAGE_TO_CLOUD_ERROR } from '../actions/saveImageToCloud';
+import { CLEAR_IMAGE } from '../actions/clearImageAction';
 
 const initialState = {
   image: '',
@@ -34,6 +35,10 @@ const saveImageToCloudReducer = (state = initialState, action) => {
         image: '',
         isUploaded: action.isUploaded,
         errorMessage: action.errorMessage
+      };
+    case CLEAR_IMAGE:
+      return {
+        ...initialState
       };
     default:
       return state;

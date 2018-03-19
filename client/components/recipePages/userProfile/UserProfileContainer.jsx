@@ -46,7 +46,6 @@ class UserProfileContainer extends Component {
    */
   componentDidMount() {
     const { userId } = this.props;
-    console.log('props gdsdhsdshd', userId);
     if (this.props.authenticated && validateToken() !== 'Session expired') {
       this.props.getUserRecipeAction(userId, 0);
       this.props.getFavoriteRecipeAction(userId, 0);
@@ -133,7 +132,6 @@ class UserProfileContainer extends Component {
    * @return {JSX} return JSX
    */
   render() {
-    console.log(this.props);
     return (
       <div>
         <Header />

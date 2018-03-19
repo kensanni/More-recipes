@@ -3,6 +3,7 @@ import PropTypes, { any } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import editRecipeAction from '../../../actionController/editRecipe';
+import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 
 /**
  * @description component to render the edit recipe modal
@@ -25,6 +26,25 @@ class EditModal extends Component {
     this.editChangeHandler = this.editChangeHandler.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.saveImageToCloud = this.saveImageToCloud.bind(this);
+  }
+
+  /**
+ * @description component to render the edit recipe modal
+ *
+ * @param {object} nextProps
+ *
+ * @returns {void}  update the state of image
+ */
+  componentWillReceiveProps(nextProps) {
+    const { image } = this.props;
+    if (image !== nextProps.image) {
+      this.setState({
+        recipe: {
+          ...this.state.recipe,
+          image: nextProps.image
+        }
+      });
+    }
   }
 
   /**
@@ -222,7 +242,8 @@ EditModal.propTypes = {
   editRecipeId: PropTypes.number,
   editRecipeAction: PropTypes.func.isRequired,
   editRecipeStatus: PropTypes.objectOf(any).isRequired,
-  recipes: PropTypes.arrayOf(any).isRequired
+  recipes: PropTypes.arrayOf(any).isRequired,
+  image: PropTypes.string.isRequired
 };
 
 /**
@@ -235,12 +256,14 @@ EditModal.propTypes = {
 const mapStateToProps = state => ({
   editRecipeId: state.getUserRecipeReducer.editRecipeId,
   recipes: state.getUserRecipeReducer.recipeData,
-  editRecipeStatus: state.editRecipeReducer.editRecipeStatus
+  editRecipeStatus: state.editRecipeReducer.editRecipeStatus,
+  image: state.saveImageToCloud.image
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    editRecipeAction
+    editRecipeAction,
+    saveImageToCloudAction
   }, dispatch)
 );
 

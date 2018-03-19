@@ -129,7 +129,7 @@ class Header extends Component {
             <div className="form-inline my-2 my-lg-0 ml-auto">
               {
               this.props.details ? <div /> :
-              <div className="section" style={{ width: '300px' }}>
+              <div className="section search-box">
                 <AsyncComponent
                   multi={this.state.multi}
                   value={this.state.value}

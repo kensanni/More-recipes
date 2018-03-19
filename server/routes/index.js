@@ -85,6 +85,7 @@ export default (app) => {
     '/api/v1/recipes/:recipeId',
     authentication.verifyUser,
     Validation.checkRecipeId,
+    Validation.validateEditRecipe,
     Recipe.modifyRecipe
   );
 
