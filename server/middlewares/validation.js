@@ -295,13 +295,28 @@ class Validation {
    * @returns {object} Returns a JSON object
    */
   static checkReviewInput(req, res, next) {
-    const { review } = req.body;
-    if (!review) {
-      return res.status(400).send({
-        errors: [{
-          message: 'Please input a review'
-        }]
+    req.checkBody({
+      review: {
+        notEmpty: {
+          options: true,
+          errorMessage: 'Please input a review'
+        },
+        matches: {
+          options: [(/^[A-Za-z0-9][^ ]+( [^]+)*$/g)],
+          errorMessage: 'You can\'t start a review with a space'
+        }
+      },
+    });
+    const errors = req.validationErrors();
+    if (errors) {
+      const allErrors = [];
+      errors.forEach((error) => {
+        allErrors.push({
+          message: error.msg,
+          field: error.param
+        });
       });
+      return res.status(400).send({ errors: allErrors });
     }
     next();
   }
@@ -327,6 +342,29 @@ class Validation {
       return res.status(400).send({
         errors: [{
           message: `you already have a recipe with the name ${req.body.name}`
+        }]
+      });
+    }
+    next();
+  }
+
+  /**
+   * @description ensure the user doesn't submit the same content back to the database
+   *
+   * @param  {object} req - request
+   * @param  {object} res - response
+   * @param  {function} next - next
+   *
+   * @returns {object} Returns a JSON object
+   */
+  static async validateEditRecipe(req, res, next) {
+    const {
+      name, description, ingredient, image
+    } = req.body;
+    if (!name && !description && !ingredient && !image) {
+      return res.status(400).send({
+        errors: [{
+          message: 'You haven\'t make any changes'
         }]
       });
     }

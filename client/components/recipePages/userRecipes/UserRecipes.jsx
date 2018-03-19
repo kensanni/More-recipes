@@ -14,6 +14,7 @@ import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
 import AddRecipeButton from '../../Include/buttons/AddRecipeButton';
 import deleteRecipeAction from '../../../actionController/deleteRecipe';
 import editRecipeAction, { setEditRecipeIdAction } from '../../../actionController/editRecipe';
+import clearImageAction from '../../../actions/clearImageAction';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import RecipeGrid from '../RecipeGrid';
@@ -48,6 +49,7 @@ class UserRecipes extends Component {
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
     this.renderRecipeGrid = this.renderRecipeGrid.bind(this);
     this.setEditRecipeId = this.setEditRecipeId.bind(this);
+    this.clearImageState = this.clearImageState.bind(this);
   }
   /**
    * @description check the state of isFetched and call the get recipe action
@@ -181,6 +183,15 @@ class UserRecipes extends Component {
     }
   }
 
+  /**
+   * @description clear the state of edit recipe image after editing an image
+   *
+   * @returns {void} call clearImageAction
+   */
+  clearImageState() {
+    this.props.clearImageAction();
+  }
+
 
   /**
    * @description get user recipes to be displayed on the new page
@@ -212,6 +223,7 @@ class UserRecipes extends Component {
           deleteRecipe={this.deleteRecipe}
           editRecipe={this.editRecipe}
           addRecipe={this.addRecipe}
+          clearImageState={this.clearImageState}
           value={this.state}
           onChange={this.handleChange}
           {...this.state}
@@ -287,7 +299,8 @@ UserRecipes.propTypes = {
   page: PropTypes.number.isRequired,
   authenticated: PropTypes.bool.isRequired,
   history: PropTypes.objectOf(any).isRequired,
-  fetching: PropTypes.bool.isRequired
+  fetching: PropTypes.bool.isRequired,
+  clearImageAction: PropTypes.func.isRequired
 };
 
 /**
@@ -314,7 +327,8 @@ const mapDispatchToProps = dispatch => (
     deleteRecipeAction,
     editRecipeAction,
     saveImageToCloudAction,
-    setEditRecipeIdAction
+    setEditRecipeIdAction,
+    clearImageAction
   }, dispatch)
 );
 

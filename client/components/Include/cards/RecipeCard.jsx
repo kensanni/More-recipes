@@ -13,7 +13,7 @@ import RecipeCardFooter from './RecipeCardFooter';
 
 const RecipeCard = (props) => {
   const {
-    recipe, showActionButton, setEditRecipeId, deleteRecipe
+    recipe, showActionButton, setEditRecipeId, deleteRecipe, clearImageState
   } = props;
   return (
     <div className="col-sm-6 col-md-6 col-lg-4 pt-4 mb-5">
@@ -32,6 +32,7 @@ const RecipeCard = (props) => {
           recipe={recipe}
           showActionButton={showActionButton}
           setEditRecipeId={setEditRecipeId}
+          clearImageState={clearImageState}
           deleteRecipe={deleteRecipe}
         />
       </div>
@@ -49,7 +50,8 @@ RecipeCard.propTypes = {
   recipe: PropTypes.objectOf(any).isRequired,
   showActionButton: PropTypes.bool,
   setEditRecipeId: PropTypes.func,
-  deleteRecipe: PropTypes.func
+  deleteRecipe: PropTypes.func,
+  clearImageState: PropTypes.func.isRequired
 };
 
 export default RecipeCard;

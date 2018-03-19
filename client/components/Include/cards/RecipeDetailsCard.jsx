@@ -118,7 +118,7 @@ const RecipeDetailsCard = (props) => {
                             <strong className="primary-font">{review.username}</strong>
                           </div>
                           <p>
-                            { review.review }
+                            { review.review.trim() }
                           </p>
                           <small className="small">{time(review.createdAt)}</small>
                           <hr />
