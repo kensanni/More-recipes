@@ -15,7 +15,9 @@ const RecipeCardFooter = (props) => {
   const {
     id, upvotes, downvotes, favorites
   } = props.recipe;
-  const { showActionButton, setEditRecipeId, deleteRecipe } = props;
+  const {
+    showActionButton, setEditRecipeId, clearImageState, deleteRecipe
+  } = props;
   let component;
 
   component = showActionButton ? (
@@ -23,7 +25,12 @@ const RecipeCardFooter = (props) => {
       <div className="row">
         <div className="col-xs-6 ml-3">
           <EditRecipeButton
-            setEditRecipeId={() => setEditRecipeId(id)}
+            onEditClicked={
+              () => {
+                setEditRecipeId(id);
+                clearImageState();
+              }
+            }
           />
           <EditModal />
         </div>

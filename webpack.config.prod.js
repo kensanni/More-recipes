@@ -26,7 +26,7 @@ export default {
       }
     }),
     new webpack.EnvironmentPlugin([
-      'REQUEST', 'CLOUD_PRESET'
+      'REQUEST', 'CLOUD_PRESET', 'JWT_SECRET'
     ])
   ],
   resolve: {

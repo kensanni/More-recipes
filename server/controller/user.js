@@ -13,7 +13,6 @@ class User {
    * @description User signup method
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res HTTP response object
    *
    * @returns {object} object
@@ -46,7 +45,6 @@ class User {
    * @description User signin method
    *
    * @param {object} req HTTP request object
-   *
    * @param {object} res HTTP response object
    *
    * @returns  {object} object

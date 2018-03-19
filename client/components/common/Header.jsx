@@ -127,7 +127,9 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <div className="form-inline my-2 my-lg-0 ml-auto">
-              <div className="section" style={{ width: '300px' }}>
+              {
+              this.props.details ? <div /> :
+              <div className="section search-box">
                 <AsyncComponent
                   multi={this.state.multi}
                   value={this.state.value}
@@ -143,6 +145,7 @@ class Header extends Component {
                   searchPromptText="Type to search for recipe"
                 />
               </div>
+            }
             </div>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item dropdown">
@@ -176,8 +179,8 @@ class Header extends Component {
                 <a
                   className="navbar-link nav-text signout"
                   id="navlink"
+                  role="none"
                   onClick={this.signOut}
-                  role="button"
                 >
                 Signout
                 </a>
@@ -192,6 +195,11 @@ class Header extends Component {
 
 Header.contextTypes = {
   router: PropTypes.objectOf(any).isRequired
+};
+
+Header.propTypes = {
+  signOutAction: PropTypes.func.isRequired,
+  details: PropTypes.bool.isRequired
 };
 
 const mapDispatchToProps = dispatch => (

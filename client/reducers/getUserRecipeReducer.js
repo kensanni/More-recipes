@@ -18,7 +18,6 @@ const initialState = {
  * @description get user recipes reducer
  *
  * @param {object} state - default application state
- *
  * @param {object} action - action dispatched
  *
  * @return {Object} - Object containg new state
@@ -41,7 +40,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
         isFetched,
         isFetching,
         recipeData: [],
-        errorMessage: ''
+        errorMessage: '',
       };
     case GET_USER_RECIPE_SUCCESSFUL:
       return {
@@ -59,7 +58,7 @@ const getUserRecipeReducer = (state = initialState, action) => {
         isFetched,
         recipeData: [],
         errorMessage,
-        isFetching
+        isFetching,
       };
     case DELETE_RECIPE_SUCCESSFUL:
       return {

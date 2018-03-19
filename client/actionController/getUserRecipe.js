@@ -5,7 +5,6 @@ import { getUserRecipeRequest, getUserRecipeSuccessful, getUserRecipeError } fro
  * @description action creator for adding recipe
  *
  * @param {number} userId
- *
  * @param {number} page
  *
  * @returns {void} action to be dispatch to the store

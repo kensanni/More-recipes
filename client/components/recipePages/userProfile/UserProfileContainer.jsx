@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes, { any } from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import { Lines } from 'react-preloading-component';
+import { validateToken } from '../../../Helpers/helper';
 import getFavoriteRecipeAction from '../../../actionController/getFavoriteRecipe';
 import getUserRecipeAction from '../../../actionController/getUserRecipe';
 import Header from '../../common/Header';
@@ -34,6 +35,7 @@ class UserProfileContainer extends Component {
     this.downvoteRecipe = this.downvoteRecipe.bind(this);
     this.favoriteRecipe = this.favoriteRecipe.bind(this);
     this.handlePaginationChange = this.handlePaginationChange.bind(this);
+    this.renderFavoriteRecipeGrid = this.renderFavoriteRecipeGrid.bind(this);
   }
   /**
    * @description call the action to display user favorite recipe
@@ -43,9 +45,15 @@ class UserProfileContainer extends Component {
    * @return {void} call action creator
    */
   componentDidMount() {
-    const { userId, page } = this.props;
-    this.props.getUserRecipeAction(userId, page);
-    this.props.getFavoriteRecipeAction(userId, page);
+    const { userId } = this.props;
+    if (this.props.authenticated && validateToken() !== 'Session expired') {
+      this.props.getUserRecipeAction(userId, 0);
+      this.props.getFavoriteRecipeAction(userId, 0);
+      return;
+    }
+    this.props.history.push('/recipes');
+    miniToastr.init();
+    return miniToastr.error('Login to continue');
   }
   /**
    * @description upvote a recipe
@@ -66,11 +74,7 @@ class UserProfileContainer extends Component {
    * @return {void} calls downvoteRecipeAction
    */
   downvoteRecipe(id) {
-    if (this.props.authenticated) {
-      return this.props.downvoteRecipeAction(id);
-    }
-    miniToastr.init();
-    return miniToastr.error('Login to continue');
+    this.props.downvoteRecipeAction(id);
   }
 
   /**
@@ -96,6 +100,31 @@ class UserProfileContainer extends Component {
     this.props.getFavoriteRecipeAction(userId, favoriteRecipes.selected);
   }
 
+  /**
+   * @description display a favorite recipe grid based on input
+   *
+   * @returns {JSX} return jsx
+   */
+  renderFavoriteRecipeGrid() {
+    const { favoriteRecipes } = this.props;
+    return (
+      <div className="row">
+        { favoriteRecipes.recipeData.data &&
+          this.props.favoriteRecipes.recipeData.data.length === 0 ?
+            <div className="col-sm-12">
+              <h1 className="text-center pt-5">No recipe has been favorited</h1>
+            </div> :
+            <RecipeGrid
+              recipes={this.props.favoriteRecipes.recipeData.data}
+              upvoteRecipe={this.upvoteRecipe}
+              downvoteRecipe={this.downvoteRecipe}
+              favoriteRecipe={this.favoriteRecipe}
+            />
+      }
+      </div>
+    );
+  }
+
 
   /**
    * @description render - display component
@@ -113,38 +142,35 @@ class UserProfileContainer extends Component {
             recipeCount={this.props.recipeCount}
           />
           <FavoriteRecipeTitle />
-          <section className="row">
+          <section>
             {
-             this.props.favoriteRecipes.isFetched ?
-               <RecipeGrid
-                 recipes={this.props.favoriteRecipes.recipeData.data}
-                 upvoteRecipe={this.upvoteRecipe}
-                 downvoteRecipe={this.downvoteRecipe}
-                 favoriteRecipe={this.favoriteRecipe}
-               />
-            :
-               <Lines />
+             !this.props.favoriteRecipes.isFetched ? <Lines /> :
+              this.renderFavoriteRecipeGrid()
         }
           </section>
         </div>
-        <ReactPaginate
-          previousLabel="Previous"
-          nextLabel="Next"
-          breakLabel={<a href="">...</a>}
-          breakClassName="page-link"
-          onPageChange={this.handlePaginationChange}
-          pageCount={this.props.page}
-          containerClassName="pagination justify-content-center"
-          pageLinkClassName="page-link"
-          nextLinkClassName="page-link"
-          previousLinkClassName="page-link"
-          disabledClassName="disabled"
-          pageClassName="page-item"
-          previousClassName="page-item"
-          nextClassName="page-item"
-          activeClassName="active"
-          subContainerClassName="pages pagination"
-        />
+        {
+          this.props.favoriteRecipes.recipeData.data &&
+          this.props.favoriteRecipes.recipeData.data.length === 0 ? null :
+          <ReactPaginate
+            previousLabel="Previous"
+            nextLabel="Next"
+            breakLabel={<a href="">...</a>}
+            breakClassName="page-link"
+            onPageChange={this.handlePaginationChange}
+            pageCount={this.props.page}
+            containerClassName="pagination justify-content-center"
+            pageLinkClassName="page-link"
+            nextLinkClassName="page-link"
+            previousLinkClassName="page-link"
+            disabledClassName="disabled"
+            pageClassName="page-item"
+            previousClassName="page-item"
+            nextClassName="page-item"
+            activeClassName="active"
+            subContainerClassName="pages pagination"
+          />
+        }
         <Footer />
       </div>
     );
@@ -168,7 +194,8 @@ UserProfileContainer.propTypes = {
   page: PropTypes.number.isRequired,
   getUserRecipeAction: PropTypes.func.isRequired,
   favoriteCount: PropTypes.number,
-  recipeCount: PropTypes.number
+  recipeCount: PropTypes.number,
+  history: PropTypes.objectOf(any).isRequired
 };
 
 const mapStateToProps = state => ({

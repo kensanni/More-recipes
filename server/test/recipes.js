@@ -26,6 +26,8 @@ describe('Testing recipe endpoints', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Signin successful');
+        expect(res.body).to.have.property('message').that.is.a('string');
+        expect(res.body.message).to.be.a('string');
         value = res.body.token;
         done();
       });
@@ -36,6 +38,9 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         expect(res).to.have.status(403);
         expect(res.body.message).equal('Not Authorized');
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.an('object');
+        expect(res.body).to.have.property('message').that.is.a('string');
         done();
       });
   });
@@ -51,6 +56,9 @@ describe('Testing recipe endpoints', () => {
       })
       .end((err, res) => {
         expect(res.body.message).equal('Recipe successfully created');
+        expect(res.body.data).to.be.an('object');
+        expect(res.body.data).to.have.all.keys('id', 'name', 'description', 'ingredient', 'image', 'updatedAt', 'userId', 'createdAt', 'views');
+        expect(res.body).to.have.property('data').that.is.an('object');
         expect(res).to.have.status(201);
         done();
       });
@@ -68,6 +76,10 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
           expect(errors[0].message).equal('Name field cannot be empty');
         }
         expect(res).to.have.status(400);
@@ -87,6 +99,10 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
           expect(errors[0].message).equal('Description field cannot be empty');
         }
         expect(res).to.have.status(400);
@@ -106,6 +122,10 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
           expect(errors[0].message).equal('ingredient field cannot be empty');
         }
         expect(res).to.have.status(400);
@@ -125,6 +145,10 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
           expect(errors[0].message).equal('Please upload an image for your recipes');
         }
         expect(res).to.have.status(400);
@@ -144,6 +168,10 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
           expect(errors[0].message).equal('you already have a recipe with the name Rice');
         }
         expect(res).to.have.status(400);
@@ -161,6 +189,14 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy.com'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
+          expect(errors[0].message).equal('Invalid recipe name');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -176,6 +212,14 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy.com'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
+          expect(errors[0].message).equal('Invalid description format');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -191,6 +235,14 @@ describe('Testing recipe endpoints', () => {
         image: 'dummy.com'
       })
       .end((err, res) => {
+        const { errors } = res.body;
+        if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
+          expect(errors[0].message).equal('Invalid ingredient format');
+        }
         expect(res).to.have.status(400);
         done();
       });
@@ -200,6 +252,8 @@ describe('Testing recipe endpoints', () => {
       .put('/api/v1/recipes/1')
       .end((err, res) => {
         expect(res).to.have.status(403);
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.have.property('message').that.is.a('string');
         expect(res.body.message).equal('Not Authorized');
         done();
       });
@@ -216,6 +270,19 @@ describe('Testing recipe endpoints', () => {
       })
       .end((err, res) => {
         expect(res).to.have.status(200);
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.have.property('message').that.is.a('string');
+        expect(res.body.data).to.have
+          .all
+          .keys(
+            'id',
+            'name',
+            'description',
+            'ingredient',
+            'image',
+            'updatedAt', 'userId',
+            'createdAt', 'views'
+          );
         expect(res.body.message).equal('Recipe updated successfully');
         done();
       });
@@ -226,6 +293,8 @@ describe('Testing recipe endpoints', () => {
       .set('x-access-token', value)
       .end((err, res) => {
         expect(res).to.have.status(400);
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.have.property('message').that.is.a('string');
         expect(res.body.message).equal('RecipeId parameter should be a number');
         done();
       });
@@ -237,6 +306,10 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
           expect(errors[0].message).equal('Recipe does not exist in this catalog');
         }
         expect(res).to.have.status(404);
@@ -248,6 +321,21 @@ describe('Testing recipe endpoints', () => {
       .get('/api/v1/recipes?page=0')
       .set('x-access-token', value)
       .end((err, res) => {
+        expect(res.body.recipesData).to.be.an('array');
+        expect(res.body.recipesData[0]).to.be.an('object');
+        expect(res.body.pages).to.be.a('number');
+        expect(res.body.recipesData[0]).to.have
+          .all
+          .keys(
+            'id',
+            'name',
+            'description',
+            'ingredient',
+            'image', 'upvotes',
+            'downvotes', 'favorites',
+            'updatedAt', 'userId',
+            'createdAt', 'views'
+          );
         expect(res).to.have.status(200);
         done();
       });
@@ -256,6 +344,21 @@ describe('Testing recipe endpoints', () => {
     chai.request(app)
       .get('/api/v1/recipes')
       .end((err, res) => {
+        expect(res.body.recipesData).to.be.an('array');
+        expect(res.body.recipesData[0]).to.be.an('object');
+        expect(res.body.pages).to.be.a('number');
+        expect(res.body.recipesData[0]).to.have
+          .all
+          .keys(
+            'id',
+            'name',
+            'description',
+            'ingredient',
+            'image', 'upvotes',
+            'downvotes', 'favorites',
+            'updatedAt', 'userId',
+            'createdAt', 'views'
+          );
         expect(res).to.have.status(200);
         done();
       });
@@ -265,6 +368,19 @@ describe('Testing recipe endpoints', () => {
       .get('/api/v1/recipes/1')
       .set('x-access-token', value)
       .end((err, res) => {
+        expect(res.body.recipeData).to.be.an('object');
+        expect(res.body.recipeData).to.have
+          .all
+          .keys(
+            'id',
+            'name',
+            'description',
+            'ingredient',
+            'image', 'upvotes',
+            'downvotes', 'favorites',
+            'Reviews', 'updatedAt',
+            'userId', 'createdAt', 'views'
+          );
         expect(res).to.have.status(200);
         done();
       });
@@ -275,6 +391,9 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         expect(res).to.have.status(403);
         expect(res.body.message).equal('Not Authorized');
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').that.is.a('string');
         done();
       });
   });
@@ -285,6 +404,9 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         expect(res).to.have.status(400);
         expect(res.body.message).equal('RecipeId parameter should be a number');
+        expect(res.body.message).to.be.a('string');
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').that.is.a('string');
         done();
       });
   });
@@ -295,6 +417,10 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         const { errors } = res.body;
         if (errors.length >= 1) {
+          expect(errors).to.be.an('array');
+          expect(errors[0]).to.be.an('object');
+          expect(errors[0].message).to.be.a('string');
+          expect(errors[0]).to.have.property('message').that.is.a('string');
           expect(errors[0].message).equal('Recipe does not exist in this catalog');
         }
         expect(res).to.have.status(404);
@@ -307,6 +433,9 @@ describe('Testing recipe endpoints', () => {
       .end((err, res) => {
         expect(res).to.have.status(403);
         expect(res.body.message).equal('Not Authorized');
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').that.is.a('string');
+        expect(res.body.message).to.be.a('string');
         done();
       });
   });
@@ -316,6 +445,9 @@ describe('Testing recipe endpoints', () => {
       .set('x-access-token', value)
       .end((err, res) => {
         expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').that.is.a('string');
+        expect(res.body.message).to.be.a('string');
         expect(res.body.message).equal('Recipe successfully deleted');
         done();
       });

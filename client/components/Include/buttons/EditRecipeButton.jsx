@@ -16,7 +16,7 @@ const EditRecipeButton = props => ((
       data-toggle="modal"
       data-target="#editModal"
       data-whatever="@getbootstrap"
-      onClick={props.setEditRecipeId}
+      onClick={props.onEditClicked}
     >
       <i className="fa fa-pencil-square-o" aria-hidden="true" />
     </button>
@@ -24,7 +24,7 @@ const EditRecipeButton = props => ((
 ));
 
 EditRecipeButton.propTypes = {
-  setEditRecipeId: PropTypes.func.isRequired
+  onEditClicked: PropTypes.func.isRequired
 };
 
 export default EditRecipeButton;

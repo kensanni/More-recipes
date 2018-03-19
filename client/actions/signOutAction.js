@@ -11,7 +11,7 @@ export default function signOutUser() {
     localStorage.removeItem('token');
     dispatch({
       type: SIGNOUT_USER,
-      userdata: {},
+      userData: {},
       isAuthenticated: false
     });
   };

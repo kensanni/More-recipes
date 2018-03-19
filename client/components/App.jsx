@@ -22,8 +22,10 @@ const history = createBrowserHistory();
 class App extends Component {
   /**
    * @description save the userID to store when component mounts
-   * @param {*} props
-   * @return {object} object
+   *
+   * @param {object} props
+   *
+   * @return {void} calls signin action
    */
   componentWillMount() {
     this.props.signInFromLocalStorage();
@@ -31,7 +33,8 @@ class App extends Component {
 
   /**
    * @description display the app
-   * @returns {*} app
+   *
+   * @returns {JSX} return JSX
    */
   render() {
     return (
