@@ -1,4 +1,13 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import mockData from '../mockData/recipeData.json';
+import favoriteRecipeAction from '../../actionController/favoriteRecipe';
 import * as actions from '../../actions/favoriteRecipeAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 describe('Favorite recipes Action', () => {
   describe('Initiate favorite recipe action request', () => {
@@ -38,5 +47,73 @@ describe('Favorite recipes Action', () => {
         isFavorited: false
       });
     });
+  });
+});
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  const {
+    favorites
+  } = mockData.Recipes;
+
+  const recipeId = 9;
+  describe('favorite recipe', () => {
+    it('dispatches successful action for a successful request', async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            message: 'recipe sucessfully added to favorite',
+            data: favorites,
+            type: 1
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.favoriteRecipeRequest(recipeId),
+        actions.favoriteRecipeSuccess(recipeId, 'recipe sucessfully added to favorite', 1)
+      ];
+
+      await store.dispatch(favoriteRecipeAction(recipeId));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject({
+        status: 400,
+        response: {
+          data: {
+            errors: [
+              {
+                message: 'Login to continue'
+              }
+            ]
+          }
+        }
+      });
+    });
+
+    const expectedActions = [
+      actions.favoriteRecipeRequest(),
+      actions.favoriteRecipeError('Login to continue')
+    ];
+
+    await store.dispatch(favoriteRecipeAction());
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });

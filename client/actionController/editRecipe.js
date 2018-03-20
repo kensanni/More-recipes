@@ -20,7 +20,7 @@ export const setEditRecipeIdAction = recipeId => dispatch => dispatch({
 export default function editRecipe(recipeId, recipeData) {
   return (dispatch) => {
     dispatch(editRecipeRequest(recipeId, recipeData));
-    instance.put(`/recipes/${recipeId}`, recipeData)
+    return instance.put(`/recipes/${recipeId}`, recipeData)
       .then(() => {
         dispatch(editRecipeSuccess(recipeId, recipeData));
         dispatch(editRecipeStatus(true, null));

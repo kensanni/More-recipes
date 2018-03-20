@@ -12,7 +12,7 @@ import { getUserRecipeRequest, getUserRecipeSuccessful, getUserRecipeError } fro
 export default function getUserRecipe(userId, page) {
   return (dispatch) => {
     dispatch(getUserRecipeRequest());
-    instance.get(`/users/${userId}/recipes?page=${page}`)
+    return instance.get(`/users/${userId}/recipes?page=${page}`)
       .then((userRecipe) => {
         const { recipesData, pages, count } = userRecipe.data;
         dispatch(getUserRecipeSuccessful(recipesData, pages, count));

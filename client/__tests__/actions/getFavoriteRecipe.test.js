@@ -1,4 +1,17 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import getFavoriteRecipeAction from '../../actionController/getFavoriteRecipe';
+import mockData from '../mockData/recipeData.json';
 import * as actions from '../../actions/getFavoriteRecipeAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+const {
+  validRecipe,
+} = mockData.Recipes;
 
 describe('Get favorite recipe Action', () => {
   describe('Initiate favorite recipe action request', () => {
@@ -37,3 +50,71 @@ describe('Get favorite recipe Action', () => {
     });
   });
 });
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  const pages = 0;
+  const count = 0;
+  const userId = 1;
+
+  it('dispatches successful', async () => {
+    const recipeData = {
+      recipeData: {
+        recipeData: [validRecipe]
+      },
+      pages: 0,
+      count: 0
+    };
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          recipeData: {
+            recipeData: [validRecipe],
+          },
+          pages,
+          count,
+        },
+      });
+    });
+
+    const expectedActions = [
+      actions.getFavoriteRecipeRequest(),
+      actions.getFavoriteRecipeSuccessful(recipeData, pages, count)
+    ];
+
+    await store.dispatch(getFavoriteRecipeAction(userId, pages));
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject([
+        {
+          message: 'No recipe found'
+        }
+      ]);
+    });
+
+    const expectedActions = [
+      actions.getFavoriteRecipeRequest(),
+      actions.getFavoriteRecipeError('No recipe found')
+    ];
+
+    await store.dispatch(getFavoriteRecipeAction());
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+});
+

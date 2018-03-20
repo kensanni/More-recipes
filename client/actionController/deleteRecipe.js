@@ -12,7 +12,7 @@ import { deleteRecipeRequest, deleteRecipeSuccessful, deleteRecipeError } from '
 export default function deleteRelete(recipeId) {
   return (dispatch) => {
     dispatch(deleteRecipeRequest(recipeId));
-    instance.delete(`/recipes/${recipeId}`)
+    return instance.delete(`/recipes/${recipeId}`)
       .then((recipe) => {
         const { message } = recipe.data;
         dispatch(deleteRecipeSuccessful(message, recipeId));

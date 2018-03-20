@@ -1,0 +1,19 @@
+{
+  "Users": {
+    "validRegistration": {
+      "iat": 1521470586,
+      "name": "hello",
+      "username": "hello1",
+      "email": "hello@gmail.com",
+      "password": "123456789"
+    },
+    "validSignin": {
+      "iat": 1521470586,
+      "username": "hello1",
+      "password": "123456789"
+    },
+    "authError": {
+      "name": "kenny"
+    }
+  }
+}

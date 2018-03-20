@@ -1,4 +1,17 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import getPopularRecipeAction from '../../actionController/getPopularRecipe';
+import mockData from '../mockData/recipeData.json';
 import * as actions from '../../actions/getPopularRecipeAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+const {
+  addRecipe,
+} = mockData.Recipes;
 
 describe('Get popular recipe Action', () => {
   describe('Initiate get popular recipe action request', () => {
@@ -31,5 +44,59 @@ describe('Get popular recipe Action', () => {
         isFetched: false,
       });
     });
+  });
+});
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  describe('get popular recipes', () => {
+    it('dispatches successful action for a successful request', async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            recipesData: [addRecipe]
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.getPopularRecipeRequest(),
+        actions.getPopularRecipeSuccess([addRecipe])
+      ];
+
+      await store.dispatch(getPopularRecipeAction([addRecipe]));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject([
+        {
+          message: 'No recipe found'
+        }
+      ]);
+    });
+
+    const expectedActions = [
+      actions.getPopularRecipeRequest(),
+      actions.getPopularRecipeError('No recipe found')
+    ];
+
+    await store.dispatch(getPopularRecipeAction());
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });

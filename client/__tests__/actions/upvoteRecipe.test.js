@@ -1,4 +1,13 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import mockData from '../mockData/recipeData.json';
+import upvoteRecipeAction from '../../actionController/upvoteRecipe';
 import * as actions from '../../actions/upvoteRecipeAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 describe('Upvote recipe Action', () => {
   describe('Initiate favorite recipe action request', () => {
@@ -53,5 +62,74 @@ describe('Upvote recipe Action', () => {
         });
       });
     });
+  });
+});
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  const {
+    upvote
+  } = mockData.Recipes;
+
+  describe('Upvote recipe', () => {
+    const recipeId = 9;
+    it('dispatches successful action for a successful request', async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            message: 'Recipe successfully upvoted',
+            data: upvote,
+            downvoteStatus: 'notDownvoted'
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.upvoteRecipeRequest(recipeId),
+        actions.incrementUpvote(recipeId),
+        actions.upvoteRecipeSuccess('Recipe successfully upvoted')
+      ];
+
+      await store.dispatch(upvoteRecipeAction(recipeId));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject({
+        status: 400,
+        response: {
+          data: {
+            errors: [
+              {
+                message: 'Login to continue'
+              }
+            ]
+          }
+        }
+      });
+    });
+
+    const expectedActions = [
+      actions.upvoteRecipeRequest(),
+      actions.upvoteRecipeError('Login to continue')
+    ];
+
+    await store.dispatch(upvoteRecipeAction());
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });

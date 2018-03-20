@@ -1,4 +1,17 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import getUserRecipeAction from '../../actionController/getUserRecipe';
+import mockData from '../mockData/recipeData.json';
 import * as actions from '../../actions/getUserRecipeAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+const {
+  addRecipe,
+} = mockData.Recipes;
 
 describe('Get user recipes Action', () => {
   describe('Initiate get recipe details action request', () => {
@@ -40,3 +53,63 @@ describe('Get user recipes Action', () => {
     });
   });
 });
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  const pages = 0;
+  it('dispatches success for successful request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          recipesData: [
+            addRecipe
+          ],
+          pages
+        }
+      });
+    });
+
+    const expectedActions = [
+      actions.getUserRecipeRequest(pages),
+      actions.getUserRecipeSuccessful([addRecipe], pages)
+    ];
+
+    await store.dispatch(getUserRecipeAction(pages));
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject({
+        status: 400,
+        response: {
+          data: {
+            message: 'No recipe found'
+          }
+        }
+      });
+    });
+
+    const expectedActions = [
+      actions.getUserRecipeRequest(),
+      actions.getUserRecipeError('No recipe found')
+    ];
+
+    await store.dispatch(getUserRecipeAction());
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+});
+

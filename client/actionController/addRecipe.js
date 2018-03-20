@@ -12,7 +12,7 @@ import { addRecipeRequest, addRecipeError, addRecipeSuccess } from '../actions/a
 export default function addRecipe(recipeData) {
   return (dispatch) => {
     dispatch(addRecipeRequest(recipeData));
-    instance.post('/recipes', recipeData)
+    return instance.post('/recipes', recipeData)
       .then((res) => {
         const { message, data } = res.data;
         dispatch(addRecipeSuccess(message, data));

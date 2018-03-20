@@ -1,4 +1,14 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import mockData from '../mockData/recipeData.json';
+import downvoteRecipeAction from '../../actionController/downvoteRecipe';
 import * as actions from '../../actions/downvoteRecipeAction';
+import * as votes from '../../actions/upvoteRecipeAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 describe('Downvote recipe Action', () => {
   describe('Initiate favorite recipe action request', () => {
@@ -53,5 +63,76 @@ describe('Downvote recipe Action', () => {
         });
       });
     });
+  });
+});
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  const {
+    upvote
+  } = mockData.Recipes;
+  
+
+  describe('Downvote recipe', () => {
+    const recipeId = 9;
+    it('dispatches successful action for a successful request', async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            message: 'Recipe successfully downvoted',
+            data: upvote,
+            upvoteStatus: 'upvoted'
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.downvoteRecipeRequest(recipeId),
+        votes.decrementUpvote(recipeId),
+        actions.incrementDownvote(recipeId),
+        actions.downvoteRecipeSuccess('Recipe successfully downvoted')
+      ];
+
+      await store.dispatch(downvoteRecipeAction(recipeId));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject({
+        status: 400,
+        response: {
+          data: {
+            errors: [
+              {
+                message: 'Login to continue'
+              }
+            ]
+          }
+        }
+      });
+    });
+
+    const expectedActions = [
+      actions.downvoteRecipeRequest(),
+      actions.downvoteRecipeError('Login to continue')
+    ];
+
+    await store.dispatch(downvoteRecipeAction());
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });

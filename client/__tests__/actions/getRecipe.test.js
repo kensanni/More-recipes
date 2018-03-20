@@ -1,4 +1,17 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import getRecipeAction from '../../actionController/getRecipe';
+import mockData from '../mockData/recipeData.json';
 import * as actions from '../../actions/getRecipeAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+const {
+  addRecipe,
+} = mockData.Recipes;
 
 describe('Get recipe Action', () => {
   describe('Initiate get recipe action request', () => {
@@ -35,3 +48,60 @@ describe('Get recipe Action', () => {
     });
   });
 });
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  const pages = 0;
+  it('dispatches success for successful request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          recipesData: [
+            addRecipe
+          ],
+          pages
+        }
+      });
+    });
+
+    const expectedActions = [
+      actions.getRecipeRequest(pages),
+      actions.getRecipeSuccess([addRecipe], pages)
+    ];
+
+    await store.dispatch(getRecipeAction(pages));
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject([
+        {
+          message: 'No recipe found'
+        }
+      ]);
+    });
+
+    const expectedActions = [
+      actions.getRecipeRequest(20),
+      actions.getRecipeError('No recipe found')
+    ];
+
+    await store.dispatch(getRecipeAction(20));
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+});
+

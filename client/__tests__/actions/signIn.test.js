@@ -1,4 +1,18 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import jwt from 'jsonwebtoken';
+import signinAction from '../../actionController/signin';
+import mockData from '../mockData/userData.json';
 import * as actions from '../../actions/signinAction';
+
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+const {
+  validSignin, authError
+} = mockData.Users;
 
 describe('Signin Action', () => {
   describe('Initiate signin action request', () => {
@@ -32,6 +46,70 @@ describe('Signin Action', () => {
         errorMessage,
         isAuthenticated: false,
       });
+    });
+  });
+});
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install();
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  describe('Signin', () => {
+    it('dispatches successful action for a successful request', async () => {
+      const token = jwt.sign(validSignin, 'SOME_SECRET');
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            token,
+            message: 'Login successful'
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.signinRequest(validSignin),
+        actions.signinSuccess('Login successful', validSignin)
+      ];
+
+      await store.dispatch(signinAction(validSignin));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('dispatches error for a failed request', async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.reject({
+          status: 400,
+          response: {
+            data: {
+              errors: [
+                {
+                  message: 'Incorrect login details'
+                }
+              ]
+            }
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.signinRequest(authError),
+        actions.signinError('Incorrect login details')
+      ];
+
+      await store.dispatch(signinAction(authError));
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });

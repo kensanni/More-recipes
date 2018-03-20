@@ -1,4 +1,18 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import jwt from 'jsonwebtoken';
+import signupAction from '../../actionController/signup';
+import mockData from '../mockData/userData.json';
 import * as actions from '../../actions/signupAction';
+
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+const {
+  validRegistration, authError
+} = mockData.Users;
 
 describe('Signup Action', () => {
   describe('Initiate signup action request', () => {
@@ -34,3 +48,68 @@ describe('Signup Action', () => {
     });
   });
 });
+
+describe('Async action', () => {
+  let store;
+
+  beforeEach(() => {
+    moxios.install();
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  describe('Signup', () => {
+    it('dispatches successful action for a successful request', async () => {
+      const token = jwt.sign(validRegistration, 'SOME_SECRET');
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            token,
+            message: 'Account successfully created'
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.signupRequest(validRegistration),
+        actions.signupSuccess('Account successfully created', validRegistration)
+      ];
+
+      await store.dispatch(signupAction(validRegistration));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('dispatches error for a failed request', async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.reject({
+          status: 400,
+          response: {
+            data: {
+              errors: [
+                {
+                  message: 'All fields are required'
+                }
+              ]
+            }
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.signupRequest({ name: 'kenny' }),
+        actions.signupError('All fields are required')
+      ];
+
+      await store.dispatch(signupAction(authError));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+});
+

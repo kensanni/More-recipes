@@ -1,5 +1,5 @@
+import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import instance from '../Helpers/helper';
 import { signupError, signupRequest, signupSuccess } from '../actions/signupAction';
 
 
@@ -13,7 +13,7 @@ import { signupError, signupRequest, signupSuccess } from '../actions/signupActi
 export default function signup(userdata) {
   return (dispatch) => {
     dispatch(signupRequest(userdata));
-    instance.post('/users/signup', userdata)
+    return axios.post('/api/v1/users/signup', userdata)
       .then((res) => {
         const { token, message } = res.data;
         const userData = jwt.decode(token);

@@ -1,4 +1,17 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import instance from '../../Helpers/helper';
+import addReviewAction from '../../actionController/addReviews';
+import mockData from '../mockData/recipeData.json';
 import * as actions from '../../actions/addReviewsAction';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+const {
+  reviewData
+} = mockData.Recipes;
 
 describe('Add reviews for recipe Action', () => {
   describe('Initiate get recipe details action request', () => {
@@ -42,5 +55,68 @@ describe('Add reviews for recipe Action', () => {
         isAdded: false,
       });
     });
+  });
+});
+
+describe('Async action', () => {
+  const recipeId = 9;
+  let store;
+
+  beforeEach(() => {
+    moxios.install(instance);
+    store = mockStore();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  describe('Add reviews', () => {
+    it('dispatches successful action for a successful request', async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            message: 'Review successfully posted',
+            data: reviewData
+          }
+        });
+      });
+
+      const expectedActions = [
+        actions.addReviewsRequest(recipeId, reviewData.review),
+        actions.addReviewsSuccessful('Review successfully posted', reviewData.review, reviewData.username, reviewData.createdAt)
+      ];
+
+      await store.dispatch(addReviewAction(recipeId, reviewData.review));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('dispatches error for a failed request', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject({
+        status: 400,
+        response: {
+          data: {
+            errors: [
+              {
+                message: 'Please input a review'
+              }
+            ]
+          }
+        }
+      });
+    });
+
+    const expectedActions = [
+      actions.addReviewsRequest(recipeId),
+      actions.addReveiwsError('Please input a review')
+    ];
+
+    await store.dispatch(addReviewAction(recipeId));
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });
