@@ -2,9 +2,13 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import instance from '../../Helpers/helper';
-import mockData from '../mockData/recipeData.json';
+import mockData from '../__mocks__/recipeData.json';
 import favoriteRecipeAction from '../../actionController/favoriteRecipe';
 import * as actions from '../../actions/favoriteRecipeAction';
+import localStorage from '../__mocks__/localStorage';
+
+window.localStorage = localStorage;
+
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -24,15 +28,15 @@ describe('Favorite recipes Action', () => {
   describe('Receive favorite recipes action response', () => {
     it('should create an action to receive a successful response', () => {
       const recipeId = null;
-      const message = '';
+      const responseMessage = '';
       const favoriteType = null;
 
-      const actionResults = actions.favoriteRecipeSuccess(recipeId, message, favoriteType);
+      const actionResults = actions.favoriteRecipeSuccess(recipeId, responseMessage, favoriteType);
       expect(actionResults).toEqual({
         type: actions.FAVORITE_RECIPE_SUCCESSFUL,
         recipeId,
         favoriteType,
-        message,
+        responseMessage,
         isFavorited: true
       });
     });

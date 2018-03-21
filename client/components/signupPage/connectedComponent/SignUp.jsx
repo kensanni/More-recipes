@@ -12,7 +12,7 @@ import backgroundImage from '../../../public/images/recipe-img-bg.jpeg';
  *
  * @description Create user account
  */
-class SignUp extends Component {
+export class SignUp extends Component {
   /**
    * @description create an instance of Signup
    *

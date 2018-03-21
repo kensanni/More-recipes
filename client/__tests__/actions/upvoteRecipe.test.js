@@ -2,9 +2,12 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import instance from '../../Helpers/helper';
-import mockData from '../mockData/recipeData.json';
+import mockData from '../__mocks__/recipeData.json';
 import upvoteRecipeAction from '../../actionController/upvoteRecipe';
 import * as actions from '../../actions/upvoteRecipeAction';
+import localStorage from '../__mocks__/localStorage';
+
+window.localStorage = localStorage;
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

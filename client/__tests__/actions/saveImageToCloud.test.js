@@ -1,4 +1,7 @@
 import * as actions from '../../actions/saveImageToCloud';
+import localStorage from '../__mocks__/localStorage';
+
+window.localStorage = localStorage;
 
 describe('Save image to cloud Action', () => {
   describe('Initiate save image to cloud action request', () => {

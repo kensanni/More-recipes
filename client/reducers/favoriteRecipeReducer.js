@@ -34,9 +34,10 @@ const favoriteRecipeReducer = (state = initialState, action) => {
         errorMessage: ''
       };
     case FAVORITE_RECIPE_ERROR:
+      console.log(action.recipeId);    
       return {
         ...state,
-        recipeId: action.recipeId,
+        recipeId: null,
         isFavorited: false,
         responseMessage: '',
         errorMessage: action.errorMessage

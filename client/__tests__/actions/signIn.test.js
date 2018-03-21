@@ -2,13 +2,19 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import jwt from 'jsonwebtoken';
+import mocklocalStorage from '../__mocks__/localStorage';
 import signinAction from '../../actionController/signin';
-import mockData from '../mockData/userData.json';
+import mockData from '../__mocks__/userData.json';
 import * as actions from '../../actions/signinAction';
+import localStorage from '../__mocks__/localStorage';
+
+window.localStorage = localStorage;
 
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
+
+window.localStorage = mocklocalStorage;
 
 const {
   validSignin, authError

@@ -4,7 +4,8 @@
     "env": {
         "node": true,
         "es6": true,
-        "mocha": true
+        "mocha": true,
+        "jest/globals": true
       },
       "globals": {
           "document": true,
@@ -41,6 +42,8 @@
                 "ClassDeclaration": true
             }
         }]
-      }
-    
+      },
+      "plugins": [
+          "jest"
+      ]
 }

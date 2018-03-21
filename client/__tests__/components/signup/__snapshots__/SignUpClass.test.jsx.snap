@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup connected component matches snapshot 1`] = `
+<Form
+  handleSubmit={[Function]}
+  onChange={[Function]}
+  value={
+    Object {
+      "confirmPassword": "",
+      "password": "",
+      "responseMessage": "",
+    }
+  }
+/>
+`;

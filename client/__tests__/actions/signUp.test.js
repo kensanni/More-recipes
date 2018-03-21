@@ -3,12 +3,15 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import jwt from 'jsonwebtoken';
 import signupAction from '../../actionController/signup';
-import mockData from '../mockData/userData.json';
+import mocklocalStorage from '../__mocks__/localStorage';
+import mockData from '../__mocks__/userData.json';
 import * as actions from '../../actions/signupAction';
 
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
+
+window.localStorage = mocklocalStorage;
 
 const {
   validRegistration, authError

@@ -4,6 +4,9 @@ import moxios from 'moxios';
 import instance from '../../Helpers/helper';
 import deleteRecipeAction from '../../actionController/deleteRecipe';
 import * as actions from '../../actions/deleteRecipeAction';
+import localStorage from '../__mocks__/localStorage';
+
+window.localStorage = localStorage;
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

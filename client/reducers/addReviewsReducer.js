@@ -2,7 +2,7 @@ import { ADD_REVIEWS_REQUEST, ADD_REVIEWS_SUCCESSFUL, ADD_REVIEWS_ERROR } from '
 
 const initialState = {
   isAdded: false,
-  responseMesage: '',
+  responseMessage: '',
   review: '',
   errorMessage: ''
 };
