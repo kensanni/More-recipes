@@ -32,15 +32,13 @@ describe('Add reviews for recipe Action', () => {
   });
   describe('Receive add reviews action response', () => {
     it('should create an action to receive a successful response', () => {
-      const responseMessage = '';
       const review = '';
       const username = '';
       const createdAt = '';
       const actionResults =
-        actions.addReviewsSuccessful(responseMessage, review, username, createdAt);
+        actions.addReviewsSuccessful(review, username, createdAt);
       expect(actionResults).toEqual({
         type: actions.ADD_REVIEWS_SUCCESSFUL,
-        responseMessage,
         review,
         username,
         createdAt,
@@ -89,7 +87,7 @@ describe('Async action', () => {
 
       const expectedActions = [
         actions.addReviewsRequest(recipeId, reviewData.review),
-        actions.addReviewsSuccessful('Review successfully posted', reviewData.review, reviewData.username, reviewData.createdAt)
+        actions.addReviewsSuccessful(reviewData.review, reviewData.username, reviewData.createdAt)
       ];
 
       await store.dispatch(addReviewAction(recipeId, reviewData.review));

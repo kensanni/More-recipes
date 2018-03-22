@@ -15,7 +15,7 @@ const initialState = {
 
 describe('Get popular recipe reducer', () => {
   it('should return the initial state', () => {
-    const newState = getPopularRecipeReducer(undefined, initialState);
+    const newState = getPopularRecipeReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
 
@@ -28,7 +28,11 @@ describe('Get popular recipe reducer', () => {
     });
   });
   it('should handle GET_POPULAR_RECIPE_SUCCESSFUL', () => {
-    const newState = getPopularRecipeReducer(initialState, types.getPopularRecipeSuccess([addRecipe]));
+    const newState =
+      getPopularRecipeReducer(
+        initialState,
+        types.getPopularRecipeSuccess([addRecipe])
+      );
     expect(newState).toEqual({
       isFetched: true,
       popularRecipesData: [addRecipe],
@@ -37,7 +41,11 @@ describe('Get popular recipe reducer', () => {
   });
   it('should handle GET_POPULAR_RECIPE_ERROR', () => {
     const errorMessage = 'Login to continue';
-    const newState = getPopularRecipeReducer(initialState, types.getPopularRecipeError(errorMessage));
+    const newState =
+      getPopularRecipeReducer(
+        initialState,
+        types.getPopularRecipeError(errorMessage)
+      );
     expect(newState).toEqual({
       isFetched: false,
       popularRecipesData: [],

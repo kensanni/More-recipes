@@ -1,5 +1,6 @@
 import instance from '../Helpers/helper';
-import { addReviewsRequest, addReviewsSuccessful, addReveiwsError } from '../actions/addReviewsAction';
+import { addReviewsRequest, addReveiwsError } from '../actions/addReviewsAction';
+import { addReviewsSuccessful } from '../actions/getReviewsAction';
 
 /**
  * @description action creator for adding reveiws
@@ -14,8 +15,8 @@ export default function addReviews(recipeId, review) {
     dispatch(addReviewsRequest(recipeId, review));
     return instance.post(`/recipes/${recipeId}/reviews`, { review })
       .then((res) => {
-        const { message, data } = res.data;
-        dispatch(addReviewsSuccessful(message, data.review, data.username, data.createdAt));
+        const { data } = res.data;
+        dispatch(addReviewsSuccessful(data.review, data.username, data.createdAt));
       })
       .catch((error) => {
         const { errors } = error.response.data;

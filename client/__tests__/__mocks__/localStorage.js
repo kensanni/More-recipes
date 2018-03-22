@@ -9,5 +9,8 @@ export default {
   },
   getItem(key, value) {
     return { ...localStorage, key: value };
+  },
+  clear() {
+    return localStorage;
   }
 };

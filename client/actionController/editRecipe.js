@@ -4,7 +4,7 @@ import { editRecipeRequest, editRecipeSuccess, editRecipeError, editRecipeStatus
 
 export const SET_EDIT_RECIPE_ID = 'SET_EDIT_RECIPE_ID';
 
-export const setEditRecipeIdAction = recipeId => dispatch => dispatch({
+export const setEditRecipeIdAction = recipeId => ({
   type: SET_EDIT_RECIPE_ID,
   recipeId
 });

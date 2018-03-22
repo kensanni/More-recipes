@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Guest Header component matches snapshot 1`] = `
+<header>
+  <nav
+    className="navbar navbar-expand-lg navbar-light bg-green"
+  >
+    <Link
+      className="navbar-link nav-text"
+      id="navlink"
+      replace={false}
+      to="/"
+    >
+      More-recipe
+    </Link>
+    <button
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      className="navbar-toggler"
+      data-target="#navbarSupportedContent"
+      data-toggle="collapse"
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="navbar-link nav-text"
+            id="navlink"
+            replace={false}
+            to="/signup"
+          >
+            Signup
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="navbar-link nav-text"
+            id="navlink"
+            replace={false}
+            to="/signin"
+          >
+            Login
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+`;

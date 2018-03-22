@@ -6,7 +6,11 @@ import { ADD_REVIEWS_SUCCESSFUL } from '../actions/addReviewsAction';
 
 const initialState = {
   isFetched: false,
-  recipeDetails: {},
+  recipeDetails: {
+    upvotes: 0,
+    downvotes: 0,
+    favorites: 0
+  },
   recipeDetailStatus: null,
   errorMessage: ''
 };
@@ -106,17 +110,6 @@ const getRecipeDetailsReducer = (state = initialState, action) => {
               ? state.recipeDetails.favorites + 1
               : state.recipeDetails.favorites - 1
           )
-        }
-      };
-    case ADD_REVIEWS_SUCCESSFUL:
-      return {
-        ...state,
-        isFetched: state.isFetched,
-        errorMessage: state.errorMessage,
-        page: state.page,
-        recipeDetails: {
-          ...state.recipeDetails,
-          Reviews: [...state.recipeDetails.Reviews, reviewied]
         }
       };
     default:

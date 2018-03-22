@@ -1,6 +1,6 @@
 export const CLEAR_IMAGE = 'CLEAR_IMAGE';
 
-const clearImageAction = () => dispatch => dispatch({
+const clearImageAction = () => ({
   type: CLEAR_IMAGE,
 });
 

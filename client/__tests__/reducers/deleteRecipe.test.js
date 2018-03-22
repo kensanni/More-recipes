@@ -10,7 +10,7 @@ const initialState = {
 
 describe('Delete recipe reducer', () => {
   it('should return the initial state', () => {
-    const newState = deleteRecipeReducer(undefined, initialState);
+    const newState = deleteRecipeReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
   it('should Handle DELETE_RECIPE_REQUEST', () => {
@@ -26,7 +26,11 @@ describe('Delete recipe reducer', () => {
     const responseMessage = 'recipe successfully deleted';
     const recipeId = 2;
 
-    const newState = deleteRecipeReducer(initialState, types.deleteRecipeSuccessful(responseMessage, recipeId));
+    const newState =
+      deleteRecipeReducer(
+        initialState,
+        types.deleteRecipeSuccessful(responseMessage, recipeId)
+      );
     expect(newState).toEqual({
       isDeleted: true,
       errorMessage: '',

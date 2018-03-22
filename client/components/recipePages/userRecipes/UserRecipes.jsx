@@ -24,7 +24,7 @@ import RecipeGrid from '../RecipeGrid';
  *
  * @description UserRecipes
  */
-class UserRecipes extends Component {
+export class UserRecipes extends Component {
   /**
    * @description create an instance of UserRecipes
    *

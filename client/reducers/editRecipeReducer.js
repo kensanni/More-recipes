@@ -7,7 +7,6 @@ const initialState = {
     status: null,
     message: null
   },
-  responseMessage: '',
   errorMessage: ''
 };
 
@@ -38,8 +37,7 @@ const editRecipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isEdited: action.isEdited,
-        responseMessage: action.responseMessage,
-        recipeData: {},
+        recipeData: action.recipeData,
         errorMessage: ''
       };
     case EDIT_RECIPE_ERROR:

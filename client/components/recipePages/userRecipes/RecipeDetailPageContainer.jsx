@@ -5,13 +5,14 @@ import PropTypes, { any } from 'prop-types';
 import miniToastr from 'mini-toastr';
 import { Lines } from 'react-preloading-component';
 import { validateToken } from '../../../Helpers/helper';
-import Header from '../../common/Header';
+import { Header } from '../../common/Header';
 import Footer from '../../common/Footer';
 import upvoteRecipeAction from '../../../actionController/upvoteRecipe';
 import signOutAction from '../../../actions/signOutAction';
 import downvoteRecipeAction from '../../../actionController/downvoteRecipe';
 import favoriteRecipeAction from '../../../actionController/favoriteRecipe';
 import getRecipeDetailsAction from '../../../actionController/getRecipeDetails';
+import getReviewsAction from '../../../actionController/getReviews';
 import addReviewsAction from '../../../actionController/addReviews';
 import RecipeDetailsCard from '../../Include/cards/RecipeDetailsCard';
 
@@ -20,7 +21,7 @@ import RecipeDetailsCard from '../../Include/cards/RecipeDetailsCard';
  *
  * @description container displaying recipe details and reviews
  */
-class RecipeDetailPageContainer extends Component {
+export class RecipeDetailPageContainer extends Component {
   /**
    *
    * @param {object} props
@@ -29,6 +30,8 @@ class RecipeDetailPageContainer extends Component {
     super(props);
     this.state = {
       review: '',
+      page: 0,
+      hasMoreReviews: true
     };
     this.upvoteRecipe = this.upvoteRecipe.bind(this);
     this.downvoteRecipe = this.downvoteRecipe.bind(this);
@@ -38,6 +41,7 @@ class RecipeDetailPageContainer extends Component {
     this.mainJsx = this.mainJsx.bind(this);
     this.errorJsx = this.errorJsx.bind(this);
     this.renderJsx = this.renderJsx.bind(this);
+    this.nextReviews = this.nextReviews.bind(this);
   }
 
   /**
@@ -49,12 +53,15 @@ class RecipeDetailPageContainer extends Component {
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
+    const page = 0;
     if (!Number.isInteger(parseInt(recipeId, 10))) {
       this.props.history.push('/recipes');
     }
 
     if (this.props.authenticated && validateToken() !== 'Session expired') {
-      return this.props.getRecipeDetailsAction(recipeId);
+      this.props.getRecipeDetailsAction(recipeId);
+      this.props.getReviewsAction(recipeId, page);
+      return;
     }
 
     this.props.history.push('/recipes');
@@ -134,6 +141,8 @@ class RecipeDetailPageContainer extends Component {
           value={this.state}
           reviews={this.props.reviews}
           onChange={this.handleReviewChange}
+          nextReviews={this.nextReviews}
+          hasMoreReviews={this.state.hasMoreReviews}
         />
         <div className="pb-5" />
       </div>
@@ -161,7 +170,7 @@ class RecipeDetailPageContainer extends Component {
    *
    * @param {number} id - id of recipe to review
    *
-   * @return {void} calls addReviews action
+   * @returns {void} calls addReviews action
    */
   addReview(id) {
     const { review } = this.state;
@@ -169,6 +178,25 @@ class RecipeDetailPageContainer extends Component {
     this.setState({
       review: ''
     });
+  }
+
+  /**
+   * @description get next paginated reviews
+   *
+   * @param {number} event
+   *
+   * @returns {void} calls addReviews action
+   */
+  nextReviews(event) {
+    event.preventDefault();
+    const { recipeId } = this.props.match.params;
+    const nextPage = this.state.page + 1;
+    if (nextPage === this.props.pages) {
+      this.setState({ hasMoreReviews: false });
+    } else {
+      this.props.getReviewsAction(recipeId, nextPage);
+      this.setState({ page: nextPage });
+    }
   }
 
   /**
@@ -198,7 +226,10 @@ class RecipeDetailPageContainer extends Component {
   render() {
     return (
       <div>
-        <Header details="true" />
+        <Header
+          details="true"
+          signOutAction={signOutAction}
+        />
         { this.renderJsx() }
         <Footer />
       </div>
@@ -208,7 +239,6 @@ class RecipeDetailPageContainer extends Component {
 
 RecipeDetailPageContainer.defaultProps = {
   recipeDetailStatus: null,
-  reviews: undefined
 };
 
 RecipeDetailPageContainer.propTypes = {
@@ -221,10 +251,12 @@ RecipeDetailPageContainer.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   addReviewsAction: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
+  pages: PropTypes.number.isRequired,
   recipeDetailStatus: PropTypes.string,
   signOutAction: PropTypes.func.isRequired,
   history: PropTypes.objectOf(any).isRequired,
-  reviews: PropTypes.arrayOf(any)
+  getReviewsAction: PropTypes.func.isRequired,
+  reviews: PropTypes.arrayOf(any).isRequired
 };
 
 const mapStateToProps = state => ({
@@ -232,7 +264,8 @@ const mapStateToProps = state => ({
   errorMessage: state.getRecipeDetailsReducer.errorMessage,
   recipeDetailStatus: state.getRecipeDetailsReducer.recipeDetailStatus,
   authenticated: state.authReducer.isAuthenticated,
-  reviews: state.getRecipeDetailsReducer.recipeDetails.Reviews
+  reviews: state.getReviewsReducer.reviews,
+  pages: state.getReviewsReducer.pages
 });
 
 const mapDispatchToProps = dispatch => (
@@ -241,6 +274,7 @@ const mapDispatchToProps = dispatch => (
     upvoteRecipeAction,
     downvoteRecipeAction,
     favoriteRecipeAction,
+    getReviewsAction,
     addReviewsAction,
     signOutAction
   }, dispatch)

@@ -69,7 +69,7 @@ describe('Async action', () => {
   });
 
   describe('AddRecipe', () => {
-    it.only('dispatches successful action for a successful request', async () => {
+    it('dispatches successful action for a successful request', async () => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upvote button matches snapshot 1`] = `
+<div>
+  <button
+    className="btn btn-orange mr-2 up favorite-btn"
+    type="button"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-thumbs-up fa-2x btn-white"
+      onClick={[Function]}
+    />
+  </button>
+  <span
+    className="mr-2"
+  />
+</div>
+`;

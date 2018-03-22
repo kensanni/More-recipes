@@ -14,7 +14,7 @@ export const favoriteRecipeSuccess = (recipeId, responseMessage, favoriteType) =
   type: FAVORITE_RECIPE_SUCCESSFUL,
   recipeId,
   favoriteType,
-  responseMessage  ,
+  responseMessage,
   isFavorited: true
 });
 

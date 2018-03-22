@@ -28,7 +28,6 @@ describe('Delete recipe Action', () => {
   describe('Receive delete recipe action response', () => {
     it('should create an action to receive a successful response', () => {
       const responseMessage = '';
-      const recipeId = null;
       const actionResults = actions.deleteRecipeSuccessful(responseMessage, recipeId);
       expect(actionResults).toEqual({
         type: actions.DELETE_RECIPE_SUCCESSFUL,

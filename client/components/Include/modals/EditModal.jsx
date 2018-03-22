@@ -12,7 +12,7 @@ import saveImageToCloudAction from '../../../actionController/saveImageToCloud';
  *
  * @returns {JSX} return JSX
  */
-class EditModal extends Component {
+export class EditModal extends Component {
   /**
    *
    * @param {object} props
@@ -170,7 +170,7 @@ class EditModal extends Component {
                     onChange={this.editChangeHandler}
                     value={stateRecipe === null ? editRecipe.name : stateRecipe.name}
                     type="text"
-                    className="form-control"
+                    className="form-control name"
                     id="recipient-name"
                   />
                 </div>
@@ -219,7 +219,7 @@ class EditModal extends Component {
               </button>
               <button
                 type="button"
-                className="btn btn-orange"
+                className="btn btn-orange editmodal"
                 onClick={this.onSubmit}
               >
                 Update recipe

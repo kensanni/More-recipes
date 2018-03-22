@@ -16,7 +16,7 @@ const initialState = {
 
 describe('Add recipe reducer', () => {
   it('should return the initial state', () => {
-    const newState = addRecipeReducer(undefined, initialState);
+    const newState = addRecipeReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
 

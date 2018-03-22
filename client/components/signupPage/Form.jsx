@@ -24,7 +24,7 @@ const Form = (props) => {
           <section className="signin-text">
             <h3>Create an account</h3>
           </section>
-          <div className="error-message">
+          <div className="error-message signup">
             { responseMessage }
           </div>
           <section className="pb-4 pt-3">
@@ -108,7 +108,7 @@ const Form = (props) => {
               Create Account
             </button>
           </div>
-          <div className="text-left">
+          <div className="text-left sign">
             <a href="f" id="text-dec">Forgotten your password?</a>
           </div>
           <div>

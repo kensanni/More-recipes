@@ -71,16 +71,23 @@ class Recipe {
    * @returns {object} return a json object
    */
   static async getRecipes(req, res) {
-    const limit = req.query.limit || 6;
+    const limit = parseInt((req.query.limit || 6), 10);
+    const page = parseInt(req.query.page, 10);
     let offset;
     let pages;
     let pageNo;
+
+    if (Number.isNaN(limit) || Number.isNaN(page)) {
+      return res.status(400).send({
+        error: 'Parameters should be a number'
+      });
+    }
 
     const findAndCount = await Recipes.findAndCountAll();
 
     if (findAndCount) {
       pages = Math.ceil(findAndCount.count / limit);
-      pageNo = parseInt(req.query.page, 10);
+      pageNo = page;
       pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo : 0;
       offset = pageNo * limit;
     }
@@ -117,10 +124,6 @@ class Recipe {
 
     const recipe = await Recipes.findOne({
       where: { id },
-      include: [{
-        model: model.Reviews,
-        attributes: ['review', 'username', 'createdAt']
-      }],
     });
 
     if (recipe.length < 1) {
@@ -151,10 +154,17 @@ class Recipe {
     const limit = req.query.limit || 6;
     const userId = req.decoded.id;
     const id = parseInt(req.params.userId, 10);
+    const page = parseInt(req.query.page, 10);
 
     if (userId !== id) {
       return res.status(401).send({
         message: 'Access denied',
+      });
+    }
+
+    if (Number.isNaN(limit) || Number.isNaN(page)) {
+      return res.status(400).send({
+        error: 'Parameters should be a number'
       });
     }
 
@@ -168,7 +178,7 @@ class Recipe {
 
     if (findAndCountUserRecipes) {
       pages = Math.ceil(findAndCountUserRecipes.count / limit);
-      pageNo = parseInt(req.query.page, 10);
+      pageNo = page;
       pageNo = Number.isInteger(pageNo) && pageNo > 0 ? pageNo : 0;
       offset = pageNo * limit;
     }

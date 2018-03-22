@@ -12,7 +12,7 @@ const DownVoteButton = (props) => {
   const { downvoteRecipe, recipeId, downvotes } = props;
   return (
     <div>
-      <button className="btn btn-orange mr-2" type="button">
+      <button className="btn btn-orange mr-2 down favorite-btn" type="button">
         <i
           className="fa fa-thumbs-down fa-2x btn-white"
           aria-hidden="true"

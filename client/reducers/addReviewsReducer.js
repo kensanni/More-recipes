@@ -2,7 +2,6 @@ import { ADD_REVIEWS_REQUEST, ADD_REVIEWS_SUCCESSFUL, ADD_REVIEWS_ERROR } from '
 
 const initialState = {
   isAdded: false,
-  responseMessage: '',
   review: '',
   errorMessage: ''
 };
@@ -17,14 +16,13 @@ const initialState = {
  */
 const addReviewsReducer = (state = initialState, action) => {
   const {
-    isAdded, responseMessage, review, errorMessage, username, createdAt
+    isAdded, review, errorMessage, username, createdAt
   } = action;
   switch (action.type) {
     case ADD_REVIEWS_REQUEST:
       return {
         ...state,
         isAdded,
-        responseMessage: '',
         review,
         errorMessage: ''
       };
@@ -32,7 +30,6 @@ const addReviewsReducer = (state = initialState, action) => {
       return {
         ...state,
         isAdded,
-        responseMessage,
         review,
         username,
         createdAt,

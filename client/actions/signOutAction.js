@@ -13,12 +13,10 @@ export const signOut = () => ({
  * @returns {void} dispatch action types
  */
 export default function signOutUser() {
-  return (dispatch) => {
-    localStorage.removeItem('token');
-    dispatch({
-      type: SIGNOUT_USER,
-      userData: {},
-      isAuthenticated: false
-    });
+  localStorage.removeItem('token');
+  return {
+    type: SIGNOUT_USER,
+    userData: {},
+    isAuthenticated: false
   };
 }

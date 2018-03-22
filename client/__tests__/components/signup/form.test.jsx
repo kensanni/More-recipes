@@ -6,8 +6,18 @@ describe('Form', () => {
   it('matches snapshot', () => {
     const props = {
       value: {}
-    }
+    };
     const output = shallow(<Form {...props} />);
     expect(output).toMatchSnapshot();
+  });
+  it('calls onChange props', () => {
+    const props = {
+      value: {},
+      onChange: jest.fn()
+    };
+    const output = shallow(<Form {...props} />);
+    const passwordInputField = output.find('input[name="password"]');
+    passwordInputField.simulate('change');
+    expect(props.onChange).toHaveBeenCalled();
   });
 });

@@ -85,7 +85,6 @@ describe('Async action', () => {
   const {
     upvote
   } = mockData.Recipes;
-  
 
   describe('Downvote recipe', () => {
     const recipeId = 9;

@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import instance from '../../Helpers/helper';
-import editRecipeAction from '../../actionController/editRecipe';
+import editRecipeAction, { SET_EDIT_RECIPE_ID, setEditRecipeIdAction } from '../../actionController/editRecipe';
 import mockData from '../__mocks__/recipeData.json';
 import * as actions from '../../actions/editRecipeAction';
 import localStorage from '../__mocks__/localStorage';
@@ -33,12 +33,12 @@ describe('Edit recipe Action', () => {
   });
   describe('Receive edit recipe action response', () => {
     it('should create an action to receive a successful response', () => {
-      const recipeId = null;
-      const recipeData = {};
-      const actionResults = actions.editRecipeSuccess(recipeId, recipeData);
+      const recipeId = 2;
+      const actionResults = actions.editRecipeSuccess(recipeId, addRecipe);
       expect(actionResults).toEqual({
+        isEdited: true,
         type: actions.EDIT_RECIPE_SUCCESSFUL,
-        recipeData,
+        recipeData: addRecipe,
         recipeId
       });
     });
@@ -63,6 +63,16 @@ describe('Edit recipe Action', () => {
         type: actions.EDIT_RECIPE_STATUS,
         status,
         message
+      });
+    });
+  });
+  describe('Set Id of recipe to be edited', () => {
+    it('should set the id of recipe', () => {
+      const recipeId = 4;
+      const actionResults = setEditRecipeIdAction(recipeId);
+      expect(actionResults).toEqual({
+        type: SET_EDIT_RECIPE_ID,
+        recipeId
       });
     });
   });

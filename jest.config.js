@@ -3,8 +3,7 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: '<rootDir>/../coverage/client',
   coveragePathIgnorePatterns: [
-    '<rootDir>/__tests__/*',
-    '<rootDir>/Helpers/*',
+    '<rootDir>/__tests__',
   ],
   collectCoverageFrom: ['**/*.{js,jsx}'],
   moduleNameMapper: {
@@ -19,8 +18,9 @@ module.exports = {
     localStorage: {
       setItem: (() => { }),
       clearItem: (() => { }),
-      getItem:  (() => { }),
-      removeItem: (() => { })
+      getItem: (() => { }),
+      removeItem: (() => { }),
+      clear: (() => {})
     }
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],  

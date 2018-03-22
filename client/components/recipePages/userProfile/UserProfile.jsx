@@ -24,7 +24,7 @@ const UserProfile = (props) => {
         <p>recipe added: { recipeCount === undefined ? 0 : recipeCount}
           <span className="vl ml-2 user-text" />
           <span>email: {email}</span>
-          <span className="vl ml-2 user-text">favorite recipe: {favoriteCount} </span>
+          <span className="vl ml-2 user-text favorite">favorite recipe: {favoriteCount} </span>
         </p>
       </div>
     </div>

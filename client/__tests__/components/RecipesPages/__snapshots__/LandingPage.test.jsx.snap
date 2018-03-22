@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Landing page component matches snapshot 1`] = `
+<div>
+  <IndexHeader />
+  <Carousel />
+  <IndexMain />
+  <IndexFooter />
+</div>
+`;

@@ -1018,6 +1018,71 @@
           "IsMultiContentStreaming": false
         }
       }
+    },
+    "/reviews/2": {
+      "get": {
+        "description": "",
+        "summary": "Get all reviews associated to a recipe",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "ReviewsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/reviews/2?page=0",
+              "headers": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJ0ZXN0aW5nMyIsImVtYWlsIjoia2Vuc2Fubml6ekBnbWFpbC5jb20iLCJpYXQiOjE1MjExMjc2NjgsImV4cCI6MTUyMTEzODQ2OH0.7-FC4i_jKxuEkL7kSQ-So0VsFiyB1Xw_HX-DEpd4M-M"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "Get all reviews associated to a recipe",
+            "x-testDescription": ""
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
     }
   }
 }

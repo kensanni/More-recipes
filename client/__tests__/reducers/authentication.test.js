@@ -1,22 +1,27 @@
 import authReducer from '../../reducers/authReducer';
 import * as signupTypes from '../../actions/signupAction';
 import * as signinTypes from '../../actions/signinAction';
+import signOutUser from '../../actions/signOutAction';
 import mockData from '../__mocks__/userData.json';
+import mocklocalStorage from '../__mocks__/localStorage';
+
+window.localStorage = mocklocalStorage;
+
 
 const {
   validSignin
 } = mockData.Users;
 
 const initialState = {
-  isAuthenticated: '',
+  isAuthenticated: false,
   userData: {},
   responseMessage: '',
   errorMessage: ''
 };
 
-describe('Authentication reducer', () => {
+describe.only('Authentication reducer', () => {
   it('should return the initial state', () => {
-    const newState = authReducer(undefined, initialState);
+    const newState = authReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
 
@@ -72,6 +77,14 @@ describe('Authentication reducer', () => {
       isAuthenticated: false,
       responseMessage: '',
       errorMessage: 'Incorrect login details',
+    });
+  });
+  it('should handle SIGNOUT_USER', () => {
+    const newState = authReducer(initialState, signOutUser());
+    expect(newState).toEqual({
+      ...initialState,
+      userData: {},
+      isAuthenticated: false,
     });
   });
 });

@@ -1,7 +1,14 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
+import saveImageToCloudAction from '../../actionController/saveImageToCloud';
 import * as actions from '../../actions/saveImageToCloud';
 import localStorage from '../__mocks__/localStorage';
 
 window.localStorage = localStorage;
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 describe('Save image to cloud Action', () => {
   describe('Initiate save image to cloud action request', () => {
@@ -38,3 +45,43 @@ describe('Save image to cloud Action', () => {
     });
   });
 });
+
+// describe('Async action', () => {
+//   let store;
+
+//   beforeEach(() => {
+//     moxios.install();
+//     store = mockStore();
+//   });
+
+//   afterEach(() => {
+//     moxios.uninstall();
+//   });
+
+//   it('should upload image if the request is successful', async () => {
+//     const data = new FormData();
+//     data.append('file', 'image.com');
+//     data.append('upload_preset', process.env.CLOUD_PRESET);
+
+//     const secure_url = 'image.com';
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.respondWith({
+//         status: 200,
+//         response: {
+//           data: {
+//             secure_url: 'image'
+//           }
+//         }
+//       });
+//     });
+
+//     const expectedActions = [
+//       actions.saveImageToCloudRequest(),
+//       actions.saveImageToCloudSuccessful(secure_url)
+//     ];
+
+//     await store.dispatch(saveImageToCloudAction({ image: 'name.con' }));
+//     expect(store.getActions()).toEqual(expectedActions);
+//   });
+// });

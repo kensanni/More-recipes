@@ -1,20 +1,19 @@
+import localStorage from 'mock-local-storage';
 import addReviewReducer from '../../reducers/addReviewsReducer';
 import * as types from '../../actions/addReviewsAction';
-import localStorage from 'mock-local-storage';
 
 global.window = {};
-window.localStorage = global.localStorage;
+window.localStorage = localStorage;
 
 const initialState = {
   isAdded: false,
-  responseMessage: '',
   review: '',
   errorMessage: ''
 };
 
 describe('Add reviews reducer', () => {
   it('should return the initial state', () => {
-    const newState = addReviewReducer(undefined, initialState);
+    const newState = addReviewReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
   it('should handle ADD_REVIEWS_REQUEST', () => {
@@ -23,15 +22,16 @@ describe('Add reviews reducer', () => {
     expect(newState).toEqual(initialState);
   });
   it('should handle ADD_REVIEWS_SUCCESSFUL', () => {
-    const responseMessage = 'Review posted succesfully';
     const review = 'Hi, there';
     const username = 'sannikay';
     const createdAt = 13247482;
 
-    const newState = addReviewReducer(initialState, types.addReviewsSuccessful(responseMessage, review, username, createdAt));
+    const newState = addReviewReducer(
+      initialState,
+      types.addReviewsSuccessful(review, username, createdAt)
+    );
     expect(newState).toEqual({
       isAdded: true,
-      responseMessage,
       review,
       username,
       createdAt,
@@ -45,7 +45,6 @@ describe('Add reviews reducer', () => {
       isAdded: false,
       review: '',
       errorMessage,
-      responseMessage: '',
     });
   });
 });

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delete modal component matches snapshot 1`] = `
+<div
+  aria-hidden="true"
+  aria-labelledby="exampleModalLabel"
+  className="modal fade"
+  id="deleteModal-undefined"
+  role="dialog"
+  tabIndex="-1"
+>
+  <div
+    className="modal-dialog"
+    role="document"
+  >
+    <div
+      className="modal-content"
+    >
+      <div
+        className="modal-header"
+      >
+        <h5
+          className="modal-title"
+          id="exampleModalLabel1"
+        >
+          Delete recipe
+        </h5>
+        <button
+          aria-label="Close"
+          className="close"
+          data-dismiss="modal"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+      </div>
+      <div
+        className="modal-body"
+      >
+        This action is irrevesible, pls process with caution
+      </div>
+      <div
+        className="modal-footer"
+      >
+        <button
+          className="btn btn-secondary"
+          data-dismiss="modal"
+          type="button"
+        >
+          Close
+        </button>
+        <button
+          className="btn btn-danger"
+          data-dismiss="modal"
+          id="del"
+          onClick={[Function]}
+          type="button"
+        >
+          Delete recipe
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

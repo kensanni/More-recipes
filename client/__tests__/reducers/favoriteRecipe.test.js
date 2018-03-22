@@ -1,3 +1,4 @@
+import localStorage from 'mock-local-storage';
 import favoriteRecipeReducer from '../../reducers/favoriteRecipeReducer';
 import * as types from '../../actions/favoriteRecipeAction';
 
@@ -10,7 +11,7 @@ const initialState = {
 
 describe('Favorite recipe reducer', () => {
   it('Should return the initial state', () => {
-    const newState = favoriteRecipeReducer(undefined, initialState);
+    const newState = favoriteRecipeReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
   it('should handle FAVORITE_RECIPE_REQUEST', () => {

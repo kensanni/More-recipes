@@ -124,12 +124,13 @@ export class SignIn extends Component {
 
 SignIn.defaultProps = {
   isAuthenticated: false
-}
+};
 
 SignIn.propTypes = {
   signInAction: PropTypes.func.isRequired,
   signinResponse: PropTypes.objectOf(any).isRequired,
   history: PropTypes.objectOf(any).isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
 /**

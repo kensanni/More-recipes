@@ -342,7 +342,7 @@ describe('Testing recipe endpoints', () => {
   });
   it('should get all recipes from catalog without authorization', (done) => {
     chai.request(app)
-      .get('/api/v1/recipes')
+      .get('/api/v1/recipes?page=0')
       .end((err, res) => {
         expect(res.body.recipesData).to.be.an('array');
         expect(res.body.recipesData[0]).to.be.an('object');
@@ -378,8 +378,7 @@ describe('Testing recipe endpoints', () => {
             'ingredient',
             'image', 'upvotes',
             'downvotes', 'favorites',
-            'Reviews', 'updatedAt',
-            'userId', 'createdAt', 'views'
+            'updatedAt', 'userId', 'createdAt', 'views'
           );
         expect(res).to.have.status(200);
         done();

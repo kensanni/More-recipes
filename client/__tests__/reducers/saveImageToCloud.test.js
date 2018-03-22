@@ -1,9 +1,6 @@
 import saveImageReducer from '../../reducers/saveImageToCloudReducer';
 import * as types from '../../actions/saveImageToCloud';
 import clearImageAction from '../../actions/clearImageAction';
-import mockData from '../__mocks__/recipeData.json';
-
-
 
 const initialState = {
   image: '',
@@ -13,12 +10,12 @@ const initialState = {
 
 describe('Save Image to cloudinary reducer', () => {
   it('should return the initial state', () => {
-    const newState = saveImageReducer(undefined, initialState);
+    const newState = saveImageReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
 
   it('should handle SAVE_IMAGE_TO_CLOUD_REQUEST', () => {
-    const image = ''
+    const image = '';
     const newState = saveImageReducer(initialState, types.saveImageToCloudRequest(image));
     expect(newState).toEqual({
       ...initialState,
@@ -27,10 +24,10 @@ describe('Save Image to cloudinary reducer', () => {
     });
   });
   it('should handle SAVE_IMAGE_TO_CLOUD_SUCCESSFUL', () => {
-    const image = 'img'
+    const image = 'img';
     const newState = saveImageReducer(initialState, types.saveImageToCloudSuccessful(image));
     expect(newState).toEqual({
-      ...initialState,      
+      ...initialState,
       image,
       isUploaded: true
     });
@@ -40,7 +37,7 @@ describe('Save Image to cloudinary reducer', () => {
     const newState = saveImageReducer(initialState, types.saveImageToCloudError(errorMessage));
     expect(newState).toEqual({
       ...initialState,
-      errorMessage   
+      errorMessage
     });
   });
   it('should handle CLEAR_IMAGE', () => {

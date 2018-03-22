@@ -6,10 +6,6 @@ import mocklocalStorage from '../__mocks__/localStorage';
 import signinAction from '../../actionController/signin';
 import mockData from '../__mocks__/userData.json';
 import * as actions from '../../actions/signinAction';
-import localStorage from '../__mocks__/localStorage';
-
-window.localStorage = localStorage;
-
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

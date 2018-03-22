@@ -23,7 +23,7 @@ import favoriteRecipeAction from '../../../actionController/favoriteRecipe';
  *
  * @description container displaying user profile and favorited recipe of a user
  */
-class UserProfileContainer extends Component {
+ export class UserProfileContainer extends Component {
   /**
    * @description create an instance of UserProfileContainer
    *

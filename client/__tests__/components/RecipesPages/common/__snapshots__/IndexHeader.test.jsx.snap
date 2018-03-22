@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndexHeader component matches snapshot 1`] = `
+<header>
+  <nav
+    className="navbar navbar-expand-lg navbar-light bg-green"
+  >
+    <Link
+      className="navbar-link nav-text"
+      id="navlink"
+      replace={false}
+      to="#"
+    >
+      More-recipe
+    </Link>
+    <button
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      className="navbar-toggler"
+      data-target="#navbarSupportedContent"
+      data-toggle="collapse"
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <ul
+        className="navbar-nav mr-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="navbar-link nav-text"
+            id="navlink"
+            replace={false}
+            to="/recipes"
+          >
+            Recipes
+          </Link>
+        </li>
+      </ul>
+      <form
+        className="form-inline my-2 my-lg-0"
+      >
+        <input
+          aria-label="Search"
+          className="form-control mr-sm-2"
+          placeholder="Search"
+          type="search"
+        />
+        <button
+          className="btn search-btn my-2 my-sm-0"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+  </nav>
+</header>
+`;

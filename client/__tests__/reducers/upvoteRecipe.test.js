@@ -10,7 +10,7 @@ const initialState = {
 
 describe('upvote recipe reducer', () => {
   it('Should return the initial state', () => {
-    const newState = upvoteReducer(undefined, initialState);
+    const newState = upvoteReducer(initialState, {});
     expect(newState).toEqual(initialState);
   });
   it('should handle UPVOTE_RECIPE_REQUEST', () => {
@@ -24,8 +24,8 @@ describe('upvote recipe reducer', () => {
     });
   });
   it('should handle UPVOTE_RECIPE_SUCCESSFUL', () => {
-    const responseMessage = 'Recipe successfully upvoted'
-    const recipeId = undefined;    
+    const responseMessage = 'Recipe successfully upvoted';
+    const recipeId = undefined;
     const newState = upvoteReducer(initialState, types.upvoteRecipeSuccess(responseMessage));
     expect(newState).toEqual({
       recipeId,
@@ -35,8 +35,8 @@ describe('upvote recipe reducer', () => {
     });
   });
   it('should handle UPVOTE_RECIPE_ERROR', () => {
-    const errorMessage = 'Login to continue'
-    const recipeId = null;    
+    const errorMessage = 'Login to continue';
+    const recipeId = null;
     const newState = upvoteReducer(initialState, types.upvoteRecipeError(errorMessage));
     expect(newState).toEqual({
       recipeId,

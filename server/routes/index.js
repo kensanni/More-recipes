@@ -6,6 +6,8 @@ import Favorite from '../controller/favorite';
 import Validation from '../middlewares/validation';
 import Upvote from '../controller/upvotes';
 import Downvote from '../controller/downvotes';
+import Reviews from '../controller/review';
+
 
 export default (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -157,4 +159,10 @@ export default (app) => {
     '/api/v1/search',
     Recipe.recipeSearch
   );
+
+  app.get(
+    '/api/v1/reviews/:recipeId',
+    authentication.verifyUser,    
+    Reviews.getReviews
+  )
 };

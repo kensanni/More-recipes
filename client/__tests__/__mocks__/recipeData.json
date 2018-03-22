@@ -47,6 +47,15 @@
       "favorites": 1,
       "count": 0,
       "pages": 0
+    },
+    "review": {
+      "id": 117,
+      "userId": 1,
+      "username": "testing",
+      "recipeId": 50,
+      "review": "hello\n",
+      "createdAt": "2018-03-18T16:26:28.237Z",
+      "updatedAt": "2018-03-18T16:26:28.237Z"
     }
   }
 }
