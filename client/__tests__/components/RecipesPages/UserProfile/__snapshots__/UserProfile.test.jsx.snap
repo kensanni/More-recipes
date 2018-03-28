@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`user profile component matches snapshot 1`] = `
+<div
+  className="row mt-5 pb-3"
+>
+  <div
+    className="col-sm-12 profile-bg user-profile"
+  >
+    <img
+      alt="avatar"
+      className="img-fluid rounded-circle"
+      src="test-file-stub"
+    />
+    <h3 />
+    <p>
+      recipe added: 
+      0
+      <span
+        className="vl ml-2 user-text"
+      />
+      <span>
+        email: 
+      </span>
+      <span
+        className="vl ml-2 user-text favorite"
+      >
+        favorite recipe: 
+         
+      </span>
+    </p>
+  </div>
+</div>
+`;

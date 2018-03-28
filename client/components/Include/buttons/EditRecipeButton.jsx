@@ -12,7 +12,7 @@ const EditRecipeButton = props => ((
   <div>
     <button
       type="button"
-      className="btn"
+      className="btn edit-button"
       data-toggle="modal"
       data-target="#editModal"
       data-whatever="@getbootstrap"

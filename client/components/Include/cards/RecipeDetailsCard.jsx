@@ -20,6 +20,8 @@ const RecipeDetailsCard = (props) => {
     reviews,
     value,
     addReview,
+    nextReviews,
+    hasMoreReviews
   } = props;
   const {
     id, name, description, ingredient, image, downvotes, upvotes, favorites,
@@ -118,7 +120,7 @@ const RecipeDetailsCard = (props) => {
                             <strong className="primary-font">{review.username}</strong>
                           </div>
                           <p>
-                            { review.review.trim() }
+                            { review.review }
                           </p>
                           <small className="small">{time(review.createdAt)}</small>
                           <hr />
@@ -128,6 +130,17 @@ const RecipeDetailsCard = (props) => {
                   ))
                 }
                 </ul>
+              }
+              {
+                hasMoreReviews &&
+                  <div className="review-btn pb-4 hidden">
+                    <small
+                      onClick={nextReviews}
+                      role="button"
+                    >
+                    load more reviews
+                    </small>
+                  </div>
               }
             </div>
           </div>
@@ -164,7 +177,9 @@ RecipeDetailsCard.propTypes = {
   onChange: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(any).isRequired,
   value: PropTypes.objectOf(any).isRequired,
-  addReview: PropTypes.func.isRequired
+  addReview: PropTypes.func.isRequired,
+  nextReviews: PropTypes.func.isRequired,
+  hasMoreReviews: PropTypes.bool.isRequired
 };
 
 export default RecipeDetailsCard;

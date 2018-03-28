@@ -12,7 +12,7 @@ import { getFavoriteRecipeRequest, getFavoriteRecipeSuccessful, getFavoriteRecip
 export default function getFavoriteRecipe(userId, page) {
   return (dispatch) => {
     dispatch(getFavoriteRecipeRequest());
-    instance.get(`/users/${userId}/favorites?page=${page}`)
+    return instance.get(`/users/${userId}/favorites?page=${page}`)
       .then((favoriteRecipe) => {
         const { data } = favoriteRecipe;
         const { pages, count } = favoriteRecipe.data;

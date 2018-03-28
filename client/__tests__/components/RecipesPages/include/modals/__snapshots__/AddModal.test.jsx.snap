@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add modal component matches snapshot 1`] = `
+<div
+  aria-hidden="true"
+  aria-labelledby="exampleModalLabel"
+  className="modal fade"
+  id="exampleModal"
+  role="dialog"
+  tabIndex="-1"
+>
+  <div
+    className="modal-dialog"
+    role="document"
+  >
+    <div
+      className="modal-content"
+    >
+      <div
+        className="modal-header black"
+      >
+        <h5
+          className="modal-title black"
+          id="exampleModalLabel"
+        >
+          Add new recipe
+        </h5>
+        <button
+          aria-label="Close"
+          className="close"
+          data-dismiss="modal"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+      </div>
+      <div
+        className="modal-body"
+      >
+        <form>
+          <div
+            className="form-group"
+          >
+            <div
+              className="error-message"
+            />
+            <label
+              className="col-form-label black"
+              htmlFor="recipient-name"
+            >
+              Name :
+            </label>
+            <input
+              className="form-control"
+              id="recipient-name"
+              name="name"
+              type="text"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              className="col-form-label black"
+              htmlFor="message-text"
+            >
+              Directions :
+            </label>
+            <textarea
+              className="form-control"
+              id="message-text"
+              name="description"
+              placeholder="seperate each directions with a newline"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              className="col-form-label black"
+              htmlFor="ingredient"
+            >
+              Ingredient :
+            </label>
+            <input
+              className="form-control"
+              id="ingredient"
+              name="ingredient"
+              placeholder="separate each ingredient with a comma"
+              type="text"
+            />
+          </div>
+          <div
+            className="form-group img-text"
+          >
+            <input
+              accept="image/*"
+              name="image"
+              type="file"
+            />
+          </div>
+        </form>
+      </div>
+      <div
+        className="modal-footer"
+      >
+        <button
+          className="btn btn-secondary"
+          data-dismiss="modal"
+          type="button"
+        >
+          Close
+        </button>
+        <button
+          className="btn btn-orange"
+          disabled="disabled"
+          type="button"
+        >
+          Add recipe
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

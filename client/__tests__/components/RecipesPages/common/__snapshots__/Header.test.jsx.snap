@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component matches snapshot 1`] = `
+<header>
+  <nav
+    className="navbar navbar-expand-lg navbar-light bg-green"
+  >
+    <Link
+      className="navbar-link nav-text"
+      id="navlink"
+      replace={false}
+      to="/recipes"
+    >
+      More-recipe
+    </Link>
+    <button
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      className="navbar-toggler"
+      data-target="#navbarSupportedContent"
+      data-toggle="collapse"
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <div
+        className="form-inline my-2 my-lg-0 ml-auto"
+      >
+        <div
+          className="section search-box"
+        >
+          <Async
+            autoload={true}
+            cache={Object {}}
+            filterOptions={false}
+            ignoreAccents={true}
+            ignoreCase={true}
+            labelKey="name"
+            loadOptions={[Function]}
+            loadingPlaceholder="Loading..."
+            multi={false}
+            noResultsText="No recipe found"
+            onChange={[Function]}
+            onValueClick={[Function]}
+            options={Array []}
+            placeholder="Search for recipe"
+            searchPromptText="Type to search for recipe"
+            value=""
+            valueKey="id"
+          />
+        </div>
+      </div>
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item dropdown"
+        >
+          <Link
+            aria-expanded="false"
+            aria-haspopup="true"
+            className="nav-link dropdown-toggle nav-text"
+            data-toggle="dropdown"
+            id="navlink"
+            replace={false}
+            role="button"
+            to=""
+          >
+            Account
+          </Link>
+          <div
+            aria-labelledby="navbarDropdown"
+            className="dropdown-menu"
+          >
+            <Link
+              className="dropdown-item nav-text"
+              replace={false}
+              to="/profile"
+            >
+              Profile
+            </Link>
+            <Link
+              className="dropdown-item nav-text"
+              replace={false}
+              to="/my-recipes"
+            >
+              My recipe
+            </Link>
+          </div>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="navbar-link nav-text signout"
+            id="navlink"
+            onClick={[Function]}
+            role="none"
+          >
+            Signout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+`;

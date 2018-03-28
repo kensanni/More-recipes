@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form matches snapshot 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="pt-5 text-center"
+  >
+    <form
+      className="m-x-auto app-login-form card-login"
+    >
+      <h1
+        className="signin-text"
+      >
+         More-recipe
+      </h1>
+      <section
+        className="signin-text"
+      >
+        <h3>
+          Create an account
+        </h3>
+      </section>
+      <div
+        className="error-message signup"
+      />
+      <section
+        className="pb-4 pt-3"
+      >
+        <input
+          className="form-control"
+          name="name"
+          placeholder="Name"
+          required={true}
+          type="text"
+          value=""
+        />
+      </section>
+      <section
+        className="pb-4"
+      >
+        <input
+          className="form-control"
+          name="username"
+          placeholder="Username"
+          required={true}
+          type="text"
+          value=""
+        />
+      </section>
+      <section
+        className="pb-4"
+      >
+        <input
+          className="form-control"
+          name="email"
+          placeholder="Email"
+          required={true}
+          type="email"
+          value=""
+        />
+      </section>
+      <section
+        className="pb-4"
+      >
+        <input
+          className="form-control"
+          name="password"
+          placeholder="Password"
+          required={true}
+          type="password"
+          value=""
+        />
+      </section>
+      <section
+        className="pb-4"
+      >
+        <input
+          className="form-control"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          required={true}
+          type="password"
+          value=""
+        />
+      </section>
+      <div>
+        <p>
+          <small>
+            By clicking ' Create Account', you are agreeing to our
+            <a
+              href="Policy"
+              id="text-dec"
+            >
+               Policy
+            </a>
+            <span>
+                and  
+            </span>
+            <a
+              href="terms"
+            >
+              Terms & Conditions
+            </a>
+          </small>
+        </p>
+      </div>
+      <div>
+        <button
+          className="btn btn-block btn-orange"
+        >
+          Create Account
+        </button>
+      </div>
+      <div
+        className="text-left sign"
+      >
+        <a
+          href="f"
+          id="text-dec"
+        >
+          Forgotten your password?
+        </a>
+      </div>
+      <div>
+        <hr />
+      </div>
+      <footer>
+        <Link
+          replace={false}
+          to="/signin"
+        >
+          Sign In
+        </Link>
+      </footer>
+    </form>
+  </div>
+</div>
+`;

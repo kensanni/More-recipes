@@ -11,7 +11,7 @@ import signInAction from '../../../actionController/signin';
  *
  * @description Log in existing Users
  */
-class SignIn extends Component {
+export class SignIn extends Component {
   /**
    * @description create an instance of Signin
    *
@@ -32,7 +32,7 @@ class SignIn extends Component {
    */
   componentWillMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
-    if (this.props.signinResponse.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       this.props.history.push('/recipes');
     }
   }
@@ -54,7 +54,7 @@ class SignIn extends Component {
    * @returns {void}
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.signinResponse.isAuthenticated) {
+    if (nextProps.isAuthenticated) {
       this.props.history.push('/recipes');
     }
     if (!lodash.isEmpty(nextProps.signinResponse.errorMessage)) {
@@ -122,10 +122,15 @@ class SignIn extends Component {
   }
 }
 
+SignIn.defaultProps = {
+  isAuthenticated: false
+};
+
 SignIn.propTypes = {
   signInAction: PropTypes.func.isRequired,
   signinResponse: PropTypes.objectOf(any).isRequired,
   history: PropTypes.objectOf(any).isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
 /**
@@ -137,6 +142,7 @@ SignIn.propTypes = {
  */
 const mapStateToProps = state => ({
   signinResponse: state.authReducer,
+  isAuthenticated: state.authReducer.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { signInAction })(SignIn);

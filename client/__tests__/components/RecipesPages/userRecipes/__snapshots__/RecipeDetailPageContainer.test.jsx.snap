@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe details page component matches snapshot 1`] = `
+<div>
+  <Header
+    details="true"
+    signOutAction={[Function]}
+  />
+  <Footer />
+</div>
+`;

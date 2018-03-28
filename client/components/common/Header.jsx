@@ -14,7 +14,7 @@ import searchRecipe from '../../actionController/searchRecipes';
  *
  * @description Header to be display for authenticated users
  */
-class Header extends Component {
+export class Header extends Component {
   /**
    * @description get the searched recipes
    *
@@ -197,9 +197,13 @@ Header.contextTypes = {
   router: PropTypes.objectOf(any).isRequired
 };
 
+Header.defaultProps = {
+  details: null
+};
+
 Header.propTypes = {
   signOutAction: PropTypes.func.isRequired,
-  details: PropTypes.bool.isRequired
+  details: PropTypes.string
 };
 
 const mapDispatchToProps = dispatch => (

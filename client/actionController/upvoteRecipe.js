@@ -13,7 +13,7 @@ import { upvoteRecipeRequest, upvoteRecipeSuccess, upvoteRecipeError, incrementU
 export default function upvoteRecipe(recipeId) {
   return (dispatch) => {
     dispatch(upvoteRecipeRequest(recipeId));
-    instance.post(`/recipes/${recipeId}/upvote`)
+    return instance.post(`/recipes/${recipeId}/upvote`)
       .then((recipe) => {
         const { message, downvoteStatus } = recipe.data;
         if (downvoteStatus === 'downvoted') {

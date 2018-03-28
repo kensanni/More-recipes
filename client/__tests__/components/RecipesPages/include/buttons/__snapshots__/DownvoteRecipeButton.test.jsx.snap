@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Downvote recipe button component matches snapshot 1`] = `
+<div>
+  <button
+    className="btn btn-orange mr-2 down favorite-btn"
+    type="button"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-thumbs-down fa-2x btn-white"
+      onClick={[Function]}
+    />
+  </button>
+  <span
+    className="mr-2"
+  />
+</div>
+`;

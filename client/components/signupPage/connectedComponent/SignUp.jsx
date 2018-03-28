@@ -12,7 +12,7 @@ import backgroundImage from '../../../public/images/recipe-img-bg.jpeg';
  *
  * @description Create user account
  */
-class SignUp extends Component {
+export class SignUp extends Component {
   /**
    * @description create an instance of Signup
    *
@@ -55,7 +55,7 @@ class SignUp extends Component {
    * @returns {void} set the state of response message
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.signupResponse.isAuthenticated) {
+    if (nextProps.isAuthenticated) {
       this.props.history.push('/recipes');
     }
     if (!lodash.isEmpty(nextProps.signupResponse.errorMessage)) {
@@ -125,6 +125,7 @@ SignUp.propTypes = {
   signUpAction: PropTypes.func.isRequired,
   signupResponse: PropTypes.objectOf(any).isRequired,
   history: PropTypes.objectOf(any).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 /**
@@ -135,7 +136,8 @@ SignUp.propTypes = {
  * @returns {void} mapStateToProps
  */
 const mapStateToProps = state => ({
-  signupResponse: state.authReducer
+  signupResponse: state.authReducer,
+  isAuthenticated: state.authReducer.isAuthenticated
 });
 
 

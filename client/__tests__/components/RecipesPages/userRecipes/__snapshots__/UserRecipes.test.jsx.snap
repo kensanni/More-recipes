@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe details page component matches snapshot 1`] = `
+<div>
+  <Connect(Header) />
+  <div
+    className="container"
+  >
+    <div
+      className="top-nav-bar"
+    >
+      <AddRecipeButton
+        addRecipe={[Function]}
+        onChange={[Function]}
+        saveImageToCloud={[Function]}
+        value={
+          Object {
+            "description": "",
+            "ingredient": "",
+            "isChanged": false,
+            "isFetched": false,
+            "name": "",
+            "recipeData": Array [],
+            "responseMessage": "",
+          }
+        }
+      />
+    </div>
+    <div>
+      <div
+        className="row"
+      >
+        <RecipeGrid
+          addRecipe={[Function]}
+          clearImageState={[Function]}
+          deleteRecipe={[Function]}
+          description=""
+          editRecipe={[Function]}
+          ingredient=""
+          isChanged={false}
+          isFetched={false}
+          name=""
+          onChange={[Function]}
+          recipeData={Array []}
+          responseMessage=""
+          setEditRecipeId={[Function]}
+          showActionButton={true}
+          value={
+            Object {
+              "description": "",
+              "ingredient": "",
+              "isChanged": false,
+              "isFetched": false,
+              "name": "",
+              "recipeData": Array [],
+              "responseMessage": "",
+            }
+          }
+        />
+      </div>
+    </div>
+    <PaginationBoxView
+      activeClassName="active"
+      breakClassName="page-link"
+      breakLabel={
+        <a
+          href=""
+        >
+          ...
+        </a>
+      }
+      containerClassName="pagination justify-content-center"
+      disableInitialCallback={false}
+      disabledClassName="disabled"
+      marginPagesDisplayed={3}
+      nextClassName="page-item"
+      nextLabel="Next"
+      nextLinkClassName="page-link"
+      onPageChange={[Function]}
+      pageClassName="page-item"
+      pageCount={10}
+      pageLinkClassName="page-link"
+      pageRangeDisplayed={2}
+      previousClassName="page-item"
+      previousLabel="Previous"
+      previousLinkClassName="page-link"
+      subContainerClassName="pages pagination"
+    />
+    <Footer />
+  </div>
+</div>
+`;

@@ -9,7 +9,7 @@ import { getPopularRecipeRequest, getPopularRecipeSuccess, getPopularRecipeError
 export default function getPopularRecipe() {
   return (dispatch) => {
     dispatch(getPopularRecipeRequest());
-    instance.get('/recipes/most-popular-recipe')
+    return instance.get('/recipes/most-popular-recipe')
       .then((recipes) => {
         const { recipesData } = recipes.data;
         dispatch(getPopularRecipeSuccess(recipesData));

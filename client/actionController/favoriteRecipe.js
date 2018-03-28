@@ -11,7 +11,7 @@ import { favoriteRecipeRequest, favoriteRecipeSuccess, favoriteRecipeError } fro
 export default function favoriteRecipe(recipeId) {
   return (dispatch) => {
     dispatch(favoriteRecipeRequest(recipeId));
-    instance.post(`/recipes/${recipeId}/favorites`)
+    return instance.post(`/recipes/${recipeId}/favorites`)
       .then((recipe) => {
         const { message, type: favoriteType } = recipe.data;
         dispatch(favoriteRecipeSuccess(recipeId, message, favoriteType));

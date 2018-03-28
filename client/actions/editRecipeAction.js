@@ -14,6 +14,7 @@ export const editRecipeRequest = (recipeId, recipeData) => ({
 
 export const editRecipeSuccess = (recipeId, recipeData) => ({
   type: EDIT_RECIPE_SUCCESSFUL,
+  isEdited: true,  
   recipeData,
   recipeId,
 });

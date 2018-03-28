@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Landing page component matches snapshot 1`] = `
+<div>
+  <GuestHeader />
+  <div
+    className="container pt-4"
+  >
+    <div
+      className="row"
+    >
+      <section
+        className="col-md-12"
+      >
+        <h2
+          className="title"
+        >
+          Popular Recipes
+        </h2>
+        <div>
+          <hr />
+        </div>
+      </section>
+      <n
+        color="#FF4601"
+        size={30}
+      />
+    </div>
+    <div
+      className="row"
+    >
+      <section
+        className="col-md-12"
+      >
+        <h2
+          className="title"
+        >
+          All Recipes
+        </h2>
+        <div>
+          <hr />
+        </div>
+      </section>
+    </div>
+    <div
+      className="row"
+    >
+      <n
+        color="#FF4601"
+        size={30}
+      />
+    </div>
+  </div>
+  <PaginationBoxView
+    activeClassName="active"
+    breakClassName="page-link"
+    breakLabel={
+      <a
+        href=""
+      >
+        ...
+      </a>
+    }
+    containerClassName="pagination justify-content-center"
+    disableInitialCallback={false}
+    disabledClassName="disabled"
+    marginPagesDisplayed={3}
+    nextClassName="page-item"
+    nextLabel="Next"
+    nextLinkClassName="page-link"
+    onPageChange={[Function]}
+    pageClassName="page-item"
+    pageCount={10}
+    pageLinkClassName="page-link"
+    pageRangeDisplayed={2}
+    previousClassName="page-item"
+    previousLabel="Previous"
+    previousLinkClassName="page-link"
+    subContainerClassName="pages pagination"
+  />
+  <Footer />
+</div>
+`;

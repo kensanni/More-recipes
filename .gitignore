@@ -2,3 +2,6 @@
 /npm-debug.log
 /.env
 /.nyc_output
+/coverage
+/e2e_test_report
+/selenium-debug.log

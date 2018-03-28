@@ -5,18 +5,19 @@ import { bindActionCreators } from 'redux';
 import ReactPaginate from 'react-paginate';
 import { Lines } from 'react-preloading-component';
 import RecipeGrid from '../recipePages/RecipeGrid';
-import Header from '../common/Header';
+import { Header } from '../common/Header';
 import GuestHeader from '../common/GuestHeader';
 import Footer from '../common/Footer';
 import getRecipeAction from '../../actionController/getRecipe';
 import getPopularRecipeAction from '../../actionController/getPopularRecipe';
+import signOutAction from '../../actions/signOutAction';
 
 /**
  * @class RecipeGrid
  *
  * @description Display all recipeCard on the app
  */
-class AllRecipes extends Component {
+export class AllRecipes extends Component {
   /**
    * @description create an instance of RecipeGrid
    *
@@ -85,7 +86,7 @@ class AllRecipes extends Component {
     return (
       <div>
         {
-          this.props.authenticated ? <Header /> : <GuestHeader />
+          this.props.authenticated ? <Header signOutAction={signOutAction} /> : <GuestHeader />
         }
         <div className="container pt-4">
           <div className="row">

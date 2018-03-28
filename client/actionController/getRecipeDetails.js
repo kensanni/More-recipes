@@ -11,7 +11,7 @@ import { getRecipeDetailsRequest, getRecipeDetailsError, getRecipeDetailsSuccess
 export default function getRecipeDetails(recipeId) {
   return (dispatch) => {
     dispatch(getRecipeDetailsRequest(recipeId));
-    instance.get(`/recipes/${recipeId}`)
+    return instance.get(`/recipes/${recipeId}`)
       .then((res) => {
         const { recipeData } = res.data;
         dispatch(getRecipeDetailsSuccessful(recipeData));

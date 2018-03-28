@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe details card component matches snapshot 1`] = `
+<div>
+  <div
+    className="card mt-5"
+  >
+    <div
+      className="card-body"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+        >
+          <div>
+            <img
+              alt=""
+              className="img img-fluid img-thumbnail img-width"
+              src=""
+            />
+            <h1
+              className="text-center pt-3"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+        >
+          <p>
+            Ingredient
+          </p>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <li
+          className="col-sm-6"
+          key="0"
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+        >
+          <p
+            className="pt-3"
+          >
+            Directions
+          </p>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+        >
+          <ol>
+            <li
+              key="0"
+            />
+          </ol>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+        >
+          <hr />
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12 inline-button"
+        >
+          <UpVoteButton
+            recipeId=""
+            upvotes=""
+          />
+          <DownVoteButton
+            downvotes=""
+            recipeId=""
+          />
+          <FavoriteButton
+            favorites=""
+            recipeId=""
+          />
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+        >
+          <hr />
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12 mt-3"
+        >
+          <h2
+            className="header-bg"
+          >
+            Reviews
+          </h2>
+        </div>
+      </div>
+      <div>
+        <div
+          className="form-group"
+        >
+          <label
+            htmlFor="comment"
+          >
+            Post a comment
+          </label>
+          <textarea
+            className="form-control"
+            name="review"
+            rows="5"
+          />
+          <button
+            className="btn btn-orange rfloat mt-3"
+            onClick={[Function]}
+            type="button"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

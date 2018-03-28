@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import instance from '../Helpers/helper';
+import axios from 'axios';
 import { signinError, signinRequest, signinSuccess } from '../actions/signinAction';
 
 /**
@@ -12,12 +12,11 @@ import { signinError, signinRequest, signinSuccess } from '../actions/signinActi
 export default function signin(userdata) {
   return (dispatch) => {
     dispatch(signinRequest(userdata));
-    instance.post('/users/signin', userdata)
+    return axios.post('/api/v1/users/signin', userdata)
       .then((res) => {
         const { token, message } = res.data;
         localStorage.setItem('token', token);
         const userinfo = jwt.decode(token);
-        instance(token);
         dispatch(signinSuccess(message, userinfo));
       })
       .catch((error) => {
@@ -38,7 +37,6 @@ export const signInFromLocalStorage = () => (
     const token = localStorage.getItem('token');
     if (token) {
       const userinfo = jwt.decode(token);
-      instance(token);
       dispatch(signinSuccess('Sign in successful.', userinfo));
     }
   }

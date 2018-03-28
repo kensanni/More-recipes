@@ -1,7 +1,7 @@
 import { DOWNVOTE_RECIPE_REQUEST, DOWNVOTE_RECIPE_SUCCESSFUL, DOWNVOTE_RECIPE_ERROR } from '../actions/downvoteRecipeAction';
 
 const initialState = {
-  isUpvoted: false,
+  isDownvoted: false,
   recipeId: null,
   responseMessage: '',
   errorMessage: ''

@@ -11,7 +11,7 @@ import { getRecipeRequest, getRecipeSuccess, getRecipeError } from '../actions/g
 export default function getRecipe(page) {
   return (dispatch) => {
     dispatch(getRecipeRequest());
-    instance.get(`/recipes?page=${page}`)
+    return instance.get(`/recipes?page=${page}`)
       .then((recipes) => {
         const { recipesData, pages } = recipes.data;
         dispatch(getRecipeSuccess(recipesData, pages));

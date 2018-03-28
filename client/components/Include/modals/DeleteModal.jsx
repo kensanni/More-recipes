@@ -47,6 +47,7 @@ const DeleteModal = (props) => {
             </button>
             <button
               type="button"
+              id="del"
               onClick={() => deleteRecipe(recipeId)}
               className="btn btn-danger"
               data-dismiss="modal"

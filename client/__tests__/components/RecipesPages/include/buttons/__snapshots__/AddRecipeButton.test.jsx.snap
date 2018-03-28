@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add recipe button component matches snapshot 1`] = `
+<div
+  className="row header-nav "
+>
+  <div
+    className="col-sm-6 col-6"
+  >
+    <p
+      className="pt-3 font"
+    >
+      Add New recipe
+    </p>
+  </div>
+  <div
+    className="col-sm-6 col-6 pt-2 pb-2"
+  >
+    <button
+      className="btn rfloat mt-2"
+      data-target="#exampleModal"
+      data-toggle="modal"
+      type="button"
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-plus-square-o"
+      />
+    </button>
+    <AddModal />
+  </div>
+</div>
+`;
