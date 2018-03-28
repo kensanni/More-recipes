@@ -50,7 +50,7 @@ module.exports = {
       .url(`${baseUrl}/signup`)
       .setValue('input[name="name"]', randomName)
       .pause(1000)
-      .setValue('input[name="username"]', 'DeveslOps')
+      .setValue('input[name="username"]', 'DevessslOps')
       .pause(1000)
       .setValue('input[name="email"]', randomEmail)
       .pause(1000)

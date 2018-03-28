@@ -3,3 +3,4 @@ exclude_patterns:
 - "client/reducers/"
 - "server/models/"
 - "server/test/"
+- "client/__tests__/"
