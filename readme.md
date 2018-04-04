@@ -17,6 +17,8 @@ More-Recipes provides a platform for users to share the awesome and exciting  re
 
   Live demo: [more-recipe-007.herokuapp.com](http://more-recipe-007.herokuapp.com/)
 	
+	user stories link on pivotal tracker: [https://www.pivotaltracker.com/n/projects/2151586](https://www.pivotaltracker.com/n/projects/2151586)
+	
 ## Technologies Used
 
 #### Client side:
@@ -26,7 +28,9 @@ More-Recipes provides a platform for users to share the awesome and exciting  re
 	  SEQUELIZE as the ORM(object Relation Mapper) for communicating with POSTGRESQL DB
 	
      - Written in ES6 and transpiled down to ES5 with BABEL
-
+	
+     - API's is RESTful 
+		
 #### Style checking and best pratice
     - ESLINT, which is configured to Airbnb-base rule
 
@@ -68,10 +72,17 @@ You can get the app running locally in the following way:
 		 
 #### Testing
 
-This app uses `Mocha/Chai` and `Chai-Http` for backend testing
+This app uses `Mocha/Chai` and `Chai-Http` for backend testing, `Enzyme/Jest` and `night-watch` for client side testing
 
+for server side test:
  > - `npm run start:test`  - migrate the test database
  > - `npm run test` - run unit test for backend
+
+for client side test:
+ > - `npm run test:client`  -run client side test
+ > - `npm run e2e:setup` - install selenium stand-alone for night-watch(end-to-end)
+ > -  `npm run e2e:test` - run end-to-end testing
+ >- `ensure you do "npm run e2e:setup" before running "npm run e2e:test"
 
 ## Contributing
 
