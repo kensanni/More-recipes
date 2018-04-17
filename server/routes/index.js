@@ -161,7 +161,7 @@ export default (app) => {
 
   app.get(
     '/api/v1/reviews/:recipeId',
-    authentication.verifyUser,    
-    Reviews.getReviews
-  )
+    authentication.verifyUser,
+    Review.getReviews
+  );
 };
