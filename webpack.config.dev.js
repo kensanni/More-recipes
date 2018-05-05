@@ -1,10 +1,11 @@
-import webpack from 'webpack';
-import path from 'path';
-import dotenv from 'dotenv-webpack';
+const webpack = require('webpack');
+const path = require('path');
+const dotenv = require('dotenv-webpack');
 
-export default {
+module.exports = {
   devtool: 'cheap-eval-source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client?reload=true',
     './client/index.jsx'
   ],

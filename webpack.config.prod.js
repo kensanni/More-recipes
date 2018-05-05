@@ -1,13 +1,10 @@
-import webpack from 'webpack';
-import path from 'path';
-import dotenv from 'dotenv';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+const webpack = require('webpack');
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-dotenv.config();
-
-export default {
+module.exports = {
   devtool: 'source-map',
-  entry: path.resolve(__dirname, 'client/index'),
+  entry: ['babel-polyfill', path.resolve(__dirname, 'client/index')],
   output: {
     path: path.join(__dirname, '../client/dist/'),
     publicPath: '/',
