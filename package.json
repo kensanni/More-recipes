@@ -4,13 +4,14 @@
   "description": "More-Recipes provides a platform for users to share the awesome and exciting  recipe ideas they have invented or learnt.  Suppose a user comes up with a food recipe,  he/she can post it on More-Recipes and  get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.",
   "main": "app.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development nodemon --exec babel-node -- ./server/bin/www",
+    "server:build": "babel server/ -d build && cp server/api-docs.json build",
+    "start:dev": "NODE_ENV=development nodemon --exec babel-node build/app.js",
     "start:test": "NODE_ENV=test sequelize db:migrate",
     "test:client": "jest --silent",
     "test": "NODE_ENV=test mocha server/test/testPath/test.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
-    "start": "NODE_ENV=production babel-node -- ./server/bin/www",
+    "start": "NODE_ENV=production build/app.js",
     "build": "webpack -d  && cp client/src/index.html client/dist/index.html && webpack-dev-server --content-base ./client/src/ --inline --hot",
     "build:prod": "webpack -p  && copy src/index.html",
     "e2e:setup": "selenium-standalone install",
@@ -29,7 +30,6 @@
   "homepage": "https://github.com/kensanni/More-recipes#readme",
   "dependencies": {
     "axios": "^0.17.1",
-    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
@@ -89,6 +89,7 @@
     "webpack-hot-middleware": "^2.20.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-jest": "^23.0.0-alpha.0",
     "babel-preset-react-app": "^3.1.1",
     "babel-preset-stage-0": "^6.24.1",
