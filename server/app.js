@@ -1,3 +1,5 @@
+import 'babel-core/register';
+import 'babel-polyfill';
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
@@ -6,13 +8,12 @@ import path from 'path';
 import http from 'http';
 import validator from 'express-validator';
 import swaggerUi from 'swagger-ui-express';
-import config from '../webpack.config';
 import prodConfig from '../webpack.config.prod';
-import routes from '../server/routes';
+import config from '../webpack.config.dev';
+import routes from './routes';
 import apiDocs from './api-docs.json';
 
-require('babel-core/register');
-require('babel-polyfill');
+
 require('dotenv').config();
 
 const HMR = require('webpack-hot-middleware');
@@ -23,6 +24,7 @@ let compiler;
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 8000;
 const server = http.createServer(app);
+
 
 if (process.env.NODE_ENV === 'production') {
   compiler = webpack(prodConfig);
