@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'More-recipes',
-    script: 'dist/app.js',
+    script: '/home/ubuntu/More-recipes/dist/app.js',
   },
   ]
 };
