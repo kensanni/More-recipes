@@ -1,3 +1,5 @@
+import 'babel-core/register';
+import 'babel-polyfill';
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
@@ -10,8 +12,6 @@ import prodConfig from '../webpack.config.prod';
 import routes from '../server/routes';
 import apiDocs from './api-docs.json';
 
-require('babel-core/register');
-require('babel-polyfill');
 require('dotenv').config();
 
 const HMR = require('webpack-hot-middleware');

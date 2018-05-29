@@ -13,7 +13,7 @@ import { signupError, signupRequest, signupSuccess } from '../actions/signupActi
 export default function signup(userdata) {
   return (dispatch) => {
     dispatch(signupRequest(userdata));
-    return axios.post('/api/v1/users/signup', userdata)
+    return axios.post('http://babadee.com/api/v1/users/signup', userdata)
       .then((res) => {
         const { token, message } = res.data;
         const userData = jwt.decode(token);
