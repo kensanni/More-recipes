@@ -12,7 +12,7 @@ import { signinError, signinRequest, signinSuccess } from '../actions/signinActi
 export default function signin(userdata) {
   return (dispatch) => {
     dispatch(signinRequest(userdata));
-    return axios.post('/api/v1/users/signin', userdata)
+    return axios.post('http://192.168.0.10', userdata)
       .then((res) => {
         const { token, message } = res.data;
         localStorage.setItem('token', token);

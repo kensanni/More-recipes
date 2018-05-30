@@ -3,13 +3,15 @@ import 'babel-polyfill';
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import cors from 'cors';
+import http from 'http';
 import webpack from 'webpack';
 import path from 'path';
 import validator from 'express-validator';
 import swaggerUi from 'swagger-ui-express';
 import config from '../webpack.config';
 import prodConfig from '../webpack.config.prod';
-import routes from '../server/routes';
+import routes from './routes';
 import apiDocs from './api-docs.json';
 
 require('dotenv').config();
@@ -20,6 +22,8 @@ let compiler;
 
 
 const app = express();
+const port = parseInt(process.env.PORT, 10) || 8000;
+const server = http.createServer(app);
 
 if (process.env.NODE_ENV === 'production') {
   compiler = webpack(prodConfig);
@@ -27,6 +31,9 @@ if (process.env.NODE_ENV === 'production') {
   compiler = webpack(config);
   app.use(HMR(compiler));
 }
+
+app.use(cors());
+app.options('*', cors());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
 
@@ -52,6 +59,12 @@ app.all('*', (req, res) => {
   res.status(404).send({
     message: 'Route does not exist'
   });
+});
+
+app.set('port', port);
+
+server.listen(port, () => {
+  console.log(`Server running at http://127.0.0.1:${port}/`);
 });
 
 export default app;

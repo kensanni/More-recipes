@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 const instance = axios.create({
-  baseURL: '/api/v1'
+  baseURL: 'http://192.168.0.10'
 });
 
 instance.interceptors.request.use((config) => {
