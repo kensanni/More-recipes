@@ -2,7 +2,6 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import { signupError, signupRequest, signupSuccess } from '../actions/signupAction';
 
-
 /**
    * @description action controller to register a new user
    *
