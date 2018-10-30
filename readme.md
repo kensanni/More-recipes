@@ -15,7 +15,7 @@ More-Recipes provides a platform for users to share the awesome and exciting  re
 - Review a recipe
 - See most popular recipes on the application
 
-  Live demo: [more-recipe-007.herokuapp.com](http://more-recipe-007.herokuapp.com/)
+  Live demo: [more-recipes.tk](http://more-recipes.tk/)
 	
 	user stories link on pivotal tracker: [https://www.pivotaltracker.com/n/projects/2151586](https://www.pivotaltracker.com/n/projects/2151586)
 	
