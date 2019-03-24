@@ -37,35 +37,36 @@ More-Recipes provides a platform for users to share the awesome and exciting  re
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+## **Prerequisites**
+To setup this project on your local machine, ensure you have the following installed on your machine
+1. NodeJs [`Node.js`](https://nodejs.org/en/download/), version 5 or greater on your machine
+
+2. [`PostgreSQL`](https://www.postgresql.org/download/) to your local machine
 
 #### Installation and Dependencies
 
 You can get the app running locally in the following way:
-1.  Install NodeJs [`node`](https://nodejs.org/en/download/), version 5 or greater on your machine
 
-2. Install [`postgres`](https://www.postgresql.org/download/) to your local machine
-
-3. Clone the repository and cd into it
+1. Clone the repository and cd into it
    
 	  ```
     git clone https://github.com/kensanni/More-recipes.git
     cd More-recipes
     ```
 		
- 4. Install dependenices 
+ 2. Install dependenices 
     
 		 npm install
 		 
- 5. Create a database in progresql
-    
-		 In the application root directory, check the config.js file in
-		 `server/config/config.js` to setup your database
+ 3. Copy the `.env.example` to `.env` and change the values to suit your needs
+     
+		cp .env.example to .env
 		 
- 6. Run database migrations
+ 4. Run database migrations
     
 		 sequelize db: migrate
 
- 7.  start the application
+ 5.  start the application
  
 		 - npm run start:dev
 		 - Application would be up and running on localhost 8000
